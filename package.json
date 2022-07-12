@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxi generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.18.2",
+    "@nuxtjs/eslint-config": "^10.0.0",
+    "@nuxtjs/eslint-module": "^3.1.0",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-nuxt": "^3.2.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^9.1.0",
+    "nuxt": "3.0.0-rc.6",
+    "prettier": "^2.6.2",
+    "sass": "^1.53.0",
+    "sass-loader": "^13.0.2"
+  }
+}

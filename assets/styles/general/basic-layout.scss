@@ -1,0 +1,21 @@
+::selection {
+  background: #302e3a;
+  color: white;
+}
+
+body {
+  color: var(--main-text-color-dark);
+}
+
+.siteContainer {
+  // height: 100%;
+  // position: relative;
+  min-height: 100vh !important;
+}
+
+html {
+  height: 100% !important;
+}
+body {
+  min-height: 100% !important;
+}

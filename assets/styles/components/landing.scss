@@ -1,0 +1,68 @@
+.landing {
+  &-container {
+    position: relative;
+
+    background-repeat: no-repeat;
+    // background-attachment: fixed;
+    background-attachment: scroll;
+    background-position: 50% 0;
+    background-size: cover;
+    -webkit-background-size: cover;
+    box-shadow: inset 0 0 300px 300px rgb(0 0 0 / 25%);
+
+    display: flex;
+    min-height: 100vh;
+    // justify-content: center;
+    justify-content: start;
+    align-items: center;
+
+    border-bottom: 1px solid whitesmoke;
+
+    @media screen and (min-width: $_xl) {
+      background-attachment: fixed;
+    }
+
+    @media screen and (min-width: $_xl) {
+      justify-content: center;
+    }
+  }
+
+  &-contentBox {
+    z-index: 1010;
+    display: flex;
+    justify-content: center;
+    // align-items: ;
+    flex-direction: column;
+
+    width: 800px;
+    min-width: 320px;
+    max-width: 800px;
+    margin: 0;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    padding: 1rem;
+    padding-left: 1.6rem;
+    padding-right: 4rem;
+
+    background-color: white;
+    // opacity: 0.94;
+    backdrop-filter: blur(6px);
+
+    @media screen and (min-width: $_sm) {
+      margin: 0.7rem;
+    }
+
+    @media screen and (min-width: $_md) {
+      margin-left: calc(1rem + 200px + 1rem);
+    }
+
+    @media screen and (min-width: $_xl) {
+      margin-left: 0.7rem;
+    }
+
+    // @media screen and (max-width: 1250px) {
+    //   margin-left: 214px;
+    // }
+  }
+}
