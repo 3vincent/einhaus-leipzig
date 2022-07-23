@@ -18,7 +18,7 @@
 </template>
 
 <style lang="scss" scoped>
-.background {
+.landing-container::before {
   background-image: url(/images/einhaus-landing-photo-01.jpg);
 }
 

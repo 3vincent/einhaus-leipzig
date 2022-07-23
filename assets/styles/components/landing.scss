@@ -25,6 +25,21 @@
     @media screen and (min-width: $_xl) {
       justify-content: center;
     }
+
+    &::before {
+      // background-image: url(/images/einhaus-landing-photo-01.jpg);
+      background-repeat: no-repeat;
+      background-position: 50% 0;
+      background-size: cover;
+      content: '';
+      height: 100%;
+      left: 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      will-change: transform;
+      z-index: -1;
+    }
   }
 
   &-contentBox {
