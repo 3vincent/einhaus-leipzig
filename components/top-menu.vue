@@ -62,25 +62,13 @@ export default {
 
       if (
         // position == 'sticky' &&
-        document.documentElement.scrollTop > element.offsetHeight
+        document.documentElement.scrollTop >
+        element.offsetHeight - 5
       ) {
         element.classList.add('smaller-after-scroll')
       } else {
         element.classList.remove('smaller-after-scroll')
       }
-
-      // console.log(document.documentElement.scrollTop)
-      // if (
-      //   document.documentElement.scrollTop > window.innerHeight &&
-      //   !element.classList.contains('fixedMobileMenu')
-      // ) {
-      //   element.classList.add('fixedMobileMenu')
-      // } else if (
-      //   document.documentElement.scrollTop < window.innerHeight &&
-      //   element.classList.contains('fixedMobileMenu')
-      // ) {
-      //   element.classList.remove('fixedMobileMenu')
-      // }
     },
   },
 }
@@ -100,22 +88,32 @@ export default {
   left: 0;
   z-index: 1000;
   padding: 1rem;
+  background-color: transparent;
 
   @media screen and (min-width: $_md) {
     height: 120px;
+    background-color: transparent;
   }
 }
 
 .smaller-after-scroll {
   height: 60px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 .conditional-class {
   position: relative;
   position: sticky;
-  background-color: white;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1);
-  transition: height 0.1s;
+  transition: all 0.3s;
+  background-color: rgba(255, 255, 255, 1);
+
+  @media screen and (min-width: $_md) {
+    background-color: transparent;
+  }
+}
+
+.smaller-after-scroll.conditional-class {
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .logo-container {
@@ -133,36 +131,6 @@ export default {
     float: left;
   }
 }
-
-.fixedMobileMenu {
-  position: fixed;
-  height: 40px;
-  width: 100vw;
-  padding: 0.1rem;
-  left: 0;
-  top: -40px;
-  right: 0;
-  margin: 0;
-
-  background-color: white;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1);
-  // animation: scrollInTop 400ms;
-  -webkit-transform: translateY(100%);
-  transform: translateY(100%);
-  transition: transform 300ms linear;
-  will-change: transform;
-}
-
-// @keyframes scrollInTop {
-//   from {
-//     // transform: translate(0, -100%);
-//     transform: translateY(-100%);
-//     will-change: transform;
-//   }
-//   to {
-//     transform: none;
-//   }
-// }
 
 a.router-link-active {
   border: 0px solid transparent;
