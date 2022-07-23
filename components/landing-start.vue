@@ -46,6 +46,7 @@
     padding: 0.7rem;
     animation: wiggle 3s infinite;
     animation-timing-function: ease;
+    will-change: transform;
   }
 
   .down {

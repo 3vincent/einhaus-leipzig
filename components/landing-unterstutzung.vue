@@ -64,9 +64,6 @@ export default {
       const element = document.querySelector('.lastContainer')
       const scrollPositionOfElement = getPosition(element).y
 
-      // console.log('ScrollPos: ', scrollPositionOfElement)
-      // console.log(element.classList.contains('stickyBackground'))
-
       if (window.innerWidth < 1280) return
 
       if (
