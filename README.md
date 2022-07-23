@@ -1,3 +1,9 @@
+## EinHaus Website:
+
+Preview at: [https://lustrous-phoenix-b8136f.netlify.app/](https://lustrous-phoenix-b8136f.netlify.app/)
+
+<hr>
+
 # Nuxt 3 Minimal Starter
 
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
