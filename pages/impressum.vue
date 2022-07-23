@@ -172,14 +172,36 @@ definePageMeta({
   flex-wrap: wrap;
   text-align: left;
   justify-content: center;
+
+  &::before {
+    background-image: url(/images/einhaus-landing-photo-06.jpg);
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
+    box-shadow: inset 0 0 300px 300px rgb(0 0 0 / 25%);
+    content: '';
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    will-change: transform;
+    z-index: -1;
+  }
 }
 
 .content {
   width: 100%;
   max-width: calc((3 * 250px) + (4 * 2rem));
-  // width: max-content;
-  // border: 1px solid green;
   padding: 2rem;
+  background-color: white;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  @media screen and (min-width: $_lg) {
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
 
   a,
   a:link,
