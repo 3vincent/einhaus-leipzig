@@ -3,6 +3,6 @@
     <TopMenu :is-relative="false" :logo-white="true" />
     <LandingOneScrollMenu />
     <slot />
-    <Footer />
+    <Footer :is-landing="true" />
   </div>
 </template>

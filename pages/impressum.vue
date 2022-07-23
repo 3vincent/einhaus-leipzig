@@ -192,7 +192,8 @@ definePageMeta({
 
 .content {
   width: 100%;
-  max-width: calc((3 * 250px) + (4 * 2rem));
+  // max-width: calc((3 * 250px) + (4 * 2rem));
+  max-width: calc(800px + (2 * 2rem));
   padding: 2rem;
   background-color: white;
   margin-top: 0;
