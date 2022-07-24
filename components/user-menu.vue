@@ -1,7 +1,7 @@
 <template>
   <div class="user-menu-container">
     <div class="user-menu-icon-container">
-      <MenuIcon />
+      <MenuIcon :is-clicked="iconClicked" />
     </div>
 
     <div class="user-menu-list-container">
@@ -32,6 +32,12 @@
 export default {
   name: 'UserMenu',
 
+  data() {
+    return {
+      iconClicked: false,
+    }
+  },
+
   beforeUnmount() {
     document
       .querySelector('.user-menu-icon-container')
@@ -52,6 +58,8 @@ export default {
         document
           .querySelector('.user-menu-list-container')
           .classList.remove('is-visible')
+
+        this.toggleClickState()
       }
     })
   },
@@ -63,6 +71,20 @@ export default {
 
       // console.log('🎉')
       menuModal.classList.toggle('is-visible')
+      this.toggleClickState()
+    },
+
+    toggleClickState() {
+      if (
+        this.iconClicked == false &&
+        document
+          .querySelector('.user-menu-list-container')
+          .classList.contains('is-visible')
+      ) {
+        this.iconClicked = true
+      } else {
+        this.iconClicked = false
+      }
     },
   },
 }
