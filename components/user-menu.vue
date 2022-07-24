@@ -1,0 +1,121 @@
+<template>
+  <div class="user-menu-container">
+    <div class="user-menu-icon-container">
+      <MenuIcon />
+    </div>
+
+    <div class="user-menu-list-container">
+      <ul class="user-menu-list">
+        <li>
+          <NuxtLink to="/">
+            <span>Home</span>
+          </NuxtLink>
+        </li>
+
+        <li>
+          <NuxtLink to="/kontakt">
+            <span>Kontakt</span>
+          </NuxtLink>
+        </li>
+
+        <li>
+          <NuxtLink to="/impressum">
+            <span>Impressum</span>
+          </NuxtLink>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'UserMenu',
+
+  beforeUnmount() {
+    document
+      .querySelector('.user-menu-icon-container')
+      .removeEventListener('mousedown', this.showMenuModal, false)
+  },
+
+  mounted() {
+    document
+      .querySelector('.user-menu-icon-container')
+      .addEventListener('mousedown', this.showMenuModal, false)
+  },
+
+  methods: {
+    showMenuModal() {
+      const hamburgerMenu = document.querySelector('.user-menu-icon-container')
+      const menuModal = document.querySelector('.user-menu-list-container')
+
+      // console.log('🎉')
+      menuModal.classList.toggle('is-visible')
+    },
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.user-menu {
+  &-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+      a.router-link-active {
+        border: 0px solid transparent;
+        font-weight: 600;
+      }
+
+      a.nuxt-link-exact-active {
+        background-color: red;
+      }
+
+      a,
+      a:visited {
+        background-color: transparent;
+        display: block;
+        border: 0px solid transparent;
+        padding: 1rem;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-decoration: none;
+        color: inherit;
+        font-size: 1.2rem;
+      }
+
+      a:hover {
+        color: #00c58e;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+      }
+    }
+
+    &-container {
+      position: absolute;
+      z-index: 1900;
+      width: 210px;
+      top: 60px;
+      right: 0;
+      padding: 0.5rem 1rem;
+      margin-right: 1rem;
+
+      background-color: white;
+      border-radius: 10px;
+      border: 0.5px solid rgba(0, 0, 0, 0.2);
+
+      display: none;
+    }
+  }
+}
+
+.is-visible {
+  display: block;
+}
+</style>

@@ -14,7 +14,11 @@
               04317 Leipzig
             </li>
             <li>info@einhaus-leipzig.de</li>
-            <li>Kontaktformular</li>
+            <li>
+              <NuxtLink to="/kontakt">
+                <span>Kontaktformular</span>
+              </NuxtLink>
+            </li>
           </ul>
         </div>
 
@@ -26,13 +30,21 @@
                 <span>Home</span>
               </NuxtLink>
             </li>
-            <li>Kontakt</li>
+            <li>
+              <NuxtLink to="/kontakt">
+                <span>Kontakt</span>
+              </NuxtLink>
+            </li>
             <li>
               <NuxtLink to="/impressum">
                 <span>Impressum</span>
               </NuxtLink>
             </li>
-            <li>Datenschutzerklärung</li>
+            <li>
+              <NuxtLink to="/datenschutz">
+                <span>Datenschutzerklärung</span>
+              </NuxtLink>
+            </li>
           </ul>
         </div>
 
@@ -40,7 +52,11 @@
           <h3 class="headline"> Links </h3>
           <ul>
             <li>info@einhaus-leipzig.de</li>
-            <li>Kontaktformular</li>
+            <li>
+              <NuxtLink to="/kontakt">
+                <span>Kontaktformular</span>
+              </NuxtLink>
+            </li>
           </ul>
         </div>
       </div>

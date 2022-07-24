@@ -6,27 +6,14 @@
     <div class="logo-container"><Logo :isWhite="logoWhite" /></div>
 
     <div class="menu-container">
-      <ul>
-        <li>
-          <!-- <NuxtLink to="/"> -->
-          <NuxtLink to="/">
-            <span>Home</span>
-          </NuxtLink>
-        </li>
-
-        <li>
-          <NuxtLink to="/impressum">
-            <span>Impressum</span>
-          </NuxtLink>
-        </li>
-      </ul>
+      <UserMenu />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TopMenu',
+  name: 'TopMenuBar',
   props: {
     isRelative: {
       type: Boolean,
@@ -55,7 +42,6 @@ export default {
       const element = document.querySelector('.top-menu-container')
       const style = window.getComputedStyle(element)
       const position = style.getPropertyValue('position')
-
       // console.log(element.offsetHeight)
 
       if (position != 'sticky') return
@@ -104,7 +90,7 @@ export default {
 .conditional-class {
   position: relative;
   position: sticky;
-  transition: all 0.3s;
+  transition: all 0.4s;
   background-color: rgba(255, 255, 255, 1);
 
   @media screen and (min-width: $_md) {
@@ -121,35 +107,17 @@ export default {
 }
 
 .menu-container {
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  position: fixed;
+  right: 0;
+  top: 10px;
+
+  @media screen and (min-width: $_md) {
+    top: 40px;
+    right: 20px;
   }
-
-  ul li {
-    float: left;
-  }
 }
 
-a.router-link-active {
-  border: 0px solid transparent;
-  font-weight: 600;
-}
-
-a.nuxt-link-exact-active {
-  background-color: red;
-}
-
-a,
-a:visited {
-  border: 0px solid transparent;
-  padding: 1rem;
-  text-decoration: none;
-  color: inherit;
-}
-
-a:hover {
-  color: #00c58e;
+.top-menu-container.smaller-after-scroll .menu-container {
+  top: 10px;
 }
 </style>
