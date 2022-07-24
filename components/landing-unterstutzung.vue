@@ -23,7 +23,9 @@
         <a href="mailto:someone@yoursite.com">
           <button type="button"> Email schreiben </button>
         </a>
-        <button>Kontaktformular</button>
+        <NuxtLink to="/kontakt">
+          <button>Kontaktformular</button>
+        </NuxtLink>
       </div>
 
       <p>

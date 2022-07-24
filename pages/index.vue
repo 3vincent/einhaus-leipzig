@@ -19,9 +19,17 @@ export default {
     })
   },
 
+  beforeUnmount() {
+    const root = document.querySelector('html')
+    root.style.scrollBehavior = 'auto'
+  },
+
   mounted() {
     const root = document.querySelector('html')
-    root.style.scrollBehavior = 'smooth'
+
+    setTimeout(function () {
+      root.style.scrollBehavior = 'smooth'
+    }, 500)
   },
 }
 </script>
@@ -36,9 +44,3 @@ export default {
     <LandingUnterstutzung />
   </main>
 </template>
-
-<style lang="scss">
-html {
-  scroll-behavior: smooth;
-}
-</style>
