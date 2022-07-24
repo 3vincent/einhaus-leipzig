@@ -1,0 +1,1 @@
+<template> Super! </template>
