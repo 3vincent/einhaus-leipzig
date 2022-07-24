@@ -7,7 +7,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="impressum-container">
+  <div class="default-container">
     <div class="content">
       <h1>Impressum</h1>
       <p>Angaben gemäß § 5 TMG</p>
@@ -123,7 +123,9 @@ definePageMeta({
       >
       <p
         >Mehr erfahren Sie in unserer
-        <a href="datenschutz">Datenschutzerklärung</a>.</p
+        <NuxtLink to="/datenschutz">
+          <span>Datenschutzerklärung</span> </NuxtLink
+        >.</p
       >
       <p><strong>Google Analytics</strong></p>
       <p
@@ -154,9 +156,11 @@ definePageMeta({
         <br />
         <small
           >Impressum vom
-          <a href="https://www.impressum-generator.de">Impressum Generator</a>
+          <a href="https://www.impressum-generator.de" target="_blank"
+            >Impressum Generator</a
+          >
           der
-          <a href="https://www.kanzlei-hasselbach.de/"
+          <a href="https://www.kanzlei-hasselbach.de/" target="_blank"
             >Kanzlei Hasselbach, Rechtsanwälte für Arbeitsrecht und
             Familienrecht</a
           ></small
@@ -167,76 +171,9 @@ definePageMeta({
 </template>
 
 <style lang="scss" scoped>
-.impressum-container {
-  display: flex;
-  flex-wrap: wrap;
-  text-align: left;
-  justify-content: center;
-
+.default-container {
   &::before {
     background-image: url(/images/einhaus-landing-photo-06.jpg);
-    background-repeat: no-repeat;
-    background-position: 50% 0;
-    background-size: cover;
-    box-shadow: inset 0 0 300px 300px rgb(0 0 0 / 25%);
-    content: '';
-    height: 100%;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    will-change: transform;
-    z-index: -1;
-  }
-}
-
-.content {
-  width: 100%;
-  // max-width: calc((3 * 250px) + (4 * 2rem));
-  max-width: calc(800px + (2 * 2rem));
-  padding: 2rem;
-  background-color: white;
-  margin-top: 0;
-  margin-bottom: 0;
-
-  @media screen and (min-width: $_lg) {
-    margin-top: 100px;
-    margin-bottom: 100px;
-  }
-
-  a,
-  a:link,
-  a:visited {
-    text-decoration: none;
-    color: var(--main-text-color-dark);
-    border-bottom: 2px solid var(--main-text-color-semidark);
-    padding-block: 2px;
-  }
-
-  a:hover {
-    opacity: 0.8;
-  }
-
-  hr {
-    border: none;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    color: #333;
-    overflow: visible;
-    height: 5px;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-    letter-spacing: -0.05em;
-  }
-
-  h4,
-  p {
-    font-size: 0.9rem;
-  }
-
-  p.no-top-padding {
-    padding-top: 0;
   }
 }
 </style>
