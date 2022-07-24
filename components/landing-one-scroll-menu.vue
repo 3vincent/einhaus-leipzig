@@ -42,10 +42,12 @@
 .on-site-menu {
   display: none;
   position: fixed;
-  left: 0;
-  top: 250px;
   z-index: 1020;
   margin-left: 1rem;
+
+  left: 0;
+  top: 50%;
+  transform: translateY(-60%);
 
   @media screen and (min-width: $_md) {
     display: block;
