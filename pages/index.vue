@@ -6,6 +6,26 @@ definePageMeta({
 })
 </script>
 
+<script>
+export default {
+  beforeMount() {
+    const root = document.querySelector('html')
+    root.style.scrollBehavior = 'auto'
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    })
+  },
+
+  mounted() {
+    const root = document.querySelector('html')
+    root.style.scrollBehavior = 'smooth'
+  },
+}
+</script>
+
 <template>
   <main>
     <LandingStart />
@@ -16,3 +36,9 @@ definePageMeta({
     <LandingUnterstutzung />
   </main>
 </template>
+
+<style lang="scss">
+html {
+  scroll-behavior: smooth;
+}
+</style>
