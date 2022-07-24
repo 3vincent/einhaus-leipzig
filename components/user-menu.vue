@@ -42,6 +42,18 @@ export default {
     document
       .querySelector('.user-menu-icon-container')
       .addEventListener('mousedown', this.showMenuModal, false)
+
+    document.addEventListener('click', event => {
+      const isClickInside = document
+        .querySelector('.user-menu-icon-container')
+        .contains(event.target)
+
+      if (!isClickInside) {
+        document
+          .querySelector('.user-menu-list-container')
+          .classList.remove('is-visible')
+      }
+    })
   },
 
   methods: {
