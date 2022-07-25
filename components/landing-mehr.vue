@@ -1,5 +1,5 @@
 <template>
-  <div id="mehr" class="landing-container background">
+  <div id="wohnhaus" class="landing-container background">
     <div class="landing-contentBox">
       <h2>EinHaus: Mehr als ein Wohnhaus.</h2>
       <p>
