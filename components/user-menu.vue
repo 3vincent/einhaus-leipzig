@@ -103,14 +103,14 @@ export default {
       margin-top: 10px;
       margin-bottom: 10px;
 
-      a.router-link-active {
-        border: 0px solid transparent;
-        font-weight: 600;
-      }
+      // a.router-link-active {
+      //   font-weight: 600;
+      // }
 
-      a.nuxt-link-exact-active {
-        background-color: red;
-      }
+      // a.nuxt-link-exact-active {
+      //   background-color: red !important;
+      //   color: red !important;
+      // }
 
       a,
       a:visited {
@@ -124,12 +124,11 @@ export default {
         color: inherit;
         font-size: 16px;
         font-weight: 500;
+        border-radius: 6px;
       }
 
       a:hover {
-        // color: #00c58e;
-        background-color: rgba(0, 0, 0, 0.2);
-        border-radius: 6px;
+        background-color: var(--background-grey);
       }
     }
 
@@ -144,7 +143,7 @@ export default {
 
       background-color: white;
       border-radius: 10px;
-      border: 0.5px solid rgba(0, 0, 0, 0.2);
+      border: 0.5px solid var(--background-grey);
 
       display: none;
     }
