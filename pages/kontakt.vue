@@ -7,6 +7,11 @@ definePageMeta({
 
 export default {
   name: 'Kontakt',
+  data() {
+    return {
+      name: this.$options.name,
+    }
+  },
 
   mounted() {
     window.scrollTo({
@@ -20,6 +25,8 @@ export default {
 <template>
   <div class="default-container">
     <div class="content">
+      <BreadcrumbNav :target-url="name" />
+
       <h1>Kontakt</h1>
       <p>Super!</p>
     </div>

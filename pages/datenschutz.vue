@@ -7,6 +7,11 @@ definePageMeta({
 
 export default {
   name: 'Datenschutz',
+  data() {
+    return {
+      name: this.$options.name,
+    }
+  },
 
   mounted() {
     window.scrollTo({
@@ -20,7 +25,9 @@ export default {
 <template>
   <div class="default-container">
     <div class="content">
-      <h1>Datenschutzerklärung</h1>
+      <BreadcrumbNav :target-url="name" />
+
+      <h1>Datenschutz&shy;erklärung</h1>
 
       <p>Verantwortlich im Sinne der Datenschutzgesetzes:</p>
       <p
