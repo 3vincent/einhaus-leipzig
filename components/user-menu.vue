@@ -1,7 +1,8 @@
 <template>
   <div class="user-menu-container">
     <div class="user-menu-icon-container">
-      <MenuIcon :is-clicked="iconClicked" />
+      <!-- <MenuIcon :is-clicked="iconClicked" /> -->
+      <MenuIcon :is-clicked="false" />
     </div>
 
     <div class="user-menu-list-container">
@@ -117,15 +118,16 @@ export default {
         display: block;
         border: 0px solid transparent;
         padding: 1rem;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 6px;
+        padding-bottom: 6px;
         text-decoration: none;
         color: inherit;
-        font-size: 1.2rem;
+        font-size: 16px;
+        font-weight: 500;
       }
 
       a:hover {
-        color: #00c58e;
+        // color: #00c58e;
         background-color: rgba(0, 0, 0, 0.2);
         border-radius: 6px;
       }
