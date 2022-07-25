@@ -11,12 +11,6 @@ export default {
   beforeMount() {
     const root = document.querySelector('html')
     root.style.scrollBehavior = 'auto'
-
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'auto',
-    })
   },
 
   beforeUnmount() {
@@ -25,11 +19,16 @@ export default {
   },
 
   mounted() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto',
+    })
+
     const root = document.querySelector('html')
 
-    setTimeout(function () {
+    if (window.scrollY == 0) {
       root.style.scrollBehavior = 'smooth'
-    }, 500)
+    }
   },
 }
 </script>

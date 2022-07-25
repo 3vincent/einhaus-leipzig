@@ -4,6 +4,17 @@
 definePageMeta({
   layout: 'default',
 })
+
+export default {
+  name: 'Datenschutz',
+
+  mounted() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto',
+    })
+  },
+}
 </script>
 
 <template>

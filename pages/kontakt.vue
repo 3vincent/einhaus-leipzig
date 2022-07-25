@@ -4,6 +4,17 @@
 definePageMeta({
   layout: 'default',
 })
+
+export default {
+  name: 'Kontakt',
+
+  mounted() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto',
+    })
+  },
+}
 </script>
 
 <template>
@@ -18,7 +29,7 @@ definePageMeta({
 <style lang="scss" scoped>
 .default-container {
   &::before {
-    background-image: url(/images/einhaus-landing-photo-06.jpg);
+    background-image: url(/images/einhaus-landing-photo-04.jpg);
   }
 }
 </style>
