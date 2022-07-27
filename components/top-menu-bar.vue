@@ -76,7 +76,7 @@ export default {
   padding: 1rem;
   background-color: transparent;
 
-  @media screen and (min-width: $_md) {
+  @media screen and (min-width: $_lg) {
     height: 120px;
     background-color: transparent;
   }
@@ -111,7 +111,7 @@ export default {
   right: 0;
   top: 10px;
 
-  @media screen and (min-width: $_md) {
+  @media screen and (min-width: $_lg) {
     top: 40px;
     right: 20px;
   }
