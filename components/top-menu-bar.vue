@@ -42,15 +42,10 @@ export default {
       const element = document.querySelector('.top-menu-container')
       const style = window.getComputedStyle(element)
       const position = style.getPropertyValue('position')
-      // console.log(element.offsetHeight)
 
       if (position != 'sticky') return
 
-      if (
-        // position == 'sticky' &&
-        document.documentElement.scrollTop >
-        element.offsetHeight - 5
-      ) {
+      if (document.documentElement.scrollTop > element.offsetHeight - 5) {
         element.classList.add('smaller-after-scroll')
       } else {
         element.classList.remove('smaller-after-scroll')
@@ -61,8 +56,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/styles/general/variables.scss';
-
 .top-menu-container {
   position: absolute;
   display: flex;
@@ -88,7 +81,7 @@ export default {
 }
 
 .conditional-class {
-  position: relative;
+  position: relative; //fallback
   position: sticky;
   transition: all 0.4s;
   background-color: rgba(255, 255, 255, 1);
@@ -110,6 +103,7 @@ export default {
   position: fixed;
   right: 0;
   top: 10px;
+  transition: top 0.4s;
 
   @media screen and (min-width: $_lg) {
     top: 40px;
