@@ -1,5 +1,5 @@
 <template>
-  <div id="unterstutzung" class="landing-container background lastContainer">
+  <div id="unterstuetzung" class="landing-container background lastContainer">
     <div class="landing-contentBox">
       <h2>Unterstütze unser Projekt.</h2>
       <p>
@@ -41,43 +41,43 @@
 <script>
 export default {
   name: 'LandingUnterstutzung',
+  data() {
+    return {
+      element: null,
+    }
+  },
+
   mounted() {
-    this.scrollThing()
+    this.mapData()
+    this.fixBackgroundImage()
+    window.addEventListener('scroll', this.fixBackgroundImage)
+    window.addEventListener('resize', this.mapData)
   },
   beforeUnmount() {
-    // console.log('deSTROy')
-    window.removeEventListener('scroll', this.scrollThing)
-  },
-  beforeMount() {
-    window.addEventListener('scroll', this.scrollThing)
+    window.removeEventListener('scroll', this.fixBackgroundImage)
+    window.removeEventListener('resize', this.mapData)
   },
   methods: {
-    scrollThing() {
-      function getPosition(element) {
-        const rect = element.getBoundingClientRect()
-        return {
-          x: rect.left,
-          y: rect.top,
-        }
-      }
+    mapData() {
+      this.element = document.querySelector('.lastContainer')
+    },
 
-      // console.log('Scrolled!  🎉', window.scrollY)
-
-      const element = document.querySelector('.lastContainer')
-      const scrollPositionOfElement = getPosition(element).y
-
+    fixBackgroundImage() {
       if (window.innerWidth < 1280) return
 
+      const scrollPositionOfElement = this.element.getBoundingClientRect().y
+
+      if (scrollPositionOfElement <= 0) {
+        this.element.classList.add('stickyBackground')
+        return
+      }
+
       if (
-        scrollPositionOfElement <= 0 &&
-        !element.classList.contains('stickyBackground')
-      ) {
-        element.classList.add('stickyBackground')
-      } else if (
         scrollPositionOfElement > 0 &&
-        element.classList.contains('stickyBackground')
+        this.element.classList.contains('stickyBackground')
       ) {
-        element.classList.remove('stickyBackground')
+        this.element.classList.remove('stickyBackground')
+        return
       }
     },
   },
