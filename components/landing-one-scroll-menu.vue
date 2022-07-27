@@ -29,8 +29,8 @@
         </NuxtLink>
       </li>
 
-      <li id="unterstutzung-nav">
-        <NuxtLink :to="{ hash: '#unterstutzung' }" :external="true">
+      <li id="unterstuetzung-nav">
+        <NuxtLink :to="{ hash: '#unterstuetzung' }" :external="true">
           Unterstütze unser Projekt
         </NuxtLink>
       </li>
@@ -41,63 +41,100 @@
 <script>
 export default {
   name: 'LandingOneScrollMenu',
+  data() {
+    return {
+      divsToHangOnTo: {
+        topY: 0,
+        bottomY: 0,
+        menuItem: '',
+        divId: '',
+      },
+      divSearchIndex: [],
+    }
+  },
   methods: {
-    mapAnchorMenu() {
-      /** TODO:
-       *    - Store data in data :)
-       *    - on mounted and on resize read position of divs and store
-       *      in an object
-       *    - fix bug with this.$router.push when clicking a nuxt-link (flickering)
-       * */
-
-      function isElementInViewport(el) {
-        if (window.innerWidth < 768) return
-
-        const element = document.querySelector(el)
-
-        const rect = element.getBoundingClientRect()
-
-        // console.log(`e: ${el} | t: ${rect.top} | b: ${rect.bottom}`)
-
-        return (
-          rect.top / 10 <= (window.innerHeight * 0.5) / 10 &&
-          rect.top / 10 >= ((window.innerHeight * 0.5) / 10) * -1
-        )
-      }
-
-      // console.log(this.$route.hash)
-
-      // console.log('start im vue: ', isElementInViewport('#start'))
-      // console.log('bisher im vue: ', isElementInViewport('#bisher'))
+    mapPositionsOfDivs() {
+      this.divSearchIndex.length = 0
 
       const children = [...document.querySelectorAll('.landing-container')].map(
         c => `#${c.id}`
       )
 
+      const windowHeight = window.innerHeight
+
+      const scrollPos = window.scrollY
+
       children.forEach(child => {
         const menuItem = document.querySelector(`${child}-nav`)
 
-        if (isElementInViewport(child) == true) {
-          menuItem.classList.add('is-active')
+        const elementRect = document
+          .querySelector(child)
+          .getBoundingClientRect()
 
-          this.$router.push(`/${child}`)
-        } else if (menuItem.classList.contains('is-active')) {
-          menuItem.classList.remove('is-active')
+        const elementTopValue = elementRect.top + scrollPos - windowHeight / 2
+
+        const elementBottomValue =
+          elementRect.bottom + scrollPos - windowHeight / 2
+
+        this.divsToHangOnTo[elementTopValue] = {
+          topY: elementTopValue,
+          bottomY: elementBottomValue,
+          menuItem: menuItem,
+          divId: child,
         }
+
+        this.divSearchIndex.push(elementTopValue)
       })
+    },
+
+    hightlightMenuItem() {
+      /** TODO:
+       *
+       *    √ Store data in data :)
+       *    √ on mounted and on resize read position of divs and store
+       *      in an object
+       *    - Maybe add a scroll limiter (-> only execute every x pixels scrolled)
+       *  ! - fix bug with this.$router.push when clicking a nuxt-link (flickering)
+       *
+       * */
+
+      const scrollPositionY = window.scrollY
+
+      const inViewportDiv = this.divSearchIndex.find(
+        div =>
+          scrollPositionY < this.divsToHangOnTo[div].bottomY &&
+          scrollPositionY > this.divsToHangOnTo[div].topY
+      )
+
+      const activeClassDiv = this.divSearchIndex.find(div =>
+        this.divsToHangOnTo[div].menuItem.classList.contains('is-active')
+      )
+
+      activeClassDiv
+        ? this.divsToHangOnTo[activeClassDiv].menuItem.classList.remove(
+            'is-active'
+          )
+        : false
+
+      inViewportDiv
+        ? this.divsToHangOnTo[inViewportDiv].menuItem.classList.add('is-active')
+        : false
     },
   },
 
   beforeMount() {
-    window.addEventListener('scroll', this.mapAnchorMenu, false)
+    window.addEventListener('scroll', this.hightlightMenuItem, false)
+    window.addEventListener('resize', this.mapPositionsOfDivs, false)
   },
 
   mounted() {
-    this.mapAnchorMenu()
+    this.mapPositionsOfDivs()
+    this.hightlightMenuItem()
   },
 
   beforeUnmount() {
-    window.removeEventListener('scroll', this.mapAnchorMenu, false)
+    window.removeEventListener('scroll', this.hightlightMenuItem, false)
+    window.removeEventListener('resize', this.mapPositionsOfDivs, false)
   },
 }
 </script>
