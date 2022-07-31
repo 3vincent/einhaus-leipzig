@@ -36,21 +36,25 @@ export default {
   data() {
     return {
       iconClicked: false,
+      hamburgerMenu: null,
+      menuModal: null,
     }
   },
 
   beforeUnmount() {
-    document
-      .querySelector('.user-menu-icon-container')
-      .removeEventListener('mousedown', this.showMenuModal, false)
+    this.hamburgerMenu.removeEventListener(
+      'mousedown',
+      this.showMenuModal,
+      false
+    )
 
     document.removeEventListener('click', this.detectOutsideClickToClose, false)
   },
 
   mounted() {
-    document
-      .querySelector('.user-menu-icon-container')
-      .addEventListener('mousedown', this.showMenuModal, false)
+    this.gatherData()
+
+    this.hamburgerMenu.addEventListener('mousedown', this.showMenuModal, false)
 
     document.addEventListener('click', event =>
       this.detectOutsideClickToClose(event)
@@ -58,21 +62,20 @@ export default {
   },
 
   methods: {
-    showMenuModal() {
-      const hamburgerMenu = document.querySelector('.user-menu-icon-container')
-      const menuModal = document.querySelector('.user-menu-list-container')
+    gatherData() {
+      this.hamburgerMenu = document.querySelector('.user-menu-icon-container')
+      this.menuModal = document.querySelector('.user-menu-list-container')
+    },
 
-      // console.log('🎉')
-      menuModal.classList.toggle('is-visible')
+    showMenuModal() {
+      this.menuModal.classList.toggle('is-visible')
       this.toggleClickState()
     },
 
     toggleClickState() {
       if (
         this.iconClicked == false &&
-        document
-          .querySelector('.user-menu-list-container')
-          .classList.contains('is-visible')
+        this.hamburgerMenu.classList.contains('is-visible')
       ) {
         this.iconClicked = true
       } else {
@@ -81,14 +84,10 @@ export default {
     },
 
     detectOutsideClickToClose(event) {
-      const isClickInside = document
-        .querySelector('.user-menu-icon-container')
-        .contains(event.target)
+      const isClickInside = this.hamburgerMenu.contains(event.target)
 
       if (!isClickInside) {
-        document
-          .querySelector('.user-menu-list-container')
-          .classList.remove('is-visible')
+        this.menuModal.classList.remove('is-visible')
 
         this.toggleClickState()
       }
