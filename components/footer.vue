@@ -48,14 +48,22 @@
           </ul>
         </div>
 
-        <div class="something list-container">
+        <div class="external-links list-container">
           <h3 class="headline"> Links </h3>
           <ul>
-            <li>info@einhaus-leipzig.de</li>
             <li>
-              <NuxtLink to="/kontakt">
-                <span>Kontaktformular</span>
-              </NuxtLink>
+              <a
+                href="https://www.netzwerk-leipziger-freiheit.de/"
+                target="_blank"
+              >
+                Netzwerk Leipziger Freiheit -
+                https://www.netzwerk-leipziger-freiheit.de/
+              </a>
+            </li>
+            <li>
+              <a href="https://www.bund-leipzig.de/" target="_blank">
+                BUND Leipzig Ortsgruppe Ost - https://www.bund-leipzig.de/
+              </a>
             </li>
           </ul>
         </div>
@@ -81,8 +89,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/styles/general/variables.scss';
-
 ::selection {
   background-color: rgba(255, 255, 255, 0.8);
 }
@@ -119,17 +125,17 @@ export default {
 
   .copyright-claim {
     grid-area: 2 / 1 / 3 / 2;
-
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.5);
     margin: 0;
-    // margin-top: 1rem;
-    // margin-bottom: 1rem;
     align-self: center;
 
-    @media screen and (min-width: $_md) {
-      font-size: 0.8rem;
+    span {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: rgba(193, 193, 193, 1);
+
+      @media screen and (min-width: $_md) {
+        font-size: 0.8rem;
+      }
     }
   }
 }
@@ -158,7 +164,7 @@ export default {
     padding-bottom: 0;
     text-transform: uppercase;
     font-weight: 600;
-    color: rgba(142, 142, 142, 1);
+    color: rgba(156, 157, 156, 1);
   }
 }
 
@@ -191,5 +197,9 @@ ul {
       text-decoration: none;
     }
   }
+}
+
+.external-links ul {
+  list-style-type: square;
 }
 </style>

@@ -43,6 +43,8 @@ export default {
     document
       .querySelector('.user-menu-icon-container')
       .removeEventListener('mousedown', this.showMenuModal, false)
+
+    document.removeEventListener('click', this.detectOutsideClickToClose, false)
   },
 
   mounted() {
@@ -50,19 +52,9 @@ export default {
       .querySelector('.user-menu-icon-container')
       .addEventListener('mousedown', this.showMenuModal, false)
 
-    document.addEventListener('click', event => {
-      const isClickInside = document
-        .querySelector('.user-menu-icon-container')
-        .contains(event.target)
-
-      if (!isClickInside) {
-        document
-          .querySelector('.user-menu-list-container')
-          .classList.remove('is-visible')
-
-        this.toggleClickState()
-      }
-    })
+    document.addEventListener('click', event =>
+      this.detectOutsideClickToClose(event)
+    )
   },
 
   methods: {
@@ -87,6 +79,20 @@ export default {
         this.iconClicked = false
       }
     },
+
+    detectOutsideClickToClose(event) {
+      const isClickInside = document
+        .querySelector('.user-menu-icon-container')
+        .contains(event.target)
+
+      if (!isClickInside) {
+        document
+          .querySelector('.user-menu-list-container')
+          .classList.remove('is-visible')
+
+        this.toggleClickState()
+      }
+    },
   },
 }
 </script>
@@ -100,8 +106,8 @@ export default {
 
     li {
       display: block;
-      margin-top: 10px;
-      margin-bottom: 10px;
+      margin-top: 00px;
+      margin-bottom: 00px;
 
       // a.router-link-active {
       //   font-weight: 600;
@@ -117,9 +123,9 @@ export default {
         background-color: transparent;
         display: block;
         border: 0px solid transparent;
-        padding: 1rem;
-        padding-top: 6px;
-        padding-bottom: 6px;
+        padding: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
         text-decoration: none;
         color: inherit;
         font-size: 16px;
@@ -128,7 +134,7 @@ export default {
       }
 
       a:hover {
-        background-color: var(--background-grey);
+        background-color: var(--background-menu-highlighting);
       }
     }
 
@@ -138,12 +144,12 @@ export default {
       width: 210px;
       top: 60px;
       right: 0;
-      padding: 0.5rem 1rem;
+      padding: 10px;
       margin-right: 1rem;
 
       background-color: white;
       border-radius: 10px;
-      border: 0.5px solid var(--background-grey);
+      border: 0.5px solid var(--background-menu-highlighting);
 
       display: none;
     }
