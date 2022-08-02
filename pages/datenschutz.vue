@@ -47,7 +47,7 @@ export default {
       >
       <p><strong>Newsletter</strong></p>
       <p
-        >Wenn Se sich für unseren Newsletter anmelden nutzen wir die
+        >Wenn Sie sich für unseren Newsletter anmelden nutzen wir die
         Anmeldedaten ausschließlich für den Newsletter-Dienst. Angemeldete
         Nutzer können von uns kontaktiert werden um über Änderungen,
         Aktualisierungen oder andere relevante Informationen unterrichtet zu
