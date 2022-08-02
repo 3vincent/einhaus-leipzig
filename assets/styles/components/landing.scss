@@ -3,7 +3,6 @@
     position: relative;
 
     background-repeat: no-repeat;
-    // background-attachment: fixed;
     background-attachment: scroll;
     background-position: 50% 0;
     background-size: cover;
@@ -21,12 +20,11 @@
       background-attachment: fixed;
     }
 
-    @media screen and (min-width: $_xl) {
-      justify-content: center;
+    @media (hover: none) {
+      background-attachment: scroll;
     }
 
     &::before {
-      // background-image: url(/images/einhaus-landing-photo-01.jpg);
       background-repeat: no-repeat;
       background-position: 50% 0;
       background-size: cover;
