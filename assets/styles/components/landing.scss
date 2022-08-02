@@ -18,6 +18,7 @@
 
     @media screen and (min-width: $_xl) {
       background-attachment: fixed;
+      justify-content: center;
     }
 
     @media (hover: none) {
@@ -29,7 +30,8 @@
       background-position: 50% 0;
       background-size: cover;
       content: '';
-      height: 100%;
+      min-height: 100vh; //fallback
+      min-height: -webkit-fill-available;
       left: 0;
       position: fixed;
       top: 0;
