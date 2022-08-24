@@ -28,7 +28,11 @@ export default {
       <BreadcrumbNav :target-url="name" />
 
       <h1>Kontakt</h1>
-      <p>Super!</p>
+      <p>
+        Wenn Du mit uns in Kontakt treten willst, schreib uns eine Email an
+        info@einhaus-leipzig.de oder füll das Kontaktformular aus.
+      </p>
+      <p> Wir werden uns schnellstmöglich bei Dir melden! </p>
     </div>
   </div>
 </template>
@@ -37,6 +41,10 @@ export default {
 .default-container {
   &::before {
     background-image: url(/images/einhaus-landing-photo-04.jpg);
+  }
+
+  p {
+    font-size: 1.1rem;
   }
 }
 </style>
