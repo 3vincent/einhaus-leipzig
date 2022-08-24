@@ -26,6 +26,10 @@
 
 .landing-container {
   box-shadow: none;
+  background-position: 50% 0;
+  background-size: cover;
+  padding-top: 0;
+  min-height: 100vh;
 }
 
 .arrow-container {
