@@ -21,21 +21,15 @@
 
     <svg
       v-else
-      viewBox="0 0 100 80"
+      viewBox="-2 0 110 80"
       width="40"
       height="40"
-      class="shadow"
       v-bind:class="{ 'is-active': isClicked }"
     >
-      <g
-        stroke="none"
-        stroke-width="1"
-        fill="var(--main-text-color-dark)"
-        fill-rule="nonzero"
-      >
-        <rect width="100" height="12"></rect>
-        <rect y="30" width="100" height="12"></rect>
-        <rect y="60" width="100" height="12"></rect>
+      <g stroke="white" stroke-width="2" fill="black" fill-rule="nonzero">
+        <rect width="102" height="14"></rect>
+        <rect y="30" width="102" height="14"></rect>
+        <rect y="60" width="102" height="14"></rect>
       </g>
     </svg>
   </div>
@@ -70,7 +64,7 @@ div {
 }
 
 .is-active {
-  filter: none;
+  filter: drop-shadow(3px 3px 2px rgba(165, 165, 165, 0.7));
 }
 
 .is-active g {
