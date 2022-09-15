@@ -47,7 +47,7 @@ export default {
     }
   },
 
-  mounted() {
+  beforeMount() {
     this.mapData()
     this.fixBackgroundImage()
     window.addEventListener('scroll', this.fixBackgroundImage)
@@ -64,6 +64,8 @@ export default {
 
     fixBackgroundImage() {
       if (window.innerWidth < 1280) return
+
+      if (!this.element) return
 
       const scrollPositionOfElement = this.element.getBoundingClientRect().y
 
