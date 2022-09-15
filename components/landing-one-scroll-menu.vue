@@ -191,7 +191,7 @@ export default {
     padding-top: 0.9rem;
     padding-right: 0.9rem;
     padding-bottom: 0.9rem;
-    padding-left: 1.4rem;
+    padding-left: 1.2rem;
   }
 
   // ul li:hover {
@@ -213,6 +213,7 @@ export default {
 
   li.is-active a,
   li.is-active a:visited {
+    font-weight: bold;
     color: var(--main-text-color-dark);
   }
 }
