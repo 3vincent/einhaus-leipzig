@@ -1,6 +1,4 @@
 <script>
-/* global definePageMeta:readonly */
-/* eslint no-undef: "error" */
 definePageMeta({
   layout: 'default',
 })

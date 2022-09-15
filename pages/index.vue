@@ -1,13 +1,10 @@
-<script setup>
-/* global definePageMeta:readonly */
-/* eslint no-undef: "error" */
+<script>
 definePageMeta({
   layout: 'landing',
 })
-</script>
 
-<script>
 export default {
+  name: 'Landing',
   beforeMount() {
     const root = document.querySelector('html')
     root.style.scrollBehavior = 'auto'
