@@ -97,6 +97,7 @@ export default {
   min-height: 30vh;
   width: 100%;
   background-color: #333;
+  padding-top: 1rem;
 }
 
 .grid-container {
@@ -174,6 +175,7 @@ ul {
   list-style-type: none;
   list-style-position: inside;
   padding: 0;
+  margin-top: 2rem;
 
   li {
     padding-bottom: 1.4rem;
