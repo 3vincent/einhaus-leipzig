@@ -6,7 +6,7 @@
         y1="10"
         x2="100"
         y2="100"
-        stroke="var(--main-text-color-dark)"
+        stroke="black"
         stroke-width="12"
       />
       <line
@@ -14,7 +14,7 @@
         y1="10"
         x2="10"
         y2="100"
-        stroke="var(--main-text-color-dark)"
+        stroke="black"
         stroke-width="12"
       />
     </svg>

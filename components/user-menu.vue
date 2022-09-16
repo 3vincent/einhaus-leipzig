@@ -75,7 +75,7 @@ export default {
     toggleClickState() {
       if (
         this.iconClicked == false &&
-        this.hamburgerMenu.classList.contains('is-visible')
+        this.menuModal.classList.contains('is-visible')
       ) {
         this.iconClicked = true
       } else {
