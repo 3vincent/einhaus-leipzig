@@ -176,11 +176,12 @@ ul {
   padding: 0;
 
   li {
-    padding-bottom: 1rem;
+    padding-bottom: 1.4rem;
     line-height: 1.4rem;
     color: rgb(230, 230, 230);
 
     @media screen and (min-width: $_md) {
+      padding-bottom: 1.2rem;
       font-size: 0.9rem;
       line-height: 1.2rem;
     }
