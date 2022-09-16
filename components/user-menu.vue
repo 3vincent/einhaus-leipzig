@@ -1,8 +1,8 @@
 <template>
   <div class="user-menu-container">
     <div class="user-menu-icon-container">
-      <MenuIcon :is-clicked="iconClicked" />
-      <!-- <MenuIcon :is-clicked="false" /> -->
+      <!-- <MenuIcon :is-clicked="iconClicked" /> -->
+      <MenuIcon :is-clicked="false" />
     </div>
 
     <div class="user-menu-list-container">
