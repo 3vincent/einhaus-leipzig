@@ -46,8 +46,7 @@ export default {
       element: null,
     }
   },
-
-  beforeMount() {
+  mounted() {
     this.mapData()
     this.fixBackgroundImage()
     window.addEventListener('scroll', this.fixBackgroundImage)
