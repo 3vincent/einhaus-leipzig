@@ -4,7 +4,14 @@
       <h2>EinHaus: Mehr als ein Wohnhaus.</h2>
       <p>
         In der Reichpietschstraße 13 gibt es noch viel mehr als bloßes Wohnen.
-        Um uns kennenzulernen, kannst du zum Beispiel zur Kellerausstellung
+        Um uns kennenzulernen, kannst du zum Beispiel zur
+        <a
+          href="http://www.kellerausstellung.de/"
+          class="text-link"
+          target="_blank"
+        >
+          Kellerausstellung
+        </a>
         kommen, die bereits seit 2010 in unserem Haus stattfindet.
         Künstler*innen aus der ganzen Welt stellen ihre Bilder, Skulpturen,
         Objekte und Fotografien aus. Die Kellerausstellung ist in ein
@@ -13,12 +20,37 @@
       </p>
       <p>
         Wir leisten einen kulturellen Beitrag im Quartier auch mit der Teilnahme
-        an der Notenspur - Nacht der Hausmusik, sowie am Programm Offene
-        Ateliers Leipzig, zu denen ebenso alle eingeladen sind. Weiterhin sitzt
-        der Klub Polski e.V. in unserem Haus, der die populäre
-        Veranstaltungsreihe Slawische Nacht organisiert und als Teil des
-        Arbeitsladen Ost als Multiplikator mit vielen Vereinen und Institutionen
-        im Leipziger Osten eng zusammenarbeitet.
+        an der
+        <a
+          href="https://notenspur-leipzig.de/"
+          class="text-link"
+          target="_blank"
+        >
+          Notenspur - Nacht der Hausmusik
+        </a>
+        , sowie am Programm
+        <a
+          href="http://offene-ateliers-leipzig.blogspot.com/"
+          class="text-link"
+          target="_blank"
+        >
+          Offene Ateliers Leipzig
+        </a>
+        , zu denen ebenso alle eingeladen sind. Weiterhin sitzt der
+        <a href="http://www.klubpolski.de/" class="text-link" target="_blank">
+          Klub Polski e.V.
+        </a>
+        in unserem Haus, der die populäre Veranstaltungsreihe
+        <a
+          href="http://www.slawische-nacht.de/"
+          class="text-link"
+          target="_blank"
+        >
+          Slawische Nacht
+        </a>
+        organisiert und als Teil des Arbeitsladen Ost als Multiplikator mit
+        vielen Vereinen und Institutionen im Leipziger Osten eng
+        zusammenarbeitet.
       </p>
     </div>
   </div>
