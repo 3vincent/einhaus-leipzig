@@ -1,0 +1,7 @@
+User-Agent: *
+
+Disallow: /datenschutz/
+
+Allow: /
+
+Sitemap: https://www.einhaus-leipzig.de/sitemap.xml
