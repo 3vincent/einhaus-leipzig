@@ -19,14 +19,10 @@
         persönlich. Wir freuen uns über eine E-Mail an info@einhaus-leipzig.de
       </p>
 
-      <div>
-        <a href="mailto:someone@yoursite.com">
-          <button type="button"> Email schreiben </button>
-        </a>
-        <NuxtLink to="/kontakt">
-          <button>Kontaktformular</button>
-        </NuxtLink>
-      </div>
+      <NuxtLink to="/kontakt" class="link primary"> Kontaktformular </NuxtLink>
+      <a href="mailto:someone@yoursite.com" class="link secondary">
+        Email schreiben
+      </a>
 
       <p>
         <small
