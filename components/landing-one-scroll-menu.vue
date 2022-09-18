@@ -218,6 +218,7 @@ export default {
   li.is-active a:visited {
     font-weight: bold;
     color: var(--main-text-color-dark);
+    letter-spacing: -0.5px;
   }
 }
 </style>
