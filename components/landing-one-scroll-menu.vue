@@ -118,9 +118,10 @@ export default {
           )
         : false
 
-      inViewportDiv
-        ? this.divsToHangOnTo[inViewportDiv].menuItem.classList.add('is-active')
-        : false
+      if (inViewportDiv) {
+        this.divsToHangOnTo[inViewportDiv].menuItem.classList.add('is-active')
+        this.$router.push(`/${this.divsToHangOnTo[inViewportDiv].divId}`)
+      }
     },
   },
 
