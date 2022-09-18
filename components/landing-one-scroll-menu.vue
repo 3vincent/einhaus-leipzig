@@ -110,6 +110,8 @@ export default {
         this.divsToHangOnTo[div].menuItem.classList.contains('is-active')
       )
 
+      if (activeClassDiv === inViewportDiv) return
+
       activeClassDiv
         ? this.divsToHangOnTo[activeClassDiv].menuItem.classList.remove(
             'is-active'
