@@ -3,15 +3,21 @@
     <div id="start" class="landing-container">
       <div class="landing-contentBox">
         <h1>EinHaus Reichpiet<wbr />sch<wbr />straße 13 eG</h1>
+        <h2 class="seo-text"></h2>
         <h3>Ein genossenschaftliches Hausprojekt in Leipzig Reudnitz</h3>
       </div>
     </div>
 
     <div class="arrow-container">
       <div class="inner-arrow-content">
-        <NuxtLink :to="{ hash: '#bisher' }" :external="true">
+        <NuxtLink
+          :to="{ hash: '#bisher' }"
+          :external="true"
+          aria-label="Scroll down"
+        >
           <div class="scrollTeacher">
             <i class="arrow down" />
+            <span class="seo-text">Scroll down</span>
           </div>
         </NuxtLink>
       </div>
