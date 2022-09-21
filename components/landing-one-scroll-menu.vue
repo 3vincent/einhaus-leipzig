@@ -87,7 +87,7 @@ export default {
       })
     },
 
-    hightlightMenuItem() {
+    highlightMenuItem() {
       /** TODO:
        *
        *    √ Store data in data :)
@@ -126,17 +126,17 @@ export default {
   },
 
   beforeMount() {
-    window.addEventListener('scroll', this.hightlightMenuItem, false)
+    window.addEventListener('scroll', this.highlightMenuItem, false)
     window.addEventListener('resize', this.mapPositionsOfDivs, false)
   },
 
   mounted() {
     this.mapPositionsOfDivs()
-    this.hightlightMenuItem()
+    this.highlightMenuItem()
   },
 
   beforeUnmount() {
-    window.removeEventListener('scroll', this.hightlightMenuItem, false)
+    window.removeEventListener('scroll', this.highlightMenuItem, false)
     window.removeEventListener('resize', this.mapPositionsOfDivs, false)
   },
 }
