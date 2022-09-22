@@ -93,8 +93,8 @@ export default {
        *    √ Store data in data :)
        *    √ on mounted and on resize read position of divs and store
        *      in an object
-       *    - Maybe add a scroll limiter (-> only execute every x pixels scrolled)
-       *  ! - fix bug with this.$router.push when clicking a nuxt-link (flickering)
+       *    x Maybe add a scroll limiter (-> only execute every x pixels scrolled)
+       *    √ fix bug with this.$router.push when clicking a nuxt-link (flickering)
        *
        * */
 

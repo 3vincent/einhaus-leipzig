@@ -36,7 +36,12 @@ export default {
 }
 
 .conditional-class {
-  filter: invert(100%);
+  /**
+  * Only switch to white logo, when screen size bigger then $_lg
+  * */
+  @media screen and (min-width: 821px) {
+    filter: invert(100%);
+  }
 }
 
 a,
