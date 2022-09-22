@@ -26,28 +26,25 @@
           class="text-link"
           target="_blank"
         >
-          Notenspur - Nacht der Hausmusik
-        </a>
-        , sowie am Programm
+          Notenspur - Nacht der Hausmusik </a
+        >, sowie am Programm
         <a
           href="http://offene-ateliers-leipzig.blogspot.com/"
           class="text-link"
           target="_blank"
         >
-          Offene Ateliers Leipzig
-        </a>
-        , zu denen ebenso alle eingeladen sind. Weiterhin sitzt der
+          Offene Ateliers Leipzig </a
+        >, zu denen ebenso alle eingeladen sind. Weiterhin sitzt der
         <a href="http://www.klubpolski.de/" class="text-link" target="_blank">
-          Klub Polski e.V.
-        </a>
+          Klub Polski e.V.</a
+        >
         in unserem Haus, der die populäre Veranstaltungsreihe
         <a
           href="http://www.slawische-nacht.de/"
           class="text-link"
           target="_blank"
+          >Slawische Nacht</a
         >
-          Slawische Nacht
-        </a>
         organisiert und als Teil des Arbeitsladen Ost als Multiplikator mit
         vielen Vereinen und Institutionen im Leipziger Osten eng
         zusammenarbeitet.
