@@ -81,7 +81,7 @@
     .text-link {
       text-decoration: none;
       color: var(--main-text-color-dark);
-      border-bottom: 1px solid var(--main-text-color-semidark);
+      border-bottom: 1px solid var(--main-text-color-dark);
       display: inline-block;
 
       @media screen and (min-width: $_md) {
@@ -90,7 +90,8 @@
     }
 
     a:hover {
-      opacity: 0.8;
+      color: var(--main-text-color-semidark);
+      border-color: var(--main-text-color-semidark-alt);
     }
   }
 }
