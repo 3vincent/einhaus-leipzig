@@ -70,7 +70,7 @@
       </div>
 
       <div class="copyright-claim">
-        <span>&#169; 2022 EinHaus Reichpietschstraße 13 eG</span>
+        <span>&#169; {{ currentYear }} EinHaus Reichpietschstraße 13 eG</span>
       </div>
     </div>
   </div>
@@ -84,6 +84,11 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  data() {
+    return {
+      currentYear: new Date().getFullYear(),
+    }
   },
 }
 </script>
