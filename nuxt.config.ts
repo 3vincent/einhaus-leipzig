@@ -14,4 +14,8 @@ export default defineNuxtConfig({
     SMTP_USER_PASSWORD: process.env.SMTP_USER_PASSWORD,
     SMTP_PORT_TLS: process.env.SMTP_PORT_TLS,
   },
+  typescript: {
+    strict: true,
+    typeCheck: true,
+  },
 })
