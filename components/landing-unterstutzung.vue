@@ -20,7 +20,9 @@
       </p>
 
       <NuxtLink to="/kontakt" class="link primary"> Kontaktformular </NuxtLink>
-      <a :href="receiverEmail" class="link secondary"> Email schreiben </a>
+      <a :href="envVar.MAIL_RECEIVER_CONTACT_FORM" class="link secondary">
+        Email schreiben
+      </a>
 
       <p>
         <small
@@ -32,12 +34,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'LandingUnterstutzung',
   data() {
     return {
       element: null,
+      envVar: useRuntimeConfig(),
     }
   },
 
@@ -77,18 +80,6 @@ export default {
         this.element.classList.remove('stickyBackground')
         return
       }
-    },
-  },
-
-  computed: {
-    receiverEmail() {
-      let mailReceiver
-      if (process.env.NODE_ENV === 'production') {
-        mailReceiver = process.env.MAIL_RECEIVER_CONTACT_FORM
-      } else {
-        mailReceiver = process.env.MAIL_RECEIVER_FALLBACK
-      }
-      return mailReceiver
     },
   },
 }
