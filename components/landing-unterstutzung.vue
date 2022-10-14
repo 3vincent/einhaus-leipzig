@@ -20,9 +20,7 @@
       </p>
 
       <NuxtLink to="/kontakt" class="link primary"> Kontaktformular </NuxtLink>
-      <a href="mailto:someone@yoursite.com" class="link secondary">
-        Email schreiben
-      </a>
+      <a :href="receiverEmail" class="link secondary"> Email schreiben </a>
 
       <p>
         <small
@@ -42,16 +40,19 @@ export default {
       element: null,
     }
   },
+
   mounted() {
     this.mapData()
     this.fixBackgroundImage()
     window.addEventListener('scroll', this.fixBackgroundImage)
     window.addEventListener('resize', this.mapData)
   },
+
   beforeUnmount() {
     window.removeEventListener('scroll', this.fixBackgroundImage)
     window.removeEventListener('resize', this.mapData)
   },
+
   methods: {
     mapData() {
       this.element = document.querySelector('.lastContainer')
@@ -76,6 +77,18 @@ export default {
         this.element.classList.remove('stickyBackground')
         return
       }
+    },
+  },
+
+  computed: {
+    receiverEmail() {
+      let mailReceiver
+      if (process.env.NODE_ENV === 'production') {
+        mailReceiver = process.env.MAIL_RECEIVER_CONTACT_FORM
+      } else {
+        mailReceiver = process.env.MAIL_RECEIVER_FALLBACK
+      }
+      return mailReceiver
     },
   },
 }
