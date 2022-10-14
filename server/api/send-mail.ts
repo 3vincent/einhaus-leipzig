@@ -1,12 +1,14 @@
 import nodemailer from 'nodemailer'
 
-const smtpHost: string = process.env.SMTP_HOST
-const smtpPortTLS: number = Number(process.env.SMTP_PORT_TLS)
-const smptUserName: string = process.env.SMTP_USER_NAME
-const smtpUserPassword: string = process.env.SMTP_USER_PASSWORD
+const envVar = useRuntimeConfig()
+
+const smtpHost: string = envVar.SMTP_HOST
+const smtpPortTLS: number = Number(envVar.SMTP_PORT_TLS)
+const smptUserName: string = envVar.SMTP_USER_NAME
+const smtpUserPassword: string = envVar.SMTP_USER_PASSWORD
 let mailReceiver: string
 
-export type PayloadData = {
+type PayloadData = {
   name: string
   email: string
   message: string
@@ -15,9 +17,9 @@ export type PayloadData = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  mailReceiver = process.env.MAIL_RECEIVER_CONTACT_FORM
+  mailReceiver = envVar.MAIL_RECEIVER_CONTACT_FORM
 } else {
-  mailReceiver = process.env.MAIL_RECEIVER_FALLBACK
+  mailReceiver = envVar.MAIL_RECEIVER_FALLBACK
 }
 
 async function sendMail(payload: PayloadData) {
