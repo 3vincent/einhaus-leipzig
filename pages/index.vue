@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 definePageMeta({
   layout: 'landing',
 })
@@ -6,13 +6,11 @@ definePageMeta({
 export default {
   name: 'Landing',
   beforeMount() {
-    const root = document.querySelector('html')
-    root.style.scrollBehavior = 'auto'
+    this.setScrollBehavior('auto')
   },
 
   beforeUnmount() {
-    const root = document.querySelector('html')
-    root.style.scrollBehavior = 'auto'
+    this.setScrollBehavior('auto')
   },
 
   mounted() {
@@ -21,11 +19,17 @@ export default {
       behavior: 'auto',
     })
 
-    const root = document.querySelector('html')
-
     if (window.scrollY == 0) {
-      root.style.scrollBehavior = 'smooth'
+      this.setScrollBehavior('smooth')
     }
+  },
+
+  methods: {
+    setScrollBehavior(mode: string) {
+      const root = document.querySelector('html')
+
+      if (root) root.style.scrollBehavior = mode
+    },
   },
 }
 </script>

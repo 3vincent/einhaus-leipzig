@@ -38,52 +38,56 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+type DivsToHangOnToChildData = {
+  topY: number
+  bottomY: number
+  menuItem: HTMLLIElement
+  divId: string
+}
+
+interface DivsToHangOnToData {
+  [key: number]: DivsToHangOnToChildData
+}
+
 export default {
   name: 'LandingOneScrollMenu',
   data() {
     return {
-      divsToHangOnTo: {
-        topY: 0,
-        bottomY: 0,
-        menuItem: '',
-        divId: '',
-      },
-      divSearchIndex: [],
+      divsToHangOnTo: {} as DivsToHangOnToData,
+      divSearchIndex: [] as DivsToHangOnToChildData['topY'][],
     }
   },
   methods: {
     mapPositionsOfDivs() {
       this.divSearchIndex.length = 0
 
-      const children = [...document.querySelectorAll('.landing-container')].map(
-        c => `#${c.id}`
-      )
+      const children = Array.from(
+        document.querySelectorAll('.landing-container')
+      ).map(c => `#${c.id}`)
 
       const windowHeight = window.innerHeight
 
       const scrollPos = window.scrollY
 
       children.forEach(child => {
-        const menuItem = document.querySelector(`${child}-nav`)
+        const element = document.querySelector(child)
 
-        const elementRect = document
-          .querySelector(child)
-          .getBoundingClientRect()
+        if (element) {
+          const elementRect = element.getBoundingClientRect()
 
-        const elementTopValue = elementRect.top + scrollPos - windowHeight / 2
+          const elementTopValue: number =
+            elementRect.top + scrollPos - windowHeight / 2
 
-        const elementBottomValue =
-          elementRect.bottom + scrollPos - windowHeight / 2
+          this.divsToHangOnTo[elementTopValue] = {
+            topY: elementTopValue,
+            bottomY: elementRect.bottom + scrollPos - windowHeight / 2,
+            menuItem: document.querySelector(`${child}-nav`)!,
+            divId: child,
+          }
 
-        this.divsToHangOnTo[elementTopValue] = {
-          topY: elementTopValue,
-          bottomY: elementBottomValue,
-          menuItem: menuItem,
-          divId: child,
+          this.divSearchIndex.push(elementTopValue)
         }
-
-        this.divSearchIndex.push(elementTopValue)
       })
     },
 

@@ -39,7 +39,7 @@ export default {
   name: 'LandingUnterstutzung',
   data() {
     return {
-      element: null,
+      element: document.querySelector('.lastContainer') as HTMLDivElement,
       envVar: useRuntimeConfig(),
     }
   },
@@ -58,7 +58,7 @@ export default {
 
   methods: {
     mapData() {
-      this.element = document.querySelector('.lastContainer')
+      this.element = document.querySelector('.lastContainer') as HTMLDivElement
     },
 
     fixBackgroundImage() {

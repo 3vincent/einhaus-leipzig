@@ -29,15 +29,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'UserMenu',
 
   data() {
     return {
       iconClicked: false,
-      hamburgerMenu: null,
-      menuModal: null,
     }
   },
 
@@ -52,8 +50,6 @@ export default {
   },
 
   mounted() {
-    this.gatherData()
-
     this.hamburgerMenu.addEventListener('mousedown', this.showMenuModal, false)
 
     document.addEventListener('click', event =>
@@ -61,12 +57,17 @@ export default {
     )
   },
 
-  methods: {
-    gatherData() {
-      this.hamburgerMenu = document.querySelector('.user-menu-icon-container')
-      this.menuModal = document.querySelector('.user-menu-list-container')
+  computed: {
+    hamburgerMenu() {
+      return document.querySelector('.user-menu-icon-container')
     },
 
+    menuModal() {
+      return document.querySelector('.user-menu-list-container')
+    },
+  },
+
+  methods: {
     showMenuModal() {
       this.menuModal.classList.toggle('is-visible')
       this.toggleClickState()
@@ -83,7 +84,7 @@ export default {
       }
     },
 
-    detectOutsideClickToClose(event) {
+    detectOutsideClickToClose(event: any) {
       const isClickInside = this.hamburgerMenu.contains(event.target)
 
       if (!isClickInside) {
