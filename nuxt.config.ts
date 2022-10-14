@@ -3,6 +3,9 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   // target: 'static', // default is 'server'
   css: ['~/assets/styles/index.scss'],
+  nitro: {
+    preset: 'vercel',
+  },
   publicRuntimeConfig: {
     MAIL_RECEIVER_FALLBACK: process.env.MAIL_RECEIVER_FALLBACK,
     MAIL_RECEIVER_CONTACT_FORM: process.env.MAIL_RECEIVER_CONTACT_FORM,
