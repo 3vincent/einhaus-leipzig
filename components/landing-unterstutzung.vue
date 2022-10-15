@@ -39,45 +39,39 @@ export default {
   name: 'LandingUnterstutzung',
   data() {
     return {
-      element: document.querySelector('.lastContainer') as HTMLDivElement,
       envVar: useRuntimeConfig(),
     }
   },
 
   mounted() {
-    this.mapData()
     this.fixBackgroundImage()
     window.addEventListener('scroll', this.fixBackgroundImage)
-    window.addEventListener('resize', this.mapData)
   },
 
   beforeUnmount() {
     window.removeEventListener('scroll', this.fixBackgroundImage)
-    window.removeEventListener('resize', this.mapData)
   },
 
   methods: {
-    mapData() {
-      this.element = document.querySelector('.lastContainer') as HTMLDivElement
-    },
-
     fixBackgroundImage() {
       if (window.innerWidth < 1280) return
 
-      if (!this.element) return
+      const element = document.querySelector('.lastContainer') as HTMLDivElement
 
-      const scrollPositionOfElement = this.element.getBoundingClientRect().y
+      if (!element) return
+
+      const scrollPositionOfElement = element.getBoundingClientRect().y
 
       if (scrollPositionOfElement <= 0) {
-        this.element.classList.add('stickyBackground')
+        element.classList.add('stickyBackground')
         return
       }
 
       if (
         scrollPositionOfElement > 0 &&
-        this.element.classList.contains('stickyBackground')
+        element.classList.contains('stickyBackground')
       ) {
-        this.element.classList.remove('stickyBackground')
+        element.classList.remove('stickyBackground')
         return
       }
     },
