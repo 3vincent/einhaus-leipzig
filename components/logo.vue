@@ -16,7 +16,7 @@
   </NuxtLink>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'Logo',
   props: {
@@ -37,7 +37,7 @@ export default {
 
 .conditional-class {
   /**
-  * Only switch to white logo, when screen size bigger then $_lg
+  * Only switch to white logo, when screen size bigger than $_lg
   * */
   @media screen and (min-width: 821px) {
     filter: invert(100%);

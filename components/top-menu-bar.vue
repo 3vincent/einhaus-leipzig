@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'TopMenuBar',
   props: {
@@ -39,16 +39,21 @@ export default {
 
   methods: {
     onFixedTopMenu() {
-      const element = document.querySelector('.top-menu-container')
-      const style = window.getComputedStyle(element)
-      const position = style.getPropertyValue('position')
+      const element = document.querySelector(
+        '.top-menu-container'
+      ) as HTMLElement
 
-      if (position != 'sticky') return
+      if (element) {
+        const style = window.getComputedStyle(element)
+        const position = style.getPropertyValue('position')
 
-      if (document.documentElement.scrollTop > element.offsetHeight - 5) {
-        element.classList.add('smaller-after-scroll')
-      } else {
-        element.classList.remove('smaller-after-scroll')
+        if (position != 'sticky') return
+
+        if (document.documentElement.scrollTop > element.offsetHeight - 5) {
+          element.classList.add('smaller-after-scroll')
+        } else {
+          element.classList.remove('smaller-after-scroll')
+        }
       }
     },
   },

@@ -11,6 +11,8 @@ $_xl: 1280px;
   // color: rgba(48, 46, 58, 1);
   --main-text-color-dark: rgba(48, 46, 58, 1);
   --main-text-color-semidark: rgba(48, 46, 58, 0.7);
+  --main-text-color-light-light: rgba(124, 124, 124, 0.7);
+  --main-text-color-semidark-alt: rgba(150, 150, 150, 1);
   --main-text-color-light: rgba(237, 237, 237, 1);
   --breadcrumb-color: rgba(0, 0, 0, 0.4);
 
@@ -18,7 +20,10 @@ $_xl: 1280px;
   --button-color-hover: rgba(6, 91, 139, 1);
   --button-color-active: rgba(4, 44, 65, 1);
 
+  --warning: rgba(255, 72, 0, 1);
+
   --pretty-green: rgba(0, 197, 142, 1);
   --background-grey: rgba(0, 0, 0, 0.2);
+  --background-light-grey: rgba(0, 0, 0, 0.05);
   --background-menu-highlighting: rgba(229, 231, 235, 1);
 }

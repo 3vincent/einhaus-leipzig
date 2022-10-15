@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <div id="start" class="landing-container">
-      <div class="landing-contentBox">
-        <h1>EinHaus Reichpiet<wbr />sch<wbr />straße 13 eG</h1>
-        <h2 class="seo-text"></h2>
-        <h3>Ein genossenschaftliches Hausprojekt in Leipzig Reudnitz</h3>
-      </div>
+  <div id="start" class="landing-container">
+    <div class="landing-contentBox">
+      <h1>EinHaus Reichpiet<wbr />sch<wbr />straße 13 eG</h1>
+      <h2 class="seo-text"></h2>
+      <h3>Ein genossenschaftliches Hausprojekt in Leipzig Reudnitz</h3>
     </div>
 
     <div class="arrow-container">

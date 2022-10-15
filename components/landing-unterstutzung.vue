@@ -20,7 +20,7 @@
       </p>
 
       <NuxtLink to="/kontakt" class="link primary"> Kontaktformular </NuxtLink>
-      <a href="mailto:someone@yoursite.com" class="link secondary">
+      <a :href="envVar.MAIL_RECEIVER_CONTACT_FORM" class="link secondary">
         Email schreiben
       </a>
 
@@ -34,46 +34,44 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'LandingUnterstutzung',
   data() {
     return {
-      element: null,
+      envVar: useRuntimeConfig(),
     }
   },
+
   mounted() {
-    this.mapData()
     this.fixBackgroundImage()
     window.addEventListener('scroll', this.fixBackgroundImage)
-    window.addEventListener('resize', this.mapData)
   },
+
   beforeUnmount() {
     window.removeEventListener('scroll', this.fixBackgroundImage)
-    window.removeEventListener('resize', this.mapData)
   },
-  methods: {
-    mapData() {
-      this.element = document.querySelector('.lastContainer')
-    },
 
+  methods: {
     fixBackgroundImage() {
       if (window.innerWidth < 1280) return
 
-      if (!this.element) return
+      const element = document.querySelector('.lastContainer') as HTMLDivElement
 
-      const scrollPositionOfElement = this.element.getBoundingClientRect().y
+      if (!element) return
+
+      const scrollPositionOfElement = element.getBoundingClientRect().y
 
       if (scrollPositionOfElement <= 0) {
-        this.element.classList.add('stickyBackground')
+        element.classList.add('stickyBackground')
         return
       }
 
       if (
         scrollPositionOfElement > 0 &&
-        this.element.classList.contains('stickyBackground')
+        element.classList.contains('stickyBackground')
       ) {
-        this.element.classList.remove('stickyBackground')
+        element.classList.remove('stickyBackground')
         return
       }
     },

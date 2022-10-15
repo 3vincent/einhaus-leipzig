@@ -70,13 +70,13 @@
       </div>
 
       <div class="copyright-claim">
-        <span>&#169; 2022 EinHaus Reichpietschstraße 13 eG</span>
+        <span>&#169; {{ currentYear }} EinHaus Reichpietschstraße 13 eG</span>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'Footer',
   props: {
@@ -84,6 +84,11 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  data() {
+    return {
+      currentYear: new Date().getFullYear(),
+    }
   },
 }
 </script>
@@ -130,12 +135,12 @@ export default {
     align-self: center;
 
     span {
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.7rem;
+      font-weight: 700;
       color: rgba(193, 193, 193, 1);
 
       @media screen and (min-width: $_md) {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
       }
     }
   }

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 definePageMeta({
   layout: 'default',
 })
@@ -31,6 +31,7 @@ export default {
         info@einhaus-leipzig.de oder füll das Kontaktformular aus.
       </p>
       <p> Wir werden uns schnellstmöglich bei Dir melden! </p>
+      <ContactForm />
     </div>
   </div>
 </template>
