@@ -18,7 +18,6 @@ export default {
       try {
         const data = await $fetch('/api/send-mail', {
           method: 'POST',
-          headers: useRequestHeaders(['cookie']),
           body: {
             name: this.name,
             email: this.email,
