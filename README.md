@@ -1,6 +1,6 @@
 ## EinHaus Website:
 
-Preview at: [https://lustrous-phoenix-b8136f.netlify.app/](https://lustrous-phoenix-b8136f.netlify.app/)
+Preview at: [https://einhaus-leipzig.vercel.app](https://einhaus-leipzig.vercel.app)
 
 <hr>
 
