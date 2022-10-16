@@ -220,7 +220,6 @@ label textarea {
   min-height: 10rem;
   max-width: 500px;
   font-family: inherit;
-  font-size: 1rem;
 }
 
 input[type='checkbox'] {
