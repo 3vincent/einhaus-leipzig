@@ -1,3 +1,49 @@
+<script setup lang="ts">
+useHead({
+  title:
+    'Impressum - EinHaus Reichpietschstraße 13 eG - Genossenschaft Leipzig',
+  meta: [
+    {
+      name: 'description',
+      content: 'Impressum',
+    },
+    {
+      hid: 'og:title',
+      name: 'og:title',
+      content:
+        'Impressum - EinHaus Reichpietschstraße 13 eG - Genossenschaft Leipzig',
+    },
+    {
+      hid: 'og:site_name',
+      property: 'og:site_name',
+      content:
+        'Impressum - EinHaus Reichpietschstraße 13 eG - Genossenschaft Leipzig',
+    },
+    {
+      hid: 'og:image',
+      property: 'og:image',
+      content:
+        'https://www.einhaus-leipzig.de/images/logo-einhaus-genossenschaft-leipzig.png',
+    },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: 'Impressum',
+    },
+    {
+      hid: 'og:url',
+      property: 'og:url',
+      content: `https://www.einhaus-leipzig.de/impressum`,
+    },
+    {
+      hid: 'og:type',
+      property: 'og:type',
+      content: 'website',
+    },
+  ],
+})
+</script>
+
 <script lang="ts">
 definePageMeta({
   layout: 'default',
