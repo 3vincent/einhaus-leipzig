@@ -121,9 +121,29 @@ export default {
             <button
               type="submit"
               class="link secondary"
-              :disabled="!email || !name || !gdpr || !message"
+              :disabled="
+                !email ||
+                !name ||
+                !gdpr ||
+                !message ||
+                !(name.length >= 2) ||
+                !email.includes('@') ||
+                !email.includes('.') ||
+                !(email.length >= 5) ||
+                !(message.length > 2) ||
+                !(gdpr = true)
+              "
               v-bind:class="
-                !email || !name || !gdpr || !message
+                !email ||
+                !name ||
+                !gdpr ||
+                !message ||
+                !(name.length >= 2) ||
+                !email.includes('.') ||
+                !email.includes('@') ||
+                !(email.length >= 5) ||
+                !(message.length > 2) ||
+                !(gdpr = true)
                   ? 'not-filled-fields'
                   : 'all-field-filled'
               "
