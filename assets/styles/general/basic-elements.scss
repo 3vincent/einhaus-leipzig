@@ -50,6 +50,19 @@
   }
 }
 
+p a {
+  text-decoration: none;
+  color: var(--main-text-color-dark);
+  padding-bottom: 0px !important;
+  border-bottom: 1px solid var(--main-text-color-light-light);
+  display: inline;
+
+  @media screen and (min-width: $_md) {
+    // background: red;
+    border-bottom-width: 2px;
+  }
+}
+
 a.primary,
 a:link.primary,
 a:visited.primary {

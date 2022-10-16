@@ -78,17 +78,6 @@
       margin-left: 0.7rem;
     }
 
-    .text-link {
-      text-decoration: none;
-      color: var(--main-text-color-dark);
-      border-bottom: 1px solid var(--main-text-color-dark);
-      display: inline-block;
-
-      @media screen and (min-width: $_md) {
-        border-width: 2px;
-      }
-    }
-
     a:hover {
       color: var(--main-text-color-semidark);
       border-color: var(--main-text-color-semidark-alt);
