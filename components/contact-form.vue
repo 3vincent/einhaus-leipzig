@@ -61,6 +61,9 @@ export default {
               <input
                 required
                 v-model="name"
+                v-bind:class="
+                  name && name.length >= 2 ? 'single-field-filled' : ''
+                "
                 type="text"
                 name="fullname"
                 autocomplete="off"
@@ -72,6 +75,14 @@ export default {
               <input
                 required
                 v-model="email"
+                v-bind:class="
+                  email &&
+                  email.includes('@') &&
+                  email.includes('.') &&
+                  email.length >= 5
+                    ? 'single-field-filled'
+                    : ''
+                "
                 type="email"
                 name="email"
                 autocomplete="off"
@@ -80,7 +91,14 @@ export default {
           <p>
             <label
               >Nachricht:
-              <textarea required v-model="message" name="message"></textarea>
+              <textarea
+                required
+                v-model="message"
+                name="message"
+                v-bind:class="
+                  message && message.length > 2 ? 'single-field-filled' : ''
+                "
+              ></textarea>
             </label>
           </p>
           <p>
@@ -176,7 +194,7 @@ export default {
 
   .inner-content.error {
     h1 {
-      color: var(--warning);
+      color: var(--warning-severe);
     }
   }
 }
@@ -208,7 +226,7 @@ label textarea {
 
   &:focus {
     background-color: var(--background-light-grey);
-    box-shadow: inset 0 0 0 2px var(--pretty-green);
+    box-shadow: inset 0 0 0 2px var(--warning);
   }
 }
 
@@ -228,6 +246,7 @@ input[type='checkbox'] {
   margin-right: 1rem;
   float: left;
 }
+
 input[type='checkbox']:before {
   content: '';
   display: block;
@@ -240,6 +259,7 @@ input[type='checkbox']:before {
   border-radius: 3px;
   background-color: white;
 }
+
 input[type='checkbox']:checked:after {
   content: '';
   display: block;
@@ -264,6 +284,10 @@ button {
   min-width: 15rem;
   color: var(--main-text-color-dark);
   transition: border 1s ease;
+}
+
+.single-field-filled {
+  box-shadow: inset 0 0 0 2px var(--pretty-green) !important;
 }
 
 .all-field-filled {
