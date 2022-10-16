@@ -198,6 +198,7 @@ label textarea {
   border: none;
   outline: none !important;
   box-shadow: inset 0 0 0 2px var(--main-text-color-light-light);
+  -webkit-appearance: none;
 
   @media screen and (min-width: $_md) {
     min-width: 50%;
