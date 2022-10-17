@@ -52,15 +52,6 @@ async function sendMail(payload: PayloadData) {
     console.log('info: ', info)
 
     console.log('Message sent: %s', info.messageId)
-
-    if (info.messageId) {
-      return {
-        statusCode: 200,
-        body: JSON.stringify({
-          msg: 'Your message was sent. Thank you.',
-        }),
-      }
-    }
   } catch (err) {
     console.log(err)
 
@@ -70,6 +61,13 @@ async function sendMail(payload: PayloadData) {
         msg: `Could not send your message. Please try again. ${err}`,
       }),
     }
+  }
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      msg: 'Your message was sent. Thank you.',
+    }),
   }
 }
 
