@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import Joi from 'joi'
 
 const smtpHost: string = process.env.SMTP_HOST!
 const smtpPortTLS: number = Number(process.env.SMTP_PORT_TLS)
@@ -79,23 +80,43 @@ export default defineEventHandler(async ({ req }) => {
     }
   }
 
+  const sanitizeHTML = (str: string) => {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+  }
+
   const { ...requestBody } = await useBody(req)
 
   const payload: PayloadData = {
-    name: requestBody?.name,
-    email: requestBody?.email,
-    message: requestBody?.message,
+    name: requestBody?.name.trim(),
+    email: requestBody?.email.trim(),
+    message: requestBody?.message.trim(),
     gdpr: requestBody?.gdpr,
     age: requestBody?.age,
   }
 
-  if (
-    !payload.name ||
-    !payload.email ||
-    !payload.message ||
-    !payload.gdpr ||
-    payload.age != 0
-  ) {
+  payload.name = sanitizeHTML(payload.name)
+  payload.email = sanitizeHTML(payload.email)
+  payload.message = sanitizeHTML(payload.message)
+
+  const schema = Joi.object({
+    name: Joi.string().min(1).max(40).required().trim(),
+    email: Joi.string().email().required().trim(),
+    message: Joi.string().min(1).max(4000).required().trim(),
+    gdpr: Joi.boolean().valid(true).required(),
+    age: Joi.number().valid(0).required(),
+  })
+
+  try {
+    const value = await schema.validateAsync(payload)
+
+    console.log('value: ', value)
+  } catch (err) {
+    console.log(err)
+
     return {
       statusCode: 400,
       body: 'Bad Input',

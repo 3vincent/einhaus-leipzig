@@ -96,7 +96,9 @@ export default {
                 v-model="message"
                 name="message"
                 v-bind:class="
-                  message && message.length > 2 ? 'single-field-filled' : ''
+                  message && message.length > 2 && message.length <= 4000
+                    ? 'single-field-filled'
+                    : ''
                 "
               ></textarea>
             </label>
@@ -131,6 +133,7 @@ export default {
                 !email.includes('.') ||
                 !(email.length >= 5) ||
                 !(message.length > 2) ||
+                message.length > 4000 ||
                 !(gdpr = true)
               "
               v-bind:class="
@@ -143,6 +146,7 @@ export default {
                 !email.includes('@') ||
                 !(email.length >= 5) ||
                 !(message.length > 2) ||
+                message.length > 4000 ||
                 !(gdpr = true)
                   ? 'not-filled-fields'
                   : 'all-field-filled'
