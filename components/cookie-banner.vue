@@ -42,10 +42,10 @@ const denyCookie = () => {
           </p>
         </div>
         <div class="button-container">
-          <a class="link primary" v-on:click.prevent="acceptCookie">
+          <a class="link primary small" v-on:click.prevent="acceptCookie">
             Akzeptieren
           </a>
-          <a class="link secondary" v-on:click.prevent="denyCookie">
+          <a class="link secondary small" v-on:click.prevent="denyCookie">
             Verweigern
           </a>
         </div>
@@ -62,8 +62,7 @@ const denyCookie = () => {
 
   background: var(--pretty-green);
   border-radius: 0.2rem;
-  max-height: 300px;
-  min-height: 80px;
+  min-height: max-content;
   height: max-content;
   left: 50%;
   transform: translateX(-50%);
@@ -79,18 +78,21 @@ const denyCookie = () => {
   padding: 0.5rem;
 
   @media screen and (min-width: $_md) {
-    padding: 1rem;
+    padding: 0rem 1rem;
   }
 }
 
 .inner-content {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: left;
 
-  div {
+  &::after {
+    content: '';
+    flex: auto;
   }
 
   p {
@@ -98,7 +100,7 @@ const denyCookie = () => {
     font-weight: 500;
     font-size: 0.9rem;
     display: inline-block;
-    padding: 0;
+    padding: 1rem 0 0 0;
   }
 
   p a {
@@ -111,8 +113,9 @@ const denyCookie = () => {
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
-  a.link:nth-child(1) {
-    margin-left: 1rem;
+
+  a.link:last-child {
+    margin-right: 0;
   }
 
   .link.primary {
