@@ -443,6 +443,7 @@ export default {
         Datenschutzerkl&auml;rung gesondert informieren und ggf. eine
         Einwilligung abfragen.</p
       >
+      <CookieDeleteButton />
       <h3>Server-Log-Dateien</h3>
       <p
         >Der Provider der Seiten erhebt und speichert automatisch Informationen
