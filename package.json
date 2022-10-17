@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@types/nodemailer": "^6.4.6",
+    "joi": "^17.6.3",
     "nodemailer": "^6.8.0"
   }
 }
