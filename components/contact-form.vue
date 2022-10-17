@@ -49,12 +49,6 @@ export default {
     <div class="contact-form-wrapper">
       <div class="form-wrapper">
         <form name="contact" method="POST" @submit.prevent="handleSubmit">
-          <p class="hidden">
-            <label>
-              Don't fill this out if you're human:
-              <input v-model="age" name="age-field" />
-            </label>
-          </p>
           <p>
             <label
               >Name:
@@ -87,6 +81,12 @@ export default {
                 name="email"
                 autocomplete="off"
             /></label>
+          </p>
+          <p class="age">
+            <label>
+              Age field:
+              <input v-model="age" name="age-field" tabindex="-1" />
+            </label>
           </p>
           <p>
             <label
@@ -219,8 +219,14 @@ export default {
   }
 }
 
-.hidden {
-  display: none;
+.age,
+.age label,
+.age label input {
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  transform: translateX(-10000000px);
 }
 
 label input,
