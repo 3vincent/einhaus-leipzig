@@ -7,12 +7,7 @@ export default defineNuxtConfig({
     preset: 'vercel',
   },
   publicRuntimeConfig: {
-    MAIL_RECEIVER_FALLBACK: process.env.MAIL_RECEIVER_FALLBACK,
-    MAIL_RECEIVER_CONTACT_FORM: process.env.MAIL_RECEIVER_CONTACT_FORM,
-    SMTP_USER_NAME: process.env.SMTP_USER_NAME,
-    SMTP_HOST: process.env.SMTP_HOST,
-    SMTP_USER_PASSWORD: process.env.SMTP_USER_PASSWORD,
-    SMTP_PORT_TLS: process.env.SMTP_PORT_TLS,
+    OFFICIAL_CONTACT_ADDRESS: process.env.OFFICIAL_CONTACT_ADDRESS,
   },
   typescript: {
     strict: true,

@@ -1,11 +1,12 @@
 import nodemailer from 'nodemailer'
 
-const envVar = useRuntimeConfig()
-
-const smtpHost: string = envVar.SMTP_HOST
-const smtpPortTLS: number = Number(envVar.SMTP_PORT_TLS)
-const smptUserName: string = envVar.SMTP_USER_NAME
-const smtpUserPassword: string = envVar.SMTP_USER_PASSWORD
+const smtpHost: string = process.env.SMTP_HOST!
+const smtpPortTLS: number = Number(process.env.SMTP_PORT_TLS)
+const smptUserName: string = process.env.SMTP_USER_NAME!
+const smtpUserPassword: string = process.env.SMTP_USER_PASSWORD!
+const contactFormSenderName: string = process.env.CONTACT_FORM_SENDER_NAME!
+const contactFormSenderAddress: string =
+  process.env.CONTACT_FORM_SENDER_ADDRESS!
 let mailReceiver: string
 
 type PayloadData = {
@@ -17,9 +18,9 @@ type PayloadData = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  mailReceiver = envVar.MAIL_RECEIVER_CONTACT_FORM
+  mailReceiver = process.env.MAIL_RECEIVER_CONTACT_FORM!
 } else {
-  mailReceiver = envVar.MAIL_RECEIVER_FALLBACK
+  mailReceiver = process.env.MAIL_RECEIVER_FALLBACK!
 }
 
 async function sendMail(payload: PayloadData) {
@@ -35,7 +36,7 @@ async function sendMail(payload: PayloadData) {
     })
 
     let info = await transporter.sendMail({
-      from: `"einhaus-leipzig.de" <${smptUserName}>`, // sender address
+      from: `"${contactFormSenderName}" <${contactFormSenderAddress}>`, // sender address
       to: mailReceiver, // list of receivers
       replyTo: `"${payload.name}" <${payload.email}>`,
       subject: 'Kontaktformular', // Subject line

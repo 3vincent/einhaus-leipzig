@@ -20,7 +20,7 @@
       </p>
 
       <NuxtLink to="/kontakt" class="link primary"> Kontaktformular </NuxtLink>
-      <a :href="envVar.MAIL_RECEIVER_CONTACT_FORM" class="link secondary">
+      <a :href="envVar.OFFICIAL_CONTACT_ADDRESS" class="link secondary">
         Email schreiben
       </a>
 
