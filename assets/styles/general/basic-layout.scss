@@ -61,11 +61,8 @@ body {
       text-decoration: none;
       color: var(--main-text-color-dark);
       border-bottom: 1px solid var(--main-text-color-semidark);
-      padding-block: 2px;
 
       @media screen and (min-width: $_md) {
-        margin-top: 100px;
-        margin-bottom: 100px;
         border-bottom-width: 2px;
       }
     }
