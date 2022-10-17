@@ -41,7 +41,10 @@ async function sendMail(payload: PayloadData) {
       replyTo: `"${payload.name}" <${payload.email}>`,
       subject: 'Kontaktformular', // Subject line
       text: JSON.stringify(payload),
-      html: `<b>Name:</b><br />${payload.name}<br /><br /><b>Email Adresse:</b><br />${payload.email}<br /><br /><b>Datenschutzerklaerung bestaetigt:</b><br />${payload.gdpr}<br /><br /><b>Nachricht:</b><br />${payload.message}<br />`,
+      html: `<b>Name:</b><br />${payload.name}<br /><br />
+             <b>Email Adresse:</b><br />${payload.email}<br /><br />
+             <b>Datenschutzerklärung bestätigt:</b><br />${payload.gdpr}<br /><br />
+             <b>Nachricht:</b><br />${payload.message}<br />`,
     })
 
     console.log('payload: ', payload)
