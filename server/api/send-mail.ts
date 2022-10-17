@@ -23,18 +23,18 @@ if (process.env.NODE_ENV === 'production') {
   mailReceiver = process.env.MAIL_RECEIVER_FALLBACK!
 }
 
+let transporter = nodemailer.createTransport({
+  host: smtpHost,
+  port: smtpPortTLS,
+  secure: true,
+  auth: {
+    user: smptUserName,
+    pass: smtpUserPassword,
+  },
+})
+
 async function sendMail(payload: PayloadData) {
   try {
-    let transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: smtpPortTLS,
-      secure: true,
-      auth: {
-        user: smptUserName,
-        pass: smtpUserPassword,
-      },
-    })
-
     let info = await transporter.sendMail({
       from: `"${contactFormSenderName}" <${contactFormSenderAddress}>`, // sender address
       to: mailReceiver, // list of receivers
