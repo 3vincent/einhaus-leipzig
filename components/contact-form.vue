@@ -160,7 +160,7 @@ export default {
       </div>
 
       <div
-        v-if="sendResponse === 500 || sendResponse === 422"
+        v-if="sendResponse === 500 || sendResponse === 400"
         class="message-response"
       >
         <div class="inner-content error">

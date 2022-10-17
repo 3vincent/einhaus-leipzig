@@ -74,9 +74,8 @@ async function sendMail(payload: PayloadData) {
 export default defineEventHandler(async ({ req }) => {
   if (req.method !== 'POST') {
     return {
-      statusCode: 405,
-      headers: { Allow: 'POST' },
-      body: 'Method not allowed',
+      statusCode: 400,
+      body: 'Bad Input',
     }
   }
 
@@ -98,9 +97,8 @@ export default defineEventHandler(async ({ req }) => {
     payload.age != 0
   ) {
     return {
-      statusCode: 422,
-      headers: { data: 'Unprocessable Entity' },
-      body: 'Invalid data',
+      statusCode: 400,
+      body: 'Bad Input',
     }
   }
 
