@@ -40,6 +40,25 @@ export default {
       }
     },
   },
+
+  computed: {
+    validateInputs() {
+      if (
+        this.name.length >= 2 &&
+        this.email.includes('@') &&
+        this.email.slice(0, this.email.indexOf('@')).length > 0 &&
+        this.email.slice(this.email.indexOf('@')).includes('.') &&
+        this.email.length >= 5 &&
+        this.message.length > 2 &&
+        this.message.length <= 4000 &&
+        this.gdpr
+      ) {
+        return true
+      }
+
+      return false
+    },
+  },
 }
 </script>
 
@@ -70,9 +89,9 @@ export default {
                 required
                 v-model="email"
                 v-bind:class="
-                  email &&
                   email.includes('@') &&
-                  email.includes('.') &&
+                  email.slice(0, email.indexOf('@')).length > 0 &&
+                  email.slice(email.indexOf('@')).includes('.') &&
                   email.length >= 5
                     ? 'single-field-filled'
                     : ''
@@ -96,7 +115,7 @@ export default {
                 v-model="message"
                 name="message"
                 v-bind:class="
-                  message && message.length > 2 && message.length <= 4000
+                  message.length > 2 && message.length <= 4000
                     ? 'single-field-filled'
                     : ''
                 "
@@ -123,33 +142,9 @@ export default {
             <button
               type="submit"
               class="link secondary"
-              :disabled="
-                !email ||
-                !name ||
-                !gdpr ||
-                !message ||
-                !(name.length >= 2) ||
-                !email.includes('@') ||
-                !email.includes('.') ||
-                !(email.length >= 5) ||
-                !(message.length > 2) ||
-                message.length > 4000 ||
-                !(gdpr = true)
-              "
+              :disabled="!validateInputs"
               v-bind:class="
-                !email ||
-                !name ||
-                !gdpr ||
-                !message ||
-                !(name.length >= 2) ||
-                !email.includes('.') ||
-                !email.includes('@') ||
-                !(email.length >= 5) ||
-                !(message.length > 2) ||
-                message.length > 4000 ||
-                !(gdpr = true)
-                  ? 'not-filled-fields'
-                  : 'all-field-filled'
+                validateInputs ? 'all-field-filled' : 'not-filled-fields'
               "
               >Senden</button
             >
