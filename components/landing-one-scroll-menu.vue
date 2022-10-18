@@ -60,6 +60,8 @@ export default {
   },
   methods: {
     mapPositionsOfDivs() {
+      if (window.innerWidth < 768) return
+
       this.divSearchIndex.length = 0
 
       const children = Array.from(
@@ -101,6 +103,8 @@ export default {
        *    √ fix bug with this.$router.push when clicking a nuxt-link (flickering)
        *
        * */
+
+      if (window.innerWidth < 768) return
 
       const scrollPositionY = window.scrollY
 
