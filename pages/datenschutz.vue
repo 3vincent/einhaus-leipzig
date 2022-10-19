@@ -176,6 +176,14 @@ export default {
         Walnut, CA 91789<br />
         privacy@vercel.com</p
       >
+      <h4>Auftragsverarbeitung</h4>
+      <p
+        >Wir haben einen Vertrag &uuml;ber Auftragsverarbeitung (AVV) mit dem
+        oben genannten Anbieter geschlossen. Hierbei handelt es sich um einen
+        datenschutzrechtlich vorgeschriebenen Vertrag, der gew&auml;hrleistet,
+        dass dieser die personenbezogenen Daten unserer Websitebesucher nur nach
+        unseren Weisungen und unter Einhaltung der DSGVO verarbeitet.</p
+      >
       <h2>3. Allgemeine Hinweise und Pflicht&shy;informationen</h2>
       <h3>Datenschutz</h3>
       <p
@@ -522,6 +530,57 @@ export default {
         Bearbeitung Ihres Anliegens). Zwingende gesetzliche Bestimmungen &ndash;
         insbesondere gesetzliche Aufbewahrungsfristen &ndash; bleiben
         unber&uuml;hrt.</p
+      >
+      <h2>5. Newsletter</h2>
+      <h3>Newsletter&shy;daten</h3>
+      <p
+        >Wenn Sie den auf der Website angebotenen Newsletter beziehen
+        m&ouml;chten, ben&ouml;tigen wir von Ihnen eine E-Mail-Adresse sowie
+        Informationen, welche uns die &Uuml;berpr&uuml;fung gestatten, dass Sie
+        der Inhaber der angegebenen E-Mail-Adresse sind und mit dem Empfang des
+        Newsletters einverstanden sind. Weitere Daten werden nicht bzw. nur auf
+        freiwilliger Basis erhoben. Diese Daten verwenden wir
+        ausschlie&szlig;lich f&uuml;r den Versand der angeforderten
+        Informationen und geben diese nicht an Dritte weiter.</p
+      >
+      <p
+        >Die Verarbeitung der in das Newsletteranmeldeformular eingegebenen
+        Daten erfolgt ausschlie&szlig;lich auf Grundlage Ihrer Einwilligung
+        (Art. 6 Abs. 1 lit. a DSGVO). Die erteilte Einwilligung zur Speicherung
+        der Daten, der E-Mail-Adresse sowie deren Nutzung zum Versand des
+        Newsletters k&ouml;nnen Sie jederzeit widerrufen, etwa &uuml;ber den
+        &bdquo;Austragen&ldquo;-Link im Newsletter. Die
+        Rechtm&auml;&szlig;igkeit der bereits erfolgten
+        Datenverarbeitungsvorg&auml;nge bleibt vom Widerruf unber&uuml;hrt.</p
+      >
+      <p
+        >Die von Ihnen zum Zwecke des Newsletter-Bezugs bei uns hinterlegten
+        Daten werden von uns bis zu Ihrer Austragung aus dem Newsletter bei uns
+        bzw. dem Newsletterdiensteanbieter gespeichert und nach der Abbestellung
+        des Newsletters oder nach Zweckfortfall aus der Newsletterverteilerliste
+        gel&ouml;scht. Wir behalten uns vor, E-Mail-Adressen aus unserem
+        Newsletterverteiler nach eigenem Ermessen im Rahmen unseres berechtigten
+        Interesses nach Art. 6 Abs. 1 lit. f DSGVO zu l&ouml;schen oder zu
+        sperren.</p
+      >
+      <p
+        >Daten, die zu anderen Zwecken bei uns gespeichert wurden, bleiben
+        hiervon unber&uuml;hrt.</p
+      >
+      <p
+        >Nach Ihrer Austragung aus der Newsletterverteilerliste wird Ihre
+        E-Mail-Adresse bei uns bzw. dem Newsletterdiensteanbieter ggf. in einer
+        Blacklist gespeichert, sofern dies zur Verhinderung k&uuml;nftiger
+        Mailings erforderlich ist. Die Daten aus der Blacklist werden nur
+        f&uuml;r diesen Zweck verwendet und nicht mit anderen Daten
+        zusammengef&uuml;hrt. Dies dient sowohl Ihrem Interesse als auch unserem
+        Interesse an der Einhaltung der gesetzlichen Vorgaben beim Versand von
+        Newslettern (berechtigtes Interesse im Sinne des Art. 6 Abs. 1 lit. f
+        DSGVO). Die Speicherung in der Blacklist ist zeitlich nicht befristet.
+        <strong
+          >Sie k&ouml;nnen der Speicherung widersprechen, sofern Ihre Interessen
+          unser berechtigtes Interesse &uuml;berwiegen.</strong
+        ></p
       >
       <p
         >Quelle:
