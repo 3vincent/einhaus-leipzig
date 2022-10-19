@@ -113,7 +113,7 @@ export default defineEventHandler(async ({ req }) => {
   try {
     const value = await schema.validateAsync(payload)
 
-    console.log('value: ', value)
+    console.log('validation output: ', value)
   } catch (err) {
     console.log(err)
 
