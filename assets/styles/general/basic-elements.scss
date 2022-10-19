@@ -48,7 +48,7 @@
   &.secondary {
     color: var(--main-text-color-semidark);
     background-color: transparent;
-    border: 2px solid var(--main-text-color-semidark);
+    border: 2px solid var(--main-text-color-semidark) !important;
 
     &:hover {
       border-color: var(--main-text-color-dark);

@@ -27,17 +27,23 @@ export default {
           },
         })
 
-        this.name = ''
-        this.email = ''
-        this.message = ''
-        this.gdpr = false
-        this.age = 0
-
         console.log(data)
         this.sendResponse = data.statusCode
       } catch (error) {
         console.log(error)
       }
+
+      if (this.sendResponse == 200) {
+        this.name = ''
+        this.email = ''
+        this.message = ''
+        this.gdpr = false
+        this.age = 0
+      }
+    },
+
+    copyToClipboard() {
+      navigator.clipboard.writeText(this.message)
     },
   },
 
@@ -163,10 +169,18 @@ export default {
         class="message-response"
       >
         <div class="inner-content error">
-          <h1>
-            Es ist ein Fehler aufgetreten. Bitte probiere es später erneut oder
-            schreib uns eine Email.
-          </h1>
+          <h2>
+            Leider ist beim Versand deiner Nachricht ein Fehler aufgetreten. Das
+            tut uns leid. Schick uns gern eine Email an info@einhaus-leipzig.de
+            oder probiere es später erneut.
+          </h2>
+          <div>
+            <h2>Deine Nachricht kannst du hier einsehen und kopieren:</h2>
+            <div class="message-copy-field"> {{ message }}</div>
+            <a v-on:click.prevent="copyToClipboard" class="link primary small"
+              >Nachricht in die Zwischenablage kopieren</a
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -188,13 +202,13 @@ export default {
 
 .message-response {
   position: absolute;
-  width: 100%;
+  width: 102%;
   border: none;
   outline: none;
-  margin-left: -5px;
+  margin-left: -1%;
   inset: 0;
   background: rgba(209, 209, 209, 0.4);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(3px);
   z-index: 20;
   box-shadow: 0 0 10px 10px rgba(209, 209, 209, 0.4);
 
@@ -212,8 +226,29 @@ export default {
   }
 
   .inner-content.error {
-    h1 {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    width: 96%;
+
+    h2 {
       color: var(--warning-severe);
+    }
+  }
+
+  .inner-content.error .message-copy-field {
+    flex: 1 1 auto;
+    height: max-content;
+    max-height: 100px;
+    border: 2px solid var(--main-text-color-dark);
+    border-radius: 0.3rem;
+    background-color: rgba(240, 240, 240, 1);
+    overflow: scroll;
+    padding: 0.5rem;
+
+    @media screen and (min-width: $_md) {
+      height: max-content;
+      max-height: 200px;
     }
   }
 }
