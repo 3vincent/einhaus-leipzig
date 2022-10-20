@@ -18,6 +18,7 @@ export default {
     async handleSubmit() {
       try {
         this.clickedOnce = true
+        this.moveLoadingAnimationToCenter()
 
         const data = await $fetch('/api/send-mail', {
           method: 'POST',
@@ -48,6 +49,14 @@ export default {
     copyToClipboard() {
       navigator.clipboard.writeText(this.message)
     },
+
+    moveLoadingAnimationToCenter() {
+      const loadingAnimationDiv = document.querySelector('#topOfThePage')
+
+      loadingAnimationDiv?.scrollIntoView({
+        block: 'start',
+      })
+    },
   },
 
   computed: {
@@ -72,7 +81,7 @@ export default {
 </script>
 
 <template>
-  <div class="contact-container">
+  <div id="topOfThePage" class="contact-container">
     <h2>Kontaktformular</h2>
     <div class="contact-form-wrapper">
       <div class="form-wrapper">
@@ -197,7 +206,11 @@ export default {
           </h2>
           <div>
             <h2>Deine Nachricht kannst du hier einsehen und kopieren:</h2>
-            <div class="message-copy-field"> {{ message }}</div>
+            <div class="message-copy-field">
+              <p>
+                {{ message }}
+              </p>
+            </div>
             <a v-on:click.prevent="copyToClipboard" class="link primary small"
               >Nachricht in die Zwischenablage kopieren</a
             >
@@ -256,8 +269,6 @@ export default {
   }
 
   .inner-content.error {
-    display: flex;
-    flex-flow: column;
     height: 100%;
     width: 96%;
 
@@ -267,18 +278,26 @@ export default {
   }
 
   .inner-content.error .message-copy-field {
-    flex: 1 1 auto;
     height: max-content;
     max-height: 100px;
+    width: 80vw;
+    max-width: 780px;
     border: 2px solid var(--main-text-color-dark);
     border-radius: 0.3rem;
     background-color: rgba(240, 240, 240, 1);
     overflow: scroll;
+    overflow-wrap: break-word;
     padding: 0.5rem;
 
     @media screen and (min-width: $_md) {
       height: max-content;
       max-height: 200px;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      margin-right: 1rem;
     }
   }
 }
