@@ -171,8 +171,9 @@ export default {
         <div class="inner-content error">
           <h2>
             Leider ist beim Versand deiner Nachricht ein Fehler aufgetreten. Das
-            tut uns leid. Schick uns gern eine Email an info@einhaus-leipzig.de
-            oder probiere es später erneut.
+            tut uns leid. Während wir den Fehler in unserem System beheben,
+            schick uns gern eine Email an info@einhaus-leipzig.de oder probiere
+            es später erneut.
           </h2>
           <div>
             <h2>Deine Nachricht kannst du hier einsehen und kopieren:</h2>
@@ -207,10 +208,10 @@ export default {
   outline: none;
   margin-left: -1%;
   inset: 0;
-  background: rgba(209, 209, 209, 0.4);
+  background: rgba(244, 244, 244, 0.7);
   backdrop-filter: blur(3px);
   z-index: 20;
-  box-shadow: 0 0 10px 10px rgba(209, 209, 209, 0.4);
+  box-shadow: 0 0 10px 10px rgba(243, 243, 243, 0.7);
 
   .inner-content {
     position: absolute;
