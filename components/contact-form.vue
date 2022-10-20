@@ -10,12 +10,15 @@ export default {
       message: '',
       gdpr: false,
       sendResponse: 0,
+      clickedOnce: false,
     }
   },
 
   methods: {
     async handleSubmit() {
       try {
+        this.clickedOnce = true
+
         const data = await $fetch('/api/send-mail', {
           method: 'POST',
           body: {
@@ -148,7 +151,7 @@ export default {
             <button
               type="submit"
               class="link secondary"
-              :disabled="!validateInputs"
+              :disabled="!validateInputs || clickedOnce"
               v-bind:class="
                 validateInputs ? 'all-field-filled' : 'not-filled-fields'
               "
@@ -156,6 +159,23 @@ export default {
             >
           </p>
         </form>
+      </div>
+
+      <div
+        v-if="
+          sendResponse !== 200 &&
+          sendResponse !== 400 &&
+          sendResponse !== 500 &&
+          clickedOnce
+        "
+        class="message-response"
+      >
+        <div class="inner-content">
+          <h1>Deine Nachricht wird verschickt...</h1>
+          <div class="loading-animation">
+            <LoadingAnimation />
+          </div>
+        </div>
       </div>
 
       <div v-if="sendResponse === 200" class="message-response">
@@ -214,6 +234,10 @@ export default {
   box-shadow: 0 0 10px 10px rgba(243, 243, 243, 0.7);
 
   .inner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -224,6 +248,11 @@ export default {
       color: var(--pretty-green);
       text-align: center;
     }
+  }
+
+  .loading-animation {
+    width: max-content;
+    margin: 2rem;
   }
 
   .inner-content.error {
