@@ -17,6 +17,8 @@ export default {}
 
 <template>
   <a
+    href="#"
+    rel="nofollow"
     class="link secondary"
     v-on:click.prevent="deleteCookie"
     v-if="cookieConsent"
