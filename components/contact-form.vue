@@ -211,7 +211,11 @@ export default {
                 {{ message }}
               </p>
             </div>
-            <a v-on:click.prevent="copyToClipboard" class="link primary small"
+            <a
+              href="#"
+              rel="nofollow"
+              v-on:click.prevent="copyToClipboard"
+              class="link primary small"
               >Nachricht in die Zwischenablage kopieren</a
             >
           </div>

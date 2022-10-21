@@ -1,16 +1,16 @@
-export default defineEventHandler(async ({ req, res }) => {
+export default defineEventHandler(async event => {
   // console.log('req url: ' + req.url)
 
   if (
-    req.url &&
-    req.url.includes(
+    event.req.url &&
+    event.req.url.includes(
       'wp-content/uploads/2018/11/LogoEinHausGenossenschaftRetina-1.png'
     )
   ) {
     // console.log('Redirecting...')
-    res.writeHead(301, {
+    event.res.writeHead(301, {
       Location: '/images/logo-einhaus-genossenschaft-leipzig.png',
     })
-    res.end('done')
+    event.res.end('done')
   }
 })

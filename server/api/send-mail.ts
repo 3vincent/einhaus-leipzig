@@ -72,8 +72,8 @@ async function sendMail(payload: PayloadData) {
   }
 }
 
-export default defineEventHandler(async ({ req }) => {
-  if (req.method !== 'POST') {
+export default defineEventHandler(async event => {
+  if (event.req.method !== 'POST') {
     return {
       statusCode: 400,
       body: 'Bad Input',
@@ -88,7 +88,7 @@ export default defineEventHandler(async ({ req }) => {
       .replace(/"/g, '&quot;')
   }
 
-  const { ...requestBody } = await useBody(req)
+  const { ...requestBody } = await readBody(event)
 
   const payload: PayloadData = {
     name: requestBody?.name.trim(),

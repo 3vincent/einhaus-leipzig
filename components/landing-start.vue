@@ -72,11 +72,11 @@
     @keyframes wiggle {
       0%,
       50% {
-        top: 0px;
+        transform: translateY(0px) rotate(45deg);
       }
 
       25% {
-        top: 20px;
+        transform: translateY(20px) rotate(45deg);
       }
     }
   }
