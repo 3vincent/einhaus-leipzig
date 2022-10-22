@@ -67,7 +67,7 @@ const denyCookie = () => {
 <style lang="scss" scoped>
 .cookie-container {
   position: fixed;
-  z-index: 1000;
+  z-index: 1400;
   bottom: 1rem;
 
   background: var(--pretty-green);
