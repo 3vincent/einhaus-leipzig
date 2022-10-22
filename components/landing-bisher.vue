@@ -31,6 +31,10 @@
 
 <style lang="scss" scoped>
 .background {
+  background-image: url(/images/placeholder.webp);
+}
+
+.background.visible {
   background-image: url(/images/einhaus-landing-photo-02.jpg);
 }
 </style>

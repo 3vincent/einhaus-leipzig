@@ -33,6 +33,10 @@ export default {
 
 <style lang="scss" scoped>
 .background {
+  background-image: url(/images/placeholder.webp);
+}
+
+.background.visible {
   background-image: url(/images/einhaus-landing-photo-03.jpg);
 }
 </style>

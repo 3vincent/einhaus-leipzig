@@ -22,6 +22,8 @@ export default {
     if (window.scrollY == 0) {
       this.setScrollBehavior('smooth')
     }
+
+    this.lazyLoadImages()
   },
 
   methods: {
@@ -29,6 +31,30 @@ export default {
       const root = document.querySelector('html')
 
       if (root) root.style.scrollBehavior = mode
+    },
+
+    lazyLoadImages() {
+      const lazyBackgrounds = [].slice.call(
+        document.querySelectorAll('.background')
+      )
+
+      if ('IntersectionObserver' in window) {
+        let lazyBackgroundObserver = new IntersectionObserver(function (
+          entries,
+          observer
+        ) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible')
+              lazyBackgroundObserver.unobserve(entry.target)
+            }
+          })
+        })
+
+        lazyBackgrounds.forEach(function (lazyBackground) {
+          lazyBackgroundObserver.observe(lazyBackground)
+        })
+      }
     },
   },
 }
