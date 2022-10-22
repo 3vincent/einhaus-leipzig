@@ -31,7 +31,7 @@ const denyCookie = () => {
 
 <template>
   <!-- <div class="container" v-if="cookieConsent === 'denied' || !cookieConsent"> -->
-  <div class="container" v-if="cookieConsent === 'denied'">
+  <div class="cookie-container" v-if="cookieConsent === 'denied'">
     <div class="content">
       <div class="inner-content">
         <div class="text-container">
@@ -65,7 +65,7 @@ const denyCookie = () => {
 </template>
 
 <style lang="scss" scoped>
-.container {
+.cookie-container {
   position: fixed;
   z-index: 1000;
   bottom: 1rem;

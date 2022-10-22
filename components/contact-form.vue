@@ -360,7 +360,7 @@ input[type='checkbox'] {
   float: left;
 }
 
-input[type='checkbox']:before {
+input[type='checkbox']::before {
   content: '';
   display: block;
   position: absolute;
