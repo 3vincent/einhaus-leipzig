@@ -1,9 +1,9 @@
 <template>
   <div class="siteContainer">
-    <CookieBanner />
+    <slot />
     <TopMenuBar :is-relative="false" :logo-white="true" />
     <LandingOneScrollMenu />
-    <slot />
     <Footer :is-landing="true" />
+    <CookieBanner />
   </div>
 </template>
