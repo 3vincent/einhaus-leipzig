@@ -39,7 +39,7 @@ export default {
   a,
   a:link,
   a:visited {
-    color: var(--main-text-color-semidark);
+    color: var(--breadcrumb-color);
     text-decoration: none;
     border: 0;
   }
