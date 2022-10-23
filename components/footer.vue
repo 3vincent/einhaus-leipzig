@@ -147,14 +147,16 @@ export default {
 }
 
 .grid-container--conditional {
-  max-width: calc(800px + (2 * 2rem));
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  max-width: calc(800px + (2 * 1.6rem));
 
   @media screen and (min-width: $_xs) {
     margin: 0 auto;
   }
 
   @media screen and (min-width: $_md) {
-    margin-left: calc(200px);
+    margin-left: 204px;
   }
 
   @media screen and (min-width: $_xl) {
