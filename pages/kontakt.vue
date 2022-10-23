@@ -85,8 +85,10 @@ export default {
 
 <style lang="scss" scoped>
 .default-container {
-  &::before {
-    background-image: url(/images/einhaus-landing-photo-04.jpg);
+  @media screen and (min-width: $_lg) {
+    &::before {
+      background-image: url(/images/einhaus-landing-photo-04.jpg);
+    }
   }
 
   p {
