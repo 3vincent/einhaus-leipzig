@@ -73,13 +73,6 @@ async function sendMail(payload: PayloadData) {
 }
 
 export default defineEventHandler(async event => {
-  if (event.req.method !== 'POST') {
-    return {
-      statusCode: 400,
-      body: 'Bad Input',
-    }
-  }
-
   const sanitizeHTML = (str: string) => {
     return str
       .replace(/&/g, '&amp;')
