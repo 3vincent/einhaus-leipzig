@@ -34,6 +34,10 @@
   background-size: cover;
   padding-top: 0;
   min-height: 100vh;
+
+  // if aktuelles is present, remove the bottom border:
+  // border-bottom: none;
+}
 .landing-contentBox {
   padding-top: 1rem;
   padding-bottom: 1rem;

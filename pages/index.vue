@@ -63,6 +63,7 @@ export default {
 <template>
   <main>
     <LandingStart />
+    <!-- <LandingAktuelles /> -->
     <div>
       <LandingOneScrollMenu />
       <LandingBisher />
