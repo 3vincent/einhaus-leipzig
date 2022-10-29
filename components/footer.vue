@@ -155,10 +155,6 @@ export default {
     margin: 0 auto;
   }
 
-  @media screen and (min-width: $_md) {
-    margin-left: 204px;
-  }
-
   @media screen and (min-width: $_xl) {
     margin: 0 auto;
   }

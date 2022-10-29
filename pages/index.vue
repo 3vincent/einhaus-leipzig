@@ -63,10 +63,13 @@ export default {
 <template>
   <main>
     <LandingStart />
-    <LandingBisher />
-    <LandingZiele />
-    <LandingGemeinschaft />
-    <LandingMehr />
-    <LandingUnterstutzung />
+    <div>
+      <LandingOneScrollMenu />
+      <LandingBisher />
+      <LandingZiele />
+      <LandingGemeinschaft />
+      <LandingMehr />
+      <LandingUnterstutzung />
+    </div>
   </main>
 </template>

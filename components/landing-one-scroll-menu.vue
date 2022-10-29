@@ -1,10 +1,6 @@
 <template>
   <div class="on-site-menu">
     <ul>
-      <li id="start-nav">
-        <NuxtLink :to="{ hash: '#start' }" :external="true">Start</NuxtLink>
-      </li>
-
       <li id="bisher-nav">
         <NuxtLink :to="{ hash: '#bisher' }" :external="true">
           Was bisher geschah
@@ -44,7 +40,9 @@ export default {
 
   methods: {
     highlighMenuItem() {
-      const pageSections = [].slice.call(document.querySelectorAll('h1, h2'))
+      const pageSections = [].slice.call(
+        document.querySelectorAll('h1, .landing-contentBox h2')
+      )
 
       if ('IntersectionObserver' in window) {
         let menuHighlightObserver = new IntersectionObserver(
@@ -63,6 +61,12 @@ export default {
                   if (activeMenuItem?.id != menuItemToHighlight?.id)
                     activeMenuItem.classList.remove('is-active')
                 })
+
+                if (entry.target.localName == 'h1') {
+                  this.$router.push(`/`)
+                  return
+                }
+
                 this.$router.push(
                   `/#${entry.target.parentElement?.parentElement?.id}`
                 )
@@ -87,13 +91,15 @@ export default {
 <style lang="scss" scoped>
 .on-site-menu {
   display: none;
-  position: fixed;
-  z-index: 1020;
-  margin-left: 1rem;
-
+  position: sticky;
+  z-index: 1;
+  width: max-content;
   left: 0;
-  top: 50%;
-  transform: translateY(-60%);
+  margin-left: 1rem;
+  margin-top: 2rem;
+  margin-top: calc(50vh - (266px / 2));
+  margin-bottom: calc(50vh - (266px / 2));
+  top: calc(50% - (266px / 2));
 
   @media screen and (min-width: $_md) {
     display: block;
