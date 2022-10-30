@@ -53,7 +53,7 @@
     */
 
     // subtracts spaces for top and bottom, so that the menu is in the vertical center
-    margin-top: calc((-50vh + 266px / 2) - 50vh - 266px / 2);
+    margin-top: calc((-50vh + 250px / 2) - 50vh - 250px / 2);
   }
 }
 </style>

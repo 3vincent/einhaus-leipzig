@@ -95,11 +95,11 @@ export default {
   z-index: 1;
   width: max-content;
   left: 0;
-  margin-left: 1rem;
+  margin-left: max(1rem, calc((100vw - 800px) / 2 - 200px - 3rem));
   margin-top: 2rem;
-  margin-top: calc(50vh - (266px / 2));
-  margin-bottom: calc(50vh - (266px / 2));
-  top: calc(50% - (266px / 2));
+  margin-top: calc(50vh - (250px / 2));
+  margin-bottom: calc(50vh - (250px / 2));
+  top: calc(50% - (250px / 2));
 
   @media screen and (min-width: $_md) {
     display: block;
@@ -112,18 +112,17 @@ export default {
   }
 
   li {
-    background-color: rgba(128, 128, 128, 0.7);
-    border-radius: 6px;
     height: 50px;
     width: 200px;
     padding: 0;
-
-    margin: 4px 0;
+    margin: 0;
 
     display: flex;
     justify-content: center;
     align-content: center;
     flex-direction: column;
+
+    border-right: 1px solid grey;
   }
 
   ul li a,
@@ -133,12 +132,14 @@ export default {
 
     font-size: 0.9rem;
     font-weight: 500;
+    letter-spacing: -0.5px;
     text-decoration: none;
     line-height: 1rem;
+    text-align: right;
 
     display: flex;
     align-content: center;
-    justify-content: left;
+    justify-content: right;
     padding-top: 0.9rem;
     padding-right: 0.9rem;
     padding-bottom: 0.9rem;
@@ -155,7 +156,8 @@ export default {
   // }
 
   .is-active {
-    background-color: white;
+    background-color: rgba(119, 119, 119, 0.9);
+    border-right: 4px solid white;
   }
 
   // .is-active:hover {
@@ -165,8 +167,7 @@ export default {
   li.is-active a,
   li.is-active a:visited {
     font-weight: bold;
-    color: var(--main-text-color-dark);
-    letter-spacing: -0.5px;
+    margin-right: -3px;
   }
 }
 </style>
