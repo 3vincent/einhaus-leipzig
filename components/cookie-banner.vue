@@ -4,7 +4,7 @@ const expires = new Date()
 expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000)
 
 const cookieConsent = useCookie('cookieConsent', { sameSite: true })
-cookieConsent.value = cookieConsent.value || 'denied'
+cookieConsent.value = cookieConsent.value || 'initial'
 
 const acceptCookie = () => {
   // @ts-ignore
@@ -31,7 +31,7 @@ const denyCookie = () => {
 
 <template>
   <!-- <div class="container" v-if="cookieConsent === 'denied' || !cookieConsent"> -->
-  <div class="cookie-container" v-if="cookieConsent === 'denied'">
+  <div class="cookie-container" v-if="cookieConsent === 'initial'">
     <div class="content">
       <div class="inner-content">
         <div class="text-container">
