@@ -1,5 +1,5 @@
 <template>
-  <div id="start" class="landing-container">
+  <div class="landing-container">
     <div class="landing-contentBox">
       <h1>EinHaus Reichpiet<wbr />sch<wbr />straße 13 eG</h1>
       <h2 class="seo-text"></h2>
@@ -34,6 +34,14 @@
   background-size: cover;
   padding-top: 0;
   min-height: 100vh;
+
+  // if aktuelles is present, remove the bottom border:
+  // border-bottom: none;
+}
+.landing-contentBox {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin: 0 auto;
 }
 
 .arrow-container {

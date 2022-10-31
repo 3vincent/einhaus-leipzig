@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer'
 import Joi from 'joi'
+import validator from 'validator'
 
 const smtpHost: string = process.env.SMTP_HOST!
 const smtpPortTLS: number = Number(process.env.SMTP_PORT_TLS)
@@ -48,11 +49,11 @@ async function sendMail(payload: PayloadData) {
              <b>Nachricht:</b><br />${payload.message}<br />`,
     })
 
-    console.log('payload: ', payload)
-
-    console.log('info: ', info)
-
-    console.log('Message sent: %s', info.messageId)
+    if (process.env.NODE_ENV === 'development') {
+      console.log('payload: ', payload)
+      console.log('info: ', info)
+      console.log('Message sent: %s', info.messageId)
+    }
   } catch (err) {
     console.log(err)
 
@@ -73,27 +74,30 @@ async function sendMail(payload: PayloadData) {
 }
 
 export default defineEventHandler(async event => {
-  const sanitizeHTML = (str: string) => {
-    return str
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-  }
+  // TODO
+  // Add a rate limiter for request or basic authentication
 
   const { ...requestBody } = await readBody(event)
 
   const payload: PayloadData = {
-    name: requestBody?.name.trim(),
-    email: requestBody?.email.trim(),
-    message: requestBody?.message.trim(),
+    name: requestBody?.name,
+    email: requestBody?.email,
+    message: requestBody?.message,
     gdpr: requestBody?.gdpr,
     age: requestBody?.age,
   }
 
-  payload.name = sanitizeHTML(payload.name)
-  payload.email = sanitizeHTML(payload.email)
-  payload.message = sanitizeHTML(payload.message)
+  async function sanitize(payload: PayloadData) {
+    try {
+      payload.name = validator.escape(payload.name).trim()
+      payload.email = (validator.normalizeEmail(payload.email) || '').trim()
+      payload.message = validator.escape(payload.message).trim()
+    } catch (error) {
+      return Promise.reject({ error: 'Error while sanitizing data' })
+    }
+
+    return Promise.resolve()
+  }
 
   const schema = Joi.object({
     name: Joi.string().min(1).max(40).required().trim(),
@@ -104,9 +108,9 @@ export default defineEventHandler(async event => {
   })
 
   try {
-    const value = await schema.validateAsync(payload)
+    await sanitize(payload)
 
-    console.log('validation output: ', value)
+    await schema.validateAsync(payload)
   } catch (err) {
     console.log(err)
 
@@ -116,7 +120,7 @@ export default defineEventHandler(async event => {
     }
   }
 
-  console.log(payload)
+  if (process.env.NODE_ENV === 'development') console.log({ payload })
 
   return sendMail(payload).catch(console.error)
 })

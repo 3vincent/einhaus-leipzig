@@ -66,6 +66,7 @@ export default {
         this.email.includes('@') &&
         this.email.slice(0, this.email.indexOf('@')).length > 0 &&
         this.email.slice(this.email.indexOf('@')).includes('.') &&
+        this.email.slice(this.email.lastIndexOf('.') + 1).length > 0 &&
         this.email.length >= 5 &&
         this.message.length > 2 &&
         this.message.length <= 4000 &&
@@ -110,6 +111,7 @@ export default {
                   email.includes('@') &&
                   email.slice(0, email.indexOf('@')).length > 0 &&
                   email.slice(email.indexOf('@')).includes('.') &&
+                  email.slice(email.lastIndexOf('.') + 1).length > 0 &&
                   email.length >= 5
                     ? 'single-field-filled'
                     : ''

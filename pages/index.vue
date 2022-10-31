@@ -39,17 +39,17 @@ export default {
       )
 
       if ('IntersectionObserver' in window) {
-        let lazyBackgroundObserver = new IntersectionObserver(function (
-          entries,
-          observer
-        ) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible')
-              lazyBackgroundObserver.unobserve(entry.target)
-            }
-          })
-        })
+        let lazyBackgroundObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible')
+                lazyBackgroundObserver.unobserve(entry.target)
+              }
+            })
+          },
+          { rootMargin: '0px 0px 200px 0px' }
+        )
 
         lazyBackgrounds.forEach(function (lazyBackground) {
           lazyBackgroundObserver.observe(lazyBackground)
@@ -63,10 +63,14 @@ export default {
 <template>
   <main>
     <LandingStart />
-    <LandingBisher />
-    <LandingZiele />
-    <LandingGemeinschaft />
-    <LandingMehr />
-    <LandingUnterstutzung />
+    <!-- <LandingAktuelles /> -->
+    <div>
+      <LandingOneScrollMenu />
+      <LandingBisher />
+      <LandingZiele />
+      <LandingGemeinschaft />
+      <LandingMehr />
+      <LandingUnterstutzung />
+    </div>
   </main>
 </template>
