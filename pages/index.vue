@@ -5,31 +5,20 @@ definePageMeta({
 
 export default {
   name: 'Landing',
-  beforeMount() {
-    this.setScrollBehavior('auto')
+
+  mounted() {
+    this.lazyLoadImages()
+
+    this.setScrollBehavior('smooth')
   },
 
   beforeUnmount() {
     this.setScrollBehavior('auto')
   },
 
-  mounted() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'auto',
-    })
-
-    if (window.scrollY == 0) {
-      this.setScrollBehavior('smooth')
-    }
-
-    this.lazyLoadImages()
-  },
-
   methods: {
     setScrollBehavior(mode: string) {
       const root = document.querySelector('html')
-
       if (root) root.style.scrollBehavior = mode
     },
 
