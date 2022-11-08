@@ -57,13 +57,6 @@ export default {
       name: this.$options.name,
     }
   },
-
-  mounted() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'auto',
-    })
-  },
 }
 </script>
 

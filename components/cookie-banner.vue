@@ -17,14 +17,17 @@ const denyCookie = () => {
   // @ts-ignore
   cookieConsent.value = null
 
+  const shortLivedCookie = useCookie('cookieConsent', { sameSite: true })
+  shortLivedCookie.value = 'denied'
+
   /* Or use cookie for one sessions
-   * This way the user does not see the banner after clicking deny - even when 
+   * This way the user does not see the banner after clicking deny - even when
    * changing pages - until they close the browser (session cookie).
    * This can be achieved like this:
 
    * useCookie('cookieConsent', { sameSite: true })
    * const shortLivedCookie = useCookie('cookieConsent', { sameSite: true })
-   * const shortLivedCookie.value = 'session'
+   * shortLivedCookie.value = 'denied'
    */
 }
 </script>

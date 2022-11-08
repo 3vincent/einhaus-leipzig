@@ -35,61 +35,51 @@ export default {
 
   data() {
     return {
-      iconClicked: false,
+      menuVisible: false,
     }
   },
 
   beforeUnmount() {
-    this.hamburgerMenu.removeEventListener(
-      'mousedown',
-      this.showMenuModal,
-      false
-    )
+    this.userMenu.removeEventListener('click', this.toggleMenuModal, false)
 
     document.removeEventListener('click', this.detectOutsideClickToClose, false)
   },
 
   mounted() {
-    this.hamburgerMenu.addEventListener('mousedown', this.showMenuModal, false)
+    this.userMenu.addEventListener('click', this.toggleMenuModal, false)
 
-    document.addEventListener('click', event =>
-      this.detectOutsideClickToClose(event)
-    )
+    document.addEventListener('click', this.detectOutsideClickToClose, false)
   },
 
   computed: {
-    hamburgerMenu() {
-      return document.querySelector('.user-menu-icon-container')
-    },
-
     menuModal() {
       return document.querySelector('.user-menu-list-container')
+    },
+
+    userMenu() {
+      return document.querySelector('.user-menu-container')
     },
   },
 
   methods: {
-    showMenuModal() {
+    toggleMenuModal() {
       this.menuModal.classList.toggle('is-visible')
+
       this.toggleClickState()
     },
 
     toggleClickState() {
-      if (
-        this.iconClicked == false &&
-        this.menuModal.classList.contains('is-visible')
-      ) {
-        this.iconClicked = true
-      } else {
-        this.iconClicked = false
-      }
+      if (this.menuModal.classList.contains('is-visible'))
+        return (this.menuVisible = true)
+
+      return (this.menuVisible = false)
     },
 
     detectOutsideClickToClose(event: any) {
-      const isClickInside = this.hamburgerMenu.contains(event.target)
+      const isClickInside = this.userMenu.contains(event.target)
 
       if (!isClickInside) {
         this.menuModal.classList.remove('is-visible')
-
         this.toggleClickState()
       }
     },
