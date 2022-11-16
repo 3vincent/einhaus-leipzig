@@ -18,14 +18,16 @@ $_xl: 1280px;
 
   --button-color: rgba(6, 147, 227, 1);
   // --button-color-hover: rgba(6, 91, 139, 1);
-  --button-color-hover: rgb(9, 133, 205);
-  --button-color-active: rgb(0, 120, 184);
+  --button-color-hover: rgba(9, 133, 205, 1);
+  --button-color-active: rgba(0, 120, 184, 1);
 
   --warning-severe: rgba(255, 72, 0, 1);
-  --warning: orange;
+  --warning: rgba(255, 165, 0, 1);
 
   --pretty-green: rgba(0, 197, 142, 1);
   --background-grey: rgba(0, 0, 0, 0.2);
   --background-light-grey: rgba(0, 0, 0, 0.05);
   --background-menu-highlighting: rgba(229, 231, 235, 1);
+
+  --onescroll-menu-background-highlighting: rgba(119, 119, 119, 1);
 }

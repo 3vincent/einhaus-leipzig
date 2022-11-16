@@ -156,7 +156,7 @@ export default {
   // }
 
   .is-active {
-    background-color: rgba(119, 119, 119, 0.9);
+    background-color: var(--onescroll-menu-background-highlighting);
     border-right: 4px solid white;
   }
 
