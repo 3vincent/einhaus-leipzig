@@ -16,12 +16,13 @@
         Für dich ist diese Art der Investition attraktiv, wenn du dein Geld
         lieber in einem Projekt anlegst, das man anfassen kann: Dein Geld kannst
         du bei uns nachhaltig anlegen. Mehr Informationen geben wir Dir gerne
-        persönlich. Wir freuen uns über eine E-Mail an info@einhaus-leipzig.de
+        persönlich. Wir freuen uns über eine E-Mail an
+        {{ envVar.public.OFFICIAL_CONTACT_ADDRESS }}
       </p>
 
       <NuxtLink to="/kontakt" class="link primary"> Kontaktformular </NuxtLink>
       <a
-        :href="`mailto:${envVar.OFFICIAL_CONTACT_ADDRESS}`"
+        :href="`mailto:${envVar.public.OFFICIAL_CONTACT_ADDRESS}`"
         class="link secondary"
       >
         Email schreiben

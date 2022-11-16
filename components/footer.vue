@@ -13,7 +13,7 @@
               Reichpietschstraße 13 <br />
               04317 Leipzig
             </li>
-            <li>info@einhaus-leipzig.de</li>
+            <li>{{ envVar.public.OFFICIAL_CONTACT_ADDRESS }}</li>
             <li>
               <NuxtLink to="/kontakt">
                 <span>Kontaktformular</span>
@@ -88,6 +88,7 @@ export default {
   data() {
     return {
       currentYear: new Date().getFullYear(),
+      envVar: useRuntimeConfig(),
     }
   },
 }

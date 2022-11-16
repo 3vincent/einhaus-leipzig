@@ -54,6 +54,7 @@ export default {
   data() {
     return {
       name: this.$options.name,
+      envVar: useRuntimeConfig(),
     }
   },
 }
@@ -77,7 +78,9 @@ export default {
         ><p
           ><strong>Kontakt:</strong> <br />
           E-Mail:
-          <a href="mailto:info@einhaus-leipzig.de">info@einhaus-leipzig.de</a>
+          <a href="`mailto:${envVar.public.OFFICIAL_CONTACT_ADDRESS}`">{{
+            envVar.public.OFFICIAL_CONTACT_ADDRESS
+          }}</a>
           <br /></p
         ><p
           ><strong>Registereintrag: </strong><br />

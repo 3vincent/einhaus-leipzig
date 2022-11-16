@@ -54,6 +54,7 @@ export default {
   data() {
     return {
       name: this.$options.name,
+      envVar: useRuntimeConfig(),
     }
   },
 }
@@ -210,7 +211,7 @@ export default {
         04317 Leipzig</p
       >
 
-      <p> E-Mail: info@einhaus-leipzig.de</p>
+      <p> E-Mail: {{ envVar.public.OFFICIAL_CONTACT_ADDRESS }}</p>
       <p
         >Verantwortliche Stelle ist die nat&uuml;rliche oder juristische Person,
         die allein oder gemeinsam mit anderen &uuml;ber die Zwecke und Mittel
