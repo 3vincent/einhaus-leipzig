@@ -40,13 +40,13 @@ export default {
   },
 
   beforeUnmount() {
-    this.userMenu.removeEventListener('click', this.toggleMenuModal, false)
+    this.userMenu?.removeEventListener('click', this.toggleMenuModal, false)
 
     document.removeEventListener('click', this.detectOutsideClickToClose, false)
   },
 
   mounted() {
-    this.userMenu.addEventListener('click', this.toggleMenuModal, false)
+    this.userMenu?.addEventListener('click', this.toggleMenuModal, false)
 
     document.addEventListener('click', this.detectOutsideClickToClose, false)
   },
@@ -63,23 +63,23 @@ export default {
 
   methods: {
     toggleMenuModal() {
-      this.menuModal.classList.toggle('is-visible')
+      this.menuModal?.classList.toggle('is-visible')
 
       this.toggleClickState()
     },
 
     toggleClickState() {
-      if (this.menuModal.classList.contains('is-visible'))
+      if (this.menuModal?.classList.contains('is-visible'))
         return (this.menuVisible = true)
 
       return (this.menuVisible = false)
     },
 
     detectOutsideClickToClose(event: any) {
-      const isClickInside = this.userMenu.contains(event.target)
+      const isClickInside = this.userMenu?.contains(event.target)
 
       if (!isClickInside) {
-        this.menuModal.classList.remove('is-visible')
+        this.menuModal?.classList.remove('is-visible')
         this.toggleClickState()
       }
     },
