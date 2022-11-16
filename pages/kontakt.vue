@@ -55,6 +55,7 @@ export default {
   data() {
     return {
       name: this.$options.name,
+      envVar: useRuntimeConfig(),
     }
   },
 }
@@ -68,7 +69,8 @@ export default {
       <h1>Kontakt</h1>
       <p>
         Wenn Du mit uns in Kontakt treten willst, schreib uns eine Email an
-        info@einhaus-leipzig.de oder füll das Kontaktformular aus.
+        {{ envVar.public.OFFICIAL_CONTACT_ADDRESS }} oder füll das
+        Kontaktformular aus.
       </p>
       <p> Wir werden uns schnellstmöglich bei Dir melden! </p>
       <ContactForm />
