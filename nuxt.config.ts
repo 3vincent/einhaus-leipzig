@@ -6,8 +6,10 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'vercel',
   },
-  publicRuntimeConfig: {
-    OFFICIAL_CONTACT_ADDRESS: process.env.OFFICIAL_CONTACT_ADDRESS,
+  runtimeConfig: {
+    public: {
+      OFFICIAL_CONTACT_ADDRESS: process.env.OFFICIAL_CONTACT_ADDRESS,
+    },
   },
   typescript: {
     strict: true,
