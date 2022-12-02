@@ -1,8 +1,8 @@
 <template>
   <div class="siteContainer">
+    <TopMenuBar :is-relative="false" :logo-white="true" />
     <slot />
     <Footer :is-landing="true" />
-    <TopMenuBar :is-relative="false" :logo-white="true" />
     <CookieBanner />
   </div>
 </template>
