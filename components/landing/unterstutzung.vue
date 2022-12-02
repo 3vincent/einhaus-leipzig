@@ -39,6 +39,8 @@
 </template>
 
 <script lang="ts">
+import { debounce } from 'lodash-es'
+
 export default {
   name: 'LandingUnterstutzung',
   data() {
@@ -49,7 +51,7 @@ export default {
 
   mounted() {
     this.fixBackgroundImage()
-    window.addEventListener('scroll', this.fixBackgroundImage)
+    window.addEventListener('scroll', debounce(this.fixBackgroundImage, 10))
   },
 
   beforeUnmount() {
