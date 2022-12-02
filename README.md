@@ -1,6 +1,6 @@
-## EinHaus Website:
+## EinHaus Website
 
-Preview at: [https://einhaus-leipzig.vercel.app](https://einhaus-leipzig.vercel.app)
+[https://www.einhaus-leipzig.de](https://www.einhaus-leipzig.de)
 
 <hr>
 
