@@ -20,12 +20,12 @@
         {{ envVar.public.OFFICIAL_CONTACT_ADDRESS }}
       </p>
 
-      <NuxtLink to="/kontakt" class="link primary"> Kontaktformular </NuxtLink>
-      <a
-        :href="`mailto:${envVar.public.OFFICIAL_CONTACT_ADDRESS}`"
-        class="link secondary"
-      >
-        Email schreiben
+      <NuxtLink to="/kontakt">
+        <button class="link primary"> Kontaktformular </button>
+      </NuxtLink>
+
+      <a :href="`mailto:${envVar.public.OFFICIAL_CONTACT_ADDRESS}`">
+        <button class="link secondary"> Email schreiben </button>
       </a>
 
       <p>

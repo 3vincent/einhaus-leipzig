@@ -45,21 +45,11 @@ const denyCookie = () => {
           </p>
         </div>
         <div class="button-container">
-          <a
-            href="#"
-            rel="nofollow"
-            class="link primary small"
-            v-on:click.prevent="acceptCookie"
-          >
-            Akzeptieren
+          <a href="#" rel="nofollow" v-on:click.prevent="acceptCookie">
+            <button class="link primary small"> Akzeptieren </button>
           </a>
-          <a
-            href="#"
-            rel="nofollow"
-            class="link secondary small"
-            v-on:click.prevent="denyCookie"
-          >
-            Verweigern
+          <a href="#" rel="nofollow" v-on:click.prevent="denyCookie">
+            <button class="link secondary small"> Verweigern </button>
           </a>
         </div>
       </div>
