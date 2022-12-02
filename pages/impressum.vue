@@ -78,7 +78,7 @@ export default {
         ><p
           ><strong>Kontakt:</strong> <br />
           E-Mail:
-          <a href="`mailto:${envVar.public.OFFICIAL_CONTACT_ADDRESS}`">{{
+          <a :href="`mailto:${envVar.public.OFFICIAL_CONTACT_ADDRESS}`">{{
             envVar.public.OFFICIAL_CONTACT_ADDRESS
           }}</a>
           <br /></p
