@@ -9,7 +9,7 @@
         Bankkredit möglichst gering zu halten bzw. durch Sondertilgungen
         schneller zurückzahlen zu können. Und hier kommst Du ins Spiel. Werde
         investierendes Mitglied unserer Genossenschaft! Das ist bereits mit
-        einem Betrag von 100 Euro möglich.Es gibt zwei Wege, wie Du uns
+        einem Betrag von 100 Euro möglich. Es gibt zwei Wege, wie Du uns
         finanziell unterstützen kannst: indem Du Genossenschaftsanteile erwirbst
         oder indem Du der Genossenschaft einen Direktkredit* gewährst.
       </p>

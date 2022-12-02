@@ -10,8 +10,8 @@
         Gemeinschaft im Haus, aber auch als einzelne Mietparteien.
       </p>
       <p>
-        Wir schätzen die Vielfalt und den Gestaltungsspielraum den das Haus uns
-        bietet: Unsere Wohnungen haben wir selbst gestaltet , eine Wohnung hat
+        Wir schätzen die Vielfalt und den Gestaltungsspielraum, den das Haus uns
+        bietet: Unsere Wohnungen haben wir selbst gestaltet, eine Wohnung hat
         blaue Dielen, eine andere eine rosafarbene Badewanne – das soll gern so
         bleiben.
       </p>
