@@ -49,7 +49,7 @@ export default {
           (entries, observer) => {
             entries.forEach(entry => {
               const menuItemToHighlight = document.querySelector(
-                `#${entry.target.closest('.landing-container')!.id}-nav`
+                `#${entry.target.closest('.landing-container')?.id}-nav`
               )
 
               if (entry.isIntersecting) {
