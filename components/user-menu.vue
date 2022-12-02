@@ -1,12 +1,12 @@
 <template>
-  <div class="user-menu-container">
+  <nav class="user-menu-container">
     <div class="user-menu-icon-container">
-      <!-- <MenuIcon :is-clicked="iconClicked" /> -->
-      <MenuIcon :is-clicked="false" />
+      <!-- <MenuButton :is-clicked="iconClicked" /> -->
+      <MenuButton :is-clicked="false" aria-controls="primary-navigation" />
     </div>
 
     <div class="user-menu-list-container">
-      <ul class="user-menu-list">
+      <ul id="primary-navigation" class="user-menu-list">
         <li>
           <NuxtLink to="/">
             <span>Home</span>
@@ -26,7 +26,7 @@
         </li>
       </ul>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script lang="ts">

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <button>
     <svg v-if="isClicked" viewBox="0 0 120 100" width="40" height="40">
       <line
         x1="10"
@@ -32,12 +32,13 @@
         <rect y="60" width="102" height="14"></rect>
       </g>
     </svg>
-  </div>
+    <span class="visually-hidden">Menu</span>
+  </button>
 </template>
 
 <script lang="ts">
 export default {
-  name: 'MenuIcon',
+  name: 'MenuButton',
   props: {
     isClicked: {
       type: Boolean,
@@ -48,14 +49,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div,
+button,
 svg {
   line-height: 0;
 }
 
-div {
+button {
   padding: 0 1rem;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
 }
 
 .shadow {
