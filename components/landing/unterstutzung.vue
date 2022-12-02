@@ -3,18 +3,20 @@
     <div class="landing-contentBox">
       <h2>Unterstütze unser Projekt.</h2>
       <p>
-        Den Kauf realisieren wir mit unserem eigenen Kapital und einem
-        Bankkredit. Darlehen und Investitionen von Privatpersonen helfen uns,
-        den Bankkredit möglichst gering zu halten. Und hier kommst Du ins Spiel.
-        Werde investierendes Mitglied unserer Genossenschaft! Das ist bereits
-        mit einem Betrag von 100 Euro möglich. Es gibt zwei Möglichkeiten, wie
-        Du uns finanziell unterstützen kannst: indem Du Genossenschaftsanteile
-        erwirbst oder indem Du der Genossenschaft einen Direktkredit* gewährst.
+        Den Kauf haben wir mit unserem eigenen Kapital und mit der Hilfe
+        zahlreicher Unterstützer:innen, sowie einem Bankkredit von der
+        Umweltbank realisiert. Unsere Unterstützer:innen helfen uns den
+        Bankkredit möglichst gering zu halten bzw. durch Sondertilgungen
+        schneller zurückzahlen zu können. Und hier kommst Du ins Spiel. Werde
+        investierendes Mitglied unserer Genossenschaft! Das ist bereits mit
+        einem Betrag von 100 Euro möglich.Es gibt zwei Wege, wie Du uns
+        finanziell unterstützen kannst: indem Du Genossenschaftsanteile erwirbst
+        oder indem Du der Genossenschaft einen Direktkredit* gewährst.
       </p>
 
       <p>
         Für dich ist diese Art der Investition attraktiv, wenn du dein Geld
-        lieber in einem Projekt anlegst, das man anfassen kann: Dein Geld kannst
+        gerne in einem Projekt anlegst, das man anfassen kann: Dein Geld kannst
         du bei uns nachhaltig anlegen. Mehr Informationen geben wir Dir gerne
         persönlich. Wir freuen uns über eine E-Mail an
         {{ envVar.public.OFFICIAL_CONTACT_ADDRESS }}

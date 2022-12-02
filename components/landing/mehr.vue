@@ -13,7 +13,7 @@
           Kellerausstellung
         </a>
         kommen, die bereits seit 2010 in unserem Haus stattfindet.
-        Künstler*innen aus der ganzen Welt stellen ihre Bilder, Skulpturen,
+        Künstler:innen aus der ganzen Welt stellen ihre Bilder, Skulpturen,
         Objekte und Fotografien aus. Die Kellerausstellung ist in ein
         musikalisches und literarisches Programm eingebettet und hat sich zu
         einer unabhängigen künstlerischen und kulturellen Plattform entwickelt.
