@@ -2,8 +2,7 @@
   <div class="landing-container">
     <div class="landing-contentBox">
       <h1>EinHaus Reichpietsch&shy;straße 13 eG</h1>
-      <h2 class="seo-text"></h2>
-      <h3>Ein genossenschaftliches Hausprojekt in Leipzig Reudnitz</h3>
+      <h2>Ein genossenschaftliches Hausprojekt in Leipzig Reudnitz</h2>
     </div>
 
     <div class="arrow-container">
@@ -42,6 +41,15 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
   margin: 0 auto;
+
+  h2 {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 400;
+    padding: 0.6rem 0;
+    letter-spacing: -0.02em;
+    line-height: 1.5;
+  }
 }
 
 .arrow-container {
