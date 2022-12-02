@@ -313,11 +313,13 @@ export default {
 .age,
 .age label,
 .age label input {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
   height: 1px;
-  margin: 0;
-  padding: 0;
   overflow: hidden;
-  transform: translateX(-10000000px);
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 label input,
