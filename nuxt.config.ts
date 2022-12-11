@@ -18,6 +18,9 @@ export default defineNuxtConfig({
   app: {
     head: {
       charset: 'utf-8',
+      htmlAttrs: {
+        lang: 'de',
+      },
       viewport: 'width=device-width, initial-scale=1, user-scalable=yes',
       title: 'EinHaus Reichpietschstraße 13 eG - Genossenschaft Leipzig',
       meta: [
