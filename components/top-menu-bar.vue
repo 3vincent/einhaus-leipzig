@@ -12,8 +12,6 @@
 </template>
 
 <script lang="ts">
-import { debounce } from 'lodash-es'
-
 export default {
   name: 'TopMenuBar',
   props: {
@@ -29,7 +27,7 @@ export default {
 
   mounted() {
     this.onFixedTopMenu()
-    window.addEventListener('scroll', debounce(this.onFixedTopMenu, 30), false)
+    window.addEventListener('scroll', this.onFixedTopMenu, false)
   },
 
   beforeUnmount() {
