@@ -60,6 +60,10 @@
   }
 }
 
+a:has(button.link) {
+  border-bottom: 0px !important;
+}
+
 p a {
   text-decoration: none;
   color: var(--main-text-color-dark);
@@ -68,7 +72,6 @@ p a {
   display: inline;
 
   @media screen and (min-width: $_md) {
-    // background: red;
     border-bottom-width: 2px;
   }
 }
