@@ -99,7 +99,7 @@ const denyCookie = () => {
   }
 
   p {
-    color: white;
+    color: var(--main-text-color-dark);
     font-weight: 500;
     font-size: 0.9rem;
     display: inline-block;
@@ -107,8 +107,8 @@ const denyCookie = () => {
   }
 
   p a {
-    color: white;
-    border-bottom-color: white;
+    color: var(----main-text-color-semidark);
+    border-bottom-color: var(----main-text-color-semidark);
     border-bottom-width: 1px;
   }
 
