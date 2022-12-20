@@ -168,7 +168,7 @@ export default {
     margin-bottom: 0;
     padding-bottom: 0;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 400;
     color: rgba(156, 157, 156, 1);
   }
 }
