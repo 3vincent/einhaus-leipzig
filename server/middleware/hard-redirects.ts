@@ -1,5 +1,5 @@
 export default defineEventHandler(async event => {
-  // console.log('req url: ' + req.url)
+  // console.log('req url: ' + event.node.req.url)
 
   if (
     event.node.req.url &&
@@ -11,6 +11,20 @@ export default defineEventHandler(async event => {
     event.node.res.writeHead(301, {
       Location: '/images/logo-einhaus-genossenschaft-leipzig.png',
     })
-    event.node.res.end('done')
+    event.node.res.end()
+  }
+
+  if (event.node.req.url == '/impressum/') {
+    event.node.res.writeHead(301, {
+      Location: '/impressum',
+    })
+    event.node.res.end()
+  }
+
+  if (event.node.req.url == '/kontakt/') {
+    event.node.res.writeHead(301, {
+      Location: '/kontakt',
+    })
+    event.node.res.end()
   }
 })
