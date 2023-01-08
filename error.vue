@@ -11,10 +11,10 @@ defineProps({
     <div class="default-container">
       <div class="content">
         <h1>{{ error?.message }}</h1>
-
         <NuxtLink to="/">
           <button class="link secondary"> Back to Homepage </button>
         </NuxtLink>
+        <h6>Error {{ error?.statusCode }}</h6>
       </div>
     </div>
 
@@ -27,6 +27,11 @@ defineProps({
 <style lang="scss" scoped>
 .default-container {
   min-height: 50vh;
+}
+
+h1,
+h2 {
+  overflow-wrap: break-word;
 }
 
 @media screen and (min-width: $_lg) {
