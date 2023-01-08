@@ -14,7 +14,7 @@ useHead({
 
 <template>
   <div class="siteContainer">
-    <TopMenuBar :is-relative="false" :logo-white="true" />
+    <TopMenuBar :should-stick="true" :logo-white="true" />
     <slot />
     <Footer :is-landing="true" />
     <CookieBanner />

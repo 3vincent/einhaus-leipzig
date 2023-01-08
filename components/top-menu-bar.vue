@@ -1,9 +1,12 @@
 <template>
   <div
     class="top-menu-container"
-    v-bind:class="{ 'conditional-class': isRelative }"
+    v-bind:class="{ 'conditional-class': shouldStick }"
   >
-    <div class="logo-container"><Logo :isWhite="logoWhite" /></div>
+    <div v-if="hasWhiteBackground" class="logo-container"
+      ><Logo :isWhite="false"
+    /></div>
+    <div v-else class="logo-container"><Logo :isWhite="logoWhite" /></div>
 
     <div class="menu-container">
       <UserMenu />
@@ -14,8 +17,15 @@
 <script lang="ts">
 export default {
   name: 'TopMenuBar',
+
+  data() {
+    return {
+      hasWhiteBackground: false,
+    }
+  },
+
   props: {
-    isRelative: {
+    shouldStick: {
       type: Boolean,
       default: false,
     },
@@ -48,8 +58,10 @@ export default {
 
         if (document.documentElement.scrollTop > element.offsetHeight - 5) {
           element.classList.add('smaller-after-scroll')
+          this.hasWhiteBackground = true
         } else {
           element.classList.remove('smaller-after-scroll')
+          this.hasWhiteBackground = false
         }
       }
     },
@@ -86,7 +98,7 @@ export default {
   position: relative; //fallback
   position: sticky;
   transition: all 0.4s;
-  background-color: rgba(255, 255, 255, 1);
+  // background-color: rgba(255, 255, 255, 1);
 
   @media screen and (min-width: $_md) {
     background-color: transparent;
