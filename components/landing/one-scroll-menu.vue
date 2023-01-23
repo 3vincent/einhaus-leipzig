@@ -143,7 +143,7 @@ export default {
     padding-top: 0.9rem;
     padding-right: 0.9rem;
     padding-bottom: 0.9rem;
-    padding-left: 1.2rem;
+    padding-left: 0.6rem;
   }
 
   // ul li:hover {

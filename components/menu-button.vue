@@ -1,38 +1,10 @@
 <template>
   <button>
-    <svg v-if="isClicked" viewBox="0 0 120 100" width="40" height="40">
-      <line
-        x1="10"
-        y1="10"
-        x2="100"
-        y2="100"
-        stroke="black"
-        stroke-width="12"
-      />
-      <line
-        x1="100"
-        y1="10"
-        x2="10"
-        y2="100"
-        stroke="black"
-        stroke-width="12"
-      />
-    </svg>
-
-    <svg
-      v-else
-      viewBox="-2 0 110 80"
-      width="40"
-      height="40"
-      v-bind:class="{ 'is-active': isClicked }"
-    >
-      <g stroke="white" stroke-width="2" fill="black" fill-rule="nonzero">
-        <rect width="102" height="14"></rect>
-        <rect y="30" width="102" height="14"></rect>
-        <rect y="60" width="102" height="14"></rect>
-      </g>
-    </svg>
-    <span class="visually-hidden">Menu</span>
+    <div id="main-menu-button" v-bind:class="{ open: isActive }">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </button>
 </template>
 
@@ -40,7 +12,7 @@
 export default {
   name: 'MenuButton',
   props: {
-    isClicked: {
+    isActive: {
       type: Boolean,
       default: false,
     },
@@ -49,28 +21,80 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-button,
-svg {
-  line-height: 0;
-}
-
 button {
   padding: 0 1rem;
   cursor: pointer;
   background-color: transparent;
   border: none;
+  padding-right: 0;
 }
 
-.shadow {
-  -webkit-filter: drop-shadow(3px 3px 2px rgba(165, 165, 165, 0.7));
-  filter: drop-shadow(3px 3px 2px rgba(165, 165, 165, 0.7));
+#main-menu-button span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: #000000;
+  outline: 1px solid var(--main-text-color-light);
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
 }
 
-.is-active {
-  filter: drop-shadow(3px 3px 2px rgba(165, 165, 165, 0.7));
+#main-menu-button {
+  height: 30px;
+  width: 36px;
 }
 
-.is-active g {
-  fill: #666;
+#main-menu-button span:nth-child(1) {
+  top: 0px;
+  -webkit-transform-origin: left center;
+  -moz-transform-origin: left center;
+  -o-transform-origin: left center;
+  transform-origin: left center;
+}
+
+#main-menu-button span:nth-child(2) {
+  top: 11px;
+  -webkit-transform-origin: left center;
+  -moz-transform-origin: left center;
+  -o-transform-origin: left center;
+  transform-origin: left center;
+}
+
+#main-menu-button span:nth-child(3) {
+  top: 22px;
+  -webkit-transform-origin: left center;
+  -moz-transform-origin: left center;
+  -o-transform-origin: left center;
+  transform-origin: left center;
+}
+
+#main-menu-button.open span:nth-child(1) {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  top: -1px;
+  left: 8px;
+}
+
+#main-menu-button.open span:nth-child(2) {
+  width: 0%;
+  opacity: 0;
+}
+
+#main-menu-button.open span:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  top: 24px;
+  left: 8px;
 }
 </style>

@@ -135,7 +135,6 @@ export default {
       top: 60px;
       right: 0;
       padding: 10px;
-      margin-right: 1rem;
 
       background-color: white;
       border-radius: 10px;

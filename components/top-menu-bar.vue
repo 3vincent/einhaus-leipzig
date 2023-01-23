@@ -103,7 +103,7 @@ export default {
 
 .menu-container {
   position: fixed;
-  right: 0;
+  right: 10px;
   top: 10px;
   transition: top 0.4s;
 
@@ -114,6 +114,6 @@ export default {
 }
 
 .top-menu-container.smaller-after-scroll .menu-container {
-  top: 10px;
+  top: 18px;
 }
 </style>
