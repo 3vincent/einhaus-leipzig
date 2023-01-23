@@ -1,8 +1,7 @@
 <template>
   <nav class="user-menu-container">
     <div class="user-menu-icon-container">
-      <!-- <MenuButton :is-clicked="iconClicked" /> -->
-      <MenuButton :is-clicked="false" aria-controls="primary-navigation" />
+      <MenuButton :is-active="menuVisible" aria-controls="primary-navigation" />
     </div>
 
     <div class="user-menu-list-container">
