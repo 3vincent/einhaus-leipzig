@@ -139,12 +139,15 @@ export default {
       border-radius: 10px;
       border: 0.5px solid var(--background-menu-highlighting);
 
-      display: none;
+      opacity: 0;
+      transform: translateX(50px) perspective(300px) rotateX(-40deg);
+      transition: transform 200ms, opacity 100ms;
     }
   }
 }
 
 .is-visible {
-  display: block;
+  transform: translateY(0) perspective(200px) rotateX(0deg);
+  opacity: 1;
 }
 </style>
