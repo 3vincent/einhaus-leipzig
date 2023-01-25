@@ -140,14 +140,14 @@ export default {
       border: 0.5px solid var(--background-menu-highlighting);
 
       opacity: 0;
-      transform: translateX(50px) perspective(300px) rotateX(-40deg);
-      transition: transform 200ms, opacity 100ms;
+      transform: translateX(50px) perspective(200px) rotateY(-40deg);
+      transition: transform 150ms, opacity 150ms;
     }
   }
 }
 
 .is-visible {
-  transform: translateY(0) perspective(200px) rotateX(0deg);
+  transform: translateX(0) perspective(200px) rotateY(0deg);
   opacity: 1;
 }
 </style>
