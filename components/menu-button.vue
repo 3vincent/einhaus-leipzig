@@ -44,6 +44,7 @@ button {
   -moz-transition: 0.25s ease-in-out;
   -o-transition: 0.25s ease-in-out;
   transition: 0.25s ease-in-out;
+  will-change: transform;
 }
 
 #main-menu-button {
