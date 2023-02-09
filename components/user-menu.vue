@@ -147,6 +147,7 @@ export default {
 }
 
 .is-visible {
+  will-change: transform, opacity;
   transform: translateX(0) perspective(200px) rotateY(0deg);
   opacity: 1;
 }
