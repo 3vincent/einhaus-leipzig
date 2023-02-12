@@ -282,6 +282,7 @@ export default {
 
     h2 {
       color: var(--warning-severe);
+      font-size: 1.4rem;
     }
   }
 
