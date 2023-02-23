@@ -65,7 +65,7 @@ export default defineNuxtConfig({
         {
           hid: 'og:url',
           property: 'og:url',
-          content: `https://www.einhaus-leipzig.de`,
+          content: 'https://www.einhaus-leipzig.de',
         },
         {
           hid: 'og:type',
