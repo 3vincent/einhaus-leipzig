@@ -17,11 +17,16 @@ export default {
 
   methods: {
     async handleSubmit() {
+      interface responseData {
+        statusCode: number
+        body: string
+      }
+
       try {
         this.clickedOnce = true
         this.moveLoadingAnimationToCenter()
 
-        const data = await $fetch('/api/send-mail', {
+        const data: responseData = await $fetch('/api/send-mail', {
           method: 'POST',
           body: {
             name: this.name,
