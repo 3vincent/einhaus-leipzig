@@ -75,8 +75,8 @@ export default {
           }
         )
 
-        pageSections.forEach(pageSections => {
-          menuHighlightObserver.observe(pageSections)
+        pageSections.forEach(pageSection => {
+          menuHighlightObserver.observe(pageSection)
         })
       }
     },
