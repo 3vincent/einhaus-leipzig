@@ -8,14 +8,8 @@ body {
 }
 
 .siteContainer {
-  min-height: 100vh !important;
-}
-
-html {
-  height: 100% !important;
-}
-body {
-  min-height: 100% !important;
+  min-height: 100vh; //Fallback
+  min-height: 100svh !important;
 }
 
 .default-container {
@@ -32,7 +26,7 @@ body {
     background-size: cover;
     content: '';
     min-height: 100vh; //fallback
-    min-height: -webkit-fill-available;
+    min-height: 100svh;
     left: 0;
     position: fixed;
     top: 0;

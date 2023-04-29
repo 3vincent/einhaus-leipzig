@@ -11,7 +11,6 @@
     padding-top: min(calc(100vw / 1.5), 300px);
 
     display: flex;
-    // min-height: 100vh;
     height: auto;
     justify-content: flex-start;
     align-items: center;
@@ -24,7 +23,8 @@
       background-size: cover;
       -webkit-background-size: cover;
       padding-top: 0;
-      min-height: 100vh;
+      min-height: 100vh; //Fallback
+      min-height: 100svh;
     }
 
     @media screen and (min-width: $_xl) {
@@ -42,7 +42,7 @@
       background-size: cover;
       content: '';
       min-height: 100vh; //fallback
-      min-height: -webkit-fill-available;
+      min-height: 100svh;
       left: 0;
       position: fixed;
       top: 0;

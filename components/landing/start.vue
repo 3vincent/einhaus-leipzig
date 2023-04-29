@@ -32,7 +32,8 @@
   background-position: 50% 0;
   background-size: cover;
   padding-top: 0;
-  min-height: 100vh;
+  min-height: 100vh; //Fallback
+  min-height: 100svh;
 
   // if aktuelles is present, remove the bottom border:
   // border-bottom: none;
@@ -55,7 +56,7 @@
 .arrow-container {
   position: absolute;
   width: 100vw;
-  bottom: 15vh;
+  bottom: 3rem;
 
   @media screen and (min-width: $_md) {
     bottom: 3rem;
