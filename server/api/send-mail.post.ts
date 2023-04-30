@@ -11,7 +11,7 @@ const contactFormSenderAddress: string =
   process.env.CONTACT_FORM_SENDER_ADDRESS!
 let mailReceiver: string
 
-type PayloadData = {
+export type PayloadData = {
   name: string
   email: string
   message: string

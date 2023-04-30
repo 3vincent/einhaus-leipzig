@@ -1,4 +1,6 @@
 <script lang="ts">
+import { PayloadData } from '../server/api/send-mail.post'
+
 export default {
   name: 'ContactForm',
 
@@ -19,13 +21,7 @@ export default {
     async handleSubmit() {
       type responseData = {
         statusCode: number
-        body: {
-          name: string
-          email: string
-          message: string
-          gdpr: boolean
-          age: number
-        }
+        body: PayloadData
       }
 
       try {
