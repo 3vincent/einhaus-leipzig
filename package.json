@@ -19,7 +19,7 @@
     "eslint-plugin-nuxt": "^4.0.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.7.0",
-    "nuxt": "^3.3.3",
+    "nuxt": "^3.4.3",
     "prettier": "^2.7.1",
     "sass": "^1.56.1",
     "sass-loader": "^13.2.0",
@@ -31,5 +31,8 @@
     "lodash-es": "^4.17.21",
     "nodemailer": "^6.8.0",
     "validator": "^13.7.0"
+  },
+  "peerDependencies": {
+    "consola": "3.0.1"
   }
 }
