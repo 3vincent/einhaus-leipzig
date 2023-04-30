@@ -17,9 +17,15 @@ export default {
 
   methods: {
     async handleSubmit() {
-      interface responseData {
+      type responseData = {
         statusCode: number
-        body: string
+        body: {
+          name: string
+          email: string
+          message: string
+          gdpr: boolean
+          age: number
+        }
       }
 
       try {
