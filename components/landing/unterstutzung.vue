@@ -128,7 +128,7 @@ small {
   position: absolute;
   background-color: transparent;
   height: 1px;
-  width: 100vw;
+  width: 100%;
 }
 
 .intersection-observer-alert-element-top {
