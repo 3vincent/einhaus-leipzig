@@ -43,13 +43,13 @@ useHead({
     },
   ],
 })
-</script>
 
-<script lang="ts">
 definePageMeta({
   layout: 'default',
 })
+</script>
 
+<script lang="ts">
 export default {
   name: 'Kontakt',
   data() {

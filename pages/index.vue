@@ -1,8 +1,10 @@
-<script lang="ts">
+<script lang="ts" setup>
 definePageMeta({
   layout: 'landing',
 })
+</script>
 
+<script lang="ts">
 export default {
   name: 'Landing',
 
