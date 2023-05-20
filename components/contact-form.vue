@@ -1,10 +1,22 @@
 <script lang="ts">
 import { PayloadData } from '../server/api/send-mail.post'
 
+interface RedirectData {
+  redirectTimeout: ReturnType<typeof setTimeout> | undefined
+}
+
+interface SpecificData {
+  sendResponse: number
+  clickedOnce: boolean
+  envVar: any
+}
+
+type ComponentData = RedirectData & PayloadData & SpecificData
+
 export default {
   name: 'ContactForm',
 
-  data() {
+  data(): ComponentData {
     return {
       name: '',
       age: 0,
@@ -14,6 +26,7 @@ export default {
       sendResponse: 0,
       clickedOnce: false,
       envVar: useRuntimeConfig(),
+      redirectTimeout: undefined,
     }
   },
 
@@ -51,6 +64,18 @@ export default {
         this.message = ''
         this.gdpr = false
         this.age = 0
+
+        const router = useRouter()
+
+        this.redirectTimeout = setTimeout(() => {
+          router.push('/')
+        }, 10000)
+      }
+    },
+
+    handleBeforeUnmount() {
+      if (this.redirectTimeout) {
+        clearTimeout(this.redirectTimeout)
       }
     },
 
@@ -85,6 +110,10 @@ export default {
 
       return false
     },
+  },
+
+  beforeUnmount() {
+    this.handleBeforeUnmount()
   },
 }
 </script>
@@ -200,6 +229,8 @@ export default {
       <div v-if="sendResponse === 200" class="message-response">
         <div class="inner-content">
           <h1>Nachricht wurde gesendet</h1>
+          <hr />
+          <p>Du wirst gleich zur Startseite weitergeleitet...</p>
         </div>
       </div>
 
