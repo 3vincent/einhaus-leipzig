@@ -1,27 +1,33 @@
 <template>
-  <svg
-    class="spinner"
-    width="65px"
-    height="65px"
-    viewBox="0 0 66 66"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle
-      class="path"
-      fill="none"
-      stroke-width="6"
-      stroke-linecap="round"
-      cx="33"
-      cy="33"
-      r="30"
-    ></circle>
-  </svg>
+  <div class="loading-animation-container">
+    <svg
+      class="spinner"
+      width="65px"
+      height="65px"
+      viewBox="0 0 66 66"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        class="path"
+        fill="none"
+        stroke-width="6"
+        stroke-linecap="round"
+        cx="33"
+        cy="33"
+        r="30"
+      ></circle>
+    </svg>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 $offset: 187;
 $duration: 1.6s;
 
+.loading-animation-container {
+  width: max-content;
+  margin: 2rem;
+}
 .spinner {
   animation: rotator $duration linear infinite;
 }

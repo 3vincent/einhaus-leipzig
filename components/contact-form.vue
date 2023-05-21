@@ -218,9 +218,8 @@ export default {
       >
         <div class="inner-content">
           <h1>Deine Nachricht wird verschickt...</h1>
-          <div class="loading-animation">
-            <LoadingAnimation />
-          </div>
+
+          <LoadingAnimation />
         </div>
       </div>
 
@@ -307,11 +306,6 @@ export default {
       color: var(--pretty-green);
       text-align: center;
     }
-  }
-
-  .loading-animation {
-    width: max-content;
-    margin: 2rem;
   }
 
   .inner-content.error {
