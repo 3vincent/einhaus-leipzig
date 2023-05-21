@@ -1,5 +1,6 @@
 <script lang="ts">
 import { PayloadData } from '../server/api/send-mail.post'
+import { ref } from 'vue'
 
 interface RedirectData {
   redirectTimeout: ReturnType<typeof setTimeout> | undefined
@@ -32,44 +33,41 @@ export default {
 
   methods: {
     async handleSubmit() {
-      type responseData = {
-        statusCode: number
-        body: PayloadData
-      }
-
       try {
         this.clickedOnce = true
         this.moveLoadingAnimationToCenter()
 
-        const data: responseData = await $fetch('/api/send-mail', {
+        const { data } = await useFetch('/api/send-mail', {
           method: 'POST',
-          body: {
+          body: JSON.stringify({
             name: this.name,
             email: this.email,
             message: this.message,
             gdpr: this.gdpr,
             age: this.age,
-          },
+          }),
         })
 
         console.log(data)
-        this.sendResponse = data.statusCode
+
+        const statusCode = ref(data?.value?.statusCode ?? 0)
+        this.sendResponse = statusCode.value
+
+        if (this.sendResponse == 200) {
+          this.name = ''
+          this.email = ''
+          this.message = ''
+          this.gdpr = false
+          this.age = 0
+
+          const router = useRouter()
+
+          this.redirectTimeout = setTimeout(() => {
+            router.push('/')
+          }, 10000)
+        }
       } catch (error) {
         console.log(error)
-      }
-
-      if (this.sendResponse == 200) {
-        this.name = ''
-        this.email = ''
-        this.message = ''
-        this.gdpr = false
-        this.age = 0
-
-        const router = useRouter()
-
-        this.redirectTimeout = setTimeout(() => {
-          router.push('/')
-        }, 10000)
       }
     },
 
