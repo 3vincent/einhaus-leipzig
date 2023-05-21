@@ -4,7 +4,10 @@
       <MenuButton :is-active="menuVisible" aria-controls="primary-navigation" />
     </div>
 
-    <div class="user-menu-list-container">
+    <div
+      class="user-menu-list-container"
+      :class="{ 'is-visible': menuVisible, 'hide-on-load': hideOnLoad }"
+    >
       <ul id="primary-navigation" class="user-menu-list">
         <li>
           <NuxtLink to="/">
@@ -35,6 +38,7 @@ export default {
   data() {
     return {
       menuVisible: false,
+      hideOnLoad: true,
     }
   },
 
@@ -48,6 +52,10 @@ export default {
     this.userMenu?.addEventListener('click', this.toggleMenuModal, false)
 
     document.addEventListener('click', this.detectOutsideClickToClose, false)
+
+    setTimeout(() => {
+      this.hideOnLoad = false
+    }, 150)
   },
 
   computed: {
@@ -141,7 +149,28 @@ export default {
 
       opacity: 0;
       transform: translateX(50px) perspective(200px) rotateY(-40deg);
-      transition: transform 150ms, opacity 150ms;
+      animation-name: hide-animation;
+      animation-duration: 150ms;
+      animation-fill-mode: forwards;
+
+      @keyframes hide-animation {
+        0% {
+          opacity: 1;
+          transform: translateX(0) perspective(200px) rotateY(0);
+        }
+
+        100% {
+          opacity: 0;
+          transform: translateX(50px) perspective(200px) rotateY(-40deg);
+          visibility: hidden;
+        }
+      }
+
+      &.hide-on-load {
+        opacity: 0;
+        transform: translateX(50px) perspective(200px) rotateY(-40deg);
+        visibility: hidden;
+      }
     }
   }
 }
@@ -150,5 +179,22 @@ export default {
   will-change: transform, opacity;
   transform: translateX(0) perspective(200px) rotateY(0deg);
   opacity: 1;
+  visibility: visible;
+  animation-name: show-animation;
+  animation-duration: 150ms;
+  animation-fill-mode: forwards;
+
+  @keyframes show-animation {
+    0% {
+      opacity: 0;
+      transform: translateX(50px) perspective(200px) rotateY(-40deg);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0) perspective(200px) rotateY(0);
+      visibility: visible;
+    }
+  }
 }
 </style>
