@@ -8,7 +8,7 @@ interface RedirectData {
 interface SpecificData {
   sendResponse: number
   clickedOnce: boolean
-  envVar: any
+  envVar: ReturnType<typeof useRuntimeConfig> | undefined
 }
 
 type ComponentData = RedirectData & PayloadData & SpecificData
@@ -243,8 +243,8 @@ export default {
             Leider ist beim Versand deiner Nachricht ein Fehler aufgetreten. Das
             tut uns leid. Während wir den Fehler in unserem System beheben,
             schick uns gern eine Email an
-            {{ envVar.public.OFFICIAL_CONTACT_ADDRESS }} oder probiere es später
-            erneut.
+            {{ envVar?.public.OFFICIAL_CONTACT_ADDRESS }} oder probiere es
+            später erneut.
           </h2>
           <div>
             <h2>Deine Nachricht kannst du hier einsehen und kopieren:</h2>
