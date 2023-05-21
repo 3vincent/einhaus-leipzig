@@ -230,11 +230,7 @@ export default {
           <hr />
           <p>Du wirst gleich zur Startseite weitergeleitet</p>
 
-          <div class="loading-animation">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </div>
+          <WaitingAnimation />
         </div>
       </div>
 
@@ -466,44 +462,5 @@ button {
 .not-filled-fields {
   border-color: var(--warning) !important;
   cursor: not-allowed;
-}
-
-.loading-animation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin: 0 4px;
-  background-color: #000;
-  animation: dot-animation 1s infinite;
-}
-
-.dot:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.dot:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.dot:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes dot-animation {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
-  }
 }
 </style>
