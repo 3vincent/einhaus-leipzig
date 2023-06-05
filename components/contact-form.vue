@@ -187,6 +187,15 @@ export default {
                 "
               >
               </textarea>
+              <span
+                class="text-counter"
+                :class="{
+                  'warning-color':
+                    message.length > 4000 || (message && message.length < 3),
+                }"
+              >
+                {{ 4000 - message.length }}
+              </span>
             </label>
           </p>
           <p>
@@ -472,5 +481,13 @@ button {
 .not-filled-fields {
   border-color: var(--warning) !important;
   cursor: not-allowed;
+}
+
+.text-counter {
+  color: var(--main-text-color-light-light);
+}
+
+.warning-color {
+  color: var(--warning);
 }
 </style>
