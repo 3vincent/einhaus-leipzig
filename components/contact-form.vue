@@ -129,13 +129,18 @@ export default {
                 required
                 v-model="name"
                 v-bind:class="
-                  name && name.length >= 2 ? 'single-field-filled' : ''
+                  name && name.length >= 2
+                    ? 'single-field-filled'
+                    : name
+                    ? 'not-filled-field'
+                    : ''
                 "
                 type="text"
                 name="fullname"
                 autocomplete="off"
             /></label>
           </p>
+
           <p>
             <label
               >Email Adresse:
@@ -149,6 +154,8 @@ export default {
                   email.slice(email.lastIndexOf('.') + 1).length > 0 &&
                   email.length >= 5
                     ? 'single-field-filled'
+                    : email
+                    ? 'not-filled-field'
                     : ''
                 "
                 type="email"
@@ -156,12 +163,14 @@ export default {
                 autocomplete="off"
             /></label>
           </p>
+
           <p class="age">
             <label>
               Age field:
               <input v-model="age" name="age-field" tabindex="-1" />
             </label>
           </p>
+
           <p>
             <label
               >Nachricht:
@@ -172,9 +181,12 @@ export default {
                 v-bind:class="
                   message.length > 2 && message.length <= 4000
                     ? 'single-field-filled'
+                    : message
+                    ? 'not-filled-field'
                     : ''
                 "
-              ></textarea>
+              >
+              </textarea>
             </label>
           </p>
           <p>
@@ -451,6 +463,10 @@ button {
 
 .all-field-filled {
   border-color: var(--pretty-green) !important;
+}
+
+.not-filled-field {
+  box-shadow: inset 0 0 0 2px var(--warning);
 }
 
 .not-filled-fields {
