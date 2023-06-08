@@ -1,6 +1,5 @@
 <script lang="ts">
 import { PayloadData } from '../server/api/send-mail.post'
-import { ref } from 'vue'
 
 interface RedirectData {
   redirectTimeout: ReturnType<typeof setTimeout> | undefined
@@ -91,14 +90,32 @@ export default {
   },
 
   computed: {
+    validateEmailAddress() {
+      if (
+        [...this.email.toLowerCase()].every(char =>
+          'abcdefghijklmnopqrstuvwxyz0123456789.@+-_~'.includes(char)
+        ) &&
+        this.email.includes('@') &&
+        this.email.split('@')[1].split('.')[0] &&
+        this.email.split('@').length == 2 &&
+        this.email.split('@')[0].length > 0 &&
+        this.email.split('@')[1].includes('.') &&
+        this.email.slice(this.email.lastIndexOf('.') + 1).length > 0 &&
+        !this.email.split('@')[1].includes('_') &&
+        !this.email.split('@')[1].includes('~') &&
+        this.email.indexOf('..') == -1 &&
+        this.email.length >= 5
+      ) {
+        return true
+      }
+
+      return false
+    },
+
     validateInputs() {
       if (
+        this.validateEmailAddress &&
         this.name.length >= 2 &&
-        this.email.includes('@') &&
-        this.email.slice(0, this.email.indexOf('@')).length > 0 &&
-        this.email.slice(this.email.indexOf('@')).includes('.') &&
-        this.email.slice(this.email.lastIndexOf('.') + 1).length > 0 &&
-        this.email.length >= 5 &&
         this.message.length > 2 &&
         this.message.length <= 4000 &&
         this.gdpr
@@ -148,11 +165,7 @@ export default {
                 required
                 v-model="email"
                 v-bind:class="
-                  email.includes('@') &&
-                  email.slice(0, email.indexOf('@')).length > 0 &&
-                  email.slice(email.indexOf('@')).includes('.') &&
-                  email.slice(email.lastIndexOf('.') + 1).length > 0 &&
-                  email.length >= 5
+                  validateEmailAddress
                     ? 'single-field-filled'
                     : email
                     ? 'not-filled-field'
@@ -187,16 +200,16 @@ export default {
                 "
               >
               </textarea>
-              <span
-                class="text-counter"
-                :class="{
-                  'warning-color':
-                    message.length > 4000 || (message && message.length < 3),
-                }"
-              >
-                {{ 4000 - message.length }}
-              </span>
             </label>
+            <span
+              class="text-counter"
+              :class="{
+                'warning-color':
+                  message.length > 4000 || (message && message.length < 3),
+              }"
+            >
+              {{ 4000 - message.length }}
+            </span>
           </p>
           <p>
             <input
