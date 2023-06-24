@@ -95,6 +95,7 @@ export default {
         [...this.email.toLowerCase()].every(char =>
           'abcdefghijklmnopqrstuvwxyz0123456789.@+-_~'.includes(char)
         ) &&
+        this.email.length >= 5 &&
         this.email.includes('@') &&
         this.email.split('@')[1].split('.')[0] &&
         this.email.split('@').length == 2 &&
@@ -103,8 +104,7 @@ export default {
         this.email.slice(this.email.lastIndexOf('.') + 1).length > 0 &&
         !this.email.split('@')[1].includes('_') &&
         !this.email.split('@')[1].includes('~') &&
-        this.email.indexOf('..') == -1 &&
-        this.email.length >= 5
+        this.email.indexOf('..') == -1
       ) {
         return true
       }
