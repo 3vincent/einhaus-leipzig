@@ -109,6 +109,9 @@ export default {
     list-style: none;
     margin: 0;
     padding: 0;
+
+    background-color: rgba(27, 27, 27, 0.1);
+    backdrop-filter: blur(4px);
   }
 
   li {
