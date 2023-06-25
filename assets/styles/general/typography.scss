@@ -9,10 +9,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 
-  @media screen and (min-width: $_xs) {
-    font-size: 14px;
-  }
-
   @media screen and (min-width: $_md) {
     font-size: 16px;
   }
@@ -56,6 +52,10 @@ p {
   font-size: 1.1rem;
   font-weight: 400;
   line-height: 1.6rem;
+  @media screen and (min-width: $_xxl) {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+  }
 }
 
 p.bold {
