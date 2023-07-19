@@ -92,6 +92,7 @@ export default {
   position: relative; //fallback
   position: sticky;
   transition: all 0.4s;
+  padding-left: 2rem;
 }
 
 .landing-site-menubar {
@@ -99,6 +100,7 @@ export default {
   position: sticky;
   transition: all 0.4s;
   background-color: transparent;
+  padding-left: 1.6rem;
 }
 
 .smaller-after-scroll.default-sites-menubar {
