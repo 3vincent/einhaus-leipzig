@@ -1,7 +1,10 @@
 <template>
   <div
     class="top-menu-container"
-    v-bind:class="{ 'conditional-class': isRelative }"
+    v-bind:class="{
+      'default-sites-menubar': isDefault,
+      'landing-site-menubar': isLanding,
+    }"
   >
     <div class="logo-container"><Logo :isWhite="logoWhite" /></div>
 
@@ -15,7 +18,11 @@
 export default {
   name: 'TopMenuBar',
   props: {
-    isRelative: {
+    isDefault: {
+      type: Boolean,
+      default: false,
+    },
+    isLanding: {
       type: Boolean,
       default: false,
     },
@@ -79,22 +86,36 @@ export default {
 
 .smaller-after-scroll {
   height: 60px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1), 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
-.conditional-class {
+.default-sites-menubar {
   position: relative; //fallback
   position: sticky;
   transition: all 0.4s;
-  background-color: rgba(255, 255, 255, 1);
-
-  @media screen and (min-width: $_md) {
-    background-color: transparent;
-  }
 }
 
-.smaller-after-scroll.conditional-class {
-  background-color: rgba(255, 255, 255, 1);
+.landing-site-menubar {
+  position: relative; //fallback
+  position: sticky;
+  transition: all 0.4s;
+  background-color: transparent;
+}
+
+.smaller-after-scroll.default-sites-menubar {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(106, 106, 106, 0.2);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.smaller-after-scroll.landing-site-menubar {
+  background-color: transparent;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+
+  @media (min-width: $_md) {
+    -webkit-backdrop-filter: unset;
+    backdrop-filter: unset;
+  }
 }
 
 .logo-container {
@@ -103,8 +124,8 @@ export default {
 
 .menu-container {
   position: fixed;
-  right: 10px;
-  top: 10px;
+  right: 14px;
+  top: 18px;
   transition: top 0.4s;
 
   @media screen and (min-width: $_lg) {

@@ -6,7 +6,7 @@ defineProps({
 
 <template>
   <div class="siteContainer">
-    <TopMenuBar :is-relative="true" :logo-white="false" />
+    <TopMenuBar :is-default="true" :logo-white="false" />
 
     <div class="default-container">
       <div class="content">

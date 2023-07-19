@@ -92,7 +92,7 @@ export default {
 .on-site-menu {
   display: none;
   position: sticky;
-  z-index: 1;
+  z-index: 1002;
   width: max-content;
   left: 0;
   margin-left: max(1rem, calc((100vw - 800px) / 2 - 200px - 3rem));

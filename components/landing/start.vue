@@ -32,8 +32,13 @@
   background-position: 50% 0;
   background-size: cover;
   padding-top: 0;
-  min-height: 100vh; //Fallback
-  min-height: 100svh;
+  min-height: calc(100vh - 60px); //Fallback
+  min-height: calc(100svh - 60px);
+
+  @media (min-width: $_lg) {
+    min-height: calc(100vh - 120px); //Fallback
+    min-height: calc(100svh - 120px);
+  }
 
   // if aktuelles is present, remove the bottom border:
   // border-bottom: none;
@@ -42,6 +47,11 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
   margin: 0 auto;
+  top: -30px;
+
+  @media (min-width: $_lg) {
+    top: -60px;
+  }
 
   h2 {
     display: block;
