@@ -4,6 +4,7 @@
     v-bind:class="{
       'default-sites-menubar': isDefault,
       'landing-site-menubar': isLanding,
+      'smaller-after-scroll': isMenuFixed,
     }"
   >
     <div class="logo-container"><Logo :isWhite="logoWhite" /></div>
@@ -32,17 +33,23 @@ export default {
     },
   },
 
+  data() {
+    return {
+      isMenuFixed: false,
+    }
+  },
+
   mounted() {
-    this.onFixedTopMenu()
-    window.addEventListener('scroll', this.onFixedTopMenu, false)
+    this.makeTopMenuSticky()
+    window.addEventListener('scroll', this.makeTopMenuSticky, false)
   },
 
   beforeUnmount() {
-    window.removeEventListener('scroll', this.onFixedTopMenu, false)
+    window.removeEventListener('scroll', this.makeTopMenuSticky, false)
   },
 
   methods: {
-    onFixedTopMenu() {
+    makeTopMenuSticky() {
       const element = document.querySelector(
         '.top-menu-container'
       ) as HTMLElement
@@ -54,9 +61,9 @@ export default {
         if (position != 'sticky') return
 
         if (document.documentElement.scrollTop > element.offsetHeight - 5) {
-          element.classList.add('smaller-after-scroll')
+          this.isMenuFixed = true
         } else {
-          element.classList.remove('smaller-after-scroll')
+          this.isMenuFixed = false
         }
       }
     },
@@ -65,8 +72,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@keyframes blur-in {
+  from {
+    -webkit-backdrop-filter: blur(8px) opacity(0);
+    backdrop-filter: blur(8px) opacity(0);
+  }
+
+  to {
+    -webkit-backdrop-filter: blur(8px) opacity(1);
+    backdrop-filter: blur(8px) opacity(1);
+  }
+}
+
 .top-menu-container {
-  position: absolute;
+  position: relative; //fallback
+  position: sticky;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -75,8 +95,8 @@ export default {
   top: 0;
   left: 0;
   z-index: 1000;
-  padding: 1rem;
   background-color: transparent;
+  transition: all 0.4s;
 
   @media screen and (min-width: $_lg) {
     height: 120px;
@@ -84,39 +104,49 @@ export default {
   }
 }
 
-.smaller-after-scroll {
-  height: 60px;
+.landing-site-menubar {
+  background-color: transparent;
+
+  .logo-container {
+    padding: 1rem;
+    margin-left: 0.6rem;
+  }
 }
 
 .default-sites-menubar {
-  position: relative; //fallback
-  position: sticky;
-  transition: all 0.4s;
-  padding-left: 2rem;
+  .logo-container {
+    padding: 1rem;
+    margin-left: 1rem;
+  }
 }
 
-.landing-site-menubar {
-  position: relative; //fallback
-  position: sticky;
-  transition: all 0.4s;
-  background-color: transparent;
-  padding-left: 1.6rem;
+.smaller-after-scroll {
+  height: 60px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    animation: blur-in 500ms 0.2s forwards;
+  }
 }
 
 .smaller-after-scroll.default-sites-menubar {
   background-color: rgba(255, 255, 255, 0.4);
   border-bottom: 1px solid rgba(106, 106, 106, 0.2);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
 }
 .smaller-after-scroll.landing-site-menubar {
   background-color: transparent;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
 
-  @media (min-width: $_md) {
-    -webkit-backdrop-filter: unset;
-    backdrop-filter: unset;
+  &::before {
+    @media (min-width: $_md) {
+      transition: all 0.4s;
+      background-color: transparent;
+      backdrop-filter: blur(8px) opacity(0) !important;
+      -webkit-backdrop-filter: blur(8px) opacity(0) !important;
+    }
   }
 }
 
@@ -128,7 +158,6 @@ export default {
   position: fixed;
   right: 14px;
   top: 18px;
-  transition: top 0.4s;
 
   @media screen and (min-width: $_lg) {
     top: 40px;
