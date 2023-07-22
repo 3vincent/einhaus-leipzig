@@ -1,28 +1,27 @@
 <script lang="ts">
 import { PayloadData } from '../server/api/send-mail.post'
+import { sanitizer } from '~/util/sanitizer'
 
-interface RedirectData {
-  redirectTimeout: ReturnType<typeof setTimeout> | undefined
-}
-
-interface SpecificData {
+interface ContactFormComponentData {
+  payload: PayloadData
   sendResponse: number
   clickedOnce: boolean
   envVar: ReturnType<typeof useRuntimeConfig> | undefined
+  redirectTimeout: ReturnType<typeof setTimeout> | undefined
 }
-
-type ComponentData = RedirectData & PayloadData & SpecificData
 
 export default {
   name: 'ContactForm',
 
-  data(): ComponentData {
+  data(): ContactFormComponentData {
     return {
-      name: '',
-      age: 0,
-      email: '',
-      message: '',
-      gdpr: false,
+      payload: {
+        name: '',
+        age: 0,
+        email: '',
+        message: '',
+        gdpr: false,
+      },
       sendResponse: 0,
       clickedOnce: false,
       envVar: useRuntimeConfig(),
@@ -34,17 +33,14 @@ export default {
     async handleSubmit() {
       try {
         this.clickedOnce = true
+
+        await sanitizer(this.payload)
+
         this.moveLoadingAnimationToCenter()
 
         const { data } = await useFetch('/api/send-mail', {
           method: 'POST',
-          body: JSON.stringify({
-            name: this.name,
-            email: this.email,
-            message: this.message,
-            gdpr: this.gdpr,
-            age: this.age,
-          }),
+          body: JSON.stringify(this.payload),
         })
 
         console.log(data)
@@ -53,11 +49,13 @@ export default {
         this.sendResponse = statusCode.value
 
         if (this.sendResponse == 200) {
-          this.name = ''
-          this.email = ''
-          this.message = ''
-          this.gdpr = false
-          this.age = 0
+          this.payload = {
+            name: '',
+            email: '',
+            message: '',
+            gdpr: false,
+            age: 0,
+          }
 
           const router = useRouter()
 
@@ -70,14 +68,14 @@ export default {
       }
     },
 
-    handleBeforeUnmount() {
+    resetAutoRedirectTimer() {
       if (this.redirectTimeout) {
         clearTimeout(this.redirectTimeout)
       }
     },
 
     copyToClipboard() {
-      navigator.clipboard.writeText(this.message)
+      navigator.clipboard.writeText(this.payload.message)
     },
 
     moveLoadingAnimationToCenter() {
@@ -92,19 +90,20 @@ export default {
   computed: {
     validateEmailAddress() {
       if (
-        [...this.email.toLowerCase()].every(char =>
+        [...this.payload.email.toLowerCase()].every(char =>
           'abcdefghijklmnopqrstuvwxyz0123456789.@+-_~'.includes(char)
         ) &&
-        this.email.length >= 5 &&
-        this.email.includes('@') &&
-        this.email.split('@')[1].split('.')[0] &&
-        this.email.split('@').length == 2 &&
-        this.email.split('@')[0].length > 0 &&
-        this.email.split('@')[1].includes('.') &&
-        this.email.slice(this.email.lastIndexOf('.') + 1).length > 0 &&
-        !this.email.split('@')[1].includes('_') &&
-        !this.email.split('@')[1].includes('~') &&
-        this.email.indexOf('..') == -1
+        this.payload.email.length >= 5 &&
+        this.payload.email.includes('@') &&
+        this.payload.email.split('@')[1].split('.')[0] &&
+        this.payload.email.split('@').length == 2 &&
+        this.payload.email.split('@')[0].length > 0 &&
+        this.payload.email.split('@')[1].includes('.') &&
+        this.payload.email.slice(this.payload.email.lastIndexOf('.') + 1)
+          .length > 0 &&
+        !this.payload.email.split('@')[1].includes('_') &&
+        !this.payload.email.split('@')[1].includes('~') &&
+        this.payload.email.indexOf('..') == -1
       ) {
         return true
       }
@@ -115,10 +114,10 @@ export default {
     validateInputs() {
       if (
         this.validateEmailAddress &&
-        this.name.length >= 2 &&
-        this.message.length > 2 &&
-        this.message.length <= 4000 &&
-        this.gdpr
+        this.payload.name.length >= 2 &&
+        this.payload.message.length > 2 &&
+        this.payload.message.length <= 4000 &&
+        this.payload.gdpr
       ) {
         return true
       }
@@ -128,7 +127,7 @@ export default {
   },
 
   beforeUnmount() {
-    this.handleBeforeUnmount()
+    this.resetAutoRedirectTimer()
   },
 }
 </script>
@@ -144,11 +143,11 @@ export default {
               >Name:
               <input
                 required
-                v-model="name"
+                v-model="payload.name"
                 v-bind:class="
-                  name && name.length >= 2
+                  payload.name && payload.name.length >= 2
                     ? 'single-field-filled'
-                    : name
+                    : payload.name
                     ? 'not-filled-field'
                     : ''
                 "
@@ -163,11 +162,11 @@ export default {
               >Email Adresse:
               <input
                 required
-                v-model="email"
+                v-model="payload.email"
                 v-bind:class="
                   validateEmailAddress
                     ? 'single-field-filled'
-                    : email
+                    : payload.email
                     ? 'not-filled-field'
                     : ''
                 "
@@ -180,7 +179,7 @@ export default {
           <p class="age">
             <label>
               Age field:
-              <input v-model="age" name="age-field" tabindex="-1" />
+              <input v-model="payload.age" name="age-field" tabindex="-1" />
             </label>
           </p>
 
@@ -189,12 +188,12 @@ export default {
               >Nachricht:
               <textarea
                 required
-                v-model="message"
+                v-model="payload.message"
                 name="message"
                 v-bind:class="
-                  message.length > 2 && message.length <= 4000
+                  payload.message.length > 2 && payload.message.length <= 4000
                     ? 'single-field-filled'
-                    : message
+                    : payload.message
                     ? 'not-filled-field'
                     : ''
                 "
@@ -205,16 +204,17 @@ export default {
               class="text-counter"
               :class="{
                 'warning-color':
-                  message.length > 4000 || (message && message.length < 3),
+                  payload.message.length > 4000 ||
+                  (payload.message && payload.message.length < 3),
               }"
             >
-              {{ 4000 - message.length }}
+              {{ 4000 - payload.message.length }}
             </span>
           </p>
           <p>
             <input
               required
-              v-model="gdpr"
+              v-model="payload.gdpr"
               type="checkbox"
               id="privacy-agreement"
               name="scales"
@@ -259,7 +259,7 @@ export default {
 
       <div v-if="sendResponse === 200" class="message-response">
         <div class="inner-content">
-          <h1>Nachricht wurde gesendet</h1>
+          <h1>Deine Nachricht wurde gesendet</h1>
           <hr />
           <p>Du wirst gleich zur Startseite weitergeleitet</p>
 
@@ -272,9 +272,11 @@ export default {
         class="message-response"
       >
         <div class="inner-content error">
+          <h2 class="error-color">
+            Leider ist beim Versand deiner Nachricht ein Fehler aufgetreten 😓
+          </h2>
           <h2>
-            Leider ist beim Versand deiner Nachricht ein Fehler aufgetreten. Das
-            tut uns leid. Während wir den Fehler in unserem System beheben,
+            Das tut uns leid. Während wir den Fehler in unserem System beheben,
             schick uns gern eine Email an
             {{ envVar?.public.OFFICIAL_CONTACT_ADDRESS }} oder probiere es
             später erneut.
@@ -283,7 +285,7 @@ export default {
             <h2>Deine Nachricht kannst du hier einsehen und kopieren:</h2>
             <div class="message-copy-field">
               <p>
-                {{ message }}
+                {{ payload.message }}
               </p>
             </div>
             <a
@@ -339,16 +341,32 @@ export default {
       font-size: 3rem;
       color: var(--pretty-green);
       text-align: center;
+      line-height: 1.2;
+      font-weight: 400;
+    }
+
+    p {
+      text-align: center;
     }
   }
 
   .inner-content.error {
     height: 100%;
     width: 96%;
+    align-items: flex-start;
 
     h2 {
-      color: var(--warning-severe);
       font-size: 1.4rem;
+      line-height: 1.6;
+      font-weight: 400;
+
+      &.error-color {
+        color: var(--warning-severe);
+      }
+    }
+
+    p {
+      text-align: left;
     }
   }
 

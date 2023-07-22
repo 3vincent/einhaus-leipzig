@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 import Joi from 'joi'
-import validator from 'validator'
+import { sanitizer } from '~/util/sanitizer'
 
 const smtpHost: string = process.env.SMTP_HOST || ''
 const smtpPortTLS: number = Number(process.env.SMTP_PORT_TLS)
@@ -30,12 +30,6 @@ export interface PayloadData {
   message: string
   gdpr: boolean
   age: number
-}
-
-async function sanitize(payload: PayloadData): Promise<void> {
-  payload.name = validator.escape(payload.name).trim()
-  payload.email = (validator.normalizeEmail(payload.email) || '').trim()
-  payload.message = validator.escape(payload.message).trim()
 }
 
 async function validatePayload(payload: PayloadData): Promise<void> {
@@ -90,7 +84,7 @@ export default defineEventHandler(async event => {
   }
 
   try {
-    await sanitize(payload)
+    await sanitizer(payload)
     await validatePayload(payload)
     const messageId = await sendMail(payload)
 
