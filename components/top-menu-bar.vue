@@ -146,6 +146,7 @@ export default {
       background-color: transparent;
       backdrop-filter: blur(8px) opacity(0) !important;
       -webkit-backdrop-filter: blur(8px) opacity(0) !important;
+      animation: none;
     }
   }
 }
