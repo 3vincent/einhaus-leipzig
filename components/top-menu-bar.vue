@@ -159,6 +159,7 @@ export default {
   position: fixed;
   right: 14px;
   top: 18px;
+  transition: top 0.4s;
 
   @media screen and (min-width: $_lg) {
     top: 40px;
