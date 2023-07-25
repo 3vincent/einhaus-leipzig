@@ -9,7 +9,6 @@
       <img
         src="/images/logo-einhaus-genossenschaft-leipzig-2-snaped.svg"
         v-bind:class="{ 'conditional-class': isWhite }"
-        style="height: 100%; object-fit: contain"
         alt="EinHaus Reichpietschtrasse 13 eG - Logo"
       />
     </div>
@@ -41,6 +40,15 @@ export default {
   position: relative;
   height: 100%;
   width: 100%;
+
+  img {
+    height: 100%;
+    object-fit: contain;
+
+    &::selection {
+      background-color: transparent;
+    }
+  }
 }
 
 .conditional-class {
