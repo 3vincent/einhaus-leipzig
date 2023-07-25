@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink to="/">
+  <NuxtLink to="/" @click="scrollUpOnLandingPage()">
     <div class="fixedLogoContainer">
       <!-- <img
         src="/images/logo-einhaus-genossenschaft-leipzig.svg"
@@ -23,6 +23,14 @@ export default {
     isWhite: {
       type: Boolean,
       default: false,
+    },
+  },
+
+  methods: {
+    scrollUpOnLandingPage() {
+      const route = useRoute()
+
+      if (route.name == 'index') window.scrollTo(0, 0)
     },
   },
 }
