@@ -135,7 +135,17 @@ export default {
 
 .smaller-after-scroll.default-sites-menubar {
   background-color: rgba(255, 255, 255, 0.4);
-  border-bottom: 1px solid rgba(106, 106, 106, 0.2);
+
+  &:after {
+    content: '';
+    height: 1px;
+    width: 100%;
+
+    position: absolute;
+    bottom: 0;
+
+    background-color: rgba(106, 106, 106, 0.2);
+  }
 }
 .smaller-after-scroll.landing-site-menubar {
   background-color: transparent;
