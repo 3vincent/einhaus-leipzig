@@ -27,4 +27,15 @@ export default defineEventHandler(async event => {
     })
     event.node.res.end()
   }
+
+  if (
+    event.node.req.url ==
+    '/download/Satzung_EinHaus_Reichpietschstrasse_13_eG.pdf'
+  ) {
+    event.node.res.writeHead(301, {
+      Location:
+        'https://download.einhaus-leipzig.de/Satzung_EinHaus_Reichpietschstrasse_13_eG.pdf.',
+    })
+    event.node.res.end()
+  }
 })
