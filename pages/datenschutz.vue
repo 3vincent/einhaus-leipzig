@@ -46,18 +46,11 @@ useHead({
 definePageMeta({
   layout: 'default',
 })
-</script>
 
-<script lang="ts">
-export default {
-  name: 'Datenschutz',
-  data() {
-    return {
-      name: this.$options.name,
-      envVar: useRuntimeConfig(),
-    }
-  },
-}
+const router = useRouter()
+const name = router.currentRoute.value.name as string
+
+const envVar = useRuntimeConfig()
 </script>
 
 <template>

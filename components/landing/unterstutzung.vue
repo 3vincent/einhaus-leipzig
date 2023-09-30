@@ -47,56 +47,43 @@
   </div>
 </template>
 
-<script lang="ts">
-import { debounce } from 'lodash-es'
+<script setup lang="ts">
+const envVar = useRuntimeConfig()
 
-export default {
-  name: 'LandingUnterstutzung',
-  data() {
-    return {
-      envVar: useRuntimeConfig(),
-    }
-  },
+onMounted(() => {
+  fixBackgroundImage()
+})
 
-  mounted() {
-    this.fixBackgroundImage()
-  },
+function fixBackgroundImage() {
+  if (window.innerWidth < 1280) return
 
-  methods: {
-    fixBackgroundImage() {
-      if (window.innerWidth < 1280) return
+  const element = document.querySelector('.lastContainer') as HTMLDivElement
 
-      const element = document.querySelector('.lastContainer') as HTMLDivElement
+  const intersectioObserverAlertElementBottom = document.querySelector(
+    '.intersection-observer-alert-element-bottom'
+  ) as HTMLDivElement
 
-      const intersectioObserverAlertElementBottom = document.querySelector(
-        '.intersection-observer-alert-element-bottom'
-      ) as HTMLDivElement
+  const intersectioObserverAlertElementTop = document.querySelector(
+    '.intersection-observer-alert-element-top'
+  ) as HTMLDivElement
 
-      const intersectioObserverAlertElementTop = document.querySelector(
-        '.intersection-observer-alert-element-top'
-      ) as HTMLDivElement
-
-      if ('IntersectionObserver' in window) {
-        let fixBackgroundImage = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                if (entry.target === intersectioObserverAlertElementTop) {
-                  element.classList.remove('stickyBackground')
-                  return
-                }
-
-                element.classList.add('stickyBackground')
-              }
-            })
+  if ('IntersectionObserver' in window) {
+    let fixBackgroundImage = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target === intersectioObserverAlertElementTop) {
+            element.classList.remove('stickyBackground')
+            return
           }
-        )
 
-        fixBackgroundImage.observe(intersectioObserverAlertElementBottom)
-        fixBackgroundImage.observe(intersectioObserverAlertElementTop)
-      }
-    },
-  },
+          element.classList.add('stickyBackground')
+        }
+      })
+    })
+
+    fixBackgroundImage.observe(intersectioObserverAlertElementBottom)
+    fixBackgroundImage.observe(intersectioObserverAlertElementTop)
+  }
 }
 </script>
 

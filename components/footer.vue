@@ -76,22 +76,15 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'Footer',
-  props: {
-    isLanding: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  data() {
-    return {
-      currentYear: new Date().getFullYear(),
-      envVar: useRuntimeConfig(),
-    }
-  },
-}
+<script setup lang="ts">
+import { boolean } from 'joi'
+
+const props = defineProps({
+  isLanding: { type: Boolean, default: false },
+})
+
+const currentYear = new Date().getFullYear()
+const envVar = useRuntimeConfig()
 </script>
 
 <style lang="scss" scoped>
