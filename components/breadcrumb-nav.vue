@@ -1,13 +1,11 @@
-<script lang="ts">
-export default {
-  name: 'BreadcrumbNav',
-  props: {
-    targetUrl: {
-      type: String,
-      default: 'halloTest',
-    },
-  },
-}
+<script setup lang="ts">
+const router = useRouter()
+
+const thisRouteName = computed(
+  () =>
+    (router.currentRoute.value.name as string).toUpperCase()[0] +
+    (router.currentRoute.value.name as string).toLowerCase().slice(1)
+)
 </script>
 
 <template>
@@ -20,7 +18,7 @@ export default {
 
     <span>></span>
 
-    <span>{{ targetUrl }}</span>
+    <span>{{ thisRouteName }}</span>
   </div>
 </template>
 

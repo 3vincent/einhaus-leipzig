@@ -47,16 +47,13 @@ definePageMeta({
   layout: 'default',
 })
 
-const router = useRouter()
-const name = router.currentRoute.value.name as string
-
 const envVar = useRuntimeConfig()
 </script>
 
 <template>
   <div class="default-container">
     <div class="content">
-      <BreadcrumbNav :target-url="name" />
+      <BreadcrumbNav />
 
       <div class="impressum"
         ><h1>Impressum</h1><p>Angaben gemäß § 5 TMG</p>
