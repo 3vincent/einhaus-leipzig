@@ -203,9 +203,7 @@ onBeforeUnmount(() => {
             <span
               class="text-counter"
               :class="{
-                'warning-color':
-                  payload.message.length > 4000 ||
-                  (payload.message && payload.message.length < 3),
+                'warning-color': payload.message.length > 4000,
               }"
             >
               {{ 4000 - payload.message.length }}
@@ -576,7 +574,7 @@ input[type='checkbox']:checked::after {
 }
 
 .warning-color {
-  color: var(--warning);
+  color: var(--warning) !important;
 }
 
 .age,
@@ -601,7 +599,5 @@ input[type='checkbox']:checked::after {
   align-items: center;
   min-width: 50%;
   max-width: 500px;
-}
-.privacy-label {
 }
 </style>
