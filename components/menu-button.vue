@@ -8,16 +8,13 @@
   </button>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'MenuButton',
-  props: {
-    isActive: {
-      type: Boolean,
-      default: false,
-    },
+<script setup lang="ts">
+defineProps({
+  isActive: {
+    type: Boolean,
+    default: false,
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

@@ -11,9 +11,6 @@ const deleteCookie = () => {
   }
 }
 </script>
-<script lang="ts">
-export default {}
-</script>
 
 <template>
   <a

@@ -31,66 +31,50 @@
   </nav>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'UserMenu',
+<script setup lang="ts">
+const menuVisible = ref(false)
+const hideOnLoad = ref(true)
 
-  data() {
-    return {
-      menuVisible: false,
-      hideOnLoad: true,
-    }
-  },
+onBeforeUnmount(() => {
+  userMenu.value?.removeEventListener('click', toggleMenuModal, false)
 
-  beforeUnmount() {
-    this.userMenu?.removeEventListener('click', this.toggleMenuModal, false)
+  document.removeEventListener('click', detectOutsideClickToClose, false)
+})
 
-    document.removeEventListener('click', this.detectOutsideClickToClose, false)
-  },
+onMounted(() => {
+  userMenu.value?.addEventListener('click', toggleMenuModal, false)
 
-  mounted() {
-    this.userMenu?.addEventListener('click', this.toggleMenuModal, false)
+  document.addEventListener('click', detectOutsideClickToClose, false)
 
-    document.addEventListener('click', this.detectOutsideClickToClose, false)
+  setTimeout(() => {
+    hideOnLoad.value = false
+  }, 150)
+})
 
-    setTimeout(() => {
-      this.hideOnLoad = false
-    }, 150)
-  },
+const menuModal = computed(() => {
+  return document.querySelector('.user-menu-list-container')
+})
 
-  computed: {
-    menuModal() {
-      return document.querySelector('.user-menu-list-container')
-    },
+const userMenu = computed(() => {
+  return document.querySelector('.user-menu-container')
+})
 
-    userMenu() {
-      return document.querySelector('.user-menu-container')
-    },
-  },
+function toggleMenuModal() {
+  menuModal.value?.classList.toggle('is-visible')
 
-  methods: {
-    toggleMenuModal() {
-      this.menuModal?.classList.toggle('is-visible')
+  toggleClickState()
+}
+function toggleClickState() {
+  if (menuModal.value?.classList.contains('is-visible'))
+    return (menuVisible.value = true)
 
-      this.toggleClickState()
-    },
+  return (menuVisible.value = false)
+}
+function detectOutsideClickToClose(event: any) {
+  const isClickInside = userMenu.value?.contains(event.target)
 
-    toggleClickState() {
-      if (this.menuModal?.classList.contains('is-visible'))
-        return (this.menuVisible = true)
-
-      return (this.menuVisible = false)
-    },
-
-    detectOutsideClickToClose(event: any) {
-      const isClickInside = this.userMenu?.contains(event.target)
-
-      if (!isClickInside) {
-        this.menuModal?.classList.remove('is-visible')
-        this.toggleClickState()
-      }
-    },
-  },
+  if (!isClickInside) menuModal.value?.classList.remove('is-visible')
+  toggleClickState()
 }
 </script>
 

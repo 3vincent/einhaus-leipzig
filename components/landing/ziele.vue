@@ -25,12 +25,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'LandingZiele',
-}
-</script>
-
 <style lang="scss" scoped>
 .background {
   background-image: url(/images/einhaus-landing-photo-03-small.jpg);

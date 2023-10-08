@@ -53,12 +53,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'LandingMehr',
-}
-</script>
-
 <style lang="scss" scoped>
 .background {
   background-image: url(/images/einhaus-landing-photo-05-small.jpg);

@@ -15,59 +15,48 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'TopMenuBar',
-  props: {
-    isDefault: {
-      type: Boolean,
-      default: false,
-    },
-    isLanding: {
-      type: Boolean,
-      default: false,
-    },
-    logoWhite: {
-      type: Boolean,
-      default: false,
-    },
+<script setup lang="ts">
+defineProps({
+  isDefault: {
+    type: Boolean,
+    default: false,
   },
+  isLanding: {
+    type: Boolean,
+    default: false,
+  },
+  logoWhite: {
+    type: Boolean,
+    default: false,
+  },
+})
 
-  data() {
-    return {
-      isMenuFixed: false,
+const isMenuFixed = ref(false)
+
+onMounted(() => {
+  makeTopMenuSticky()
+  window.addEventListener('scroll', makeTopMenuSticky, false)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', makeTopMenuSticky, false)
+})
+
+function makeTopMenuSticky() {
+  const element = document.querySelector('.top-menu-container') as HTMLElement
+
+  if (element) {
+    const style = window.getComputedStyle(element)
+    const position = style.getPropertyValue('position')
+
+    if (position != 'sticky') return
+
+    if (document.documentElement.scrollTop > element.offsetHeight - 5) {
+      isMenuFixed.value = true
+    } else {
+      isMenuFixed.value = false
     }
-  },
-
-  mounted() {
-    this.makeTopMenuSticky()
-    window.addEventListener('scroll', this.makeTopMenuSticky, false)
-  },
-
-  beforeUnmount() {
-    window.removeEventListener('scroll', this.makeTopMenuSticky, false)
-  },
-
-  methods: {
-    makeTopMenuSticky() {
-      const element = document.querySelector(
-        '.top-menu-container'
-      ) as HTMLElement
-
-      if (element) {
-        const style = window.getComputedStyle(element)
-        const position = style.getPropertyValue('position')
-
-        if (position != 'sticky') return
-
-        if (document.documentElement.scrollTop > element.offsetHeight - 5) {
-          this.isMenuFixed = true
-        } else {
-          this.isMenuFixed = false
-        }
-      }
-    },
-  },
+  }
 }
 </script>
 

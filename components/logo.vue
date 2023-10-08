@@ -15,23 +15,18 @@
   </NuxtLink>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'Logo',
-  props: {
-    isWhite: {
-      type: Boolean,
-      default: false,
-    },
+<script setup lang="ts">
+defineProps({
+  isWhite: {
+    type: Boolean,
+    default: false,
   },
+})
 
-  methods: {
-    scrollUpOnLandingPage() {
-      const route = useRoute()
+function scrollUpOnLandingPage() {
+  const route = useRoute()
 
-      if (route.name == 'index') window.scrollTo(0, 0)
-    },
-  },
+  if (route.name == 'index') window.scrollTo(0, 0)
 }
 </script>
 

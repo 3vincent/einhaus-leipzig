@@ -19,12 +19,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'LandingGemeinschaft',
-}
-</script>
-
 <style lang="scss" scoped>
 .background {
   background-image: url(/images/einhaus-landing-photo-04-small.jpg);
