@@ -3,16 +3,6 @@ definePageMeta({
   layout: 'landing',
 })
 
-onMounted(() => {
-  lazyLoadImages()
-
-  setScrollBehavior('smooth')
-})
-
-onBeforeUnmount(() => {
-  setScrollBehavior('auto')
-})
-
 function setScrollBehavior(mode: string) {
   const root = document.querySelector('html')
   if (root) root.style.scrollBehavior = mode
@@ -41,6 +31,16 @@ function lazyLoadImages() {
     })
   }
 }
+
+onMounted(() => {
+  lazyLoadImages()
+
+  setScrollBehavior('smooth')
+})
+
+onBeforeUnmount(() => {
+  setScrollBehavior('auto')
+})
 </script>
 
 <template>

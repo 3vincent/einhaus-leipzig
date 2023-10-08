@@ -36,6 +36,8 @@
 
 <script setup lang="ts">
 async function highlightMenuItem() {
+  if (window && window.innerWidth < 768) return
+
   const pageSections = Array.from(
     document.querySelectorAll('.landing-contentBox')
   )
@@ -82,8 +84,10 @@ async function highlightMenuItem() {
   }
 }
 
-onMounted(() => {
-  highlightMenuItem()
+onMounted(async () => {
+  await highlightMenuItem()
+
+  window.addEventListener('resize', highlightMenuItem)
 })
 </script>
 
