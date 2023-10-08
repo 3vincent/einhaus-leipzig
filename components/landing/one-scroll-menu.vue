@@ -34,58 +34,57 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'LandingOneScrollMenu',
+<script setup lang="ts">
+async function highlightMenuItem() {
+  const pageSections = Array.from(
+    document.querySelectorAll('.landing-contentBox')
+  )
 
-  methods: {
-    highlighMenuItem() {
-      const pageSections = [].slice.call(
-        document.querySelectorAll('h1, .landing-contentBox h2')
-      )
+  if ('IntersectionObserver' in window) {
+    const observerOptions = {
+      threshold: 0.75,
+    }
 
-      if ('IntersectionObserver' in window) {
-        let menuHighlightObserver = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach(entry => {
-              const menuItemToHighlight = document.querySelector(
-                `#${entry.target.closest('.landing-container')?.id}-nav`
-              )
+    const menuHighlightObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(async entry => {
+          const menuItems = document.querySelectorAll('.on-site-menu li')
 
-              if (entry.isIntersecting) {
-                menuItemToHighlight?.classList.add('is-active')
+          const menuItemToHighlight = document.querySelector(
+            `#${entry.target.closest('.landing-container')?.id}-nav`
+          )
 
-                const activeMenuItems = Array.from(
-                  document.querySelectorAll('.is-active')
-                ).forEach(activeMenuItem => {
-                  if (activeMenuItem?.id != menuItemToHighlight?.id)
-                    activeMenuItem.classList.remove('is-active')
-                })
-
-                if (entry.target.localName == 'h1') {
-                  this.$router.push(`/`)
-                  return
-                }
-
-                this.$router.push(
-                  `/#${entry.target.parentElement?.parentElement?.id}`
-                )
-              }
+          if (entry.isIntersecting) {
+            menuItems.forEach(item => {
+              item.classList.remove('is-active')
             })
+
+            menuItemToHighlight?.classList.add('is-active')
+
+            if (entry.target.parentElement?.id) {
+              await navigateTo({
+                hash: `#${entry.target.parentElement?.id}`,
+              })
+
+              return
+            }
+
+            await navigateTo({ hash: '' })
           }
-        )
-
-        pageSections.forEach(pageSection => {
-          menuHighlightObserver.observe(pageSection)
         })
-      }
-    },
-  },
+      },
+      observerOptions
+    )
 
-  mounted() {
-    this.highlighMenuItem()
-  },
+    pageSections.forEach(pageSection => {
+      menuHighlightObserver.observe(pageSection)
+    })
+  }
 }
+
+onMounted(() => {
+  highlightMenuItem()
+})
 </script>
 
 <style lang="scss" scoped>
