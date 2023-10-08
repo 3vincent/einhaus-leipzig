@@ -9,9 +9,7 @@ function setScrollBehavior(mode: string) {
 }
 
 function lazyLoadImages() {
-  const lazyBackgrounds = [].slice.call(
-    document.querySelectorAll('.background')
-  )
+  const lazyBackgrounds = Array.from(document.querySelectorAll('.background'))
 
   if ('IntersectionObserver' in window) {
     let lazyBackgroundObserver = new IntersectionObserver(
