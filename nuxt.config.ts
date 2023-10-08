@@ -1,7 +1,6 @@
 import { defineNuxtConfig } from 'nuxt/config'
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  // target: 'static', // default is 'server'
   css: ['~/assets/styles/index.scss'],
   nitro: {
     preset: 'vercel',
@@ -74,7 +73,6 @@ export default defineNuxtConfig({
         },
       ],
       link: [
-        // <link rel="icon" href="/favicon.ico" sizes="any"><!-- 32×32 -->
         { rel: 'icon', href: '/icon.svg', type: 'image/svg+xml' },
         { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
