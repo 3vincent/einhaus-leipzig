@@ -3,11 +3,6 @@ definePageMeta({
   layout: 'landing',
 })
 
-function setScrollBehavior(mode: string) {
-  const root = document.querySelector('html')
-  if (root) root.style.scrollBehavior = mode
-}
-
 function lazyLoadImages() {
   const lazyBackgrounds = Array.from(document.querySelectorAll('.background'))
 
@@ -32,12 +27,6 @@ function lazyLoadImages() {
 
 onMounted(() => {
   lazyLoadImages()
-
-  setScrollBehavior('smooth')
-})
-
-onBeforeUnmount(() => {
-  setScrollBehavior('auto')
 })
 </script>
 
