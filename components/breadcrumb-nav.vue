@@ -16,7 +16,7 @@ const thisRouteName = computed(
       </NuxtLink>
     </span>
 
-    <span>></span>
+    <div class="arrow"></div>
 
     <span>{{ thisRouteName }}</span>
   </div>
@@ -24,6 +24,8 @@ const thisRouteName = computed(
 
 <style lang="scss" scoped>
 .breadcrumbs {
+  display: flex;
+  align-items: center;
   color: var(--breadcrumb-color);
   font-size: 0.8rem;
   font-weight: 400;
@@ -41,5 +43,16 @@ const thisRouteName = computed(
     text-decoration: none;
     border: 0;
   }
+}
+
+.arrow {
+  display: inline-block;
+  height: 4px;
+  width: 4px;
+  margin-right: 10px;
+  margin-top: 2px;
+  border: solid var(--main-text-color-dark);
+  border-width: 0 1px 1px 0;
+  transform: rotate(-45deg);
 }
 </style>
