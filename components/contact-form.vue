@@ -78,7 +78,7 @@ function moveLoadingAnimationToCenter() {
   })
 }
 
-const validateEmailAddress = computed(() => {
+const isEmailValidated = computed(() => {
   if (
     [...payload.value.email.toLowerCase()].every(char =>
       'abcdefghijklmnopqrstuvwxyz0123456789.@+-_~'.includes(char)
@@ -101,9 +101,9 @@ const validateEmailAddress = computed(() => {
   return false
 })
 
-const validateInputs = computed(() => {
+const allFieldsValidated = computed(() => {
   if (
-    validateEmailAddress &&
+    isEmailValidated.value &&
     payload.value.name.length >= 2 &&
     payload.value.message.length > 2 &&
     payload.value.message.length <= 4000 &&
@@ -151,7 +151,7 @@ onBeforeUnmount(() => {
               required
               v-model="payload.email"
               v-bind:class="
-                validateEmailAddress
+                isEmailValidated
                   ? 'single-field-filled'
                   : payload.email
                   ? 'not-filled-field'
@@ -231,9 +231,9 @@ onBeforeUnmount(() => {
             <button
               type="submit"
               class="link secondary"
-              :disabled="!validateInputs || clickedOnce"
-              v-bind:class="
-                validateInputs ? 'all-field-filled' : 'not-filled-fields'
+              :disabled="!allFieldsValidated || clickedOnce"
+              :class="
+                allFieldsValidated ? 'all-field-filled' : 'not-filled-fields'
               "
               >Senden</button
             >
