@@ -1,5 +1,5 @@
 import validator from 'validator'
-import { PayloadData } from '../server/api/send-mail.post'
+import type { PayloadData } from '../server/api/send-mail.post'
 
 export async function sanitizer(payload: PayloadData): Promise<void> {
   payload.name = validator.escape(payload.name).trim()

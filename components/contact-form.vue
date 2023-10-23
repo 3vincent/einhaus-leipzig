@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PayloadData } from '../server/api/send-mail.post'
+import type { PayloadData } from '../server/api/send-mail.post'
 import { sanitizer } from '~/util/sanitizer'
 
 const payload = ref<PayloadData>({
