@@ -125,7 +125,7 @@ function makeTopMenuSticky() {
 .smaller-after-scroll.default-sites-menubar {
   background-color: rgba(255, 255, 255, 0.4);
 
-  &:after {
+  &::after {
     content: '';
     height: 1px;
     width: 100%;
