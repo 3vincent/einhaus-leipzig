@@ -43,11 +43,13 @@ async function handleSubmit() {
     sendResponse = statusCode.value
 
     if (sendResponse == 200) {
-      payload.value.name = ''
-      payload.value.email = ''
-      payload.value.message = ''
-      payload.value.gdpr = false
-      payload.value.age = 0
+      payload.value = {
+        name: '',
+        age: 0,
+        email: '',
+        message: '',
+        gdpr: false,
+      }
 
       const router = useRouter()
 

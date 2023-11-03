@@ -45,17 +45,9 @@ onBeforeUnmount(() => {
 function makeTopMenuSticky() {
   const element = document.querySelector('.top-menu-container') as HTMLElement
 
-  if (element) {
-    const style = window.getComputedStyle(element)
-    const position = style.getPropertyValue('position')
-
-    if (position != 'sticky') return
-
-    if (document.documentElement.scrollTop > element.offsetHeight - 5) {
-      isMenuFixed.value = true
-    } else {
-      isMenuFixed.value = false
-    }
+  if (element && window.getComputedStyle(element).position === 'sticky') {
+    isMenuFixed.value =
+      document.documentElement.scrollTop > element.offsetHeight - 5
   }
 }
 </script>
