@@ -77,7 +77,7 @@ function makeTopMenuSticky() {
   left: 0;
   z-index: 1000;
   background-color: transparent;
-  transition: all 0.4s;
+  transition: all 0.2s;
 
   @media screen and (min-width: $_lg) {
     height: 120px;
