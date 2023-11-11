@@ -41,14 +41,22 @@ a.link.secondary {
 
   div {
     position: absolute;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: var(--pretty-green);
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    backdrop-filter: blur(3px);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid white;
+
+    &::before {
+      content: '';
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--pretty-green);
+      border: 2px solid white;
+    }
 
     &::after {
       content: '';
