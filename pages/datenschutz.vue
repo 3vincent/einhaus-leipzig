@@ -48,6 +48,7 @@ definePageMeta({
 })
 
 const envVar = useRuntimeConfig()
+const cookieConsent = useCookie('cookieConsent')
 </script>
 
 <template>
@@ -435,7 +436,11 @@ const envVar = useRuntimeConfig()
         Datenschutzerkl&auml;rung gesondert informieren und ggf. eine
         Einwilligung abfragen.</p
       >
+
+      <pre>Cookie Status: <span :style="{ 'font-style': cookieConsent === 'initial' ? 'italic' : '', 'font-weight': cookieConsent !== 'initial' ? 'bold' : 'normal' }">{{ cookieConsent }}</span></pre>
+
       <CookieDeleteButton />
+
       <h3>Server-Log-Dateien</h3>
       <p
         >Der Provider der Seiten erhebt und speichert automatisch Informationen
