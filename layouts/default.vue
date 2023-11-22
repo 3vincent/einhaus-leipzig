@@ -15,7 +15,7 @@ useHead({
 <template>
   <div class="siteContainer">
     <TopMenuBar :is-default="true" :logo-white="false" />
-    <slot />
+    <NuxtPage />
     <Footer />
     <CookieBanner />
   </div>
