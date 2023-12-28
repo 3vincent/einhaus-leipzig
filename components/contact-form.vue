@@ -382,7 +382,9 @@ onBeforeUnmount(() => {
         left: 10px;
         color: #999;
         pointer-events: none;
-        transition: all 0.3s ease, font-size 0.3s ease;
+        transition:
+          all 0.3s ease,
+          font-size 0.3s ease;
 
         &.active {
           transform: translate(-6px, -20px);
@@ -441,7 +443,9 @@ onBeforeUnmount(() => {
 button {
   min-width: 15rem;
   color: var(--main-text-color-dark);
-  transition: border 0.3s ease, background-color 0.3s ease;
+  transition:
+    border 0.3s ease,
+    background-color 0.3s ease;
 
   &.all-field-filled {
     background-color: var(--pretty-green);
