@@ -32,32 +32,38 @@ export interface PayloadData {
   age: number
 }
 
-async function validatePayload(payload: PayloadData): Promise<void> {
+async function validatePayload(payload: PayloadData): Promise<any> {
   const schema = Joi.object({
-    name: Joi.string().min(1).max(40).required().trim(),
+    name: Joi.string().min(1).max(120).required().trim(),
     email: Joi.string().email().required().trim(),
     message: Joi.string().min(1).max(4000).required().trim(),
     gdpr: Joi.boolean().valid(true).required(),
     age: Joi.number().valid(0).required(),
   })
 
-  await schema.validateAsync(payload)
+  return await schema.validateAsync(payload)
 }
 
 async function sendMail(payload: PayloadData): Promise<string> {
-  const info = await transporter.sendMail({
-    from: `"${contactFormSenderName}" <${contactFormSenderAddress}>`,
-    to: mailReceiver,
-    replyTo: `"${payload.name}" <${payload.email}>`,
-    subject: 'Kontaktformular',
-    text: JSON.stringify(payload),
-    html: `<b>Name:</b><br />${payload.name}<br /><br />
-           <b>Email Adresse:</b><br />${payload.email}<br /><br />
-           <b>Datenschutzerklärung bestätigt:</b><br />${payload.gdpr}<br /><br />
-           <b>Nachricht:</b><br />${payload.message}<br />`,
-  })
+  try {
+    const info = await transporter.sendMail({
+      from: `"${contactFormSenderName}" <${contactFormSenderAddress}>`,
+      to: mailReceiver,
+      replyTo: `"${payload.name}" <${payload.email}>`,
+      subject: 'Kontaktformular',
+      text: JSON.stringify(payload),
+      html: `<b>Name:</b><br />${payload.name}<br /><br />
+    <b>Email Adresse:</b><br />${payload.email}<br /><br />
+    <b>Datenschutzerklärung bestätigt:</b><br />${payload.gdpr}<br /><br />
+    <b>Nachricht:</b><br />${payload.message}<br />`,
+    })
 
-  return info.messageId
+    return info.messageId
+  } catch (error) {
+    console.log(error)
+
+    throw new Error('Error sending message')
+  }
 }
 
 export default defineEventHandler(async event => {
@@ -84,9 +90,11 @@ export default defineEventHandler(async event => {
   }
 
   try {
-    await sanitizer(payload)
-    await validatePayload(payload)
-    const messageId = await sendMail(payload)
+    const sanitizedPayload = await sanitizer(payload)
+
+    await validatePayload(sanitizedPayload)
+
+    const messageId = await sendMail(sanitizedPayload)
 
     if (process.env.NODE_ENV === 'development') {
       console.log({ payload })
@@ -99,14 +107,16 @@ export default defineEventHandler(async event => {
         msg: 'Your message was sent. Thank you.',
       }),
     }
-  } catch (err) {
-    console.error(err)
+  } catch (err: any) {
+    console.log(err)
 
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        msg: 'Could not send your message. Please try again.',
-      }),
-    }
+    throw createError({
+      statusCode: 535,
+      message: 'There was an error sending the message!',
+      data: {
+        statusCode: err?.response?.status,
+        responseBody: err?.data,
+      },
+    })
   }
 })

@@ -10,7 +10,7 @@ const payload = ref<PayloadData>({
   gdpr: false,
 })
 
-let sendResponse = 0
+const sendResponse = ref(0)
 const clickedOnce = ref(false)
 const envVar = useRuntimeConfig()
 let redirectTimeout: ReturnType<typeof setTimeout> | undefined = undefined
@@ -28,21 +28,19 @@ async function handleSubmit() {
   try {
     clickedOnce.value = true
 
-    await sanitizer(payload.value)
+    const sanitizedPayload = await sanitizer(payload.value)
 
     moveLoadingAnimationToCenter()
 
-    const { data } = await useFetch('/api/send-mail', {
+    const response = await useFetch('/api/send-mail', {
       method: 'POST',
-      body: JSON.stringify(payload.value),
+      body: JSON.stringify(sanitizedPayload),
     })
 
-    console.log(data)
+    sendResponse.value =
+      response.data?.value?.statusCode ?? response.error.value?.statusCode ?? 0
 
-    const statusCode = ref(data?.value?.statusCode ?? 0)
-    sendResponse = statusCode.value
-
-    if (sendResponse == 200) {
+    if (sendResponse.value == 200) {
       payload.value = {
         name: '',
         age: 0,
@@ -127,120 +125,124 @@ onBeforeUnmount(() => {
     <h2>Kontaktformular</h2>
     <div class="contact-form-wrapper">
       <div class="form-container">
-        <form name="contact" method="POST" @submit.prevent="handleSubmit">
-          <div class="input-container">
-            <input
-              required
-              v-model="payload.name"
-              v-bind:class="
-                payload.name && payload.name.length >= 2
-                  ? 'single-field-filled'
-                  : payload.name
-                  ? 'not-filled-field'
-                  : ''
-              "
-              type="text"
-              name="name"
-              autocomplete="off"
-              class="input-field"
-              placeholder=" "
-            />
-            <label for="name" class="input-label">Name</label>
-          </div>
+        <ClientOnly>
+          <form name="contact" method="POST" @submit.prevent="handleSubmit">
+            <div class="input-container">
+              <input
+                required
+                v-model="payload.name"
+                v-bind:class="
+                  payload.name && payload.name.length >= 2
+                    ? 'single-field-filled'
+                    : payload.name
+                      ? 'not-filled-field'
+                      : ''
+                "
+                type="text"
+                name="name"
+                autocomplete="off"
+                class="input-field"
+                placeholder=" "
+              />
+              <label for="name" class="input-label">Name</label>
+            </div>
 
-          <div class="input-container">
-            <input
-              required
-              v-model="payload.email"
-              v-bind:class="
-                isEmailValidated
-                  ? 'single-field-filled'
-                  : payload.email
-                  ? 'not-filled-field'
-                  : ''
-              "
-              type="email"
-              name="email"
-              autocomplete="off"
-              class="input-field"
-              placeholder=" "
-            />
+            <div class="input-container">
+              <input
+                required
+                v-model="payload.email"
+                v-bind:class="
+                  isEmailValidated
+                    ? 'single-field-filled'
+                    : payload.email
+                      ? 'not-filled-field'
+                      : ''
+                "
+                type="email"
+                name="email"
+                autocomplete="off"
+                class="input-field"
+                placeholder=" "
+              />
 
-            <label for="email" class="input-label"> Email Adresse</label>
-          </div>
+              <label for="email" class="input-label"> Email Adresse</label>
+            </div>
 
-          <div class="input-container age">
-            <input v-model="payload.age" name="age-field" tabindex="-1" />
-            <label for="age-field" class="input-label"> Age field</label>
-          </div>
+            <div class="input-container age">
+              <input v-model="payload.age" name="age-field" tabindex="-1" />
+              <label for="age-field" class="input-label"> Age field</label>
+            </div>
 
-          <div class="input-container">
-            <textarea
-              placeholder=" "
-              required
-              name="message"
-              v-model="payload.message"
-              v-bind:class="
-                payload.message.length > 2 && payload.message.length <= 4000
-                  ? 'single-field-filled'
-                  : payload.message
-                  ? 'not-filled-field'
-                  : ''
-              "
-              class="input-field"
-              rows="4"
-              cols="60"
-              @focus="onFocus"
-              @blur="onBlur"
-            >
-            </textarea>
-            <label
-              for="message"
-              class="input-label"
-              :class="{
-                active: isTextAreaFocused || payload.message.length > 0,
-              }"
-              >Nachricht</label
-            >
-            <span
-              class="text-counter"
-              :class="{
-                'warning-color': payload.message.length > 4000,
-              }"
-            >
-              {{ 4000 - payload.message.length }}
-            </span>
-          </div>
-
-          <div class="privacy-container">
-            <input
-              required
-              v-model="payload.gdpr"
-              type="checkbox"
-              id="privacy-agreement"
-              name="scales"
-            />
-            <label for="privacy-agreement" class="privacy-label">
-              <span>
-                Hiermit bestätige ich, dass ich die
-                <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>
-                gelesen habe und der Verarbeitung meiner Daten zustimme.
+            <div class="input-container">
+              <textarea
+                placeholder=" "
+                required
+                name="message"
+                v-model="payload.message"
+                v-bind:class="
+                  payload.message.length > 2 && payload.message.length <= 4000
+                    ? 'single-field-filled'
+                    : payload.message
+                      ? 'not-filled-field'
+                      : ''
+                "
+                class="input-field"
+                rows="4"
+                cols="60"
+                @focus="onFocus"
+                @blur="onBlur"
+              >
+              </textarea>
+              <label
+                for="message"
+                class="input-label"
+                :class="{
+                  active: isTextAreaFocused || payload.message.length > 0,
+                }"
+                >Nachricht</label
+              >
+              <span
+                class="text-counter"
+                :class="{
+                  'warning-color': payload.message.length > 4000,
+                }"
+              >
+                {{ 4000 - payload.message.length }}
               </span>
-            </label>
-          </div>
+            </div>
 
-          <p>
-            <button
-              type="submit"
-              class="link secondary"
-              :disabled="!allFieldsValidated || clickedOnce"
-              :class="
-                allFieldsValidated ? 'all-field-filled' : 'not-filled-fields'
-              "
-              >Senden</button
-            >
-          </p>
-        </form>
+            <div class="privacy-container">
+              <input
+                required
+                v-model="payload.gdpr"
+                type="checkbox"
+                id="privacy-agreement"
+                name="scales"
+              />
+              <label for="privacy-agreement" class="privacy-label">
+                <span>
+                  Hiermit bestätige ich, dass ich die
+                  <a href="/datenschutz" target="_blank"
+                    >Datenschutzerklärung</a
+                  >
+                  gelesen habe und der Verarbeitung meiner Daten zustimme.
+                </span>
+              </label>
+            </div>
+
+            <p>
+              <button
+                type="submit"
+                class="link secondary"
+                :disabled="!allFieldsValidated || clickedOnce"
+                :class="
+                  allFieldsValidated ? 'all-field-filled' : 'not-filled-fields'
+                "
+                >Senden</button
+              >
+            </p>
+          </form>
+        </ClientOnly>
       </div>
 
       <FullModal
@@ -248,6 +250,7 @@ onBeforeUnmount(() => {
           sendResponse !== 200 &&
           sendResponse !== 400 &&
           sendResponse !== 500 &&
+          sendResponse !== 535 &&
           clickedOnce
         "
         :show="true"
@@ -274,7 +277,9 @@ onBeforeUnmount(() => {
       </FullModal>
 
       <FullModal
-        v-if="sendResponse === 500 || sendResponse === 400"
+        v-if="
+          sendResponse === 500 || sendResponse === 400 || sendResponse === 535
+        "
         :show="true"
       >
         <div class="message-response">
