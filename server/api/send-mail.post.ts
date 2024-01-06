@@ -97,7 +97,7 @@ export default defineEventHandler(async event => {
     const messageId = await sendMail(sanitizedPayload)
 
     if (process.env.NODE_ENV === 'development') {
-      console.log({ payload })
+      console.log({ sanitizedPayload })
       console.log('Message sent:', messageId)
     }
 
@@ -112,7 +112,9 @@ export default defineEventHandler(async event => {
 
     throw createError({
       statusCode: 535,
-      message: 'There was an error sending the message!',
+      message: `There was an error sending the message! ${
+        err.details[0].message ?? ''
+      }`,
       data: {
         statusCode: err?.response?.status,
         responseBody: err?.data,
