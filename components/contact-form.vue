@@ -32,13 +32,15 @@ async function handleSubmit() {
 
     moveLoadingAnimationToCenter()
 
-    const response = await useFetch('/api/send-mail', {
+    const response: any = await $fetch('/api/send-mail', {
       method: 'POST',
       body: JSON.stringify(sanitizedPayload),
     })
 
+    console.log(response)
+
     sendResponse.value =
-      response.data?.value?.statusCode ?? response.error.value?.statusCode ?? 0
+      response.statusCode ?? response.error.value?.statusCode ?? 0
 
     if (sendResponse.value == 200) {
       payload.value = {
@@ -57,6 +59,7 @@ async function handleSubmit() {
     }
   } catch (error) {
     console.log(error)
+    sendResponse.value = 535
   }
 }
 

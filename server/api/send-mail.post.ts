@@ -113,7 +113,7 @@ export default defineEventHandler(async event => {
     throw createError({
       statusCode: 535,
       message: `There was an error sending the message! ${
-        err.details[0].message ?? ''
+        Array.isArray(err.details) ? err.details[0]?.message : ''
       }`,
       data: {
         statusCode: err?.response?.status,
