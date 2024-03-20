@@ -35,7 +35,7 @@ const isMenuFixed = ref(false)
 
 onMounted(() => {
   makeTopMenuSticky()
-  window.addEventListener('scroll', makeTopMenuSticky, false)
+  window.addEventListener('scroll', makeTopMenuSticky, { passive: true })
 })
 
 onBeforeUnmount(() => {
