@@ -15,16 +15,31 @@ const clickedOnce = ref(false)
 const envVar = useRuntimeConfig()
 let redirectTimeout: ReturnType<typeof setTimeout> | undefined = undefined
 const isTextAreaFocused = ref(false)
+const showTooltipInElement = ref<'name' | 'email' | 'message' | 'gdpr' | null>(
+  null
+)
 
 function onFocus() {
+  if (showTooltipInElement.value !== null) showTooltipInElement.value = null
+}
+
+function onTextareaFocus() {
+  onFocus()
+
   isTextAreaFocused.value = true
 }
 
-function onBlur() {
+function onTextareaBlur() {
   isTextAreaFocused.value = false
 }
 
 async function handleSubmit() {
+  if (!allFieldsValidated.value) {
+    checkFormValidations()
+
+    return
+  }
+
   try {
     clickedOnce.value = true
 
@@ -81,6 +96,51 @@ function moveLoadingAnimationToCenter() {
   })
 }
 
+const checkFormValidations = () => {
+  const formContainer = document.querySelector('.contact-container')
+
+  formContainer?.scrollIntoView({
+    block: 'start',
+  })
+
+  Object.keys(payload.value).forEach(item => {
+    if (showTooltipInElement.value !== null) return
+
+    if (item === 'name' && !isNameValidated.value) {
+      showTooltipInElement.value = item
+    }
+
+    if (item === 'email' && !isEmailValidated.value) {
+      showTooltipInElement.value = item
+    }
+
+    if (item === 'message' && !isMessageValidated.value) {
+      showTooltipInElement.value = item
+    }
+
+    if (item === 'gdpr' && !payload.value.gdpr) {
+      showTooltipInElement.value = item
+    }
+  })
+}
+
+const isNameValidated = computed(() => {
+  if (payload.value.name.length >= 2) return true
+
+  return false
+})
+
+const isMessageValidated = computed(() => {
+  if (
+    payload.value.message.length > 2 &&
+    payload.value.message.length <= 4000
+  ) {
+    return true
+  }
+
+  return false
+})
+
 const isEmailValidated = computed(() => {
   if (
     [...payload.value.email.toLowerCase()].every(char =>
@@ -107,9 +167,8 @@ const isEmailValidated = computed(() => {
 const allFieldsValidated = computed(() => {
   if (
     isEmailValidated.value &&
-    payload.value.name.length >= 2 &&
-    payload.value.message.length > 2 &&
-    payload.value.message.length <= 4000 &&
+    isNameValidated.value &&
+    isMessageValidated.value &&
     payload.value.gdpr
   ) {
     return true
@@ -129,13 +188,20 @@ onBeforeUnmount(() => {
     <div class="contact-form-wrapper">
       <div class="form-container">
         <ClientOnly>
-          <form name="contact" method="POST" @submit.prevent="handleSubmit">
+          <form
+            name="contact"
+            method="POST"
+            @submit.prevent="handleSubmit"
+            novalidate
+          >
             <div class="input-container">
+              <FormTooltip v-if="showTooltipInElement === 'name'" />
+
               <input
                 required
                 v-model="payload.name"
                 v-bind:class="
-                  payload.name && payload.name.length >= 2
+                  isNameValidated
                     ? 'single-field-filled'
                     : payload.name
                       ? 'not-filled-field'
@@ -146,11 +212,14 @@ onBeforeUnmount(() => {
                 autocomplete="off"
                 class="input-field"
                 placeholder=" "
+                @focus="onFocus"
               />
               <label for="name" class="input-label">Name</label>
             </div>
 
             <div class="input-container">
+              <FormTooltip v-if="showTooltipInElement === 'email'" />
+
               <input
                 required
                 v-model="payload.email"
@@ -166,6 +235,7 @@ onBeforeUnmount(() => {
                 autocomplete="off"
                 class="input-field"
                 placeholder=" "
+                @focus="onFocus"
               />
 
               <label for="email" class="input-label"> Email Adresse</label>
@@ -177,13 +247,15 @@ onBeforeUnmount(() => {
             </div>
 
             <div class="input-container">
+              <FormTooltip v-if="showTooltipInElement === 'message'" />
+
               <textarea
                 placeholder=" "
                 required
                 name="message"
                 v-model="payload.message"
                 v-bind:class="
-                  payload.message.length > 2 && payload.message.length <= 4000
+                  isMessageValidated
                     ? 'single-field-filled'
                     : payload.message
                       ? 'not-filled-field'
@@ -192,8 +264,8 @@ onBeforeUnmount(() => {
                 class="input-field"
                 rows="4"
                 cols="60"
-                @focus="onFocus"
-                @blur="onBlur"
+                @focus="onTextareaFocus"
+                @blur="onTextareaBlur"
               >
               </textarea>
               <label
@@ -215,12 +287,15 @@ onBeforeUnmount(() => {
             </div>
 
             <div class="privacy-container">
+              <FormTooltip v-if="showTooltipInElement === 'gdpr'" />
+
               <input
                 required
                 v-model="payload.gdpr"
                 type="checkbox"
                 id="privacy-agreement"
                 name="scales"
+                @focus="onFocus"
               />
               <label for="privacy-agreement" class="privacy-label">
                 <span>
@@ -234,15 +309,7 @@ onBeforeUnmount(() => {
             </div>
 
             <p>
-              <button
-                type="submit"
-                class="link secondary"
-                :disabled="!allFieldsValidated || clickedOnce"
-                :class="
-                  allFieldsValidated ? 'all-field-filled' : 'not-filled-fields'
-                "
-                >Senden</button
-              >
+              <button type="submit" class="link primary">Senden</button>
             </p>
           </form>
         </ClientOnly>
@@ -568,20 +635,20 @@ input[type='checkbox']:checked::after {
   border-width: 2px !important;
 }
 
-.all-field-filled {
-  border-color: var(--pretty-green) !important;
-  border-width: 2px;
-}
+// .all-field-filled {
+//   border-color: var(--pretty-green) !important;
+//   border-width: 2px;
+// }
 
 .not-filled-field {
   // box-shadow: inset 0 0 0 2px var(--warning);
   border-color: var(--warning) !important;
 }
 
-.not-filled-fields {
-  border-color: var(--warning) !important;
-  cursor: not-allowed;
-}
+// .not-filled-fields {
+//   border-color: var(--warning) !important;
+//   cursor: not-allowed;
+// }
 
 .text-counter {
   color: var(--main-text-color-light-light);
