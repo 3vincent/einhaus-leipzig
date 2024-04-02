@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { PayloadData } from '../server/api/send-mail.post'
 import { sanitizer } from '~/util/sanitizer'
+import type { PayloadData } from '../server/api/send-mail.post'
 
 const payload = ref<PayloadData>({
   name: '',
@@ -296,6 +296,7 @@ onBeforeUnmount(() => {
                 id="privacy-agreement"
                 name="scales"
                 @focus="onFocus"
+                @click="onFocus"
               />
               <label for="privacy-agreement" class="privacy-label">
                 <span>
