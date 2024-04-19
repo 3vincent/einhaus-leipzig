@@ -7,14 +7,12 @@ const cookieConsent = useCookie('cookieConsent', { sameSite: true })
 cookieConsent.value = cookieConsent.value || 'initial'
 
 const acceptCookie = () => {
-  // @ts-ignore
   cookieConsent.value = null
   const acceptCookie = useCookie('cookieConsent', { expires, sameSite: true })
   acceptCookie.value = 'accepted'
 }
 
 const denyCookie = () => {
-  // @ts-ignore
   cookieConsent.value = null
 
   const shortLivedCookie = useCookie('cookieConsent', { sameSite: true })
