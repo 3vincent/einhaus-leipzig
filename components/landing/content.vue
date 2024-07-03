@@ -96,7 +96,7 @@ onMounted(() => {
   border: none;
 }
 
-small {
+:deep(small) {
   font-size: 0.7rem;
   font-weight: 500;
   opacity: 0.8;
