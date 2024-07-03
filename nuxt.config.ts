@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'vercel',
   },
+  compatibilityDate: '2024-07-04',
   runtimeConfig: {
     public: {
       OFFICIAL_CONTACT_ADDRESS: process.env.OFFICIAL_CONTACT_ADDRESS,

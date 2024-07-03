@@ -8,7 +8,7 @@
     <div class="arrow-container">
       <div class="inner-arrow-content">
         <NuxtLink
-          :to="{ hash: 'bisher' }"
+          :to="{ hash: '#bisher' }"
           :external="true"
           aria-label="Scroll down"
         >
