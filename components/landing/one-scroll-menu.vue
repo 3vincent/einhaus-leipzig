@@ -2,31 +2,31 @@
   <div class="on-site-menu">
     <ul>
       <li id="bisher-nav">
-        <NuxtLink :to="{ hash: 'bisher' }" :external="true">
+        <NuxtLink :to="{ hash: '#bisher' }" :external="true">
           Was bisher geschah
         </NuxtLink>
       </li>
 
       <li id="ziele-nav">
-        <NuxtLink :to="{ hash: 'ziele' }" :external="true">
+        <NuxtLink :to="{ hash: '#ziele' }" :external="true">
           Unsere Ziele
         </NuxtLink>
       </li>
 
       <li id="gemeinschaft-nav">
-        <NuxtLink :to="{ hash: 'gemeinschaft' }" :external="true">
+        <NuxtLink :to="{ hash: '#gemeinschaft' }" :external="true">
           EinHaus Gemeinschaft
         </NuxtLink>
       </li>
 
       <li id="wohnhaus-nav">
-        <NuxtLink :to="{ hash: 'wohnhaus' }" :external="true">
+        <NuxtLink :to="{ hash: '#wohnhaus' }" :external="true">
           Mehr als ein Wohnhaus
         </NuxtLink>
       </li>
 
       <li id="unterstuetzung-nav">
-        <NuxtLink :to="{ hash: 'unterstuetzung' }" :external="true">
+        <NuxtLink :to="{ hash: '#unterstuetzung' }" :external="true">
           Unterstütze unser Projekt
         </NuxtLink>
       </li>
