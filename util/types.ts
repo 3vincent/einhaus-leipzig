@@ -1,9 +1,7 @@
 import { LANDING_PAGE_SLUGS } from './enums'
 
-type LandingPageSlugs = LANDING_PAGE_SLUGS
-
 export type LandingPageContent = {
-  slug: LandingPageSlugs
+  slug: LANDING_PAGE_SLUGS
   lastContainer?: boolean
   firstContainer?: boolean
   visible?: boolean
