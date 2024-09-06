@@ -44,10 +44,10 @@ const denyCookie = () => {
         </div>
         <div class="button-container">
           <a href="#" rel="nofollow" v-on:click.prevent="acceptCookie">
-            <button class="link primary small"> Akzeptieren </button>
+            <button class="link primary"> Akzeptieren </button>
           </a>
           <a href="#" rel="nofollow" v-on:click.prevent="denyCookie">
-            <button class="link secondary small"> Verweigern </button>
+            <button class="link secondary"> Verweigern </button>
           </a>
         </div>
       </div>
@@ -117,6 +117,11 @@ const denyCookie = () => {
 
   a.link:last-child {
     margin-right: 0;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
   }
 
   .link.primary {
