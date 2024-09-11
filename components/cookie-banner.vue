@@ -3,30 +3,23 @@ const expires = new Date()
 // expires after one year
 expires.setTime(expires.getTime() + 365 * 24 * 60 * 60 * 1000)
 
-const cookieConsent = useCookie('cookieConsent', { sameSite: true })
+const cookieConsent = useCookie('cookieConsent', {
+  sameSite: 'strict',
+  expires,
+})
 cookieConsent.value = cookieConsent.value || 'initial'
 
 const acceptCookie = () => {
-  cookieConsent.value = null
-  const acceptCookie = useCookie('cookieConsent', { expires, sameSite: true })
-  acceptCookie.value = 'accepted'
+  cookieConsent.value = 'accepted'
+
+  refreshCookie('cookieConsent')
 }
 
 const denyCookie = () => {
-  cookieConsent.value = null
-
   const shortLivedCookie = useCookie('cookieConsent', { sameSite: true })
   shortLivedCookie.value = 'denied'
 
-  /* Or use cookie for one sessions
-   * This way the user does not see the banner after clicking deny - even when
-   * changing pages - until they close the browser (session cookie).
-   * This can be achieved like this:
-
-   * useCookie('cookieConsent', { sameSite: true })
-   * const shortLivedCookie = useCookie('cookieConsent', { sameSite: true })
-   * shortLivedCookie.value = 'denied'
-   */
+  refreshCookie('cookieConsent')
 }
 </script>
 
@@ -43,10 +36,10 @@ const denyCookie = () => {
           </p>
         </div>
         <div class="button-container">
-          <a href="#" rel="nofollow" v-on:click.prevent="acceptCookie">
+          <a href="#" rel="nofollow" @click.prevent="acceptCookie">
             <button class="link primary"> Akzeptieren </button>
           </a>
-          <a href="#" rel="nofollow" v-on:click.prevent="denyCookie">
+          <a href="#" rel="nofollow" @click.prevent="denyCookie">
             <button class="link secondary"> Verweigern </button>
           </a>
         </div>
@@ -60,7 +53,6 @@ const denyCookie = () => {
   position: fixed;
   z-index: 1400;
   bottom: 1rem;
-
   background: var(--pretty-green);
   border-radius: 0.2rem;
   min-height: max-content;
@@ -86,10 +78,8 @@ const denyCookie = () => {
 .inner-content {
   display: flex;
   flex-direction: column;
-
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: left;
 
   &::after {
     content: '';
@@ -127,7 +117,6 @@ const denyCookie = () => {
   .link.primary {
     background-color: white;
     color: var(--main-text-color-dark) !important;
-    border: 2px solid var(--main-text-color-semidark) !important;
     border: 2px solid white !important;
 
     &:hover,
