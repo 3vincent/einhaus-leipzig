@@ -48,7 +48,30 @@ definePageMeta({
 })
 
 const envVar = useRuntimeConfig()
-const cookieConsent = useCookie('cookieConsent')
+
+type CookieStatus = 'initial' | 'accepted' | 'denied'
+
+const status: Record<CookieStatus, string> = {
+  initial: 'initial',
+  accepted: 'accepted',
+  denied: 'denied',
+}
+
+const getCookieStatus = (currentStatus: CookieStatus): string => {
+  return status[currentStatus]
+}
+
+const cookieConsent = useCookie<string | null | undefined>('cookieConsent')
+
+const cookieConsentStatus = computed(() => {
+  const currentStatus = cookieConsent.value as CookieStatus
+
+  if (status[currentStatus]) {
+    return getCookieStatus(currentStatus)
+  } else {
+    return 'error'
+  }
+})
 </script>
 
 <template>
@@ -437,7 +460,7 @@ const cookieConsent = useCookie('cookieConsent')
         Einwilligung abfragen.</p
       >
 
-      <pre>Cookie Status: <span :style="{ 'font-style': cookieConsent === 'initial' ? 'italic' : '', 'font-weight': cookieConsent !== 'initial' ? 'bold' : 'normal' }">{{ cookieConsent }}</span></pre>
+      <pre>Cookie Status: <span :style="{ 'font-style': cookieConsent === 'initial' ? 'italic' : '', 'font-weight': cookieConsent !== 'initial' ? 'bold' : 'normal' }">{{ cookieConsentStatus }}</span></pre>
 
       <CookieDeleteButton />
 
