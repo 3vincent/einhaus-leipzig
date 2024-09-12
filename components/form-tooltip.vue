@@ -7,14 +7,9 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(
-  defineProps<{
-    text?: string
-  }>(),
-  {
-    text: 'Pflichtfeld. Bitte ausfüllen.',
-  }
-)
+const { text = 'Pflichtfeld. Bitte ausfüllen.' } = defineProps<{
+  text?: string
+}>()
 
 const topOffset = ref(0)
 

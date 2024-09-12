@@ -77,11 +77,9 @@
 </template>
 
 <script setup lang="ts">
-import { boolean } from 'joi'
-
-const props = defineProps({
-  isLanding: { type: Boolean, default: false },
-})
+const { isLanding = false } = defineProps<{
+  isLanding?: boolean
+}>()
 
 const currentYear = new Date().getFullYear()
 const envVar = useRuntimeConfig()

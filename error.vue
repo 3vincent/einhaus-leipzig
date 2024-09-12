@@ -1,7 +1,16 @@
 <script setup lang="ts">
-defineProps({
-  error: Object,
-})
+type ErrorObject = {
+  url: string
+  statusCode: number
+  statusMessage: string
+  message: string
+  stack: string
+  data: string
+}
+
+defineProps<{
+  error: ErrorObject
+}>()
 </script>
 
 <template>

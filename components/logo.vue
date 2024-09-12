@@ -16,12 +16,9 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  isWhite: {
-    type: Boolean,
-    default: false,
-  },
-})
+const { isWhite = false } = defineProps<{
+  isWhite?: boolean
+}>()
 
 function scrollUpOnLandingPage() {
   const route = useRoute()

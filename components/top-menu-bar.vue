@@ -16,20 +16,15 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  isDefault: {
-    type: Boolean,
-    default: false,
-  },
-  isLanding: {
-    type: Boolean,
-    default: false,
-  },
-  logoWhite: {
-    type: Boolean,
-    default: false,
-  },
-})
+const {
+  isDefault = false,
+  isLanding = false,
+  logoWhite = false,
+} = defineProps<{
+  isDefault?: boolean
+  isLanding?: boolean
+  logoWhite?: boolean
+}>()
 
 const isMenuFixed = ref(false)
 

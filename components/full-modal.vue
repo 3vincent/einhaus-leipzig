@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <Transition name="modal-fade">
-      <div class="modal-overlay" v-show="props.show">
+      <div class="modal-overlay" v-show="show">
         <div class="modal">
           <div class="modal-content">
             <slot></slot>
@@ -20,16 +20,11 @@
 
 <script setup lang="ts">
 const emit = defineEmits(['close'])
-const props = defineProps({
-  show: {
-    type: Boolean,
-    default: false,
-  },
-  showCloseButton: {
-    type: Boolean,
-    default: false,
-  },
-})
+
+const { show = false, showCloseButton = false } = defineProps<{
+  show?: boolean
+  showCloseButton?: boolean
+}>()
 
 const closeModal = () => {
   emit('close')
