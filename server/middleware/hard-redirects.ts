@@ -1,41 +1,51 @@
-export default defineEventHandler(async event => {
-  // console.log('req url: ' + event.node.req.url)
+import type { H3Event } from 'h3'
 
-  if (
-    event.node.req.url &&
-    event.node.req.url.includes(
-      'wp-content/uploads/2018/11/LogoEinHausGenossenschaftRetina-1.png'
-    )
-  ) {
-    // console.log('Redirecting...')
-    event.node.res.writeHead(301, {
-      Location: '/images/logo-einhaus-genossenschaft-leipzig.png',
-    })
-    event.node.res.end()
-  }
+const RULES = [removeTrailingSlash, customRedirects]
 
-  if (event.node.req.url == '/impressum/') {
-    event.node.res.writeHead(301, {
-      Location: '/impressum',
-    })
-    event.node.res.end()
-  }
+const customRedirectList = [
+  {
+    source: '/wp-content/uploads/2018/11/LogoEinHausGenossenschaftRetina-1.png',
+    dest: '/images/logo-einhaus-genossenschaft-leipzig.png',
+  },
+  {
+    source: '/download/Satzung_EinHaus_Reichpietschstrasse_13_eG.pdf',
+    dest: 'https://download.einhaus-leipzig.de/Satzung_EinHaus_Reichpietschstrasse_13_eG.pdf',
+  },
+]
 
-  if (event.node.req.url == '/kontakt/') {
-    event.node.res.writeHead(301, {
-      Location: '/kontakt',
-    })
-    event.node.res.end()
-  }
+export default defineEventHandler(event => {
+  for (const rule of RULES) {
+    const response = rule(event)
 
-  if (
-    event.node.req.url ==
-    '/download/Satzung_EinHaus_Reichpietschstrasse_13_eG.pdf'
-  ) {
-    event.node.res.writeHead(301, {
-      Location:
-        'https://download.einhaus-leipzig.de/Satzung_EinHaus_Reichpietschstrasse_13_eG.pdf',
-    })
-    event.node.res.end()
+    if (response) return response
   }
 })
+
+function removeTrailingSlash(event: H3Event) {
+  const { path } = event
+
+  if (path === '/') return
+  if (!path.endsWith('/')) return
+
+  const newPath = path.slice(0, -1)
+
+  if (path === newPath) return
+
+  return sendRedirect(event, newPath, 301)
+}
+
+function customRedirects(event: H3Event) {
+  const { path } = event
+
+  if (!customRedirectList.map(redirect => redirect.source).includes(path))
+    return
+
+  const newPath = customRedirectList.find(
+    redirect => redirect.source === path
+  )?.dest
+
+  if (!newPath) return
+  if (newPath === path) return
+
+  return sendRedirect(event, newPath, 301)
+}
