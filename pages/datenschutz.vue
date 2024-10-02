@@ -1,46 +1,17 @@
 <script setup lang="ts">
-useHead({
+useSeoMeta({
   title:
     'Datenschutzerklärung - EinHaus Reichpietschstraße 13 eG - Genossenschaft Leipzig',
-  meta: [
-    {
-      name: 'description',
-      content: 'Datenschutzerklärung',
-    },
-    {
-      hid: 'og:title',
-      name: 'og:title',
-      content:
-        'Datenschutzerklärung - EinHaus Reichpietschstraße 13 eG - Genossenschaft Leipzig',
-    },
-    {
-      hid: 'og:site_name',
-      property: 'og:site_name',
-      content:
-        'Datenschutzerklärung - EinHaus Reichpietschstraße 13 eG - Genossenschaft Leipzig',
-    },
-    {
-      hid: 'og:image',
-      property: 'og:image',
-      content:
-        'https://www.einhaus-leipzig.de/images/logo-einhaus-genossenschaft-leipzig.png',
-    },
-    {
-      hid: 'og:description',
-      property: 'og:description',
-      content: 'Datenschutzerklärung',
-    },
-    {
-      hid: 'og:url',
-      property: 'og:url',
-      content: `https://www.einhaus-leipzig.de/datenschutz`,
-    },
-    {
-      hid: 'og:type',
-      property: 'og:type',
-      content: 'website',
-    },
-  ],
+  description: 'Datenschutzerklärung',
+  ogTitle:
+    'Datenschutzerklärung - EinHaus Reichpietschstraße 13 eG - Genossenschaft Leipzig',
+  ogSiteName:
+    'Datenschutzerklärung - EinHaus Reichpietschstraße 13 eG - Genossenschaft Leipzig',
+  ogImage:
+    'https://www.einhaus-leipzig.de/images/logo-einhaus-genossenschaft-leipzig.png',
+  ogDescription: 'Datenschutzerklärung',
+  ogUrl: 'https://www.einhaus-leipzig.de/datenschutz',
+  ogType: 'website',
 })
 
 definePageMeta({

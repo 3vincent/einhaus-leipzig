@@ -4,6 +4,20 @@ import type { LandingPageContent } from '~/util/types'
 
 const envVar = useRuntimeConfig()
 
+useSeoMeta({
+  title: 'EinHaus Reichpietschstraße 13 eG - Genossenschaft Leipzig',
+  description:
+    'Wir, die Mieter haben uns zusammengeschlossen und unser Haus selbst gekauft: Ein genossenschaftliches Hausprojekt in Leipzig Reudnitz.',
+  ogTitle: 'EinHaus Reichpietschstraße 13 eG - Genossenschaft Leipzig',
+  ogSiteName: 'EinHaus Reichpietschstraße 13 eG - Genossenschaft Leipzig',
+  ogImage:
+    'https://www.einhaus-leipzig.de/images/logo-einhaus-genossenschaft-leipzig.png',
+  ogDescription:
+    'Wir, die Mieter haben uns zusammengeschlossen und unser Haus selbst gekauft: Ein genossenschaftliches Hausprojekt in Leipzig Reudnitz.',
+  ogUrl: 'https://www.einhaus-leipzig.de',
+  ogType: 'website',
+})
+
 definePageMeta({
   layout: 'landing',
 })
