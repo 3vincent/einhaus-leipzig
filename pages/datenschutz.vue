@@ -14,6 +14,15 @@ useSeoMeta({
   ogType: 'website',
 })
 
+useHead({
+  link: [
+    {
+      rel: 'canonical',
+      href: 'https://www.einhaus-leipzig.de/datenschutz',
+    },
+  ],
+})
+
 definePageMeta({
   layout: 'default',
 })

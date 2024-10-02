@@ -15,6 +15,15 @@ useSeoMeta({
   ogType: 'website',
 })
 
+useHead({
+  link: [
+    {
+      rel: 'canonical',
+      href: 'https://www.einhaus-leipzig.de/kontakt',
+    },
+  ],
+})
+
 definePageMeta({
   layout: 'default',
 })
