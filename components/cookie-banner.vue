@@ -36,12 +36,21 @@ const denyCookie = () => {
           </p>
         </div>
         <div class="button-container">
-          <a href="#" rel="nofollow" @click.prevent="acceptCookie">
-            <button class="link primary"> Akzeptieren </button>
-          </a>
-          <a href="#" rel="nofollow" @click.prevent="denyCookie">
-            <button class="link secondary"> Verweigern </button>
-          </a>
+          <a
+            @click.prevent="acceptCookie"
+            role="button"
+            rel="nofollow"
+            class="link primary"
+            >Akzeptieren</a
+          >
+
+          <a
+            @click.prevent="denyCookie"
+            role="button"
+            rel="nofollow"
+            class="link secondary"
+            >Verweigern</a
+          >
         </div>
       </div>
     </div>

@@ -20,9 +20,7 @@ defineProps<{
     <div class="default-container">
       <div class="content">
         <h1>{{ error?.message }}</h1>
-        <NuxtLink to="/">
-          <button class="link secondary"> Back to Homepage </button>
-        </NuxtLink>
+        <NuxtLink to="/" class="link secondary"> Back to Homepage </NuxtLink>
         <h6>Error {{ error?.statusCode }}</h6>
       </div>
     </div>
