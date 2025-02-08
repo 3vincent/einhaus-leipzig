@@ -1,33 +1,13 @@
 <template>
   <div class="on-site-menu">
     <ul>
-      <li id="bisher-nav">
-        <NuxtLink :to="{ hash: '#bisher' }" :external="true">
-          Was bisher geschah
-        </NuxtLink>
-      </li>
-
-      <li id="ziele-nav">
-        <NuxtLink :to="{ hash: '#ziele' }" :external="true">
-          Unsere Ziele
-        </NuxtLink>
-      </li>
-
-      <li id="gemeinschaft-nav">
-        <NuxtLink :to="{ hash: '#gemeinschaft' }" :external="true">
-          EinHaus Gemeinschaft
-        </NuxtLink>
-      </li>
-
-      <li id="wohnhaus-nav">
-        <NuxtLink :to="{ hash: '#wohnhaus' }" :external="true">
-          Mehr als ein Wohnhaus
-        </NuxtLink>
-      </li>
-
-      <li id="unterstuetzung-nav">
-        <NuxtLink :to="{ hash: '#unterstuetzung' }" :external="true">
-          Unterstütze unser Projekt
+      <li
+        v-for="menuEntry in menuEntries"
+        :key="menuEntry.hash"
+        :id="`${menuEntry.hash}-nav`"
+      >
+        <NuxtLink :to="{ hash: `#${menuEntry.hash}` }" :external="true">
+          {{ menuEntry.text }}
         </NuxtLink>
       </li>
     </ul>
@@ -35,6 +15,36 @@
 </template>
 
 <script setup lang="ts">
+import { LANDING_PAGE_SLUGS } from '~/util/enums'
+
+type MenuEntry = {
+  hash: LANDING_PAGE_SLUGS
+  text: string
+}
+
+const menuEntries: MenuEntry[] = [
+  {
+    hash: LANDING_PAGE_SLUGS.BISHER,
+    text: 'Was bisher geschah',
+  },
+  {
+    hash: LANDING_PAGE_SLUGS.ZIELE,
+    text: 'Unsere Ziele',
+  },
+  {
+    hash: LANDING_PAGE_SLUGS.GEMEINSCHAFT,
+    text: 'EinHaus Gemeinschaft',
+  },
+  {
+    hash: LANDING_PAGE_SLUGS.WOHNHAUS,
+    text: 'Mehr als ein Wohnhaus',
+  },
+  {
+    hash: LANDING_PAGE_SLUGS.UNTERSTUZUNG,
+    text: 'Unterstütze unser Projekt',
+  },
+]
+
 async function highlightMenuItem() {
   if (window && window.innerWidth < 768) return
 
@@ -84,8 +94,8 @@ async function highlightMenuItem() {
   }
 }
 
-onMounted(async () => {
-  await highlightMenuItem()
+onMounted(() => {
+  highlightMenuItem()
 
   window.addEventListener('resize', highlightMenuItem)
 })
