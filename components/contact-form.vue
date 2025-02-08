@@ -582,7 +582,7 @@ button {
     overflow-wrap: break-word;
     padding: 0.5rem;
 
-    @media screen and (min-width: $_md) {
+    @media screen and (min-width: $md) {
       height: max-content;
       max-height: 200px;
     }

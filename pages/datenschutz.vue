@@ -585,7 +585,7 @@ const cookieConsentStatus = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-@media screen and (min-width: $_lg) {
+@media screen and (min-width: $lg) {
   .default-container::before {
     background-image: url(/images/einhaus-landing-photo-05.jpg);
   }

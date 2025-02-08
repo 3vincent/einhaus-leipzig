@@ -35,7 +35,7 @@
   min-height: calc(100vh - 60px); //Fallback
   min-height: calc(100svh - 60px);
 
-  @media (min-width: $_lg) {
+  @media (min-width: $lg) {
     min-height: calc(100vh - 120px); //Fallback
     min-height: calc(100svh - 120px);
   }
@@ -49,7 +49,7 @@
   margin: 0 auto;
   top: -30px;
 
-  @media (min-width: $_lg) {
+  @media (min-width: $lg) {
     top: -60px;
   }
 
@@ -68,7 +68,7 @@
   width: 100vw;
   bottom: 3rem;
 
-  @media screen and (min-width: $_md) {
+  @media screen and (min-width: $md) {
     bottom: 3rem;
   }
 

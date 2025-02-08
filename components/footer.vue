@@ -131,7 +131,7 @@ const envVar = useRuntimeConfig()
       font-weight: 700;
       color: rgba(193, 193, 193, 1);
 
-      @media screen and (min-width: $_md) {
+      @media screen and (min-width: $md) {
         font-size: 0.7rem;
       }
     }
@@ -143,11 +143,11 @@ const envVar = useRuntimeConfig()
   padding-right: 1.6rem;
   max-width: calc(800px + (2 * 1.6rem));
 
-  @media screen and (min-width: $_xs) {
+  @media screen and (min-width: $xs) {
     margin: 0 auto;
   }
 
-  @media screen and (min-width: $_xl) {
+  @media screen and (min-width: $xl) {
     margin: 0 auto;
   }
 }
@@ -177,7 +177,7 @@ ul {
     line-height: 1.4rem;
     color: rgb(230, 230, 230);
 
-    @media screen and (min-width: $_md) {
+    @media screen and (min-width: $md) {
       padding-bottom: 1.2rem;
       font-size: 0.9rem;
       line-height: 1.2rem;

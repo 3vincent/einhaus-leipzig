@@ -1,3 +1,5 @@
+@use "variables";
+
 .link {
   display: inline-block;
 
@@ -19,7 +21,7 @@
 
   cursor: pointer;
 
-  @media screen and (min-width: $_md) {
+  @media screen and (min-width: variables.$md) {
     margin-right: 1.4rem;
   }
 
@@ -71,7 +73,7 @@ p a {
   border-bottom: 1px solid var(--main-text-color-light-light);
   display: inline;
 
-  @media screen and (min-width: $_md) {
+  @media screen and (min-width: variables.$md) {
     border-bottom-width: 2px;
   }
 }

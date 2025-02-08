@@ -1,2 +1,2 @@
-@import './general/index.scss';
-@import './components/index.scss';
+@use 'general/index.scss';
+@use 'components/index.scss' as index2;

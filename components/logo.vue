@@ -45,7 +45,7 @@ function scrollUpOnLandingPage() {
 
 .conditional-class {
   /**
-  * Only switch to white logo, when screen size bigger than $_lg
+  * Only switch to white logo, when screen size bigger than $lg
   * */
   @media screen and (min-width: 821px) {
     filter: invert(100%);

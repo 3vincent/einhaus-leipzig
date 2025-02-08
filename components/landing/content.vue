@@ -119,7 +119,7 @@ onMounted(() => {
   bottom: -2px;
 }
 
-@media screen and (min-width: $_md) {
+@media screen and (min-width: $md) {
   .landing-container-first {
     /**
     // TODO

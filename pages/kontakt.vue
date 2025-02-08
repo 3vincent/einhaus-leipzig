@@ -50,7 +50,7 @@ const envVar = useRuntimeConfig()
 
 <style lang="scss" scoped>
 .default-container {
-  @media screen and (min-width: $_lg) {
+  @media screen and (min-width: $lg) {
     &::before {
       background-image: url(/images/einhaus-landing-photo-04.jpg);
     }

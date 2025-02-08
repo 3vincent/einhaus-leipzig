@@ -74,7 +74,7 @@ function makeTopMenuSticky() {
   background-color: transparent;
   transition: all 0.2s;
 
-  @media screen and (min-width: $_lg) {
+  @media screen and (min-width: $lg) {
     height: 120px;
     background-color: transparent;
   }
@@ -127,7 +127,7 @@ function makeTopMenuSticky() {
   background-color: transparent;
 
   &::before {
-    @media (min-width: $_md) {
+    @media (min-width: $md) {
       transition: all 0.4s;
       background-color: transparent;
       backdrop-filter: blur(8px) opacity(0) !important;
@@ -147,7 +147,7 @@ function makeTopMenuSticky() {
   top: 18px;
   transition: top 0.4s;
 
-  @media screen and (min-width: $_lg) {
+  @media screen and (min-width: $lg) {
     top: 40px;
     right: 20px;
   }

@@ -45,7 +45,7 @@ a {
   border-bottom: 0px !important;
 }
 
-@media screen and (min-width: $_lg) {
+@media screen and (min-width: $lg) {
   .default-container::before {
     background-image: url(/images/einhaus-landing-photo-06.jpg);
   }

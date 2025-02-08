@@ -71,7 +71,7 @@ const denyCookie = () => {
   max-width: calc(100vw - 0.5rem - 0.5rem);
   width: max-content;
 
-  @media screen and (min-width: $_md) {
+  @media screen and (min-width: $md) {
     max-width: calc(100vw - 1rem - 1rem);
   }
 }
@@ -79,7 +79,7 @@ const denyCookie = () => {
 .content {
   padding: 0.5rem;
 
-  @media screen and (min-width: $_md) {
+  @media screen and (min-width: $md) {
     padding: 0rem 1rem;
   }
 }

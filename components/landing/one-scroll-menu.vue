@@ -104,7 +104,7 @@ onMounted(async () => {
   margin-bottom: calc(50vh - (250px / 2));
   top: calc(50% - (250px / 2));
 
-  @media screen and (min-width: $_md) {
+  @media screen and (min-width: $md) {
     display: block;
   }
 
