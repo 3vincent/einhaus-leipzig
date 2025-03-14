@@ -4,7 +4,6 @@ const route = useRoute()
 useHead({
   link: [
     {
-      hid: 'canonical',
       rel: 'canonical',
       href: 'https://www.einhaus-leipzig.de' + route.path,
     },
