@@ -28,6 +28,20 @@ definePageMeta({
 })
 
 const envVar = useRuntimeConfig()
+let isMobile = ref(false)
+
+const calculateMobile = () => {
+  isMobile.value = window.innerWidth < 992
+}
+
+onMounted(() => {
+  addEventListener('resize', calculateMobile)
+  calculateMobile()
+})
+
+onUnmounted(() => {
+  removeEventListener('resize', calculateMobile)
+})
 </script>
 
 <template>
@@ -159,6 +173,19 @@ const envVar = useRuntimeConfig()
         </small>
       </div>
     </div>
+
+    <div class="content custom-paddings">
+      <hr v-if="isMobile" />
+
+      <small>
+        👾 Website proudly created by Ben
+        <small
+          >(<a href="https://www.github.com/3vincent" target="_blank"
+            >https://www.github.com/3vincent</a
+          >)</small
+        >
+      </small>
+    </div>
   </div>
 </template>
 
@@ -167,5 +194,9 @@ const envVar = useRuntimeConfig()
   .default-container::before {
     background-image: url(/images/einhaus-landing-photo-06.jpg);
   }
+}
+
+.custom-paddings {
+  margin-top: -80px;
 }
 </style>
