@@ -10,12 +10,21 @@
           {{ menuEntry.text }}
         </NuxtLink>
       </li>
+
+      <div
+        class="menuItemIndicator"
+        :style="{
+          transform: `translateY(${menuItemIndicatorScrollPosition}px)`,
+        }"
+      ></div>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
 import { LANDING_PAGE_SLUGS } from '~/util/enums'
+
+let menuItemIndicatorScrollPosition = ref(0)
 
 type MenuEntry = {
   hash: LANDING_PAGE_SLUGS
@@ -73,6 +82,17 @@ async function highlightMenuItem() {
 
             menuItemToHighlight?.classList.add('is-active')
 
+            const currentHighlightedMenuItemIndex = Array.from(
+              menuItems
+            ).findIndex(item => item.id === menuItemToHighlight?.id)
+
+            if (currentHighlightedMenuItemIndex >= 0)
+              menuItemIndicatorScrollPosition.value =
+                50 * currentHighlightedMenuItemIndex
+            if (currentHighlightedMenuItemIndex < 0)
+              menuItemIndicatorScrollPosition.value = 0
+
+            // update url while scrolling over elements but not clicking in the side menu
             if (entry.target.parentElement?.id) {
               await navigateTo({
                 hash: `#${entry.target.parentElement?.id}`,
@@ -162,23 +182,19 @@ onMounted(() => {
     padding-left: 0.6rem;
   }
 
-  // ul li:hover {
-  //   background-color: white;
-  //   box-shadow: 0px 0px 0.4rem rgba(70, 70, 70, 0.9);
+  // .is-active {
   // }
 
-  // ul li a:hover {
-  //   color: var(--main-text-color-dark);
-  // }
-
-  .is-active {
-    background-color: var(--onescroll-menu-background-highlighting);
-    border-right: 4px solid white;
+  .menuItemIndicator {
+    position: absolute;
+    height: 50px;
+    width: 3px;
+    right: -1px;
+    top: 0px;
+    background-color: white;
+    transition: transform 0.3s ease-in-out;
+    will-change: transform;
   }
-
-  // .is-active:hover {
-  //   box-shadow: none;
-  // }
 
   li.is-active a,
   li.is-active a:visited {
