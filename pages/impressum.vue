@@ -196,6 +196,11 @@ onUnmounted(() => {
   }
 }
 
+.default-container {
+  flex-direction: column;
+  align-items: center;
+}
+
 .custom-paddings {
   margin-top: -80px;
 }
