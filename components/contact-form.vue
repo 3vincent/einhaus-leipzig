@@ -148,14 +148,14 @@ const isEmailValidated = computed(() => {
     ) &&
     payload.value.email.length >= 5 &&
     payload.value.email.includes('@') &&
-    payload.value.email.split('@')[1].split('.')[0] &&
+    payload.value.email.split('@')[1]?.split('.')[0] &&
     payload.value.email.split('@').length == 2 &&
-    payload.value.email.split('@')[0].length > 0 &&
-    payload.value.email.split('@')[1].includes('.') &&
+    (payload.value.email?.split('@')[0]?.length ?? 0) > 0 &&
+    payload.value.email.split('@')[1]?.includes('.') &&
     payload.value.email.slice(payload.value.email.lastIndexOf('.') + 1).length >
       0 &&
-    !payload.value.email.split('@')[1].includes('_') &&
-    !payload.value.email.split('@')[1].includes('~') &&
+    !payload.value.email.split('@')[1]?.includes('_') &&
+    !payload.value.email.split('@')[1]?.includes('~') &&
     payload.value.email.indexOf('..') == -1
   ) {
     return true

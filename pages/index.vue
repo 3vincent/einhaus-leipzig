@@ -39,15 +39,14 @@ function lazyLoadImages() {
       (entries, observer) => {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            landingPageContents.value[
-              landingPageContents.value.indexOf(
-                landingPageContents.value.find(
-                  item => item.slug === entry.target.id
-                )!
-              )
-            ].visible = true
+            const item = landingPageContents.value.find(
+              item => item.slug === entry.target.id
+            )
 
-            lazyBackgroundObserver.unobserve(entry.target)
+            if (item) {
+              item.visible = true
+              lazyBackgroundObserver.unobserve(entry.target)
+            }
           }
         })
       },
