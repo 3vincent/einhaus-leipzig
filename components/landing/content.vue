@@ -22,6 +22,7 @@
       <div class="landing-contentBox">
         <h2>{{ title }}</h2>
 
+        <!-- eslint-disable-next-line vue/no-v-html -->
         <div v-html="htmlText"></div>
 
         <slot />
@@ -64,18 +65,20 @@ function fixBackgroundImage() {
   ) as HTMLDivElement
 
   if ('IntersectionObserver' in window) {
-    let fixBackgroundImage = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          if (entry.target === intersectioObserverAlertElementTop) {
-            element.classList.remove('sticky-background')
-            return
-          }
+    const fixBackgroundImage = new IntersectionObserver(
+      (entries, _observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (entry.target === intersectioObserverAlertElementTop) {
+              element.classList.remove('sticky-background')
+              return
+            }
 
-          element.classList.add('sticky-background')
-        }
-      })
-    })
+            element.classList.add('sticky-background')
+          }
+        })
+      }
+    )
 
     fixBackgroundImage.observe(intersectioObserverAlertElementBottom)
     fixBackgroundImage.observe(intersectioObserverAlertElementTop)

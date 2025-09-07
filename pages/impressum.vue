@@ -28,7 +28,7 @@ definePageMeta({
 })
 
 const envVar = useRuntimeConfig()
-let isMobile = ref(false)
+const isMobile = ref(false)
 
 const calculateMobile = () => {
   isMobile.value = window.innerWidth < 992

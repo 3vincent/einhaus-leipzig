@@ -25,7 +25,7 @@ const denyCookie = () => {
 
 <template>
   <!-- <div class="container" v-if="cookieConsent === 'denied' || !cookieConsent"> -->
-  <div class="cookie-container" v-if="cookieConsent === 'initial'">
+  <div v-if="cookieConsent === 'initial'" class="cookie-container">
     <div class="content">
       <div class="inner-content">
         <div class="text-container">
@@ -37,18 +37,18 @@ const denyCookie = () => {
         </div>
         <div class="button-container">
           <a
-            @click.prevent="acceptCookie"
             role="button"
             rel="nofollow"
             class="link primary"
+            @click.prevent="acceptCookie"
             >Akzeptieren</a
           >
 
           <a
-            @click.prevent="denyCookie"
             role="button"
             rel="nofollow"
             class="link secondary"
+            @click.prevent="denyCookie"
             >Verweigern</a
           >
         </div>

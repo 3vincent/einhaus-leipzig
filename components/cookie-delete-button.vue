@@ -4,7 +4,6 @@ const showCheck = ref(false)
 
 const deleteCookie = () => {
   try {
-    // @ts-ignore
     showCheck.value = true
     setTimeout(() => {
       showCheck.value = false
@@ -19,11 +18,11 @@ const deleteCookie = () => {
 
 <template>
   <a
+    v-if="cookieConsent !== 'initial'"
     href="#"
     rel="nofollow"
     class="link secondary"
-    v-on:click.prevent="deleteCookie"
-    v-if="cookieConsent !== 'initial'"
+    @click.prevent="deleteCookie"
   >
     Cookie löschen
     <Transition>

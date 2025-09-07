@@ -84,4 +84,5 @@ export default defineNuxtConfig({
       },
     },
   },
+  modules: [['@nuxt/eslint', { config: { stylistic: false }, checker: true }]],
 })

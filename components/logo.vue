@@ -8,7 +8,7 @@
       /> -->
       <img
         src="/images/logo-einhaus-genossenschaft-leipzig-2-snaped.svg"
-        v-bind:class="{ 'conditional-class': isWhite }"
+        :class="{ 'conditional-class': isWhite }"
         alt="EinHaus Reichpietschtrasse 13 eG - Logo"
       />
     </div>

@@ -1,15 +1,15 @@
 <template>
   <Teleport to="body">
     <Transition name="modal-fade">
-      <div class="modal-overlay" v-show="show">
+      <div v-show="show" class="modal-overlay">
         <div class="modal">
           <div class="modal-content">
             <slot></slot>
           </div>
           <button
             v-if="showCloseButton"
-            @click="closeModal"
             class="close-button link secondary small"
+            @click="closeModal"
             >Schließen</button
           >
         </div>

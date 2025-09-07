@@ -70,6 +70,8 @@ function toggleClickState() {
 
   return (menuVisible.value = false)
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function detectOutsideClickToClose(event: any) {
   const isClickInside = userMenu.value?.contains(event.target)
 

@@ -1,13 +1,13 @@
 <template>
   <div
     class="top-menu-container"
-    v-bind:class="{
+    :class="{
       'default-sites-menubar': isDefault,
       'landing-site-menubar': isLanding,
       'smaller-after-scroll': isMenuFixed,
     }"
   >
-    <div class="logo-container"><Logo :isWhite="logoWhite" /></div>
+    <div class="logo-container"><Logo :is-white="logoWhite" /></div>
 
     <div class="menu-container">
       <UserMenu />

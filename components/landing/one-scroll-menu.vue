@@ -3,8 +3,8 @@
     <ul>
       <li
         v-for="menuEntry in menuEntries"
-        :key="menuEntry.hash"
         :id="`${menuEntry.hash}-nav`"
+        :key="menuEntry.hash"
       >
         <NuxtLink :to="{ hash: `#${menuEntry.hash}` }" :external="true">
           {{ menuEntry.text }}
@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { LANDING_PAGE_SLUGS } from '~/util/enums'
 
-let menuItemIndicatorScrollPosition = ref(0)
+const menuItemIndicatorScrollPosition = ref(0)
 
 type MenuEntry = {
   hash: LANDING_PAGE_SLUGS
@@ -67,7 +67,7 @@ async function highlightMenuItem() {
     }
 
     const menuHighlightObserver = new IntersectionObserver(
-      (entries, observer) => {
+      (entries, _observer) => {
         entries.forEach(async entry => {
           const menuItems = document.querySelectorAll('.on-site-menu li')
 

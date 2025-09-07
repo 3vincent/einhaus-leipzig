@@ -1,4 +1,4 @@
-import { LANDING_PAGE_SLUGS } from './enums'
+import type { LANDING_PAGE_SLUGS } from './enums'
 
 export type LandingPageContent = {
   slug: LANDING_PAGE_SLUGS

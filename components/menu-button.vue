@@ -1,6 +1,6 @@
 <template>
   <button aria-label="Main User Menu">
-    <div id="main-menu-button" v-bind:class="{ open: isActive }">
+    <div id="main-menu-button" :class="{ open: isActive }">
       <span></span>
       <span></span>
       <span></span>

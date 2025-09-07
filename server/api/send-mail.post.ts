@@ -1,5 +1,5 @@
-import nodemailer from 'nodemailer'
 import Joi from 'joi'
+import nodemailer from 'nodemailer'
 import { sanitizer } from '~/util/sanitizer'
 
 const smtpHost: string = process.env.SMTP_HOST || ''
@@ -32,7 +32,7 @@ export interface PayloadData {
   age: number
 }
 
-async function validatePayload(payload: PayloadData): Promise<any> {
+async function validatePayload(payload: PayloadData): Promise<PayloadData> {
   const schema = Joi.object({
     name: Joi.string().min(1).max(120).required().trim(),
     email: Joi.string().email().required().trim(),
@@ -107,6 +107,7 @@ export default defineEventHandler(async event => {
         msg: 'Your message was sent. Thank you.',
       }),
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     console.log(err)
 

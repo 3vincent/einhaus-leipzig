@@ -35,8 +35,8 @@ function lazyLoadImages() {
   const lazyBackgrounds = Array.from(document.querySelectorAll('.background'))
 
   if ('IntersectionObserver' in window) {
-    let lazyBackgroundObserver = new IntersectionObserver(
-      (entries, observer) => {
+    const lazyBackgroundObserver = new IntersectionObserver(
+      (entries, _observer) => {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
             const item = landingPageContents.value.find(

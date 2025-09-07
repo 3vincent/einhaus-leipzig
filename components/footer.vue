@@ -2,7 +2,7 @@
   <div class="footer-container">
     <div
       class="grid-container"
-      v-bind:class="{ 'grid-container--conditional': isLanding }"
+      :class="{ 'grid-container--conditional': isLanding }"
     >
       <div class="grid-container-inner">
         <div class="kontakt list-container">

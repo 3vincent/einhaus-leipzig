@@ -47,6 +47,7 @@ async function handleSubmit() {
 
     moveLoadingAnimationToCenter()
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const response: any = await $fetch('/api/send-mail', {
       method: 'POST',
       body: JSON.stringify(sanitizedPayload),
@@ -191,16 +192,16 @@ onBeforeUnmount(() => {
           <form
             name="contact"
             method="POST"
-            @submit.prevent="handleSubmit"
             novalidate
+            @submit.prevent="handleSubmit"
           >
             <div class="input-container">
               <FormTooltip v-if="showTooltipInElement === 'name'" />
 
               <input
-                required
                 v-model="payload.name"
-                v-bind:class="
+                required
+                :class="
                   isNameValidated
                     ? 'single-field-filled'
                     : payload.name
@@ -221,9 +222,9 @@ onBeforeUnmount(() => {
               <FormTooltip v-if="showTooltipInElement === 'email'" />
 
               <input
-                required
                 v-model="payload.email"
-                v-bind:class="
+                required
+                :class="
                   isEmailValidated
                     ? 'single-field-filled'
                     : payload.email
@@ -250,11 +251,11 @@ onBeforeUnmount(() => {
               <FormTooltip v-if="showTooltipInElement === 'message'" />
 
               <textarea
+                v-model="payload.message"
                 placeholder=" "
                 required
                 name="message"
-                v-model="payload.message"
-                v-bind:class="
+                :class="
                   isMessageValidated
                     ? 'single-field-filled'
                     : payload.message
@@ -290,10 +291,10 @@ onBeforeUnmount(() => {
               <FormTooltip v-if="showTooltipInElement === 'gdpr'" />
 
               <input
-                required
-                v-model="payload.gdpr"
-                type="checkbox"
                 id="privacy-agreement"
+                v-model="payload.gdpr"
+                required
+                type="checkbox"
                 name="scales"
                 @focus="onFocus"
                 @click="onFocus"
@@ -374,8 +375,8 @@ onBeforeUnmount(() => {
               <a
                 href="#"
                 rel="nofollow"
-                v-on:click.prevent="copyToClipboard"
                 class="link secondary small"
+                @click.prevent="copyToClipboard"
                 >Nachricht in die Zwischenablage kopieren</a
               >
 
