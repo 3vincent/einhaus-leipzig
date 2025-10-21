@@ -627,7 +627,7 @@ input[type='checkbox']:checked::after {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
   position: absolute;
-  top: px;
+  top: 0px;
   left: 6px;
 }
 
