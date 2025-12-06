@@ -25,24 +25,9 @@
         <div class="navigation list-container">
           <h3 class="headline"> Navigation </h3>
           <ul>
-            <li>
-              <NuxtLink to="/">
-                <span>Home</span>
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/kontakt">
-                <span>Kontakt</span>
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/impressum">
-                <span>Impressum</span>
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/datenschutz">
-                <span>Datenschutzerklärung</span>
+            <li v-for="link in navigationLinks" :key="link.to">
+              <NuxtLink :to="link.to">
+                <span>{{ link.label }}</span>
               </NuxtLink>
             </li>
           </ul>
@@ -77,12 +62,15 @@
 </template>
 
 <script setup lang="ts">
+import { PRIMARY_NAVIGATION_LINKS } from '~/util/navigation-links'
+
 const { isLanding = false } = defineProps<{
   isLanding?: boolean
 }>()
 
 const currentYear = new Date().getFullYear()
 const envVar = useRuntimeConfig()
+const navigationLinks = PRIMARY_NAVIGATION_LINKS
 </script>
 
 <style lang="scss" scoped>

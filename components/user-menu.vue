@@ -9,21 +9,9 @@
       :class="{ 'is-visible': menuVisible, 'hide-on-load': hideOnLoad }"
     >
       <ul id="primary-navigation" class="user-menu-list">
-        <li>
-          <NuxtLink to="/">
-            <span>Home</span>
-          </NuxtLink>
-        </li>
-
-        <li>
-          <NuxtLink to="/kontakt">
-            <span>Kontakt</span>
-          </NuxtLink>
-        </li>
-
-        <li>
-          <NuxtLink to="/impressum">
-            <span>Impressum</span>
+        <li v-for="link in navigationLinks" :key="link.to">
+          <NuxtLink :to="link.to">
+            <span>{{ link.label }}</span>
           </NuxtLink>
         </li>
       </ul>
@@ -32,8 +20,11 @@
 </template>
 
 <script setup lang="ts">
+import { PRIMARY_NAVIGATION_LINKS } from '~/util/navigation-links'
+
 const menuVisible = ref(false)
 const hideOnLoad = ref(true)
+const navigationLinks = PRIMARY_NAVIGATION_LINKS
 
 onBeforeUnmount(() => {
   userMenu.value?.removeEventListener('click', toggleMenuModal, false)
