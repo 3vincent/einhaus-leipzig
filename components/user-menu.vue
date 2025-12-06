@@ -24,7 +24,12 @@ import { PRIMARY_NAVIGATION_LINKS } from '~/util/navigation-links'
 
 const menuVisible = ref(false)
 const hideOnLoad = ref(true)
-const navigationLinks = PRIMARY_NAVIGATION_LINKS
+const navigationLinks = computed(() =>
+  PRIMARY_NAVIGATION_LINKS.filter(link => {
+    const slug = link.to.toLowerCase()
+    return !slug.includes('datenschutz') && !slug.includes('impressum')
+  })
+)
 
 onBeforeUnmount(() => {
   userMenu.value?.removeEventListener('click', toggleMenuModal, false)
