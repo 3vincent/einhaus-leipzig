@@ -19,6 +19,7 @@ body {
   flex-wrap: wrap;
   text-align: left;
   justify-content: center;
+  gap: 20px;
 
   &::before {
     background-color: white;
@@ -49,9 +50,16 @@ body {
     margin-top: 0;
     margin-bottom: 0;
 
-    @media screen and (min-width: variables.$lg) {
-      margin-top: 100px;
-      margin-bottom: 100px;
+    &:first-of-type {
+      @media screen and (min-width: variables.$lg) {
+        margin-top: 100px;
+      }
+    }
+
+    &:last-of-type {
+      @media screen and (min-width: variables.$lg) {
+        margin-bottom: 100px;
+      }
     }
 
     a,

@@ -174,7 +174,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div class="content custom-paddings">
+    <div class="content">
       <hr v-if="isMobile" />
 
       <small>
@@ -199,9 +199,5 @@ onUnmounted(() => {
 .default-container {
   flex-direction: column;
   align-items: center;
-}
-
-.custom-paddings {
-  margin-top: -80px;
 }
 </style>
