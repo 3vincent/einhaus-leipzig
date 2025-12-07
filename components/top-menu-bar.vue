@@ -10,12 +10,41 @@
     <div class="logo-container"><Logo :is-white="logoWhite" /></div>
 
     <div class="menu-container">
+      <NuxtLink
+        v-if="!isMobile && !isMitgliedPage"
+        to="/mitglied-werden"
+        class="link primary small"
+        style="margin: 0 !important; top: -5px"
+      >
+        Mitglied werden
+      </NuxtLink>
+
       <UserMenu />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+const route = useRoute()
+const isMitgliedPage = computed(() =>
+  (route.path || '').toLowerCase().includes('mitglied')
+)
+
+const isMobile = ref(false)
+
+const calculateMobile = () => {
+  isMobile.value = window.innerWidth < 480
+}
+
+onMounted(() => {
+  addEventListener('resize', calculateMobile)
+  calculateMobile()
+})
+
+onUnmounted(() => {
+  removeEventListener('resize', calculateMobile)
+})
+
 const {
   isDefault = false,
   isLanding = false,
@@ -152,6 +181,9 @@ function makeTopMenuSticky() {
   right: 14px;
   top: 18px;
   transition: top 0.4s;
+
+  display: flex;
+  gap: 1rem;
 
   @media screen and (min-width: $lg) {
     top: 40px;
