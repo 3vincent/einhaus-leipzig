@@ -1,5 +1,5 @@
 <template>
-  <div class="landing-container background">
+  <div id="aktuelles" class="landing-container background">
     <div class="landing-contentBox">
       <h2> Aktuelles </h2>
       <p>
@@ -13,7 +13,7 @@
 
 <style lang="scss" scoped>
 .landing-container {
-  min-height: 70vh;
+  min-height: 100vh;
   box-shadow: none;
   // top: -4px;
 }
