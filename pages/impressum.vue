@@ -175,8 +175,6 @@ onUnmounted(() => {
     </div>
 
     <div class="content">
-      <hr v-if="isMobile" />
-
       <small>
         👾 Website proudly created by Ben
         <small
@@ -190,10 +188,8 @@ onUnmounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@media screen and (min-width: $lg) {
-  .default-container::before {
-    background-image: url(/images/einhaus-landing-photo-06.jpg);
-  }
+.default-container::before {
+  background-image: url(/images/einhaus-landing-photo-06.jpg);
 }
 
 .default-container {

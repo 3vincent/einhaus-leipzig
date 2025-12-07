@@ -92,7 +92,13 @@ function makeTopMenuSticky() {
 .default-sites-menubar {
   .logo-container {
     padding: 1rem;
-    margin-left: 1rem;
+    padding-left: 0.8rem;
+    margin-left: 0rem;
+
+    @media screen and (min-width: $lg) {
+      margin-left: 1rem;
+      padding: 1rem;
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-@use "../general/variables";
+@use '../general/variables';
 
 .landing {
   &-container {
@@ -63,13 +63,14 @@
 
     padding: 2rem;
     padding-left: 1.6rem;
-    padding-right: 4rem;
+    padding-right: 1.6rem;
 
     background-color: white;
 
     @media screen and (min-width: variables.$md) {
       padding-top: 1rem;
       padding-bottom: 1rem;
+      padding-right: 4rem;
       margin-top: 2rem;
       margin-right: 0.7rem;
       margin-bottom: 2rem;
