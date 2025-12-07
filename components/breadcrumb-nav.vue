@@ -1,10 +1,13 @@
 <script setup lang="ts">
 const router = useRouter()
 
-const thisRouteName = computed(
-  () =>
+const thisRouteName = computed(() =>
+  (
     (router.currentRoute.value.name as string).toUpperCase()[0] +
     (router.currentRoute.value.name as string).toLowerCase().slice(1)
+  )
+    .split('-')
+    .join(' ')
 )
 </script>
 
