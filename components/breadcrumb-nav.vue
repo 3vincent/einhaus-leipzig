@@ -12,7 +12,7 @@ const thisRouteName = computed(
   <div class="breadcrumbs">
     <span>
       <NuxtLink to="/">
-        <span>Home</span>
+        <span>Startseite</span>
       </NuxtLink>
     </span>
 
