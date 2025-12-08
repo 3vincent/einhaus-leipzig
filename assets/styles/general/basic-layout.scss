@@ -28,8 +28,7 @@ body {
     background-position: 50% 0;
     background-size: cover;
     content: '';
-    min-height: 100vh; //fallback
-    min-height: 100svh;
+    min-height: 100vh;
     left: 0;
     position: fixed;
     top: 0;
@@ -44,7 +43,6 @@ body {
 
   .content {
     width: calc(100% - 20px);
-    // width: 100%;
     max-width: calc(800px + (2 * 2rem));
     padding: 1rem;
     background-color: white;
