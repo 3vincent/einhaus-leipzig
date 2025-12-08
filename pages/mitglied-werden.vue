@@ -175,7 +175,7 @@
             class="link secondary link-elevation"
             >PDF herunterladen</a
           >
-          Informationsblatt als PDF herunterladen
+          <span>Informationsblatt als PDF herunterladen</span>
         </div>
 
         <div>
@@ -186,7 +186,7 @@
             Online-Beitritt ausfüllen
           </NuxtLink>
 
-          Beitrittserklärung online ausfüllen
+          <span>Beitrittserklärung online ausfüllen</span>
         </div>
       </div>
     </div>
@@ -651,6 +651,13 @@ ul.list-card {
       margin: 0.4rem 0 0;
       line-height: 1.6;
     }
+  }
+}
+
+.action-button-wrapper {
+  div {
+    display: flex;
+    align-items: center;
   }
 }
 </style>
