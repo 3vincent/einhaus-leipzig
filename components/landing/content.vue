@@ -7,11 +7,13 @@
 
     <div
       :id="slug"
+      ref="landingContainer"
       class="landing-container background"
       :class="{
         'landing-container-first': firstContainer,
         'landing-container-no-bottom-border': lastContainer,
         'fix-background-image': lastContainer,
+        'safari-fixed-off': isSafari,
       }"
       :style="
         visible
@@ -49,7 +51,18 @@ const backgroundImageUrlSmall = computed(() => {
   return props.backgroundImageUrl.replace('.jpg', '-small.jpg')
 })
 
+const isSafari = computed(() => {
+  if (typeof navigator === 'undefined') return false
+  const ua = navigator.userAgent
+  const isWebkit = /safari/i.test(ua) && !/chrome|crios|fxios/i.test(ua)
+  const isAndroid = /android/i.test(ua)
+  return isWebkit && !isAndroid
+})
+
+const landingContainer = ref<HTMLElement | null>(null)
+
 function fixBackgroundImage() {
+  // if (window.innerWidth < 1280 || isSafari.value) return
   if (window.innerWidth < 1280) return
 
   const element = document.querySelector(
@@ -87,6 +100,10 @@ function fixBackgroundImage() {
 
 onMounted(() => {
   if (props.lastContainer) fixBackgroundImage()
+
+  if (isSafari.value) {
+    landingContainer.value?.classList.add('safari-fixed-off')
+  }
 })
 </script>
 
@@ -120,6 +137,14 @@ onMounted(() => {
 
 .intersection-observer-alert-element-bottom {
   bottom: -2px;
+}
+
+.safari-fixed-off {
+  background-attachment: scroll !important;
+
+  &::before {
+    display: none !important;
+  }
 }
 
 @media screen and (min-width: $md) {
