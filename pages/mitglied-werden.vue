@@ -172,7 +172,7 @@
           <a
             :href="'/informationsblatt-mitglied-werden.pdf'"
             role="button"
-            class="link secondary"
+            class="link secondary link-elevation"
             >PDF herunterladen</a
           >
           Informationsblatt als PDF herunterladen
@@ -181,7 +181,7 @@
         <div>
           <NuxtLink
             to="/mitglied-werden/online-beitritt-ausfuellen"
-            class="link primary"
+            class="link primary link-elevation"
           >
             Online-Beitritt ausfüllen
           </NuxtLink>

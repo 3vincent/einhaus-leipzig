@@ -13,7 +13,7 @@
       <NuxtLink
         v-if="!isMobile && !isMitgliedPage"
         to="/mitglied-werden"
-        class="link primary small"
+        class="link primary small link-elevation"
         style="margin: 0 !important; top: -5px"
       >
         Mitglied werden

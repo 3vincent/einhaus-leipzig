@@ -236,14 +236,14 @@ const landingPageContents = ref<LandingPageContent[]>([
         :background-image-url="content.backgroundImageUrl"
       >
         <div v-if="content.slug === LANDING_PAGE_SLUGS.UNTERSTUZUNG">
-          <NuxtLink to="/kontakt" class="link primary">
+          <NuxtLink to="/kontakt" class="link primary link-elevation">
             Kontaktformular
           </NuxtLink>
 
           <a
             :href="`mailto:${envVar.public.OFFICIAL_CONTACT_ADDRESS}`"
             role="button"
-            class="link secondary"
+            class="link secondary link-elevation"
             >Email schreiben</a
           >
 
