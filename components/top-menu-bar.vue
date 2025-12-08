@@ -164,7 +164,6 @@ function makeTopMenuSticky() {
   &::before {
     @media (min-width: $md) {
       transition: all 0.4s;
-      background-color: transparent;
       backdrop-filter: blur(8px) opacity(0) !important;
       -webkit-backdrop-filter: blur(8px) opacity(0) !important;
       animation: none;
