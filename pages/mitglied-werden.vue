@@ -481,7 +481,7 @@ ul.list-card {
   margin: 1.5rem 0 2rem;
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 
   li {
     display: grid;
