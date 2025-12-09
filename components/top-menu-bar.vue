@@ -166,6 +166,7 @@ function makeTopMenuSticky() {
       transition: all 0.4s;
       backdrop-filter: blur(8px) opacity(0) !important;
       -webkit-backdrop-filter: blur(8px) opacity(0) !important;
+      background-color: transparent;
       animation: none;
     }
   }
