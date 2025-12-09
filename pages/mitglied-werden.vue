@@ -658,6 +658,12 @@ ul.list-card {
   div {
     display: flex;
     align-items: center;
+
+    @media screen and (min-width: $xxs) {
+      > *:nth-child(1) {
+        flex-basis: max-content;
+      }
+    }
   }
 }
 </style>
