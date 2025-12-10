@@ -17,5 +17,6 @@ useHead({
     <NuxtPage />
     <Footer />
     <CookieBanner />
+    <ToastStack />
   </div>
 </template>

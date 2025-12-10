@@ -17,5 +17,6 @@ useHead({
     <slot />
     <Footer :is-landing="true" />
     <CookieBanner />
+    <ToastStack />
   </div>
 </template>
