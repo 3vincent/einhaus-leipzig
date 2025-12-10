@@ -34,5 +34,6 @@ useHead({
 
 definePageMeta({
   layout: 'default',
+  breadcrumb: 'Online-Beitritt ausfüllen',
 })
 </script>
