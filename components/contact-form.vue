@@ -20,6 +20,7 @@ const showTooltipInElement = ref<'name' | 'email' | 'message' | 'gdpr' | null>(
 )
 const STORAGE_KEY = 'einhaus-contact-form'
 const isReady = ref(false)
+const { showToast } = useToast()
 
 function onFocus() {
   if (showTooltipInElement.value !== null) showTooltipInElement.value = null
@@ -96,10 +97,20 @@ async function handleSubmit() {
       redirectTimeout = setTimeout(() => {
         router.push('/')
       }, 8000)
+
+      showToast({
+        style: 'success',
+        message: 'Deine Nachricht wurde gesendet.',
+      })
     }
   } catch (error) {
     console.log(error)
     sendResponse.value = 535
+    showToast({
+      style: 'error',
+      message:
+        'Deine Nachricht konnte nicht gesendet werden. Bitte versuche es später erneut.',
+    })
   }
 }
 
