@@ -1,28 +1,67 @@
 <script setup lang="ts">
-const router = useRouter()
+const route = useRoute()
 
-const thisRouteName = computed(() =>
-  (
-    (router.currentRoute.value.name as string).toUpperCase()[0] +
-    (router.currentRoute.value.name as string).toLowerCase().slice(1)
-  )
-    .split('-')
-    .join(' ')
-)
+const formatSegment = (segment: string) => {
+  const umlautMap: Record<string, string> = {
+    ae: 'ä',
+    oe: 'ö',
+    ue: 'ü',
+  }
+
+  let text = segment.replace(/-/g, ' ')
+
+  Object.entries(umlautMap).forEach(([ascii, umlaut]) => {
+    const regex = new RegExp(ascii, 'gi')
+    text = text.replace(regex, match =>
+      match === match.toUpperCase() ? umlaut.toUpperCase() : umlaut
+    )
+  })
+
+  return text.charAt(0).toUpperCase() + text.slice(1)
+}
+
+const breadcrumbs = computed(() => {
+  const segments = route.path.split('/').filter(Boolean)
+
+  let pathAccumulator = ''
+  const items = segments.map((segment, index) => {
+    pathAccumulator += `/${segment}`
+    const isLast = index === segments.length - 1
+    return {
+      label:
+        isLast && route.meta?.breadcrumb
+          ? (route.meta.breadcrumb as string)
+          : formatSegment(segment),
+      to: isLast ? null : pathAccumulator,
+    }
+  })
+
+  return [{ label: 'Startseite', to: '/' }, ...items]
+})
 </script>
 
 <template>
-  <div class="breadcrumbs">
-    <span>
-      <NuxtLink to="/">
-        <span>Startseite</span>
-      </NuxtLink>
-    </span>
+  <nav class="breadcrumbs" aria-label="Brotkrumen">
+    <template
+      v-for="(crumb, index) in breadcrumbs"
+      :key="crumb.to || crumb.label"
+    >
+      <span v-if="crumb.to">
+        <NuxtLink :to="crumb.to">
+          <span class="w-bold underline">{{ crumb.label }}</span>
+        </NuxtLink>
+      </span>
+      <span v-else class="w-light">
+        {{ crumb.label }}
+      </span>
 
-    <div class="arrow"></div>
-
-    <span>{{ thisRouteName }}</span>
-  </div>
+      <div
+        v-if="index < breadcrumbs.length - 1"
+        class="arrow"
+        aria-hidden="true"
+      ></div>
+    </template>
+  </nav>
 </template>
 
 <style lang="scss" scoped>
@@ -57,5 +96,17 @@ const thisRouteName = computed(() =>
   border: solid var(--main-text-color-dark);
   border-width: 0 1px 1px 0;
   transform: rotate(-45deg);
+}
+
+.w-bold {
+  font-weight: 500;
+}
+
+.w-light {
+  font-weight: 300;
+}
+
+.underline {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.555);
 }
 </style>
