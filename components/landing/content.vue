@@ -51,13 +51,7 @@ const backgroundImageUrlSmall = computed(() => {
   return props.backgroundImageUrl.replace('.jpg', '-small.jpg')
 })
 
-const isSafari = computed(() => {
-  if (typeof navigator === 'undefined') return false
-  const ua = navigator.userAgent
-  const isWebkit = /safari/i.test(ua) && !/chrome|crios|fxios/i.test(ua)
-  const isAndroid = /android/i.test(ua)
-  return isWebkit && !isAndroid
-})
+const isSafari = ref(false)
 
 const landingContainer = ref<HTMLElement | null>(null)
 
@@ -99,6 +93,11 @@ function fixBackgroundImage() {
 }
 
 onMounted(() => {
+  const ua = navigator.userAgent
+  const isWebkit = /safari/i.test(ua) && !/chrome|crios|fxios/i.test(ua)
+  const isAndroid = /android/i.test(ua)
+  isSafari.value = isWebkit && !isAndroid
+
   if (props.lastContainer) fixBackgroundImage()
 
   if (isSafari.value) {
