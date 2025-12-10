@@ -13,7 +13,7 @@
               Reichpietschstraße 13 <br />
               04317 Leipzig
             </li>
-            <li>{{ envVar.public.OFFICIAL_CONTACT_ADDRESS }}</li>
+            <li>{{ envVar.public.DISPLAY_OFFICIAL_CONTACT_ADDRESS }}</li>
             <li>
               <NuxtLink to="/kontakt">
                 <span>Kontaktformular</span>

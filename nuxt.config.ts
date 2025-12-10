@@ -8,7 +8,8 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-07-04',
   runtimeConfig: {
     public: {
-      OFFICIAL_CONTACT_ADDRESS: process.env.OFFICIAL_CONTACT_ADDRESS,
+      DISPLAY_OFFICIAL_CONTACT_ADDRESS:
+        process.env.DISPLAY_OFFICIAL_CONTACT_ADDRESS,
     },
   },
   typescript: {

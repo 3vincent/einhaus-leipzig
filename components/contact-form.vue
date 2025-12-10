@@ -418,8 +418,8 @@ onBeforeUnmount(() => {
             <p>
               Das tut uns leid. Während wir den Fehler in unserem System
               beheben, schick uns gern eine Email an
-              {{ envVar?.public.OFFICIAL_CONTACT_ADDRESS }} oder probiere es
-              später erneut.
+              {{ envVar?.public.DISPLAY_OFFICIAL_CONTACT_ADDRESS }} oder
+              probiere es später erneut.
             </p>
             <div>
               <p>Deine Nachricht kannst du hier einsehen und kopieren:</p>

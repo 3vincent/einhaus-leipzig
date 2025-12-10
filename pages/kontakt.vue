@@ -39,7 +39,7 @@ const envVar = useRuntimeConfig()
       <h1>Kontakt</h1>
       <p>
         Wenn Du mit uns in Kontakt treten willst, schreib uns eine Email an
-        {{ envVar.public.OFFICIAL_CONTACT_ADDRESS }} oder füll das
+        {{ envVar.public.DISPLAY_OFFICIAL_CONTACT_ADDRESS }} oder füll das
         Kontaktformular aus.
       </p>
       <p> Wir werden uns schnellstmöglich bei Dir melden! </p>

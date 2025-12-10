@@ -208,7 +208,7 @@ const landingPageContents = ref<LandingPageContent[]>([
           gerne in einem Projekt anlegst, das man anfassen kann: Dein Geld
           kannst du bei uns nachhaltig anlegen. Mehr Informationen geben wir Dir
           gerne persönlich. Wir freuen uns über eine E-Mail an
-          ${envVar.public.OFFICIAL_CONTACT_ADDRESS}
+          ${envVar.public.DISPLAY_OFFICIAL_CONTACT_ADDRESS}
         </p>`,
     backgroundImageUrl: '/images/einhaus-landing-photo-06.jpg',
   },
@@ -241,7 +241,7 @@ const landingPageContents = ref<LandingPageContent[]>([
           </NuxtLink>
 
           <a
-            :href="`mailto:${envVar.public.OFFICIAL_CONTACT_ADDRESS}`"
+            :href="`mailto:${envVar.public.DISPLAY_OFFICIAL_CONTACT_ADDRESS}`"
             role="button"
             class="link secondary link-elevation"
             >Email schreiben</a

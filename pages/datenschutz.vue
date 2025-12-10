@@ -205,7 +205,7 @@ const cookieConsentStatus = computed(() => {
         04317 Leipzig</p
       >
 
-      <p> E-Mail: {{ envVar.public.OFFICIAL_CONTACT_ADDRESS }}</p>
+      <p> E-Mail: {{ envVar.public.DISPLAY_OFFICIAL_CONTACT_ADDRESS }}</p>
       <p
         >Verantwortliche Stelle ist die nat&uuml;rliche oder juristische Person,
         die allein oder gemeinsam mit anderen &uuml;ber die Zwecke und Mittel
