@@ -37,3 +37,9 @@ definePageMeta({
   breadcrumb: 'Online-Beitritt ausfüllen',
 })
 </script>
+
+<style lang="scss" scoped>
+.default-container::before {
+  background-image: url(/images/einhaus-landing-photo-06.jpg);
+}
+</style>
