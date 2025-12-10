@@ -152,7 +152,7 @@
       <p></p>
       <p></p>
 
-      <h3>Drei Schritte:</h3>
+      <h3>Vier Schritte:</h3>
 
       <ol class="steps-list">
         <li v-for="(step, index) in steps" :key="step.title">
@@ -162,31 +162,55 @@
             <!-- eslint-disable-next-line vue/no-v-html -->
             <p class="step-sub" v-html="step.subtitle" />
           </div>
+          <div v-if="step.icon" class="step-icon">
+            <img :src="step.icon" :alt="step.title" loading="lazy" />
+          </div>
         </li>
       </ol>
 
       <h3>Hier geht es los:</h3>
 
-      <div class="action-button-wrapper">
-        <div>
-          <a
-            :href="'/informationsblatt-mitglied-werden.pdf'"
-            role="button"
-            class="link secondary link-elevation"
-            >PDF herunterladen</a
-          >
-          <span>Informationsblatt als PDF herunterladen</span>
+      <div class="cta-grid">
+        <div class="cta-card flyer">
+          <p class="cta-title flyer-title">Informationsblatt als PDF</p>
+          <div class="flyer-preview">
+            <img
+              src="/images/flyer-display.png"
+              alt="Informationsblatt Vorschau"
+              loading="lazy"
+            />
+          </div>
+          <div class="cta-body flyer-body">
+            <p class="cta-sub">
+              Alle Fakten im Überblick – lade dir das PDF herunter.
+            </p>
+          </div>
+          <div class="cta-actions">
+            <a
+              :href="'/informationsblatt-mitglied-werden.pdf'"
+              role="button"
+              class="link secondary link-elevation"
+            >
+              PDF herunterladen
+            </a>
+          </div>
         </div>
 
-        <div>
-          <NuxtLink
-            to="/mitglied-werden/online-beitritt-ausfuellen"
-            class="link primary link-elevation"
-          >
-            Online-Beitritt ausfüllen
-          </NuxtLink>
-
-          <span>Beitrittserklärung online ausfüllen</span>
+        <div class="cta-card online">
+          <div class="cta-body">
+            <p class="cta-title">Online beitreten</p>
+            <p class="cta-sub">
+              Fülle die Beitrittserklärung direkt online aus und sende sie ab.
+            </p>
+            <div>
+              <NuxtLink
+                to="/mitglied-werden/online-beitritt-ausfuellen"
+                class="link primary link-elevation"
+              >
+                Online-Beitritt ausfüllen
+              </NuxtLink>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -320,14 +344,23 @@ const steps = [
   {
     title: 'Informationsblatt herunterladen',
     subtitle: 'PDF: „Mitglied werden – alle Fakten im Überblick“',
+    icon: '/icons/newsletter-mail.svg',
   },
   {
     title: 'Beitrittserklärung ausfüllen',
     subtitle: 'PDF oder Online-Formular',
+    icon: '/icons/community-hands.svg',
+  },
+  {
+    title: 'Antrag wird geprüft',
+    subtitle:
+      'Wir schauen deinen Antrag zeitnah an und melden uns mit den nächsten Schritten.',
+    icon: '/icons/structure-shield.svg',
   },
   {
     title: 'Anteile zeichnen',
     subtitle: 'Du erhältst eine Bestätigung und wirst offiziell Mitglied.',
+    icon: '/icons/home-heart.svg',
   },
 ]
 
@@ -484,15 +517,18 @@ ul.list-card {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 
   li {
+    position: relative;
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: start;
     gap: 0.75rem;
     padding: 1rem 1.2rem;
-    border-radius: 14px;
-    background: linear-gradient(140deg, #f6f8fb 0%, #eef2f7 100%);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 10px 24px -16px rgba(0, 0, 0, 0.25);
+    padding-right: 3.5rem;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 8px 18px -14px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
   }
 
   .step-number {
@@ -508,6 +544,24 @@ ul.list-card {
     font-size: 1.05rem;
   }
 
+  .step-icon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #1f3a4d0f;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
   .step-title {
     margin: 0;
     font-weight: 700;
@@ -518,6 +572,16 @@ ul.list-card {
     margin: 0;
     color: #304559;
     line-height: 1.5;
+  }
+
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: linear-gradient(180deg, #1f3a4d, #6b94b8);
   }
 }
 
@@ -654,16 +718,76 @@ ul.list-card {
   }
 }
 
-.action-button-wrapper {
-  div {
-    display: flex;
-    align-items: center;
+.cta-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-top: 1rem;
+  align-items: start;
+}
 
-    @media screen and (min-width: $xxs) {
-      > *:nth-child(1) {
-        flex-basis: max-content;
-      }
+.cta-card {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  background: #f6f8fb;
+  box-shadow: 0 10px 24px -16px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 0.75rem;
+}
+
+.cta-card.flyer {
+  grid-template-columns: 140px 1fr;
+  grid-template-rows: auto 1fr auto;
+  align-items: start;
+
+  @media screen and (max-width: 720px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .flyer-title {
+    grid-column: 1 / -1;
+  }
+
+  .flyer-preview {
+    width: 100%;
+    max-width: 180px;
+    justify-self: center;
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 12px 24px -16px rgba(0, 0, 0, 0.35);
     }
   }
+
+  .flyer-body {
+    align-self: center;
+  }
+}
+
+.cta-body {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.cta-actions {
+  grid-column: 1 / -1;
+  align-self: end;
+}
+
+.cta-title {
+  margin: 0;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.cta-sub {
+  margin: 0;
+  color: #304559;
+  line-height: 1.5;
 }
 </style>
