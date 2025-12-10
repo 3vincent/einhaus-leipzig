@@ -18,6 +18,8 @@ const isTextAreaFocused = ref(false)
 const showTooltipInElement = ref<'name' | 'email' | 'message' | 'gdpr' | null>(
   null
 )
+const STORAGE_KEY = 'einhaus-contact-form'
+const isReady = ref(false)
 
 function onFocus() {
   if (showTooltipInElement.value !== null) showTooltipInElement.value = null
@@ -32,6 +34,27 @@ function onTextareaFocus() {
 function onTextareaBlur() {
   isTextAreaFocused.value = false
 }
+
+onMounted(() => {
+  const saved = sessionStorage.getItem(STORAGE_KEY)
+  if (saved) {
+    try {
+      const parsed = JSON.parse(saved) as Partial<PayloadData>
+      payload.value = { ...payload.value, ...parsed }
+    } catch (error) {
+      console.warn('Konnte gespeicherte Kontaktdaten nicht laden', error)
+    }
+  }
+  isReady.value = true
+})
+
+watch(
+  () => ({ ...payload.value }),
+  value => {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(value))
+  },
+  { deep: true }
+)
 
 async function handleSubmit() {
   if (!allFieldsValidated.value) {
@@ -66,6 +89,7 @@ async function handleSubmit() {
         message: '',
         gdpr: false,
       }
+      sessionStorage.removeItem(STORAGE_KEY)
 
       const router = useRouter()
 
@@ -187,7 +211,7 @@ onBeforeUnmount(() => {
   <div id="top-of-the-page" class="contact-container">
     <h2>Kontaktformular</h2>
     <div class="contact-form-wrapper">
-      <div class="form-container">
+      <div v-if="isReady" class="form-container">
         <ClientOnly>
           <form
             name="contact"
@@ -315,6 +339,27 @@ onBeforeUnmount(() => {
             </p>
           </form>
         </ClientOnly>
+      </div>
+      <div v-else class="form-container skeleton">
+        <div class="input-container">
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line"></div>
+        </div>
+        <div class="input-container">
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line"></div>
+        </div>
+        <div class="input-container">
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line tall"></div>
+        </div>
+        <div class="privacy-container">
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line"></div>
+        </div>
+        <p>
+          <button type="button" class="link primary" disabled>Laden…</button>
+        </p>
       </div>
 
       <FullModal
@@ -507,6 +552,40 @@ onBeforeUnmount(() => {
         font-weight: 800;
       }
     }
+  }
+}
+
+.skeleton {
+  .skeleton-line {
+    width: 100%;
+    height: 14px;
+    background: linear-gradient(90deg, #f0f2f6 0%, #e8ebf2 50%, #f0f2f6 100%);
+    background-size: 200% 100%;
+    border-radius: 6px;
+    animation: shimmer 1.2s ease-in-out infinite;
+
+    &.short {
+      width: 120px;
+      margin-bottom: 6px;
+    }
+
+    &.tall {
+      height: 120px;
+    }
+  }
+
+  .privacy-container {
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
   }
 }
 .contact-container {
