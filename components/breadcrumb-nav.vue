@@ -72,7 +72,7 @@ const breadcrumbs = computed(() => {
   font-size: 0.8rem;
   font-weight: 400;
   margin-top: 1rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 3.33rem;
 
   > span {
     padding-right: 0.4rem;
