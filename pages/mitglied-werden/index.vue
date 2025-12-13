@@ -204,7 +204,7 @@
             </p>
             <div>
               <NuxtLink
-                to="/mitglied-werden/online-beitritt-ausfuellen"
+                to="/mitglied-werden/online-formular/"
                 class="link primary link-elevation"
               >
                 Online-Beitritt ausfüllen
