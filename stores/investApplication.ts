@@ -11,6 +11,7 @@ const defaultPayload = (): InvestApplicationPayload => ({
   email: '',
   phone: '',
   birthDate: '',
+  taxId: '',
   street: '',
   postalCode: '',
   city: '',

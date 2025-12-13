@@ -17,6 +17,7 @@ export type InvestApplicationPayload = {
   email: string
   phone: string
   birthDate?: string
+  taxId: string
   street: string
   postalCode: string
   city: string

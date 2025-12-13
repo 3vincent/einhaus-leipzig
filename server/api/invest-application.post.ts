@@ -41,6 +41,7 @@ const payloadSchema = Joi.object<InvestApplicationPayload>({
   email: Joi.string().email().trim().required(),
   phone: Joi.string().allow('').max(120).trim().default(''),
   birthDate: Joi.string().isoDate().required(),
+  taxId: Joi.string().pattern(/^\d{11}$/).trim().required(),
   street: Joi.string().min(1).max(200).trim().required(),
   postalCode: Joi.string().min(2).max(20).trim().required(),
   city: Joi.string().min(1).max(120).trim().required(),
@@ -60,6 +61,7 @@ async function sendNotificationMail(payload: InvestApplicationPayload) {
 
 Name: ${payload.firstName} ${payload.lastName}
 Geburtsdatum: ${payload.birthDate}
+Steuer-ID: ${payload.taxId}
 E-Mail: ${payload.email}
 Anteile: ${payload.shares}
 `
@@ -82,6 +84,8 @@ Wir prüfen ihn und melden uns bei dir.
 
 Zusammenfassung:
 - E-Mail: ${payload.email}
+- Geburtsdatum: ${payload.birthDate}
+- Steuer-ID: ${payload.taxId}
 - Anteile: ${payload.shares}
 
 

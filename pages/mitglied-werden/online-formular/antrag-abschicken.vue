@@ -55,6 +55,10 @@
           <div class="col value">{{ payload.birthDate || '—' }}</div>
         </div>
         <div class="review-row">
+          <div class="col label">Steuer-ID</div>
+          <div class="col value">{{ payload.taxId || '—' }}</div>
+        </div>
+        <div class="review-row">
           <div class="col label">Anzahl Geschäftsanteile</div>
           <div class="col value">{{ payload.shares }}</div>
         </div>

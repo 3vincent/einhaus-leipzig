@@ -147,6 +147,32 @@
         />
       </label>
 
+      <div class="form-field full-row-span info-block">
+        <h2 class="info-title">Steueridentifikationsnummer</h2>
+        <p class="muted">
+          Die Steueridentifikationsnummer und das Geburtsdatum werden benötigt,
+          um im Falle einer Gewinnausschüttung die Abgeltungssteuer abführen zu
+          können und die gesetzlich vorgesehenen Abfragen zum
+          Kirchensteuermerkmal durchführen zu können.
+        </p>
+      </div>
+
+      <label class="form-field full-row-span" :class="{ error: errors.taxId }">
+        <span>Steueridentifikationsnummer *</span>
+        <input
+          v-model="localForm.taxId"
+          type="text"
+          name="taxId"
+          inputmode="numeric"
+          autocomplete="off"
+          :aria-invalid="!!errors.taxId"
+          :aria-describedby="errors.taxId ? 'error-taxId' : undefined"
+        />
+        <small v-if="errors.taxId" id="error-taxId">
+          {{ errors.taxId }}
+        </small>
+      </label>
+
       <label class="form-field full-row-span" :class="{ error: errors.shares }">
         <h2>Genossenschaftsanteile</h2>
         <span>Anzahl der gewünschten Genossenschaftsanteile *</span>
@@ -196,6 +222,7 @@ const localForm = reactive({
   email: store.payload.email,
   phone: store.payload.phone,
   birthDate: store.payload.birthDate || '',
+  taxId: store.payload.taxId || '',
   street: store.payload.street,
   postalCode: store.payload.postalCode,
   city: store.payload.city,
@@ -235,6 +262,8 @@ function validate() {
   if (!localForm.email.trim() || !emailRegex.test(localForm.email))
     errors.email = 'Bitte eine gültige E-Mail-Adresse angeben.'
   if (!localForm.birthDate) errors.birthDate = 'Bitte gib dein Geburtsdatum an.'
+  if (!/^\d{11}$/.test(localForm.taxId.trim()))
+    errors.taxId = 'Bitte eine gültige 11-stellige Steuer-ID angeben.'
   if (!localForm.street.trim())
     errors.street = 'Bitte Straße und Hausnummer angeben.'
   if (!localForm.postalCode.trim())
@@ -282,7 +311,6 @@ onMounted(() => {
 }
 
 h1 {
-  // font-size: clamp(2.6rem, 4vw, 2.9rem);
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   margin-bottom: 0.6rem;
 }
