@@ -84,5 +84,5 @@ export default defineNuxtConfig({
       },
     },
   },
-  modules: [['@nuxt/eslint', { config: { stylistic: false }, checker: true }]],
+  modules: [['@nuxt/eslint', { config: { stylistic: false }, checker: true }], '@pinia/nuxt', '@nuxt/icon'],
 })

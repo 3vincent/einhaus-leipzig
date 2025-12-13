@@ -13,6 +13,8 @@
   "devDependencies": {
     "@nuxt/devtools": "^3.0.0",
     "@nuxt/eslint": "^1.9.0",
+    "@nuxt/icon": "^2.1.0",
+    "@pinia/nuxt": "^0.11.3",
     "@types/node": "^24.3.1",
     "@types/nodemailer": "^7.0.1",
     "@types/validator": "^13.7.10",
@@ -32,6 +34,7 @@
   "dependencies": {
     "joi": "^18.0.1",
     "nodemailer": "^7.0.6",
+    "pinia": "^3.0.4",
     "validator": "^13.7.0"
   }
 }
