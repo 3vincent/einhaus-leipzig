@@ -149,12 +149,6 @@
 
       <div class="form-field full-row-span info-block">
         <h2 class="info-title">Steueridentifikationsnummer</h2>
-        <p class="muted">
-          Die Steueridentifikationsnummer und das Geburtsdatum werden benötigt,
-          um im Falle einer Gewinnausschüttung die Abgeltungssteuer abführen zu
-          können und die gesetzlich vorgesehenen Abfragen zum
-          Kirchensteuermerkmal durchführen zu können.
-        </p>
       </div>
 
       <label class="form-field full-row-span" :class="{ error: errors.taxId }">
@@ -171,6 +165,12 @@
         <small v-if="errors.taxId" id="error-taxId">
           {{ errors.taxId }}
         </small>
+        <p class="muted">
+          Die Steueridentifikationsnummer und das Geburtsdatum werden benötigt,
+          um im Falle einer Gewinnausschüttung die Abgeltungssteuer abführen zu
+          können und die gesetzlich vorgesehenen Abfragen zum
+          Kirchensteuermerkmal durchführen zu können.
+        </p>
       </label>
 
       <label class="form-field full-row-span" :class="{ error: errors.shares }">
