@@ -16,6 +16,7 @@ export type InvestApplicationPayload = {
   lastName: string
   email: string
   phone: string
+  birthDate?: string
   street: string
   postalCode: string
   city: string
@@ -24,4 +25,7 @@ export type InvestApplicationPayload = {
   confirmInfo: boolean
   dataConsent: boolean
   newsletter: boolean
+  iban: string
+  accountHolder: string
+  bic?: string
 }

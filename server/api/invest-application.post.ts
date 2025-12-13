@@ -40,6 +40,7 @@ const payloadSchema = Joi.object<InvestApplicationPayload>({
   lastName: Joi.string().min(1).max(120).trim().required(),
   email: Joi.string().email().trim().required(),
   phone: Joi.string().allow('').max(120).trim().default(''),
+  birthDate: Joi.string().isoDate().required(),
   street: Joi.string().min(1).max(200).trim().required(),
   postalCode: Joi.string().min(2).max(20).trim().required(),
   city: Joi.string().min(1).max(120).trim().required(),
@@ -48,6 +49,9 @@ const payloadSchema = Joi.object<InvestApplicationPayload>({
   confirmInfo: Joi.boolean().valid(true).required(),
   dataConsent: Joi.boolean().valid(true).required(),
   newsletter: Joi.boolean().default(false),
+  iban: Joi.string().min(4).max(34).trim().required(),
+  accountHolder: Joi.string().min(1).max(120).trim().required(),
+  bic: Joi.string().allow('').max(11).trim(),
 }).options({ stripUnknown: true })
 
 async function sendNotificationMail(payload: InvestApplicationPayload) {
@@ -55,6 +59,7 @@ async function sendNotificationMail(payload: InvestApplicationPayload) {
   const text = `Neue Anfrage für investierende Mitgliedschaft
 
 Name: ${payload.firstName} ${payload.lastName}
+Geburtsdatum: ${payload.birthDate}
 E-Mail: ${payload.email}
 Anteile: ${payload.shares}
 `
@@ -78,6 +83,7 @@ Wir prüfen ihn und melden uns bei dir.
 Zusammenfassung:
 - E-Mail: ${payload.email}
 - Anteile: ${payload.shares}
+
 
 Viele Grüße
 EinHaus Reichpietschstraße 13 eG`
