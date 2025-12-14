@@ -45,7 +45,8 @@ $duration: 1.6s;
   stroke-dasharray: $offset;
   stroke-dashoffset: 0;
   transform-origin: center;
-  animation: dash $duration ease-in-out infinite,
+  animation:
+    dash $duration ease-in-out infinite,
     colors ($duration * 4) ease-in-out infinite;
 }
 

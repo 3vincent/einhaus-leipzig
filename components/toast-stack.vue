@@ -18,7 +18,9 @@ const positionClass = (position: ToastPosition) => {
 <template>
   <div
     class="toast-stack"
-    :class="toasts[0]?.position ? positionClass(toasts[0].position) : 'pos-top-right'"
+    :class="
+      toasts[0]?.position ? positionClass(toasts[0].position) : 'pos-top-right'
+    "
     aria-live="polite"
     aria-atomic="true"
   >

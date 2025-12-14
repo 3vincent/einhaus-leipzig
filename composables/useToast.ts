@@ -8,7 +8,12 @@ export type ToastOptions = {
   position?: ToastPosition
 }
 
-export type ToastPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'center'
+export type ToastPosition =
+  | 'top-right'
+  | 'top-left'
+  | 'bottom-right'
+  | 'bottom-left'
+  | 'center'
 
 const DEFAULT_DURATION = 3000
 

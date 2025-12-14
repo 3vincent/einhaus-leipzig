@@ -4,9 +4,21 @@ import { useInvestApplicationStore } from '~/stores/investApplication'
 const store = useInvestApplicationStore()
 
 const steps = [
-  { label: 'Persönliche Daten', path: '/mitglied-werden/online-formular/persoenliche-daten', index: 0 },
-  { label: 'Bankverbindung', path: '/mitglied-werden/online-formular/bankverbindung', index: 1 },
-  { label: 'Antrag abschicken', path: '/mitglied-werden/online-formular/antrag-abschicken', index: 2 },
+  {
+    label: 'Persönliche Daten',
+    path: '/mitglied-werden/online-formular/persoenliche-daten',
+    index: 0,
+  },
+  {
+    label: 'Bankverbindung',
+    path: '/mitglied-werden/online-formular/bankverbindung',
+    index: 1,
+  },
+  {
+    label: 'Antrag abschicken',
+    path: '/mitglied-werden/online-formular/antrag-abschicken',
+    index: 2,
+  },
 ]
 
 function canNavigate(stepIndex: number) {
@@ -64,7 +76,9 @@ function goTo(stepIndex: number, path: string) {
   background: #f7f9fb;
   color: #304559;
   cursor: pointer;
-  transition: border-color 150ms ease, background-color 150ms ease;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease;
 }
 
 .step.locked {

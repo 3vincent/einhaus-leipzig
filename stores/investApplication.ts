@@ -58,10 +58,10 @@ export const useInvestApplicationStore = defineStore(
       loadedFromSession.value = true
     }
 
-  const saveToSession = () => {
-    if (!import.meta.client) return
-    try {
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(payload.value))
+    const saveToSession = () => {
+      if (!import.meta.client) return
+      try {
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(payload.value))
       } catch (error) {
         console.warn('Konnte Antrag nicht in sessionStorage speichern', error)
       }

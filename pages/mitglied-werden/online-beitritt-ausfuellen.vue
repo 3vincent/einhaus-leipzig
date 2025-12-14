@@ -266,7 +266,9 @@
       </form>
 
       <small class="asterisk-note">* Pflichtfelder</small>
-      <p class="secure-note">🔒 Ihre Angaben werden sicher übertragen (SSL-verschlüsselt).</p>
+      <p class="secure-note"
+        >🔒 Ihre Angaben werden sicher übertragen (SSL-verschlüsselt).</p
+      >
 
       <FullModal v-if="submitting" :show="true">
         <div class="submit-modal">
