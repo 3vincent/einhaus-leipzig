@@ -33,7 +33,7 @@ function handleCloseConfirm() {
       <NuxtPage />
     </main>
 
-    <ConfirmCloseModal
+    <InvestWizardConfirmClose
       v-if="showCloseConfirm"
       @close="showCloseConfirm = false"
       @confirm="handleCloseConfirm"
