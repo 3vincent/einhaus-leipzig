@@ -41,7 +41,10 @@ const payloadSchema = Joi.object<InvestApplicationPayload>({
   email: Joi.string().email().trim().required(),
   phone: Joi.string().allow('').max(120).trim().default(''),
   birthDate: Joi.string().isoDate().required(),
-  taxId: Joi.string().pattern(/^\d{11}$/).trim().required(),
+  taxId: Joi.string()
+    .pattern(/^\d{11}$/)
+    .trim()
+    .required(),
   street: Joi.string().min(1).max(200).trim().required(),
   postalCode: Joi.string().min(2).max(20).trim().required(),
   city: Joi.string().min(1).max(120).trim().required(),
