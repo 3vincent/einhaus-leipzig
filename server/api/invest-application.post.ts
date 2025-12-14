@@ -67,6 +67,7 @@ Geburtsdatum: ${payload.birthDate}
 Steuer-ID: ${payload.taxId}
 E-Mail: ${payload.email}
 Anteile: ${payload.shares}
+Kommentar: ${payload.comment || '—'}
 `
 
   return transporter.sendMail({

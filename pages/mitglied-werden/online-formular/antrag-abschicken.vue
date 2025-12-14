@@ -117,6 +117,28 @@
           <div class="col value">{{ payload.bic || '—' }}</div>
         </div>
       </section>
+
+      <section class="review-card text-area-card">
+        <div class="card-header">
+          <div>
+            <h3>Kommentar / Nachricht</h3>
+            <div class="col label">(Optional)</div>
+          </div>
+        </div>
+        <div class="review-row">
+          <div class="col value full-width">
+            <textarea
+              v-model="payload.comment"
+              rows="4"
+              maxlength="2500"
+              placeholder="Deine Nachricht an uns (max. 2500 Zeichen)"
+            />
+            <div class="char-counter muted">
+              Noch {{ remainingCommentChars }} Zeichen
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
     <div v-if="!success" class="consent-block">
       <label class="checkbox" :class="{ error: errors.confirmInfo }">
@@ -206,6 +228,7 @@ const submitting = ref(false)
 const errorMessage = ref('')
 const { showToast } = useToast()
 const hydrated = ref(false)
+const maxCommentLength = 2500
 
 // Session-Daten früh laden, damit ein Reload die Eingaben behält
 if (import.meta.client) {
@@ -223,6 +246,11 @@ onMounted(() => {
   }
   store.currentStep = 2
   hydrated.value = true
+})
+
+const remainingCommentChars = computed(() => {
+  const len = payload.comment ? payload.comment.length : 0
+  return Math.max(0, maxCommentLength - len)
 })
 
 function editStep(stepIndex: number) {
@@ -370,6 +398,26 @@ h1 {
   flex: 1 1 240px;
 }
 
+.review-row .full-width {
+  flex: 1 1 100%;
+}
+
+.review-row textarea {
+  width: 100%;
+  min-height: 240px;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  font-size: 1rem;
+  background: #fff;
+  resize: vertical;
+}
+
+.char-counter {
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+}
+
 .icon {
   width: 18px;
   height: 18px;
@@ -438,5 +486,17 @@ h1 {
   width: 18px;
   height: 18px;
   fill: currentColor;
+}
+
+.text-area-card {
+  padding-bottom: 4rem;
+
+  .card-header {
+    div {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
 }
 </style>
