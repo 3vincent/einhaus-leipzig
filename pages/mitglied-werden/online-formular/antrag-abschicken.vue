@@ -132,7 +132,7 @@
               rows="4"
               maxlength="2500"
               placeholder="Deine Nachricht an uns (max. 2500 Zeichen)"
-            />
+            ></textarea>
             <div class="char-counter muted">
               Noch {{ remainingCommentChars }} Zeichen
             </div>
