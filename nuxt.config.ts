@@ -16,6 +16,12 @@ export default defineNuxtConfig({
     strict: true,
     typeCheck: true,
     shim: false,
+    tsConfig: {
+      compilerOptions: {
+        // Ensure custom layout typings (investwizard) are picked up in all environments
+        types: ['./types/layouts.d.ts', 'node'],
+      },
+    },
   },
   app: {
     head: {

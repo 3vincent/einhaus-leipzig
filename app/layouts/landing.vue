@@ -14,7 +14,7 @@ useHead({
 <template>
   <div class="siteContainer">
     <TopMenuBar :is-landing="true" :logo-white="true" />
-    <slot />
+    <NuxtPage />
     <Footer :is-landing="true" />
     <CookieBanner />
     <ToastStack />

@@ -5,6 +5,17 @@ const store = useInvestApplicationStore()
 const showCloseConfirm = ref(false)
 const hydrated = ref(false)
 
+const route = useRoute()
+
+useHead({
+  link: [
+    {
+      rel: 'canonical',
+      href: 'https://www.einhaus-leipzig.de' + route.path,
+    },
+  ],
+})
+
 onMounted(() => {
   hydrated.value = true
 })
