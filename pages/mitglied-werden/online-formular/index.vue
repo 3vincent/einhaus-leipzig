@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'invest-wizard',
+  layout: 'investwizard',
 })
 
 if (import.meta.client) {

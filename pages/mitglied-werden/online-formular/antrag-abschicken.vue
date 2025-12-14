@@ -213,7 +213,7 @@ import { useToast } from '~/composables/useToast'
 import { useInvestApplicationStore } from '~/stores/investApplication'
 
 definePageMeta({
-  layout: 'invest-wizard',
+  layout: 'investwizard',
 })
 
 useHead({
