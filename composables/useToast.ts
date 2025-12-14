@@ -17,14 +17,14 @@ export type ToastPosition =
 
 const DEFAULT_DURATION = 3000
 
-export function useToast() {
+export const useToast = () => {
   const toasts = useState<ToastOptions[]>('toasts', () => [])
 
-  function dismissToast(id: number) {
+  const dismissToast = (id: number) => {
     toasts.value = toasts.value.filter(toast => toast.id !== id)
   }
 
-  function showToast(options: ToastOptions) {
+  const showToast = (options: ToastOptions) => {
     const id = options.id ?? Date.now() + Math.random()
     const duration = options.duration ?? DEFAULT_DURATION
 

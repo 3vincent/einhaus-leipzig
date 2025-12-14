@@ -283,6 +283,7 @@
 </template>
 
 <script setup lang="ts">
+import { useToast } from '~/composables/useToast'
 import type { InvestApplicationPayload } from '~/util/types'
 
 useSeoMeta({
