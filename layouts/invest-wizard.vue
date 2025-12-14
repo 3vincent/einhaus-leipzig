@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import ConfirmCloseModal from '~/components/invest-wizard-confirm-close.vue'
-import InvestWizardStepper from '~/components/invest-wizard-stepper.vue'
-import ToastStack from '~/components/toast-stack.vue'
 import { useInvestApplicationStore } from '~/stores/investApplication'
 
 const store = useInvestApplicationStore()
