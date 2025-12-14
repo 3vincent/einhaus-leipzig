@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { InvestApplicationPayload } from '~/util/types'
+import type { InvestApplicationPayload } from '~~/util/types'
 
 const STORAGE_KEY = 'investApplicationDraft'
 type Salutation = InvestApplicationPayload['salutation']

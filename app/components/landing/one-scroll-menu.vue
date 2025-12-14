@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { LANDING_PAGE_SLUGS } from '~/util/enums'
+import { LANDING_PAGE_SLUGS } from '~~/util/enums'
 
 const menuItemIndicatorScrollPosition = ref(0)
 

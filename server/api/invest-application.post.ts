@@ -1,7 +1,7 @@
 import Joi from 'joi'
 import nodemailer from 'nodemailer'
 import { $fetch } from 'ofetch'
-import type { InvestApplicationPayload } from '~/util/types'
+import type { InvestApplicationPayload } from '~~/util/types'
 
 const smtpHost: string = process.env.SMTP_HOST || ''
 const smtpPortTLS: number = Number(process.env.SMTP_PORT_TLS)
@@ -45,6 +45,7 @@ const payloadSchema = Joi.object<InvestApplicationPayload>({
     .pattern(/^\d{11}$/)
     .trim()
     .required(),
+  comment: Joi.string().allow('').max(2500).trim().default(''),
   street: Joi.string().min(1).max(200).trim().required(),
   postalCode: Joi.string().min(2).max(20).trim().required(),
   city: Joi.string().min(1).max(120).trim().required(),

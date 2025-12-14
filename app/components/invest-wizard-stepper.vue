@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useInvestApplicationStore } from '~/stores/investApplication'
+import { useInvestApplicationStore } from '../stores/investApplication'
 
 const store = useInvestApplicationStore()
 

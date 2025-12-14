@@ -1,7 +1,6 @@
 import { defineNuxtConfig } from 'nuxt/config'
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  srcDir: '.',
   css: ['~/assets/styles/index.scss'],
   nitro: {
     preset: 'vercel',

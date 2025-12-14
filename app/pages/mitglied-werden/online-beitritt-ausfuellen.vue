@@ -283,8 +283,8 @@
 </template>
 
 <script setup lang="ts">
-import { useToast } from '~/composables/useToast'
-import type { InvestApplicationPayload } from '~/util/types'
+import type { InvestApplicationPayload } from '~~/util/types'
+import { useToast } from '../../composables/useToast'
 
 useSeoMeta({
   title:

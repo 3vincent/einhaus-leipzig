@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import nodemailer from 'nodemailer'
-import { sanitizer } from '~/util/sanitizer'
+import { sanitizer } from '~~/util/sanitizer'
 
 const smtpHost: string = process.env.SMTP_HOST || ''
 const smtpPortTLS: number = Number(process.env.SMTP_PORT_TLS)

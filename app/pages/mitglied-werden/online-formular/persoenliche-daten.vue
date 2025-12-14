@@ -200,7 +200,7 @@
 </template>
 
 <script setup lang="ts">
-import { useInvestApplicationStore } from '~/stores/investApplication'
+import { useInvestApplicationStore } from '../../../stores/investApplication'
 
 definePageMeta({
   layout: 'investwizard',

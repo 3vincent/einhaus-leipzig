@@ -1,11 +1,12 @@
 // @ts-check
 import prettier from 'eslint-config-prettier/flat'
 import vue from 'eslint-plugin-vue'
-import withNuxt from './.nuxt/eslint.config.mjs'
+import { createConfigForNuxt } from '@nuxt/eslint-config/flat'
 
-// Top-level await is fine in .mjs
-export default await withNuxt(
-  // 1) ignores block
+const nuxtConfig = await createConfigForNuxt()
+
+export default [
+  ...nuxtConfig,
   {
     ignores: [
       '.nuxt',
@@ -20,11 +21,7 @@ export default await withNuxt(
       '.vercel',
     ],
   },
-
-  // 2) Vue recommended flat preset
   ...vue.configs['flat/recommended'],
-
-  // 3) Your custom rules
   {
     rules: {
       'comma-dangle': 'off',
@@ -33,7 +30,6 @@ export default await withNuxt(
       'vue/no-reserved-component-names': 'off',
     },
   },
-
-  // 4) Prettier last (spread because it’s an array)
-  prettier
-)
+  // prettier is a single config object, not an array
+  prettier,
+]

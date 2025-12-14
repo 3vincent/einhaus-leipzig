@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import type { LandingPageContent } from '@/util/types'
+import type { LandingPageContent } from '~~/util/types'
 
 const props = withDefaults(defineProps<LandingPageContent>(), {
   lastContainer: false,

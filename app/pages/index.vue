@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { LANDING_PAGE_SLUGS } from '@/util/enums'
-import type { LandingPageContent } from '~/util/types'
+import { LANDING_PAGE_SLUGS } from '~~/util/enums'
+import type { LandingPageContent } from '~~/util/types'
 
 const envVar = useRuntimeConfig()
 

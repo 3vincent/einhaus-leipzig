@@ -1,4 +1,4 @@
-import { useInvestApplicationStore } from '~/stores/investApplication'
+import { useInvestApplicationStore } from '../stores/investApplication'
 
 // Ensure session data wins over SSR hydration on the client
 export default defineNuxtPlugin(nuxtApp => {

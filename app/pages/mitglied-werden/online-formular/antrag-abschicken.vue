@@ -209,8 +209,8 @@
 </template>
 
 <script setup lang="ts">
-import { useToast } from '~/composables/useToast'
-import { useInvestApplicationStore } from '~/stores/investApplication'
+import { useToast } from '../../../composables/useToast'
+import { useInvestApplicationStore } from '../../../stores/investApplication'
 
 definePageMeta({
   layout: 'investwizard',

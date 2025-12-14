@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { PRIMARY_NAVIGATION_LINKS } from '~/util/navigation-links'
+import { PRIMARY_NAVIGATION_LINKS } from '~~/util/navigation-links'
 
 const { isLanding = false } = defineProps<{
   isLanding?: boolean

@@ -20,12 +20,13 @@
 </template>
 
 <script setup lang="ts">
-import { PRIMARY_NAVIGATION_LINKS } from '~/util/navigation-links'
+import { PRIMARY_NAVIGATION_LINKS } from '~~/util/navigation-links'
 
 const menuVisible = ref(false)
 const hideOnLoad = ref(true)
+type NavLink = (typeof PRIMARY_NAVIGATION_LINKS)[number]
 const navigationLinks = computed(() =>
-  PRIMARY_NAVIGATION_LINKS.filter(link => {
+  PRIMARY_NAVIGATION_LINKS.filter((link: NavLink) => {
     const slug = link.to.toLowerCase()
     return !slug.includes('datenschutz') && !slug.includes('impressum')
   })

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useToast } from '~/composables/useToast'
-import { sanitizer } from '~/util/sanitizer'
-import type { PayloadData } from '../server/api/send-mail.post'
+import type { PayloadData } from '~~/server/api/send-mail.post'
+import { sanitizer } from '~~/util/sanitizer'
+import { useToast } from '../composables/useToast'
 
 const payload = ref<PayloadData>({
   name: '',
