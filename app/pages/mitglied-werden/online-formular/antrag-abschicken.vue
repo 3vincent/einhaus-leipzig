@@ -60,7 +60,10 @@
         </div>
         <div class="review-row">
           <div class="col label">Anzahl Geschäftsanteile</div>
-          <div class="col value">{{ payload.shares }}</div>
+          <div class="col value shares">
+            <span class="strong">{{ payload.shares }}</span>
+            <span class="muted">· entspricht {{ payloadSharesInEuro }}</span>
+          </div>
         </div>
       </section>
 
@@ -231,6 +234,17 @@ const { showToast } = useToast()
 const hydrated = ref(false)
 const maxCommentLength = 2500
 
+const payloadSharesInEuro = computed(() => {
+  const shares = Number(payload.shares) || 0
+  const euroPerShare = 100
+  return new Intl.NumberFormat('de-DE', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(shares * euroPerShare)
+})
+
 // Session-Daten früh laden, damit ein Reload die Eingaben behält
 if (import.meta.client) {
   store.loadFromSession()
@@ -397,6 +411,21 @@ h1 {
 .review-row .value {
   color: #0f2635;
   flex: 1 1 240px;
+
+  &.shares {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+
+    .strong {
+      font-weight: 700;
+    }
+
+    .muted {
+      color: #6d6d6d;
+      font-weight: 500;
+    }
+  }
 }
 
 .review-row .full-width {
