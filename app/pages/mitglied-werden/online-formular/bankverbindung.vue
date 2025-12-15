@@ -14,22 +14,40 @@
     </div>
 
     <form class="form-grid" novalidate @submit.prevent="onNext">
-      <label class="form-field" :class="{ error: errors.accountHolder }">
-        <span>Kontoinhaber:in *</span>
+      <div
+        class="form-field account-holder-group"
+        :class="{ error: errors.accountHolder }"
+      >
+        <div class="account-holder-header">
+          <span>Kontoinhaber:in *</span>
+        </div>
+        <label class="checkbox-inline below">
+          <input
+            v-model="useCustomAccountHolder"
+            type="checkbox"
+            name="customAccountHolder"
+          />
+          <span>Abweichenden Kontoinhaber:in angeben</span>
+        </label>
         <input
           v-model="localForm.accountHolder"
-          type="text"
-          name="accountHolder"
-          autocomplete="name"
+          :disabled="!useCustomAccountHolder"
           :aria-invalid="!!errors.accountHolder"
           :aria-describedby="
             errors.accountHolder ? 'error-accountHolder' : undefined
           "
+          type="text"
+          name="accountHolder"
+          autocomplete="name"
         />
+        <small v-if="!useCustomAccountHolder" class="hint">
+          Wird automatisch mit deinem Namen befüllt. Checkbox aktivieren, um
+          eine:n abweichenden Kontoinhaber:in einzutragen.
+        </small>
         <small v-if="errors.accountHolder" id="error-accountHolder">
           {{ errors.accountHolder }}
         </small>
-      </label>
+      </div>
 
       <label class="form-field" :class="{ error: errors.iban }">
         <span>IBAN *</span>
@@ -90,18 +108,32 @@ useHead({
 const store = useInvestApplicationStore()
 const router = useRouter()
 
+const defaultAccountHolder = computed(() =>
+  `${store.payload.firstName} ${store.payload.lastName}`.trim()
+)
+const useCustomAccountHolder = ref(
+  !!store.payload.accountHolder &&
+    store.payload.accountHolder.trim() !== defaultAccountHolder.value
+)
+
 onMounted(() => {
   if (!store.isStep1Valid) {
     router.push('/mitglied-werden/online-formular/persoenliche-daten')
     return
   }
   store.currentStep = 1
+  // Pre-fill Kontoinhaber:in with the name from step 1 unless a custom value was already set
+  if (!useCustomAccountHolder.value) {
+    localForm.accountHolder = defaultAccountHolder.value
+    store.update({ accountHolder: defaultAccountHolder.value })
+  }
 })
 
 const formError = ref('')
 const errors = reactive<Partial<Record<string, string>>>({})
 const localForm = reactive({
-  accountHolder: store.payload.accountHolder,
+  accountHolder:
+    store.payload.accountHolder || defaultAccountHolder.value || '',
   iban: store.payload.iban,
   bic: store.payload.bic || '',
 })
@@ -123,12 +155,32 @@ watch(
   () => ({ ...store.payload }),
   value => {
     Object.assign(localForm, {
-      accountHolder: value.accountHolder,
+      accountHolder: value.accountHolder || defaultAccountHolder.value || '',
       iban: value.iban,
       bic: value.bic || '',
     })
   },
   { deep: true, immediate: true }
+)
+
+watch(
+  () => defaultAccountHolder.value,
+  val => {
+    if (!useCustomAccountHolder.value) {
+      localForm.accountHolder = val
+      store.update({ accountHolder: val })
+    }
+  }
+)
+
+watch(
+  () => useCustomAccountHolder.value,
+  enabled => {
+    if (!enabled) {
+      localForm.accountHolder = defaultAccountHolder.value
+      store.update({ accountHolder: defaultAccountHolder.value })
+    }
+  }
 )
 
 const ibanRegex = /^[A-Z]{2}\d{2}[A-Z0-9]{1,30}$/
@@ -173,7 +225,8 @@ function validate() {
   if (localForm.bic && !bicRegex.test(localForm.bic.trim().toUpperCase()))
     errors.bic = 'Bitte eine gültige BIC angeben.'
 
-  if (Object.keys(errors).length) {
+  const hasErrors = Object.values(errors).some(Boolean)
+  if (hasErrors) {
     formError.value =
       'Bitte prüfe die markierten Felder und versuche es erneut.'
     return false
@@ -250,6 +303,39 @@ h1 {
   &.error select {
     border-color: #d46a41;
   }
+}
+
+.account-holder-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.account-holder-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.checkbox-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  color: #4a4a4a;
+
+  input {
+    width: 18px;
+    height: 18px;
+  }
+
+  &.below {
+    margin-top: 0.25rem;
+  }
+}
+
+.hint {
+  color: #6d6d6d;
 }
 
 .actions {
