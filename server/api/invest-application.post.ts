@@ -59,13 +59,16 @@ const payloadSchema = Joi.object<InvestApplicationPayload>({
   bic: Joi.string().allow('').max(11).trim(),
 }).options({ stripUnknown: true })
 
+const formatBirthDate = (value?: string) => {
+  if (!value) return ''
+  return value.split('T')[0] || value
+}
+
 async function sendNotificationMail(payload: InvestApplicationPayload) {
   const subject = 'Neue Anfrage: investierende Mitgliedschaft'
   const text = `Neue Anfrage für investierende Mitgliedschaft
 
 Name: ${payload.firstName} ${payload.lastName}
-Geburtsdatum: ${payload.birthDate}
-Steuer-ID: ${payload.taxId}
 E-Mail: ${payload.email}
 Anteile: ${payload.shares}
 Kommentar: ${payload.comment || '—'}
@@ -89,8 +92,6 @@ Wir prüfen ihn und melden uns bei dir.
 
 Zusammenfassung:
 - E-Mail: ${payload.email}
-- Geburtsdatum: ${payload.birthDate}
-- Steuer-ID: ${payload.taxId}
 - Anteile: ${payload.shares}
 
 
@@ -113,13 +114,17 @@ export default defineEventHandler(async event => {
     const validated = await payloadSchema.validateAsync(rawBody, {
       abortEarly: true,
     })
+    const cleanedPayload: InvestApplicationPayload = {
+      ...validated,
+      birthDate: formatBirthDate(validated.birthDate),
+    }
 
     // send data to API
     if (investApiEndpoint) {
       try {
         await $fetch(investApiEndpoint, {
           method: 'POST',
-          body: validated,
+          body: cleanedPayload,
           headers: {
             'X-Service-Token': investApiServiceToken,
             Origin: appOrigin,
@@ -139,8 +144,8 @@ export default defineEventHandler(async event => {
       }
     }
 
-    await sendNotificationMail(validated)
-    await sendConfirmationMail(validated)
+    await sendNotificationMail(cleanedPayload)
+    await sendConfirmationMail(cleanedPayload)
 
     return { statusCode: 200, body: { ok: true } }
   } catch (error: unknown) {
