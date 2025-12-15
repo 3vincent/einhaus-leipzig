@@ -277,7 +277,8 @@ function validate() {
   )
     errors.shares = 'Bitte eine positive ganze Zahl angeben.'
 
-  if (Object.keys(errors).length) {
+  const hasErrors = Object.values(errors).some(Boolean)
+  if (hasErrors) {
     formError.value =
       'Bitte prüfe die markierten Felder und versuche es erneut.'
     return false
