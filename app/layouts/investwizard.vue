@@ -18,6 +18,14 @@ useHead({
 
 onMounted(() => {
   hydrated.value = true
+
+  // Prevent browser back-button from leaving the 3-step wizard
+  if (import.meta.client) {
+    history.pushState(null, '', location.href)
+    const onPopState = () => history.pushState(null, '', location.href)
+    window.addEventListener('popstate', onPopState)
+    onBeforeUnmount(() => window.removeEventListener('popstate', onPopState))
+  }
 })
 
 function handleCloseConfirm() {
