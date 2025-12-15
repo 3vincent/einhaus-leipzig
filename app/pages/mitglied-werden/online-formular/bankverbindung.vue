@@ -96,6 +96,9 @@
 
 <script setup lang="ts">
 import { useInvestApplicationStore } from '../../../stores/investApplication'
+import { useToast } from '../../../composables/useToast'
+
+const { showToast } = useToast()
 
 definePageMeta({
   layout: 'investwizard',
@@ -229,6 +232,10 @@ function validate() {
   if (hasErrors) {
     formError.value =
       'Bitte prüfe die markierten Felder und versuche es erneut.'
+    showToast({
+      style: 'error',
+      message: formError.value,
+    })
     return false
   }
   return true

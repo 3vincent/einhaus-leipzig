@@ -201,6 +201,7 @@
 
 <script setup lang="ts">
 import { useInvestApplicationStore } from '../../../stores/investApplication'
+import { useToast } from '../../../composables/useToast'
 
 definePageMeta({
   layout: 'investwizard',
@@ -212,6 +213,7 @@ useHead({
 
 const store = useInvestApplicationStore()
 const router = useRouter()
+const { showToast } = useToast()
 
 const formError = ref('')
 const errors = reactive<Partial<Record<string, string>>>({})
@@ -281,6 +283,11 @@ function validate() {
   if (hasErrors) {
     formError.value =
       'Bitte prüfe die markierten Felder und versuche es erneut.'
+
+    showToast({
+      style: 'error',
+      message: 'Bitte prüfe die markierten Felder und versuche es erneut.',
+    })
     return false
   }
   return true

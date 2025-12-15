@@ -287,7 +287,12 @@ function validateConsents() {
     errors.dataConsent =
       'Bitte stimme der Verarbeitung deiner Daten zu, damit wir den Antrag bearbeiten können.'
 
-  if (errors.confirmInfo || errors.dataConsent) {
+  const hasErrors = errors.confirmInfo || errors.dataConsent
+  if (hasErrors) {
+    showToast({
+      style: 'error',
+      message: 'Bitte bestätige die erforderlichen Hinweise.',
+    })
     return false
   }
   return true
