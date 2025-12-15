@@ -21,8 +21,12 @@ onMounted(() => {
 
   // Prevent browser back-button from leaving the 3-step wizard
   if (import.meta.client) {
-    history.pushState(null, '', location.href)
-    const onPopState = () => history.pushState(null, '', location.href)
+    const lockedState = { ...(history.state || {}), __wizardLock: true }
+    history.replaceState(lockedState, '', location.href)
+    const onPopState = (event: PopStateEvent) => {
+      const state = event.state || lockedState
+      history.pushState(state, '', location.href)
+    }
     window.addEventListener('popstate', onPopState)
     onBeforeUnmount(() => window.removeEventListener('popstate', onPopState))
   }
