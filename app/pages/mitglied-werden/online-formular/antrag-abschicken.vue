@@ -197,12 +197,24 @@
       <button
         class="link primary"
         type="button"
+        :aria-busy="submitting ? 'true' : 'false'"
         :disabled="submitting"
         @click="onSubmit"
       >
+        <span v-if="submitting" class="btn-spinner" aria-hidden="true" />
         {{ submitting ? 'Wird gesendet…' : 'Antrag absenden' }}
       </button>
     </div>
+
+    <p
+      v-if="!success && submitting && showSlowHint"
+      class="slow-hint"
+      role="status"
+      aria-live="polite"
+    >
+      Der Antrag wird gesendet. Das kann einen Moment dauern – bitte nicht
+      erneut klicken.
+    </p>
 
     <p v-if="!success" class="secure-note">
       <Icon name="uil:lock" style="color: black" />
@@ -233,6 +245,8 @@ const errorMessage = ref('')
 const { showToast } = useToast()
 const hydrated = ref(false)
 const maxCommentLength = 2500
+const showSlowHint = ref(false)
+let slowHintTimeout: ReturnType<typeof setTimeout> | undefined
 
 const payloadSharesInEuro = computed(() => {
   const shares = Number(payload.shares) || 0
@@ -301,6 +315,10 @@ function validateConsents() {
 async function onSubmit() {
   if (!validateConsents()) return
   submitting.value = true
+  showSlowHint.value = false
+  slowHintTimeout = setTimeout(() => {
+    showSlowHint.value = true
+  }, 8000)
   errorMessage.value = ''
   try {
     const body = {
@@ -328,6 +346,8 @@ async function onSubmit() {
     })
   } finally {
     submitting.value = false
+    showSlowHint.value = false
+    if (slowHintTimeout) clearTimeout(slowHintTimeout)
   }
 }
 
@@ -515,6 +535,28 @@ h1 {
   align-items: center;
   gap: 0.35rem;
   font-size: 1rem;
+}
+
+.btn-spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: rgba(255, 255, 255, 1);
+  display: inline-block;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.slow-hint {
+  margin-top: 0.75rem;
+  color: #304559;
+  font-size: 0.95rem;
 }
 
 .icon-lock {
