@@ -58,7 +58,7 @@ onUnmounted(() => {
           04317 Leipzig <br /> </p
         ><p>
           <strong>Vertreten durch: </strong><br />
-          Dr. Claudia Dislich, Sandra Sancelean, Beate Schicketanz<br /> </p
+          Claudia Dislich, Marten Flegel, Sandra Sancelean, Beate Schicketanz<br /> </p
         ><p
           ><strong>Kontakt:</strong> <br />
           E-Mail:
