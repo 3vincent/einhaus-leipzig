@@ -19,7 +19,6 @@
     overflow-x: hidden;
 
     border-bottom: 1px solid rgb(177, 177, 177);
-
     @media screen and (min-width: variables.$md) {
       background-position: 50% 0;
       background-size: cover;
@@ -55,8 +54,8 @@
   }
 
   &-contentBox {
-    width: 800px;
-    min-width: 320px;
+    width: min(100%, 800px);
+    min-width: 0;
     max-width: 800px;
 
     margin: 0;
@@ -84,6 +83,11 @@
     a:hover {
       color: var(--main-text-color-semidark);
       border-color: var(--main-text-color-semidark-alt);
+    }
+
+    p,
+    li {
+      line-height: 1.75;
     }
   }
 }
