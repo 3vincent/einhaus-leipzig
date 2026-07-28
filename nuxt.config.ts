@@ -16,12 +16,6 @@ export default defineNuxtConfig({
     strict: true,
     typeCheck: true,
     shim: false,
-    tsConfig: {
-      compilerOptions: {
-        // Ensure custom layout typings (investwizard) are picked up in all environments
-        types: ['./types/layouts.d.ts', 'node'],
-      },
-    },
   },
   app: {
     head: {
@@ -90,9 +84,5 @@ export default defineNuxtConfig({
       },
     },
   },
-  modules: [
-    ['@nuxt/eslint', { config: { stylistic: false }, checker: true }],
-    '@pinia/nuxt',
-    '@nuxt/icon',
-  ],
+  modules: [['@nuxt/eslint', { config: { stylistic: false }, checker: true }]],
 })

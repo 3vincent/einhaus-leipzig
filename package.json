@@ -11,11 +11,8 @@
     "format:fix": "prettier --write ."
   },
   "devDependencies": {
-    "@iconify-json/uil": "^1.2.3",
     "@nuxt/devtools": "^3.0.0",
     "@nuxt/eslint": "^1.9.0",
-    "@nuxt/icon": "^2.1.0",
-    "@pinia/nuxt": "^1.0.1",
     "@types/node": "^26.1.2",
     "@types/nodemailer": "^8.0.1",
     "@types/validator": "^13.7.10",
@@ -35,7 +32,6 @@
   "dependencies": {
     "joi": "^18.0.1",
     "nodemailer": "^9.0.3",
-    "pinia": "^4.0.2",
     "validator": "^13.7.0"
   }
 }

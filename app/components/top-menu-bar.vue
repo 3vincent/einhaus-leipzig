@@ -9,42 +9,11 @@
   >
     <div class="logo-container"><Logo :is-white="logoWhite" /></div>
 
-    <div class="menu-container">
-      <NuxtLink
-        v-if="!isMobile && !isMitgliedPage"
-        to="/mitglied-werden"
-        class="link primary small link-elevation"
-        style="margin: 0 !important; top: -5px"
-      >
-        Mitglied werden
-      </NuxtLink>
-
-      <UserMenu />
-    </div>
+    <div class="menu-container"><UserMenu /></div>
   </div>
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
-const isMitgliedPage = computed(() =>
-  (route.path || '').toLowerCase().includes('mitglied')
-)
-
-const isMobile = ref(false)
-
-const calculateMobile = () => {
-  isMobile.value = window.innerWidth < 480
-}
-
-onMounted(() => {
-  addEventListener('resize', calculateMobile)
-  calculateMobile()
-})
-
-onUnmounted(() => {
-  removeEventListener('resize', calculateMobile)
-})
-
 const {
   isDefault = false,
   isLanding = false,

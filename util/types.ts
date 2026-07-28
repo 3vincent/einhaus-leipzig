@@ -9,25 +9,3 @@ export type LandingPageContent = {
   htmlText: string
   backgroundImageUrl: string
 }
-
-export type InvestApplicationPayload = {
-  salutation: '' | 'frau' | 'herr' | 'divers'
-  firstName: string
-  lastName: string
-  email: string
-  phone: string
-  birthDate?: string
-  taxId: string
-  comment?: string
-  street: string
-  postalCode: string
-  city: string
-  country: string
-  shares: number
-  confirmInfo: boolean
-  dataConsent: boolean
-  newsletter: boolean
-  iban: string
-  accountHolder: string
-  bic?: string
-}
