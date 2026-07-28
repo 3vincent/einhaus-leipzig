@@ -137,10 +137,20 @@ const denyCookie = () => {
   }
 
   .link.secondary {
-    color: var(--main-text-color-dark) !important;
+    color: white !important;
+    background-color: var(--button-color);
+    border-color: var(--button-color) !important;
 
-    &:hover {
-      color: var(--main-text-color-semidark) !important;
+    &:hover,
+    &:focus {
+      color: white !important;
+      background-color: var(--button-color-hover);
+      border-color: var(--button-color-hover) !important;
+    }
+
+    &:active {
+      background-color: var(--button-color-active);
+      border-color: var(--button-color-active) !important;
     }
   }
 }
