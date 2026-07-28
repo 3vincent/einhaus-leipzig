@@ -14,8 +14,8 @@ const payload = ref<PayloadData>({
 
 const sendResponse = ref(0)
 const clickedOnce = ref(false)
+const isSubmitting = ref(false)
 const envVar = useRuntimeConfig()
-let redirectTimeout: ReturnType<typeof setTimeout> | undefined = undefined
 const isTextAreaFocused = ref(false)
 const showTooltipInElement = ref<'name' | 'email' | 'message' | 'gdpr' | null>(
   null
@@ -62,6 +62,8 @@ watch(
 )
 
 async function handleSubmit() {
+  if (isSubmitting.value) return
+
   if (!allFieldsValidated.value) {
     checkFormValidations()
 
@@ -70,6 +72,7 @@ async function handleSubmit() {
 
   try {
     clickedOnce.value = true
+    isSubmitting.value = true
 
     const sanitizedPayload = await sanitizer(payload.value)
 
@@ -97,12 +100,6 @@ async function handleSubmit() {
       }
       sessionStorage.removeItem(STORAGE_KEY)
 
-      const router = useRouter()
-
-      redirectTimeout = setTimeout(() => {
-        router.push('/')
-      }, 8000)
-
       showToast({
         style: 'success',
         message: 'Deine Nachricht wurde gesendet.',
@@ -116,12 +113,8 @@ async function handleSubmit() {
       message:
         'Deine Nachricht konnte nicht gesendet werden. Bitte versuche es später erneut.',
     })
-  }
-}
-
-function resetAutoRedirectTimer() {
-  if (redirectTimeout) {
-    clearTimeout(redirectTimeout)
+  } finally {
+    isSubmitting.value = false
   }
 }
 
@@ -138,30 +131,25 @@ function moveLoadingAnimationToCenter() {
 }
 
 const checkFormValidations = () => {
-  const formContainer = document.querySelector('.contact-container')
+  const invalidField = !isNameValidated.value
+    ? 'name'
+    : !isEmailValidated.value
+      ? 'email'
+      : !isMessageValidated.value
+        ? 'message'
+        : !payload.value.gdpr
+          ? 'gdpr'
+          : null
 
-  formContainer?.scrollIntoView({
-    block: 'start',
-  })
+  showTooltipInElement.value = invalidField
 
-  Object.keys(payload.value).forEach(item => {
-    if (showTooltipInElement.value !== null) return
-
-    if (item === 'name' && !isNameValidated.value) {
-      showTooltipInElement.value = item
-    }
-
-    if (item === 'email' && !isEmailValidated.value) {
-      showTooltipInElement.value = item
-    }
-
-    if (item === 'message' && !isMessageValidated.value) {
-      showTooltipInElement.value = item
-    }
-
-    if (item === 'gdpr' && !payload.value.gdpr) {
-      showTooltipInElement.value = item
-    }
+  nextTick(() => {
+    const fieldId = invalidField === 'gdpr' ? 'privacy-agreement' : invalidField
+    document.getElementById(fieldId || '')?.focus({ preventScroll: true })
+    document.getElementById(fieldId || '')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    })
   })
 }
 
@@ -217,10 +205,6 @@ const allFieldsValidated = computed(() => {
 
   return false
 })
-
-onBeforeUnmount(() => {
-  resetAutoRedirectTimer()
-})
 </script>
 
 <template>
@@ -239,6 +223,7 @@ onBeforeUnmount(() => {
               <FormTooltip v-if="showTooltipInElement === 'name'" />
 
               <input
+                id="name"
                 v-model="payload.name"
                 required
                 :class="
@@ -262,6 +247,7 @@ onBeforeUnmount(() => {
               <FormTooltip v-if="showTooltipInElement === 'email'" />
 
               <input
+                id="email"
                 v-model="payload.email"
                 required
                 :class="
@@ -296,6 +282,7 @@ onBeforeUnmount(() => {
               <FormTooltip v-if="showTooltipInElement === 'message'" />
 
               <textarea
+                id="message"
                 v-model="payload.message"
                 placeholder=" "
                 required
@@ -323,6 +310,7 @@ onBeforeUnmount(() => {
                 >Nachricht</label
               >
               <span
+                v-if="payload.message.length >= 3500"
                 class="text-counter"
                 :class="{
                   'warning-color': payload.message.length > 4000,
@@ -356,7 +344,18 @@ onBeforeUnmount(() => {
             </div>
 
             <p>
-              <button type="submit" class="link primary">Senden</button>
+              <button
+                type="submit"
+                class="link primary submit-button"
+                :disabled="isSubmitting"
+              >
+                <span
+                  v-if="isSubmitting"
+                  class="button-spinner"
+                  aria-hidden="true"
+                ></span>
+                {{ isSubmitting ? 'Wird gesendet …' : 'Senden' }}
+              </button>
             </p>
           </form>
         </ClientOnly>
@@ -407,9 +406,10 @@ onBeforeUnmount(() => {
           <div class="inner-content">
             <h1>Deine Nachricht wurde gesendet</h1>
             <hr />
-            <p>Du wirst gleich zur Startseite weitergeleitet</p>
-
-            <WaitingAnimation />
+            <p>Du kannst jetzt zur Startseite zurückkehren.</p>
+            <NuxtLink to="/" class="link primary small"
+              >Zur Startseite</NuxtLink
+            >
           </div>
         </div>
       </FullModal>
@@ -573,6 +573,33 @@ onBeforeUnmount(() => {
         font-weight: 800;
       }
     }
+  }
+}
+
+.submit-button {
+  display: inline-flex;
+  gap: 0.65rem;
+  align-items: center;
+  justify-content: center;
+
+  &:disabled {
+    cursor: wait;
+    opacity: 0.72;
+  }
+}
+
+.button-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: button-spin 0.8s linear infinite;
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
