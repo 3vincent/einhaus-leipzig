@@ -21,7 +21,7 @@
           : `background-image: url(${backgroundImageUrlSmall})`
       "
     >
-      <div class="landing-contentBox">
+      <div class="landing-contentBox landing-contentBox-copy">
         <h2>{{ title }}</h2>
 
         <!-- eslint-disable-next-line vue/no-v-html -->
@@ -107,6 +107,31 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+.landing-contentBox.landing-contentBox-copy {
+  padding: 1.75rem 1.6rem 2rem;
+
+  h2 {
+    margin-bottom: 1.25rem;
+    padding: 0;
+  }
+
+  :deep(p) {
+    padding: 0;
+  }
+
+  :deep(p + p) {
+    margin-top: 1.1rem;
+  }
+
+  :deep(p.bold) {
+    margin-block: 1.35rem;
+  }
+
+  @media screen and (min-width: $md) {
+    padding: 2.25rem clamp(2.5rem, 5vw, 4rem) 2.5rem;
+  }
+}
+
 .sticky-background {
   background-attachment: scroll;
 }
