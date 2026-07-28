@@ -1,7 +1,7 @@
 <template>
-  <nav class="user-menu-container">
+  <nav ref="userMenu" class="user-menu-container" aria-label="Hauptnavigation">
     <div class="user-menu-icon-container">
-      <MenuButton :is-active="menuVisible" aria-controls="primary-navigation" />
+      <MenuButton :is-active="menuVisible" @toggle="toggleMenu" />
     </div>
 
     <div
@@ -9,8 +9,13 @@
       :class="{ 'is-visible': menuVisible, 'hide-on-load': hideOnLoad }"
     >
       <ul id="primary-navigation" class="user-menu-list">
-        <li v-for="link in navigationLinks" :key="link.to">
-          <NuxtLink :to="link.to">
+        <li v-for="(link, index) in navigationLinks" :key="link.to">
+          <NuxtLink
+            :ref="element => setFirstLink(element, index)"
+            :to="link.to"
+            :aria-current="route.path === link.to ? 'page' : undefined"
+            @click="closeMenu"
+          >
             <span>{{ link.label }}</span>
           </NuxtLink>
         </li>
@@ -24,6 +29,9 @@ import { PRIMARY_NAVIGATION_LINKS } from '~~/util/navigation-links'
 
 const menuVisible = ref(false)
 const hideOnLoad = ref(true)
+const userMenu = ref<HTMLElement | null>(null)
+const firstLink = ref<HTMLElement | null>(null)
+const route = useRoute()
 type NavLink = (typeof PRIMARY_NAVIGATION_LINKS)[number]
 const navigationLinks = computed(() =>
   PRIMARY_NAVIGATION_LINKS.filter((link: NavLink) => {
@@ -32,48 +40,49 @@ const navigationLinks = computed(() =>
   })
 )
 
-onBeforeUnmount(() => {
-  userMenu.value?.removeEventListener('click', toggleMenuModal, false)
-
-  document.removeEventListener('click', detectOutsideClickToClose, false)
-})
-
 onMounted(() => {
-  userMenu.value?.addEventListener('click', toggleMenuModal, false)
-
-  document.addEventListener('click', detectOutsideClickToClose, false)
+  document.addEventListener('click', detectOutsideClickToClose)
+  document.addEventListener('keydown', handleKeydown)
 
   setTimeout(() => {
     hideOnLoad.value = false
   }, 150)
 })
 
-const menuModal = computed(() => {
-  return document.querySelector('.user-menu-list-container')
+onBeforeUnmount(() => {
+  document.removeEventListener('click', detectOutsideClickToClose)
+  document.removeEventListener('keydown', handleKeydown)
 })
 
-const userMenu = computed(() => {
-  return document.querySelector('.user-menu-container')
-})
+function setFirstLink(element: unknown, index: number) {
+  if (index !== 0) return
 
-function toggleMenuModal() {
-  menuModal.value?.classList.toggle('is-visible')
-
-  toggleClickState()
-}
-function toggleClickState() {
-  if (menuModal.value?.classList.contains('is-visible'))
-    return (menuVisible.value = true)
-
-  return (menuVisible.value = false)
+  const component = element as { $el?: HTMLElement } | null
+  firstLink.value = component?.$el || null
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function detectOutsideClickToClose(event: any) {
-  const isClickInside = userMenu.value?.contains(event.target)
+async function toggleMenu() {
+  menuVisible.value = !menuVisible.value
 
-  if (!isClickInside) menuModal.value?.classList.remove('is-visible')
-  toggleClickState()
+  if (menuVisible.value) {
+    await nextTick()
+    firstLink.value?.focus()
+  }
+}
+
+function closeMenu() {
+  menuVisible.value = false
+}
+
+function detectOutsideClickToClose(event: MouseEvent) {
+  const isClickInside =
+    event.target instanceof Node && userMenu.value?.contains(event.target)
+
+  if (!isClickInside) closeMenu()
+}
+
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape') closeMenu()
 }
 </script>
 
@@ -115,6 +124,17 @@ function detectOutsideClickToClose(event: any) {
 
       a:hover {
         background-color: var(--background-menu-highlighting);
+      }
+
+      a[aria-current='page'] {
+        color: var(--button-color-hover);
+        background-color: var(--background-menu-highlighting);
+        font-weight: 700;
+      }
+
+      a:focus-visible {
+        outline: 3px solid var(--button-color);
+        outline-offset: 2px;
       }
     }
 

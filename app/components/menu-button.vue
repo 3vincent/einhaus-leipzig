@@ -1,5 +1,11 @@
 <template>
-  <button aria-label="Main User Menu">
+  <button
+    type="button"
+    aria-label="Hauptnavigation"
+    :aria-expanded="isActive"
+    aria-controls="primary-navigation"
+    @click="$emit('toggle')"
+  >
     <div id="main-menu-button" :class="{ open: isActive }">
       <span></span>
       <span></span>
@@ -12,15 +18,28 @@
 const { isActive = false } = defineProps<{
   isActive?: boolean
 }>()
+
+defineEmits<{
+  toggle: []
+}>()
 </script>
 
 <style lang="scss" scoped>
 button {
-  padding: 0 1rem;
+  display: grid;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0.55rem 0 0.55rem 0.75rem;
+  place-items: center end;
   cursor: pointer;
   background-color: transparent;
   border: none;
-  padding-right: 0;
+
+  &:focus-visible {
+    outline: 3px solid var(--button-color);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
 }
 
 #main-menu-button span {
@@ -44,6 +63,7 @@ button {
 #main-menu-button {
   height: 30px;
   width: 36px;
+  pointer-events: none;
 }
 
 #main-menu-button span:nth-child(1) {
