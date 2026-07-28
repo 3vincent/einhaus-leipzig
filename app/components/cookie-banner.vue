@@ -104,8 +104,8 @@ const denyCookie = () => {
   }
 
   p a {
-    color: var(----main-text-color-semidark);
-    border-bottom-color: var(----main-text-color-semidark);
+    color: var(--main-text-color-semidark);
+    border-bottom-color: var(--main-text-color-semidark);
     border-bottom-width: 1px;
   }
 
@@ -119,8 +119,19 @@ const denyCookie = () => {
   }
 
   .button-container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin: 0.75rem 0;
+
+    @media screen and (min-width: $md) {
+      grid-template-columns: repeat(2, minmax(150px, 1fr));
+    }
+
+    .link {
+      width: 100%;
+      margin: 0;
+    }
   }
 
   .link.primary {
