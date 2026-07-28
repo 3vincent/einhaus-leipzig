@@ -11,15 +11,15 @@
     "format:fix": "prettier --write ."
   },
   "devDependencies": {
+    "@iconify-json/uil": "^1.2.3",
     "@nuxt/devtools": "^3.0.0",
     "@nuxt/eslint": "^1.9.0",
     "@nuxt/icon": "^2.1.0",
-    "@pinia/nuxt": "^0.11.3",
-    "@iconify-json/uil": "^1.2.3",
-    "@types/node": "^24.3.1",
-    "@types/nodemailer": "^7.0.1",
+    "@pinia/nuxt": "^1.0.1",
+    "@types/node": "^26.1.2",
+    "@types/nodemailer": "^8.0.1",
     "@types/validator": "^13.7.10",
-    "eslint": "^9.35.0",
+    "eslint": "^10.8.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-vue": "^10.4.0",
@@ -27,15 +27,15 @@
     "prettier": "^3.0.3",
     "sass": "^1.56.1",
     "sass-embedded": "^1.93.2",
-    "typescript": "^5.0.4",
+    "typescript": "^5.9.3",
     "vite-plugin-eslint2": "^5.0.4",
     "vue-eslint-parser": "^10.2.0",
     "vue-tsc": "^3.0.6"
   },
   "dependencies": {
     "joi": "^18.0.1",
-    "nodemailer": "^7.0.6",
-    "pinia": "^3.0.4",
+    "nodemailer": "^9.0.3",
+    "pinia": "^4.0.2",
     "validator": "^13.7.0"
   }
 }

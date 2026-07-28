@@ -62,14 +62,14 @@ async function sendMail(payload: PayloadData): Promise<string> {
   } catch (error) {
     console.log(error)
 
-    throw new Error('Error sending message')
+    throw new Error('Error sending message', { cause: error })
   }
 }
 
 export default defineEventHandler(async event => {
   // TODO: Add a rate limiter for requests or basic authentication
 
-  const { ...requestBody } = await readBody(event)
+  const requestBody = await readBody<Partial<PayloadData>>(event)
 
   const payload: PayloadData = {
     name: requestBody?.name || '',
@@ -120,6 +120,7 @@ export default defineEventHandler(async event => {
         statusCode: err?.response?.status,
         responseBody: err?.data,
       },
+      cause: err,
     })
   }
 })
