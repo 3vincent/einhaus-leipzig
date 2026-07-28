@@ -5,10 +5,11 @@ import { useToast } from '../composables/useToast'
 
 const payload = ref<PayloadData>({
   name: '',
-  age: 0,
   email: '',
   message: '',
   gdpr: false,
+  companyWebsite: '',
+  formStartedAt: 0,
 })
 
 const sendResponse = ref(0)
@@ -47,6 +48,8 @@ onMounted(() => {
       console.warn('Konnte gespeicherte Kontaktdaten nicht laden', error)
     }
   }
+  payload.value.companyWebsite = ''
+  payload.value.formStartedAt = Date.now()
   isReady.value = true
 })
 
@@ -86,10 +89,11 @@ async function handleSubmit() {
     if (sendResponse.value == 200) {
       payload.value = {
         name: '',
-        age: 0,
         email: '',
         message: '',
         gdpr: false,
+        companyWebsite: '',
+        formStartedAt: Date.now(),
       }
       sessionStorage.removeItem(STORAGE_KEY)
 
@@ -278,9 +282,14 @@ onBeforeUnmount(() => {
               <label for="email" class="input-label"> Email Adresse</label>
             </div>
 
-            <div class="input-container age">
-              <input v-model="payload.age" name="age-field" tabindex="-1" />
-              <label for="age-field" class="input-label"> Age field</label>
+            <div class="input-container contact-check" aria-hidden="true">
+              <input
+                v-model="payload.companyWebsite"
+                name="company-website"
+                tabindex="-1"
+                autocomplete="off"
+              />
+              <label for="company-website" class="input-label">Website</label>
             </div>
 
             <div class="input-container">
@@ -751,10 +760,10 @@ input[type='checkbox']:checked::after {
   color: var(--warning) !important;
 }
 
-.age,
-.age label,
-.input-container.age,
-.age label input {
+.contact-check,
+.contact-check label,
+.input-container.contact-check,
+.contact-check label input {
   clip: rect(0 0 0 0) !important;
   clip-path: inset(50%) !important;
   height: 1px;

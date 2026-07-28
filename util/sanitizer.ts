@@ -7,6 +7,7 @@ export async function sanitizer(payload: PayloadData): Promise<PayloadData> {
     email: (validator.normalizeEmail(payload.email) || '').trim(),
     message: validator.escape(payload.message).trim(),
     gdpr: payload.gdpr,
-    age: payload.age,
+    companyWebsite: validator.escape(payload.companyWebsite).trim(),
+    formStartedAt: payload.formStartedAt,
   }
 }

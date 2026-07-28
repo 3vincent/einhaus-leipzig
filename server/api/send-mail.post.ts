@@ -24,12 +24,19 @@ const transporter = nodemailer.createTransport({
   },
 })
 
+const FORM_MINIMUM_AGE_MS = 2500
+const FORM_MAXIMUM_AGE_MS = 2 * 60 * 60 * 1000
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000
+const RATE_LIMIT_MAX_REQUESTS = 5
+const requestLog = new Map<string, number[]>()
+
 export interface PayloadData {
   name: string
   email: string
   message: string
   gdpr: boolean
-  age: number
+  companyWebsite: string
+  formStartedAt: number
 }
 
 async function validatePayload(payload: PayloadData): Promise<PayloadData> {
@@ -38,7 +45,8 @@ async function validatePayload(payload: PayloadData): Promise<PayloadData> {
     email: Joi.string().email().required().trim(),
     message: Joi.string().min(1).max(4000).required().trim(),
     gdpr: Joi.boolean().valid(true).required(),
-    age: Joi.number().valid(0).required(),
+    companyWebsite: Joi.string().allow('').max(0).required(),
+    formStartedAt: Joi.number().integer().positive().required(),
   })
 
   return await schema.validateAsync(payload)
@@ -67,32 +75,54 @@ async function sendMail(payload: PayloadData): Promise<string> {
 }
 
 export default defineEventHandler(async event => {
-  // TODO: Add a rate limiter for requests or basic authentication
-
   const requestBody = await readBody<Partial<PayloadData>>(event)
+
+  const hasAntiSpamFields =
+    Object.hasOwn(requestBody, 'companyWebsite') &&
+    Object.hasOwn(requestBody, 'formStartedAt')
+  const formAge = Date.now() - Number(requestBody.formStartedAt)
+  const looksAutomated =
+    !hasAntiSpamFields ||
+    typeof requestBody.companyWebsite !== 'string' ||
+    requestBody.companyWebsite.length > 0 ||
+    !Number.isFinite(formAge) ||
+    formAge < FORM_MINIMUM_AGE_MS ||
+    formAge > FORM_MAXIMUM_AGE_MS
+
+  // Return a convincing success response without sending mail so bots do not
+  // learn which part of the trap they triggered.
+  if (looksAutomated) {
+    return successResponse()
+  }
 
   const payload: PayloadData = {
     name: requestBody?.name || '',
     email: requestBody?.email || '',
     message: requestBody?.message || '',
     gdpr: requestBody?.gdpr || false,
-    age: requestBody?.age || 0,
+    companyWebsite: requestBody.companyWebsite ?? '',
+    formStartedAt: Number(requestBody.formStartedAt),
   }
 
-  // Honeypot to detect scripted abuse
-  if (payload.age != 0) {
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        msg: 'Your message was sent. Thank you.',
-      }),
-    }
+  const ip = getRequestIP(event, { xForwardedFor: true }) || 'unknown'
+  const now = Date.now()
+  const recentRequests = (requestLog.get(ip) || []).filter(
+    timestamp => now - timestamp < RATE_LIMIT_WINDOW_MS
+  )
+
+  if (recentRequests.length >= RATE_LIMIT_MAX_REQUESTS) {
+    throw createError({
+      statusCode: 429,
+      message: 'Too many contact requests. Please try again later.',
+    })
   }
 
   try {
     const sanitizedPayload = await sanitizer(payload)
 
     await validatePayload(sanitizedPayload)
+
+    requestLog.set(ip, [...recentRequests, now])
 
     const messageId = await sendMail(sanitizedPayload)
 
@@ -101,12 +131,7 @@ export default defineEventHandler(async event => {
       console.log('Message sent:', messageId)
     }
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        msg: 'Your message was sent. Thank you.',
-      }),
-    }
+    return successResponse()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     console.log(err)
@@ -124,3 +149,12 @@ export default defineEventHandler(async event => {
     })
   }
 })
+
+function successResponse() {
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      msg: 'Your message was sent. Thank you.',
+    }),
+  }
+}
