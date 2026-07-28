@@ -124,26 +124,12 @@ const denyCookie = () => {
   }
 
   .link.primary {
-    background-color: white;
-    color: var(--main-text-color-dark) !important;
-    border: 2px solid white !important;
-
-    &:hover,
-    :focus {
-      // border-color: var(--main-text-color-semidark-light) !important;
-      // border-color: var(--main-text-color-semidark-light) !important;
-      box-shadow: 0px 0px 0.4rem rgba(46, 46, 46, 0.8) !important;
-    }
-  }
-
-  .link.secondary {
     color: white !important;
     background-color: var(--button-color);
     border-color: var(--button-color) !important;
 
     &:hover,
     &:focus {
-      color: white !important;
       background-color: var(--button-color-hover);
       border-color: var(--button-color-hover) !important;
     }
@@ -151,6 +137,18 @@ const denyCookie = () => {
     &:active {
       background-color: var(--button-color-active);
       border-color: var(--button-color-active) !important;
+    }
+  }
+
+  .link.secondary {
+    color: var(--main-text-color-dark) !important;
+    background-color: white;
+    border-color: var(--main-text-color-semidark) !important;
+
+    &:hover,
+    &:focus {
+      color: var(--main-text-color-semidark) !important;
+      background-color: rgba(232, 232, 232, 0.5);
     }
   }
 }
