@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="topMenu"
     class="top-menu-container"
     :class="{
       'default-sites-menubar': isDefault,
@@ -25,6 +26,7 @@ const {
 }>()
 
 const isMenuFixed = ref(false)
+const topMenu = ref<HTMLElement | null>(null)
 
 onMounted(() => {
   makeTopMenuSticky()
@@ -36,7 +38,7 @@ onBeforeUnmount(() => {
 })
 
 function makeTopMenuSticky() {
-  const element = document.querySelector('.top-menu-container') as HTMLElement
+  const element = topMenu.value
 
   if (element && window.getComputedStyle(element).position === 'sticky') {
     isMenuFixed.value =

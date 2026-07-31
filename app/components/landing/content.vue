@@ -2,6 +2,7 @@
   <div>
     <div
       v-if="lastContainer"
+      ref="observerAlertTop"
       class="intersection-observer-alert-element-top"
     ></div>
 
@@ -16,7 +17,7 @@
         'safari-fixed-off': isSafari,
       }"
       :style="
-        visible
+        imageVisible
           ? `background-image: url(${backgroundImageUrl});`
           : `background-image: url(${backgroundImageUrlSmall})`
       "
@@ -33,6 +34,7 @@
 
     <div
       v-if="lastContainer"
+      ref="observerAlertBottom"
       class="intersection-observer-alert-element-bottom"
     ></div>
   </div>
@@ -52,31 +54,49 @@ const backgroundImageUrlSmall = computed(() => {
 })
 
 const isSafari = ref(false)
-
 const landingContainer = ref<HTMLElement | null>(null)
+const observerAlertTop = ref<HTMLElement | null>(null)
+const observerAlertBottom = ref<HTMLElement | null>(null)
+const imageVisible = ref(props.visible)
+let backgroundObserver: IntersectionObserver | undefined
+let stickyBackgroundObserver: IntersectionObserver | undefined
+
+function observeBackgroundImage() {
+  if (!landingContainer.value || !('IntersectionObserver' in window)) {
+    imageVisible.value = true
+    return
+  }
+
+  backgroundObserver = new IntersectionObserver(
+    entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return
+      imageVisible.value = true
+      backgroundObserver?.disconnect()
+    },
+    { rootMargin: '0px 0px 200px 0px' }
+  )
+  backgroundObserver.observe(landingContainer.value)
+}
 
 function fixBackgroundImage() {
   // if (window.innerWidth < 1280 || isSafari.value) return
   if (window.innerWidth < 1280) return
 
-  const element = document.querySelector(
-    '.fix-background-image'
-  ) as HTMLDivElement
+  const element = landingContainer.value
+  const intersectionObserverAlertElementBottom = observerAlertBottom.value
+  const intersectionObserverAlertElementTop = observerAlertTop.value
 
-  const intersectioObserverAlertElementBottom = document.querySelector(
-    '.intersection-observer-alert-element-bottom'
-  ) as HTMLDivElement
-
-  const intersectioObserverAlertElementTop = document.querySelector(
-    '.intersection-observer-alert-element-top'
-  ) as HTMLDivElement
-
-  if ('IntersectionObserver' in window) {
-    const fixBackgroundImage = new IntersectionObserver(
+  if (
+    element &&
+    intersectionObserverAlertElementBottom &&
+    intersectionObserverAlertElementTop &&
+    'IntersectionObserver' in window
+  ) {
+    stickyBackgroundObserver = new IntersectionObserver(
       (entries, _observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            if (entry.target === intersectioObserverAlertElementTop) {
+            if (entry.target === intersectionObserverAlertElementTop) {
               element.classList.remove('sticky-background')
               return
             }
@@ -87,8 +107,8 @@ function fixBackgroundImage() {
       }
     )
 
-    fixBackgroundImage.observe(intersectioObserverAlertElementBottom)
-    fixBackgroundImage.observe(intersectioObserverAlertElementTop)
+    stickyBackgroundObserver.observe(intersectionObserverAlertElementBottom)
+    stickyBackgroundObserver.observe(intersectionObserverAlertElementTop)
   }
 }
 
@@ -97,12 +117,18 @@ onMounted(() => {
   const isWebkit = /safari/i.test(ua) && !/chrome|crios|fxios/i.test(ua)
   const isAndroid = /android/i.test(ua)
   isSafari.value = isWebkit && !isAndroid
+  observeBackgroundImage()
 
   if (props.lastContainer) fixBackgroundImage()
 
   if (isSafari.value) {
     landingContainer.value?.classList.add('safari-fixed-off')
   }
+})
+
+onBeforeUnmount(() => {
+  backgroundObserver?.disconnect()
+  stickyBackgroundObserver?.disconnect()
 })
 </script>
 
