@@ -24,19 +24,25 @@ const fieldElements: Record<
   gdpr: gdprInput,
 }
 
-function onFocus() {
-  if (showTooltipInElement.value !== null) showTooltipInElement.value = null
-}
-
 function onTextareaFocus() {
-  onFocus()
-
   isTextAreaFocused.value = true
 }
 
 function onTextareaBlur() {
   isTextAreaFocused.value = false
 }
+
+watch(
+  () => validation.value.fields,
+  fields => {
+    const visibleTooltip = showTooltipInElement.value
+
+    if (visibleTooltip && fields[visibleTooltip]) {
+      showTooltipInElement.value = null
+    }
+  },
+  { deep: true }
+)
 
 async function handleSubmit() {
   if (!validation.value.valid) {
@@ -102,7 +108,6 @@ const checkFormValidations = () => {
                 autocomplete="off"
                 class="input-field"
                 placeholder=" "
-                @focus="onFocus"
               />
               <label for="name" class="input-label">Name</label>
             </div>
@@ -127,7 +132,6 @@ const checkFormValidations = () => {
                 autocomplete="off"
                 class="input-field"
                 placeholder=" "
-                @focus="onFocus"
               />
 
               <label for="email" class="input-label"> Email Adresse</label>
@@ -197,8 +201,6 @@ const checkFormValidations = () => {
                 required
                 type="checkbox"
                 name="scales"
-                @focus="onFocus"
-                @click="onFocus"
               />
               <label for="privacy-agreement" class="privacy-label">
                 <span>
