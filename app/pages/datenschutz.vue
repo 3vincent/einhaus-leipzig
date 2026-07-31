@@ -55,7 +55,10 @@ const cookieConsentStatus = computed(() => {
 </script>
 
 <template>
-  <div class="default-container">
+  <div
+    class="default-container"
+    style="--page-background: url('/images/einhaus-landing-photo-05.jpg')"
+  >
     <div class="content">
       <BreadcrumbNav />
 
@@ -587,7 +590,7 @@ const cookieConsentStatus = computed(() => {
 <style lang="scss" scoped>
 @media screen and (min-width: $lg) {
   .default-container::before {
-    background-image: url(/images/einhaus-landing-photo-05.jpg);
+    background-image: var(--page-background);
   }
 }
 </style>
