@@ -45,7 +45,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="default-container">
+  <div
+    class="default-container"
+    style="--page-background: url('/images/einhaus-landing-photo-06.jpg')"
+  >
     <div class="content">
       <BreadcrumbNav />
 
@@ -190,7 +193,7 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 .default-container::before {
-  background-image: url(/images/einhaus-landing-photo-06.jpg);
+  background-image: var(--page-background);
 }
 
 .default-container {

@@ -32,7 +32,10 @@ const envVar = useRuntimeConfig()
 </script>
 
 <template>
-  <div class="default-container">
+  <div
+    class="default-container"
+    style="--page-background: url('/images/einhaus-landing-photo-04.jpg')"
+  >
     <div class="content">
       <BreadcrumbNav />
 
@@ -51,7 +54,7 @@ const envVar = useRuntimeConfig()
 <style lang="scss" scoped>
 .default-container {
   &::before {
-    background-image: url(/images/einhaus-landing-photo-04.jpg);
+    background-image: var(--page-background);
   }
 
   p {

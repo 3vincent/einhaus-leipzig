@@ -1,36 +1,30 @@
 <script setup lang="ts">
-import type { PayloadData } from '~~/server/api/send-mail.post'
-import { sanitizer } from '~~/util/sanitizer'
-import { useToast } from '../composables/useToast'
+import type { ContactFormField } from '~~/shared/types/contact'
+import { CONTACT_MESSAGE_MAX_LENGTH } from '~~/shared/validation/contact'
+import { useContactForm } from '../composables/useContactForm'
 
-const payload = ref<PayloadData>({
-  name: '',
-  email: '',
-  message: '',
-  gdpr: false,
-  companyWebsite: '',
-  formStartedAt: 0,
-})
-
-const sendResponse = ref(0)
-const clickedOnce = ref(false)
-const isSubmitting = ref(false)
+const { isReady, isSubmitting, payload, sendResponse, submit, validation } =
+  useContactForm()
 const envVar = useRuntimeConfig()
 const isTextAreaFocused = ref(false)
-const showTooltipInElement = ref<'name' | 'email' | 'message' | 'gdpr' | null>(
-  null
-)
-const STORAGE_KEY = 'einhaus-contact-form'
-const isReady = ref(false)
-const { showToast } = useToast()
+const showTooltipInElement = ref<ContactFormField | null>(null)
+const contactContainer = ref<HTMLElement | null>(null)
+const nameInput = ref<HTMLInputElement | null>(null)
+const emailInput = ref<HTMLInputElement | null>(null)
+const messageInput = ref<HTMLTextAreaElement | null>(null)
+const gdprInput = ref<HTMLInputElement | null>(null)
 
-function onFocus() {
-  if (showTooltipInElement.value !== null) showTooltipInElement.value = null
+const fieldElements: Record<
+  ContactFormField,
+  Ref<HTMLInputElement | HTMLTextAreaElement | null>
+> = {
+  name: nameInput,
+  email: emailInput,
+  message: messageInput,
+  gdpr: gdprInput,
 }
 
 function onTextareaFocus() {
-  onFocus()
-
   isTextAreaFocused.value = true
 }
 
@@ -38,177 +32,52 @@ function onTextareaBlur() {
   isTextAreaFocused.value = false
 }
 
-onMounted(() => {
-  const saved = sessionStorage.getItem(STORAGE_KEY)
-  if (saved) {
-    try {
-      const parsed = JSON.parse(saved) as Partial<PayloadData>
-      payload.value = { ...payload.value, ...parsed }
-    } catch (error) {
-      console.warn('Konnte gespeicherte Kontaktdaten nicht laden', error)
-    }
-  }
-  payload.value.companyWebsite = ''
-  payload.value.formStartedAt = Date.now()
-  isReady.value = true
-})
-
 watch(
-  () => ({ ...payload.value }),
-  value => {
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(value))
+  () => validation.value.fields,
+  fields => {
+    const visibleTooltip = showTooltipInElement.value
+
+    if (visibleTooltip && fields[visibleTooltip]) {
+      showTooltipInElement.value = null
+    }
   },
   { deep: true }
 )
 
 async function handleSubmit() {
-  if (isSubmitting.value) return
-
-  if (!allFieldsValidated.value) {
+  if (!validation.value.valid) {
     checkFormValidations()
-
     return
   }
 
-  try {
-    clickedOnce.value = true
-    isSubmitting.value = true
-
-    const sanitizedPayload = await sanitizer(payload.value)
-
-    moveLoadingAnimationToCenter()
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const response: any = await $fetch('/api/send-mail', {
-      method: 'POST',
-      body: JSON.stringify(sanitizedPayload),
-    })
-
-    console.log(response)
-
-    sendResponse.value =
-      response.statusCode ?? response.error.value?.statusCode ?? 0
-
-    if (sendResponse.value == 200) {
-      payload.value = {
-        name: '',
-        email: '',
-        message: '',
-        gdpr: false,
-        companyWebsite: '',
-        formStartedAt: Date.now(),
-      }
-      sessionStorage.removeItem(STORAGE_KEY)
-
-      showToast({
-        style: 'success',
-        message: 'Deine Nachricht wurde gesendet.',
-      })
-    }
-  } catch (error) {
-    console.log(error)
-    sendResponse.value = 535
-    showToast({
-      style: 'error',
-      message:
-        'Deine Nachricht konnte nicht gesendet werden. Bitte versuche es später erneut.',
-    })
-  } finally {
-    isSubmitting.value = false
-  }
+  contactContainer.value?.scrollIntoView({ block: 'start' })
+  await submit()
 }
 
-function copyToClipboard() {
-  navigator.clipboard.writeText(payload.value.message)
-}
-
-function moveLoadingAnimationToCenter() {
-  const loadingAnimationDiv = document.querySelector('#top-of-the-page')
-
-  loadingAnimationDiv?.scrollIntoView({
-    block: 'start',
-  })
+async function copyToClipboard() {
+  await navigator.clipboard.writeText(payload.value.message)
 }
 
 const checkFormValidations = () => {
-  const invalidField = !isNameValidated.value
-    ? 'name'
-    : !isEmailValidated.value
-      ? 'email'
-      : !isMessageValidated.value
-        ? 'message'
-        : !payload.value.gdpr
-          ? 'gdpr'
-          : null
+  const invalidField = validation.value.firstInvalidField
 
   showTooltipInElement.value = invalidField
 
   nextTick(() => {
-    const fieldId = invalidField === 'gdpr' ? 'privacy-agreement' : invalidField
-    document.getElementById(fieldId || '')?.focus({ preventScroll: true })
-    document.getElementById(fieldId || '')?.scrollIntoView({
+    if (!invalidField) return
+
+    const element = fieldElements[invalidField].value
+    element?.focus({ preventScroll: true })
+    element?.scrollIntoView({
       behavior: 'smooth',
       block: 'center',
     })
   })
 }
-
-const isNameValidated = computed(() => {
-  if (payload.value.name.length >= 2) return true
-
-  return false
-})
-
-const isMessageValidated = computed(() => {
-  if (
-    payload.value.message.length > 2 &&
-    payload.value.message.length <= 4000
-  ) {
-    return true
-  }
-
-  return false
-})
-
-const isEmailValidated = computed(() => {
-  if (
-    [...payload.value.email.toLowerCase()].every(char =>
-      'abcdefghijklmnopqrstuvwxyz0123456789.@+-_~'.includes(char)
-    ) &&
-    payload.value.email.length >= 5 &&
-    payload.value.email.includes('@') &&
-    payload.value.email.split('@')[1]?.split('.')[0] &&
-    payload.value.email.split('@').length == 2 &&
-    (payload.value.email?.split('@')[0]?.length ?? 0) > 0 &&
-    payload.value.email.split('@')[1]?.includes('.') &&
-    payload.value.email.slice(payload.value.email.lastIndexOf('.') + 1).length >
-      0 &&
-    !payload.value.email.split('@')[1]?.includes('_') &&
-    !payload.value.email.split('@')[1]?.includes('~') &&
-    payload.value.email.indexOf('..') == -1
-  ) {
-    return true
-  }
-
-  return false
-})
-
-const allFieldsValidated = computed(() => {
-  if (
-    isEmailValidated.value &&
-    isNameValidated.value &&
-    isMessageValidated.value &&
-    payload.value.gdpr
-  ) {
-    return true
-  }
-
-  return false
-})
 </script>
 
 <template>
-  <div id="top-of-the-page" class="contact-container">
+  <div id="top-of-the-page" ref="contactContainer" class="contact-container">
     <h2>Kontaktformular</h2>
     <div class="contact-form-wrapper">
       <div v-if="isReady" class="form-container">
@@ -224,10 +93,11 @@ const allFieldsValidated = computed(() => {
 
               <input
                 id="name"
+                ref="nameInput"
                 v-model="payload.name"
                 required
                 :class="
-                  isNameValidated
+                  validation.fields.name
                     ? 'single-field-filled'
                     : payload.name
                       ? 'not-filled-field'
@@ -238,7 +108,6 @@ const allFieldsValidated = computed(() => {
                 autocomplete="off"
                 class="input-field"
                 placeholder=" "
-                @focus="onFocus"
               />
               <label for="name" class="input-label">Name</label>
             </div>
@@ -248,10 +117,11 @@ const allFieldsValidated = computed(() => {
 
               <input
                 id="email"
+                ref="emailInput"
                 v-model="payload.email"
                 required
                 :class="
-                  isEmailValidated
+                  validation.fields.email
                     ? 'single-field-filled'
                     : payload.email
                       ? 'not-filled-field'
@@ -262,7 +132,6 @@ const allFieldsValidated = computed(() => {
                 autocomplete="off"
                 class="input-field"
                 placeholder=" "
-                @focus="onFocus"
               />
 
               <label for="email" class="input-label"> Email Adresse</label>
@@ -283,12 +152,13 @@ const allFieldsValidated = computed(() => {
 
               <textarea
                 id="message"
+                ref="messageInput"
                 v-model="payload.message"
                 placeholder=" "
                 required
                 name="message"
                 :class="
-                  isMessageValidated
+                  validation.fields.message
                     ? 'single-field-filled'
                     : payload.message
                       ? 'not-filled-field'
@@ -313,10 +183,11 @@ const allFieldsValidated = computed(() => {
                 v-if="payload.message.length >= 3500"
                 class="text-counter"
                 :class="{
-                  'warning-color': payload.message.length > 4000,
+                  'warning-color':
+                    payload.message.length > CONTACT_MESSAGE_MAX_LENGTH,
                 }"
               >
-                {{ 4000 - payload.message.length }}
+                {{ CONTACT_MESSAGE_MAX_LENGTH - payload.message.length }}
               </span>
             </div>
 
@@ -325,12 +196,11 @@ const allFieldsValidated = computed(() => {
 
               <input
                 id="privacy-agreement"
+                ref="gdprInput"
                 v-model="payload.gdpr"
                 required
                 type="checkbox"
                 name="scales"
-                @focus="onFocus"
-                @click="onFocus"
               />
               <label for="privacy-agreement" class="privacy-label">
                 <span>
@@ -382,16 +252,7 @@ const allFieldsValidated = computed(() => {
         </p>
       </div>
 
-      <FullModal
-        v-if="
-          sendResponse !== 200 &&
-          sendResponse !== 400 &&
-          sendResponse !== 500 &&
-          sendResponse !== 535 &&
-          clickedOnce
-        "
-        :show="true"
-      >
+      <FullModal v-if="isSubmitting" :show="true" label="Versandstatus">
         <div class="message-response">
           <div class="inner-content">
             <h1>Deine Nachricht wird verschickt...</h1>
@@ -401,7 +262,11 @@ const allFieldsValidated = computed(() => {
         </div>
       </FullModal>
 
-      <FullModal v-if="sendResponse === 200" :show="true">
+      <FullModal
+        v-if="sendResponse === 200"
+        :show="true"
+        label="Nachricht gesendet"
+      >
         <div class="message-response">
           <div class="inner-content">
             <h1>Deine Nachricht wurde gesendet</h1>
@@ -419,6 +284,7 @@ const allFieldsValidated = computed(() => {
           sendResponse === 500 || sendResponse === 400 || sendResponse === 535
         "
         :show="true"
+        label="Fehler beim Nachrichtenversand"
       >
         <div class="message-response">
           <div class="inner-content error">
@@ -438,12 +304,11 @@ const allFieldsValidated = computed(() => {
                   {{ payload.message }}
                 </p>
               </div>
-              <a
-                href="#"
-                rel="nofollow"
+              <button
+                type="button"
                 class="link secondary small"
-                @click.prevent="copyToClipboard"
-                >Nachricht in die Zwischenablage kopieren</a
+                @click="copyToClipboard"
+                >Nachricht in die Zwischenablage kopieren</button
               >
 
               <NuxtLink to="/" class="link primary small"

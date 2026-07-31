@@ -3,36 +3,30 @@ const cookieConsent = useCookie('cookieConsent')
 const showCheck = ref(false)
 
 const deleteCookie = () => {
-  try {
-    showCheck.value = true
-    setTimeout(() => {
-      showCheck.value = false
-      cookieConsent.value = 'initial'
-    }, 1000)
-    console.log('Cookie deleted..')
-  } catch (error) {
-    console.log(error)
-  }
+  showCheck.value = true
+  setTimeout(() => {
+    showCheck.value = false
+    cookieConsent.value = 'initial'
+  }, 1000)
 }
 </script>
 
 <template>
-  <a
+  <button
     v-if="cookieConsent !== 'initial'"
-    href="#"
-    rel="nofollow"
+    type="button"
     class="link secondary"
-    @click.prevent="deleteCookie"
+    @click="deleteCookie"
   >
     Cookie löschen
     <Transition>
       <div v-if="showCheck"></div>
     </Transition>
-  </a>
+  </button>
 </template>
 
 <style scoped lang="scss">
-a.link.secondary {
+button.link.secondary {
   position: relative;
   display: inline-flex;
   align-items: center;

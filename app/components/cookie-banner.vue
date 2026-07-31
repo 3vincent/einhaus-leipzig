@@ -36,20 +36,12 @@ const denyCookie = () => {
           </p>
         </div>
         <div class="button-container">
-          <a
-            role="button"
-            rel="nofollow"
-            class="link primary"
-            @click.prevent="acceptCookie"
-            >Akzeptieren</a
+          <button type="button" class="link primary" @click="acceptCookie"
+            >Akzeptieren</button
           >
 
-          <a
-            role="button"
-            rel="nofollow"
-            class="link secondary"
-            @click.prevent="denyCookie"
-            >Verweigern</a
+          <button type="button" class="link secondary" @click="denyCookie"
+            >Verweigern</button
           >
         </div>
       </div>
@@ -109,12 +101,12 @@ const denyCookie = () => {
     border-bottom-width: 1px;
   }
 
-  a.link {
+  .link {
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
 
-  a.link:last-child {
+  .link:last-child {
     margin-right: 0;
   }
 

@@ -5,6 +5,8 @@
     "dev": "nuxi dev",
     "generate": "nuxi generate",
     "preview": "nuxi preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --check .",
@@ -26,6 +28,7 @@
     "sass-embedded": "^1.93.2",
     "typescript": "^5.9.3",
     "vite-plugin-eslint2": "^5.0.4",
+    "vitest": "^4.1.10",
     "vue-eslint-parser": "^10.2.0",
     "vue-tsc": "^3.0.6"
   },

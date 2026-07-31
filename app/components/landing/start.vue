@@ -1,5 +1,8 @@
 <template>
-  <div class="landing-container">
+  <div
+    class="landing-container"
+    style="--landing-start-image: url('/images/einhaus-landing-photo-01.jpg')"
+  >
     <div class="landing-contentBox">
       <h1>EinHaus Reichpietsch&shy;straße 13 eG</h1>
       <h2>Ein genossenschaftliches Hausprojekt in Leipzig Reudnitz</h2>
@@ -24,7 +27,7 @@
 
 <style lang="scss" scoped>
 .landing-container::before {
-  background-image: url(/images/einhaus-landing-photo-01.jpg);
+  background-image: var(--landing-start-image);
 }
 
 .landing-container {

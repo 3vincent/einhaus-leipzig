@@ -17,7 +17,10 @@ defineProps<{
   <div class="siteContainer">
     <TopMenuBar :is-default="true" :logo-white="false" />
 
-    <div class="default-container">
+    <div
+      class="default-container"
+      style="--page-background: url('/images/einhaus-landing-photo-06.jpg')"
+    >
       <div class="content">
         <h1>{{ error?.message }}</h1>
         <NuxtLink to="/" class="link secondary"> Back to Homepage </NuxtLink>
@@ -47,7 +50,7 @@ a {
 
 @media screen and (min-width: $lg) {
   .default-container::before {
-    background-image: url(/images/einhaus-landing-photo-06.jpg);
+    background-image: var(--page-background);
   }
 }
 </style>

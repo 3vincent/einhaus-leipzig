@@ -31,38 +31,6 @@ definePageMeta({
   layout: 'landing',
 })
 
-function lazyLoadImages() {
-  const lazyBackgrounds = Array.from(document.querySelectorAll('.background'))
-
-  if ('IntersectionObserver' in window) {
-    const lazyBackgroundObserver = new IntersectionObserver(
-      (entries, _observer) => {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            const item = landingPageContents.value.find(
-              item => item.slug === entry.target.id
-            )
-
-            if (item) {
-              item.visible = true
-              lazyBackgroundObserver.unobserve(entry.target)
-            }
-          }
-        })
-      },
-      { rootMargin: '0px 0px 200px 0px' }
-    )
-
-    lazyBackgrounds.forEach(function (lazyBackground) {
-      lazyBackgroundObserver.observe(lazyBackground)
-    })
-  }
-}
-
-onMounted(() => {
-  lazyLoadImages()
-})
-
 const landingPageContents = ref<LandingPageContent[]>([
   {
     slug: LANDING_PAGE_SLUGS.BISHER,

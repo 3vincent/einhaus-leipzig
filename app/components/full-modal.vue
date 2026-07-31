@@ -1,14 +1,23 @@
 <template>
   <Teleport to="body">
     <Transition name="modal-fade">
-      <div v-show="show" class="modal-overlay">
-        <div class="modal">
+      <div v-show="show" class="modal-overlay" @mousedown.self="closeModal">
+        <div
+          ref="dialog"
+          class="modal"
+          role="dialog"
+          aria-modal="true"
+          :aria-label="label"
+          tabindex="-1"
+          @keydown="handleKeydown"
+        >
           <div class="modal-content">
             <slot></slot>
           </div>
           <button
             v-if="showCloseButton"
             class="close-button link secondary small"
+            type="button"
             @click="closeModal"
             >Schließen</button
           >
@@ -19,15 +28,84 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(['close'])
+const emit = defineEmits<{ close: [] }>()
 
-const { show = false, showCloseButton = false } = defineProps<{
+const {
+  show = false,
+  showCloseButton = false,
+  label = 'Dialog',
+} = defineProps<{
   show?: boolean
   showCloseButton?: boolean
+  label?: string
 }>()
+const dialog = ref<HTMLElement | null>(null)
+let previouslyFocusedElement: HTMLElement | null = null
+
+const focusableSelector =
+  'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+
+watch(
+  () => show,
+  async isShown => {
+    if (!import.meta.client) return
+
+    if (!isShown) {
+      restoreFocus()
+      return
+    }
+
+    previouslyFocusedElement = document.activeElement as HTMLElement | null
+    await nextTick()
+    const firstFocusable =
+      dialog.value?.querySelector<HTMLElement>(focusableSelector)
+    ;(firstFocusable ?? dialog.value)?.focus()
+  },
+  { immediate: true, flush: 'post' }
+)
+
+onBeforeUnmount(restoreFocus)
 
 const closeModal = () => {
   emit('close')
+}
+
+function restoreFocus() {
+  if (!import.meta.client) return
+
+  previouslyFocusedElement?.focus()
+  previouslyFocusedElement = null
+}
+
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape') {
+    event.preventDefault()
+    closeModal()
+    return
+  }
+
+  if (event.key !== 'Tab' || !dialog.value) return
+
+  const focusableElements = Array.from(
+    dialog.value.querySelectorAll<HTMLElement>(focusableSelector)
+  )
+
+  if (focusableElements.length === 0) {
+    event.preventDefault()
+    dialog.value.focus()
+    return
+  }
+
+  const first = focusableElements[0]
+  const last = focusableElements.at(-1)
+
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault()
+    last?.focus()
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault()
+    first?.focus()
+  }
 }
 </script>
 

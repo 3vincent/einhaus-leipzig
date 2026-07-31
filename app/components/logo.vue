@@ -23,7 +23,7 @@ const { isWhite = false } = defineProps<{
 function scrollUpOnLandingPage() {
   const route = useRoute()
 
-  if (route.name == 'index') window.scrollTo(0, 0)
+  if (route.name === 'index') window.scrollTo(0, 0)
 }
 </script>
 

@@ -1,6 +1,11 @@
 import Joi from 'joi'
 import nodemailer from 'nodemailer'
 import { sanitizer } from '~~/util/sanitizer'
+import type {
+  ContactFormPayload,
+  ContactFormResponse,
+} from '~~/shared/types/contact'
+import { contactRateLimitAllows } from '../utils/contact-rate-limit'
 
 const smtpHost: string = process.env.SMTP_HOST || ''
 const smtpPortTLS: number = Number(process.env.SMTP_PORT_TLS)
@@ -26,24 +31,13 @@ const transporter = nodemailer.createTransport({
 
 const FORM_MINIMUM_AGE_MS = 2500
 const FORM_MAXIMUM_AGE_MS = 2 * 60 * 60 * 1000
-const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000
-const RATE_LIMIT_MAX_REQUESTS = 5
-const requestLog = new Map<string, number[]>()
-
-export interface PayloadData {
-  name: string
-  email: string
-  message: string
-  gdpr: boolean
-  companyWebsite: string
-  formStartedAt: number
-}
-
-async function validatePayload(payload: PayloadData): Promise<PayloadData> {
+async function validatePayload(
+  payload: ContactFormPayload
+): Promise<ContactFormPayload> {
   const schema = Joi.object({
-    name: Joi.string().min(1).max(120).required().trim(),
+    name: Joi.string().min(2).max(120).required().trim(),
     email: Joi.string().email().required().trim(),
-    message: Joi.string().min(1).max(4000).required().trim(),
+    message: Joi.string().min(3).max(4000).required().trim(),
     gdpr: Joi.boolean().valid(true).required(),
     companyWebsite: Joi.string().allow('').max(0).required(),
     formStartedAt: Joi.number().integer().positive().required(),
@@ -52,7 +46,7 @@ async function validatePayload(payload: PayloadData): Promise<PayloadData> {
   return await schema.validateAsync(payload)
 }
 
-async function sendMail(payload: PayloadData): Promise<string> {
+async function sendMail(payload: ContactFormPayload): Promise<string> {
   try {
     const info = await transporter.sendMail({
       from: `"${contactFormSenderName}" <${contactFormSenderAddress}>`,
@@ -68,14 +62,12 @@ async function sendMail(payload: PayloadData): Promise<string> {
 
     return info.messageId
   } catch (error) {
-    console.log(error)
-
     throw new Error('Error sending message', { cause: error })
   }
 }
 
 export default defineEventHandler(async event => {
-  const requestBody = await readBody<Partial<PayloadData>>(event)
+  const requestBody = await readBody<Partial<ContactFormPayload>>(event)
 
   const hasAntiSpamFields =
     Object.hasOwn(requestBody, 'companyWebsite') &&
@@ -95,7 +87,7 @@ export default defineEventHandler(async event => {
     return successResponse()
   }
 
-  const payload: PayloadData = {
+  const payload: ContactFormPayload = {
     name: requestBody?.name || '',
     email: requestBody?.email || '',
     message: requestBody?.message || '',
@@ -105,12 +97,9 @@ export default defineEventHandler(async event => {
   }
 
   const ip = getRequestIP(event, { xForwardedFor: true }) || 'unknown'
-  const now = Date.now()
-  const recentRequests = (requestLog.get(ip) || []).filter(
-    timestamp => now - timestamp < RATE_LIMIT_WINDOW_MS
-  )
+  const rateLimitIdentifier = `${ip}:${payload.email.trim().toLowerCase()}`
 
-  if (recentRequests.length >= RATE_LIMIT_MAX_REQUESTS) {
+  if (!contactRateLimitAllows(rateLimitIdentifier)) {
     throw createError({
       statusCode: 429,
       message: 'Too many contact requests. Please try again later.',
@@ -118,24 +107,19 @@ export default defineEventHandler(async event => {
   }
 
   try {
-    const sanitizedPayload = await sanitizer(payload)
+    const sanitizedPayload = sanitizer(payload)
 
     await validatePayload(sanitizedPayload)
 
-    requestLog.set(ip, [...recentRequests, now])
-
-    const messageId = await sendMail(sanitizedPayload)
-
-    if (process.env.NODE_ENV === 'development') {
-      console.log({ sanitizedPayload })
-      console.log('Message sent:', messageId)
-    }
+    await sendMail(sanitizedPayload)
 
     return successResponse()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
-    console.log(err)
-
+  } catch (error: unknown) {
+    const err = error as {
+      details?: { message?: string }[]
+      response?: { status?: number }
+      data?: unknown
+    }
     throw createError({
       statusCode: 535,
       message: `There was an error sending the message! ${
@@ -150,7 +134,7 @@ export default defineEventHandler(async event => {
   }
 })
 
-function successResponse() {
+function successResponse(): ContactFormResponse {
   return {
     statusCode: 200,
     body: JSON.stringify({

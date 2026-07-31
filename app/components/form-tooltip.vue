@@ -1,5 +1,9 @@
 <template>
-  <div class="tooltip-container" :style="`top: ${topOffset}px`">
+  <div
+    ref="tooltipContainer"
+    class="tooltip-container"
+    :style="`top: ${topOffset}px`"
+  >
     {{ text }}
 
     <i></i>
@@ -12,12 +16,11 @@ const { text = 'Pflichtfeld. Bitte ausfüllen.' } = defineProps<{
 }>()
 
 const topOffset = ref(0)
+const tooltipContainer = ref<HTMLElement | null>(null)
 
 const calculateTopOffset = () => {
-  const tooltipContainer = document.querySelector('.tooltip-container')
-
-  if (tooltipContainer) {
-    const height = tooltipContainer.getBoundingClientRect().height
+  if (tooltipContainer.value) {
+    const height = tooltipContainer.value.getBoundingClientRect().height
     topOffset.value = -height - 8
   }
 }
