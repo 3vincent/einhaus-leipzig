@@ -1,7 +1,7 @@
 import validator from 'validator'
-import type { PayloadData } from '../server/api/send-mail.post'
+import type { ContactFormPayload } from '../shared/types/contact'
 
-export async function sanitizer(payload: PayloadData): Promise<PayloadData> {
+export function sanitizer(payload: ContactFormPayload): ContactFormPayload {
   return {
     name: validator.escape(payload.name).trim(),
     email: (validator.normalizeEmail(payload.email) || '').trim(),
