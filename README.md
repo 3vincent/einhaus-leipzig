@@ -1,48 +1,72 @@
-## EinHaus Website
+# EinHaus Leipzig
 
-[https://www.einhaus-leipzig.de](https://www.einhaus-leipzig.de)
+Website der EinHaus Reichpietschstraße 13 eG, eines selbstverwalteten
+Hausprojekts in Leipzig-Reudnitz.
 
-<hr>
+Live: [www.einhaus-leipzig.de](https://www.einhaus-leipzig.de)
 
-# Nuxt 3 Minimal Starter
+## Technischer Überblick
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+- Nuxt 4 und Vue 3 mit Composition API und strengem TypeScript
+- serverseitig gerenderte Seiten mit SEO- und Open-Graph-Metadaten
+- responsives SCSS ohne UI-Framework
+- Kontaktformular mit gemeinsamer Client-/Server-Typisierung, Schema-Validierung,
+  Honeypot, Zeitprüfung und SMTP-Versand
+- mehrstufiger Spam-Schutz durch Honeypot, Zeitprüfung und lokales Rate-Limit
+- zugängliche Navigation, Dialoge und Statusmeldungen
+- automatisierte Tests mit Vitest
+- Deployment als Vercel-Nitro-Anwendung
 
-## Setup
+## Lokale Entwicklung
 
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install --shamefully-hoist
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
+Voraussetzung ist eine aktuelle Node.js-LTS-Version.
 
 ```bash
+npm ci
 npm run dev
 ```
 
-## Production
+Die Entwicklungsseite ist anschließend unter `http://localhost:3000`
+erreichbar.
 
-Build the application for production:
+## Umgebungsvariablen
+
+Für das Kontaktformular werden folgende Variablen benötigt:
+
+```dotenv
+DISPLAY_OFFICIAL_CONTACT_ADDRESS=
+SMTP_HOST=
+SMTP_PORT_TLS=
+SMTP_USER_NAME=
+SMTP_USER_PASSWORD=
+CONTACT_FORM_SENDER_NAME=
+CONTACT_FORM_SENDER_ADDRESS=
+MAIL_RECEIVER_CONTACT_FORM=
+MAIL_RECEIVER_FALLBACK=
+```
+
+Das lokale Rate-Limit benötigt keine zusätzliche Infrastruktur. Auf einer
+Serverless-Plattform gilt sein Zähler jeweils für eine aktive Instanz. Honeypot
+und Zeitprüfung funktionieren unabhängig davon. Falls zukünftig ein globales
+Limit erforderlich wird, sollte es direkt über die Hosting-Plattform
+konfiguriert werden.
+
+## Qualitätschecks
 
 ```bash
+npm run lint
+npm run format
+npm test
 npm run build
 ```
 
-Locally preview production build:
+## Projektstruktur
 
-```bash
-npm run preview
+```text
+app/          Vue-Komponenten, Seiten, Layouts und Composables
+server/       Nitro-API, Middleware und serverseitige Hilfsfunktionen
+shared/       gemeinsam verwendete DTOs und Validierung
+tests/        automatisierte Unit-Tests
+util/         statische Daten und Sanitizing
+public/       Bilder, Icons und SEO-Dateien
 ```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
