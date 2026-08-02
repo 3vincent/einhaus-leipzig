@@ -118,27 +118,27 @@ const positionClass = (position: ToastPosition) => {
   padding: 0.85rem 1rem;
   border-radius: 12px;
   box-shadow: 0 12px 24px -16px rgba(0, 0, 0, 0.35);
-  color: #0f2635;
-  background: #f5f8fb;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  color: var(--color-text);
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
 }
 
 .toast--success {
-  background: #ecf8f0;
-  border-color: #c3e7d2;
-  color: #1c6b3f;
+  background: var(--color-success-surface);
+  border-color: var(--color-success-border);
+  color: var(--color-success-strong);
 }
 
 .toast--error {
-  background: #fff4f0;
-  border-color: #f3c7b8;
-  color: #8c2f07;
+  background: var(--color-danger-surface);
+  border-color: var(--color-danger-border);
+  color: var(--color-danger-strong);
 }
 
 .toast--info {
-  background: #eef3f8;
-  border-color: #d5deeb;
-  color: #1f3a4d;
+  background: var(--color-brand-surface);
+  border-color: var(--color-brand-soft);
+  color: var(--color-brand-active);
 }
 
 .toast__message {
