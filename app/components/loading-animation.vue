@@ -52,19 +52,20 @@ $duration: 1.6s;
 
 @keyframes colors {
   0% {
-    stroke: #4285f4;
+    stroke: var(--color-brand);
   }
   25% {
-    stroke: #de3e35;
+    stroke: var(--color-brand-hover);
   }
   50% {
-    stroke: #f7c223;
+    stroke: var(--color-brand);
+    opacity: 0.72;
   }
   75% {
-    stroke: #1b9a59;
+    stroke: var(--color-brand-active);
   }
   100% {
-    stroke: #4285f4;
+    stroke: var(--color-brand);
   }
 }
 
