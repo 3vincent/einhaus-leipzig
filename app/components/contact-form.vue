@@ -510,17 +510,7 @@ const checkFormValidations = () => {
 }
 
 button {
-  min-width: 15rem;
   color: var(--main-text-color-dark);
-  transition:
-    border 0.3s ease,
-    background-color 0.3s ease;
-
-  &.all-field-filled {
-    background-color: var(--pretty-green);
-    color: white;
-    transition: background-color 0.3s ease;
-  }
 }
 
 .message-response {

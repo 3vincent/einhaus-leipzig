@@ -125,34 +125,5 @@ const denyCookie = () => {
       margin: 0;
     }
   }
-
-  .link.primary {
-    color: white !important;
-    background-color: var(--button-color);
-    border-color: var(--button-color) !important;
-
-    &:hover,
-    &:focus {
-      background-color: var(--button-color-hover);
-      border-color: var(--button-color-hover) !important;
-    }
-
-    &:active {
-      background-color: var(--button-color-active);
-      border-color: var(--button-color-active) !important;
-    }
-  }
-
-  .link.secondary {
-    color: var(--main-text-color-dark) !important;
-    background-color: white;
-    border-color: var(--main-text-color-semidark) !important;
-
-    &:hover,
-    &:focus {
-      color: var(--main-text-color-semidark) !important;
-      background-color: rgba(232, 232, 232, 0.5);
-    }
-  }
 }
 </style>
