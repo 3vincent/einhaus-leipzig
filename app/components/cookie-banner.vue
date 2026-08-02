@@ -54,7 +54,8 @@ const denyCookie = () => {
   position: fixed;
   z-index: 1400;
   bottom: 1rem;
-  background: var(--pretty-green);
+  background: var(--color-brand-surface);
+  border: 1px solid var(--color-border);
   border-radius: 0.2rem;
   min-height: max-content;
   height: max-content;
@@ -88,7 +89,7 @@ const denyCookie = () => {
   }
 
   p {
-    color: var(--main-text-color-dark);
+    color: var(--color-text);
     font-weight: 500;
     font-size: 0.9rem;
     display: inline-block;
@@ -96,8 +97,8 @@ const denyCookie = () => {
   }
 
   p a {
-    color: var(--main-text-color-semidark);
-    border-bottom-color: var(--main-text-color-semidark);
+    color: var(--color-text-muted);
+    border-bottom-color: var(--color-border-strong);
     border-bottom-width: 1px;
   }
 
