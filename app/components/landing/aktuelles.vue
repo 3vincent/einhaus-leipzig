@@ -19,9 +19,9 @@
 }
 
 .landing-contentBox {
-  background-color: rgb(255, 255, 255);
+  background-color: var(--color-surface);
   border-radius: 0.7rem;
-  box-shadow: 0 0 0 3px var(--main-text-color-dark);
+  box-shadow: 0 0 0 3px var(--color-text);
 }
 
 .background {

@@ -123,17 +123,17 @@ function handleKeydown(event: KeyboardEvent) {
       }
 
       a:hover {
-        background-color: var(--background-menu-highlighting);
+        background-color: var(--color-menu-highlight);
       }
 
       a[aria-current='page'] {
-        color: var(--button-color-hover);
-        background-color: var(--background-menu-highlighting);
+        color: var(--color-brand-hover);
+        background-color: var(--color-menu-highlight);
         font-weight: 700;
       }
 
       a:focus-visible {
-        outline: 3px solid var(--button-color);
+        outline: 3px solid var(--color-brand);
         outline-offset: 2px;
       }
     }
@@ -148,7 +148,7 @@ function handleKeydown(event: KeyboardEvent) {
 
       background-color: white;
       border-radius: 10px;
-      border: 0.5px solid var(--background-menu-highlighting);
+      border: 1px solid var(--color-border);
 
       opacity: 0;
       transform: translateX(50px) perspective(200px) rotateY(-40deg);

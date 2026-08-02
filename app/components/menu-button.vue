@@ -76,7 +76,7 @@ button {
   }
 
   &:focus-visible {
-    outline: 3px solid var(--button-focus-ring);
+    outline: 3px solid var(--color-focus-ring);
     outline-offset: 3px;
   }
 }
@@ -86,7 +86,7 @@ button {
   position: absolute;
   height: 2px;
   width: 100%;
-  background: var(--main-text-color-dark);
+  background: var(--color-text);
   border-radius: 99px;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);

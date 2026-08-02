@@ -116,7 +116,7 @@ function handleKeydown(event: KeyboardEvent) {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--color-overlay);
   backdrop-filter: blur(3px);
   display: flex;
   justify-content: center;
@@ -125,7 +125,7 @@ function handleKeydown(event: KeyboardEvent) {
 }
 
 .modal {
-  background-color: white;
+  background-color: var(--color-surface);
   padding: 20px 40px;
   // margin-top: -20vh;
   box-shadow: 0 0 10px 10px rgba(103, 103, 103, 0.7);

@@ -81,7 +81,7 @@ const navigationLinks = PRIMARY_NAVIGATION_LINKS
 .footer-container {
   min-height: 30vh;
   width: 100%;
-  background-color: #333;
+  background-color: var(--color-text);
   padding-top: 1rem;
 }
 
@@ -117,7 +117,7 @@ const navigationLinks = PRIMARY_NAVIGATION_LINKS
     span {
       font-size: 0.7rem;
       font-weight: 700;
-      color: rgba(193, 193, 193, 1);
+      color: var(--color-border);
 
       @media screen and (min-width: $md) {
         font-size: 0.7rem;
@@ -148,7 +148,7 @@ const navigationLinks = PRIMARY_NAVIGATION_LINKS
     padding-bottom: 0;
     text-transform: uppercase;
     font-weight: 400;
-    color: rgba(156, 157, 156, 1);
+    color: var(--color-text-subtle);
   }
 }
 
@@ -163,7 +163,7 @@ ul {
   li {
     padding-bottom: 1.4rem;
     line-height: 1.4rem;
-    color: rgb(230, 230, 230);
+    color: var(--color-text-inverse);
 
     @media screen and (min-width: $md) {
       padding-bottom: 1.2rem;
@@ -178,7 +178,6 @@ ul {
     }
 
     a:hover {
-      // color: #00c58e;
       opacity: 0.8;
       text-decoration: none;
     }

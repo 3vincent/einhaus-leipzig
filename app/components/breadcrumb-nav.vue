@@ -68,7 +68,7 @@ const breadcrumbs = computed(() => {
 .breadcrumbs {
   display: flex;
   align-items: center;
-  color: var(--breadcrumb-color);
+  color: var(--color-text-muted);
   font-size: 0.8rem;
   font-weight: 400;
   margin-top: 1rem;
@@ -81,7 +81,7 @@ const breadcrumbs = computed(() => {
   a,
   a:link,
   a:visited {
-    color: var(--breadcrumb-color);
+    color: var(--color-text-muted);
     text-decoration: none;
     border: 0;
   }
@@ -93,7 +93,7 @@ const breadcrumbs = computed(() => {
   width: 4px;
   margin-right: 10px;
   margin-top: 2px;
-  border: solid var(--main-text-color-dark);
+  border: solid var(--color-text);
   border-width: 0 1px 1px 0;
   transform: rotate(-45deg);
 }
@@ -107,6 +107,6 @@ const breadcrumbs = computed(() => {
 }
 
 .underline {
-  border-bottom: 1px solid rgba(128, 128, 128, 0.555);
+  border-bottom: 1px solid var(--color-border);
 }
 </style>
