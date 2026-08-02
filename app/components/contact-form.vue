@@ -97,11 +97,9 @@ const checkFormValidations = () => {
                 v-model="payload.name"
                 required
                 :class="
-                  validation.fields.name
-                    ? 'single-field-filled'
-                    : payload.name
-                      ? 'not-filled-field'
-                      : ''
+                  payload.name && !validation.fields.name
+                    ? 'not-filled-field'
+                    : ''
                 "
                 type="text"
                 name="name"
@@ -121,11 +119,9 @@ const checkFormValidations = () => {
                 v-model="payload.email"
                 required
                 :class="
-                  validation.fields.email
-                    ? 'single-field-filled'
-                    : payload.email
-                      ? 'not-filled-field'
-                      : ''
+                  payload.email && !validation.fields.email
+                    ? 'not-filled-field'
+                    : ''
                 "
                 type="email"
                 name="email"
@@ -158,11 +154,9 @@ const checkFormValidations = () => {
                 required
                 name="message"
                 :class="
-                  validation.fields.message
-                    ? 'single-field-filled'
-                    : payload.message
-                      ? 'not-filled-field'
-                      : ''
+                  payload.message && !validation.fields.message
+                    ? 'not-filled-field'
+                    : ''
                 "
                 class="input-field"
                 rows="4"
@@ -365,7 +359,7 @@ const checkFormValidations = () => {
       .input-field {
         width: 100%;
         padding: 10px;
-        border: 2px solid #d8dcee;
+        border: 1px solid var(--color-border);
         border-radius: 6px;
         outline: none;
         font-size: 16px;
@@ -373,7 +367,8 @@ const checkFormValidations = () => {
         min-height: 50px;
 
         &:focus-visible {
-          border-color: var(--main-text-color-dark);
+          border-color: var(--color-brand);
+          box-shadow: 0 0 0 3px var(--color-focus-ring);
         }
       }
 
@@ -381,14 +376,14 @@ const checkFormValidations = () => {
         position: absolute;
         bottom: 4px;
         right: 4px;
-        color: #b8b8b8cc;
+        color: var(--color-text-subtle);
       }
 
       .input-label {
         position: absolute;
         top: 14px;
         left: 10px;
-        color: #999;
+        color: var(--color-text-subtle);
         pointer-events: none;
         transition:
           all 0.3s ease,
@@ -402,7 +397,7 @@ const checkFormValidations = () => {
           //   #f5f5f5 69.11%,
           //   rgba(255, 255, 255, 0) 100%
           // );
-          color: var(--main-text-color-dark);
+          color: var(--color-text);
           font-size: 11px;
           padding: 0 3px;
           line-height: 1;
@@ -419,14 +414,14 @@ const checkFormValidations = () => {
         //   rgba(255, 255, 255, 0) 100%
         // );
         background-color: white;
-        color: #b9b9b9;
+        color: var(--color-text-subtle);
         font-size: 11px;
         padding: 0 3px;
         line-height: 1;
       }
 
       .input-field:focus + .input-label {
-        color: var(--main-text-color-dark);
+        color: var(--color-text);
       }
 
       input[type='radio'] {
@@ -510,7 +505,7 @@ const checkFormValidations = () => {
 }
 
 button {
-  color: var(--main-text-color-dark);
+  color: var(--color-text);
 }
 
 .message-response {
@@ -522,7 +517,7 @@ button {
 
     h1 {
       font-size: 3rem;
-      color: var(--pretty-green);
+      color: var(--color-success-strong);
       text-align: center;
       line-height: 1.2;
       font-weight: 400;
@@ -544,7 +539,7 @@ button {
       font-weight: 400;
 
       &.error-color {
-        color: var(--warning-severe);
+        color: var(--color-danger-strong);
       }
     }
 
@@ -558,9 +553,9 @@ button {
     max-height: 100px;
     width: 80vw;
     max-width: 780px;
-    border: 2px solid var(--main-text-color-dark);
+    border: 1px solid var(--color-border-strong);
     border-radius: 0.3rem;
-    background-color: rgba(240, 240, 240, 1);
+    background-color: var(--color-surface-soft);
     overflow: scroll;
     overflow-wrap: break-word;
     padding: 0.5rem;
@@ -593,7 +588,7 @@ input[type='checkbox']::before {
   height: 16px;
   top: -2px;
   left: 0;
-  border: 2px solid #555555;
+  border: 2px solid var(--color-text-muted);
   border-radius: 3px;
   background-color: white;
 }
@@ -613,33 +608,16 @@ input[type='checkbox']:checked::after {
   left: 6px;
 }
 
-.single-field-filled {
-  // box-shadow: inset 0 0 0 2px var(--pretty-green) !important;
-  border-color: var(--pretty-green) !important;
-  border-width: 2px !important;
-}
-
-// .all-field-filled {
-//   border-color: var(--pretty-green) !important;
-//   border-width: 2px;
-// }
-
 .not-filled-field {
-  // box-shadow: inset 0 0 0 2px var(--warning);
-  border-color: var(--warning) !important;
+  border-color: var(--color-warning) !important;
 }
-
-// .not-filled-fields {
-//   border-color: var(--warning) !important;
-//   cursor: not-allowed;
-// }
 
 .text-counter {
-  color: var(--main-text-color-light-light);
+  color: var(--color-text-subtle);
 }
 
 .warning-color {
-  color: var(--warning) !important;
+  color: var(--color-warning) !important;
 }
 
 .contact-check,

@@ -38,8 +38,9 @@ onMounted(() => {
   transform: translateX(-50%);
   padding: 0.3rem;
   z-index: 100;
-  background-color: white;
-  border: 2px solid var(--main-text-color-semidark);
+  color: var(--color-warning);
+  background-color: var(--color-warning-surface);
+  border: 1px solid var(--color-warning-border);
   border-radius: 0.4rem;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 
@@ -63,9 +64,9 @@ i::after {
   height: 12px;
   left: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
-  background-color: #ffffff;
+  background-color: var(--color-warning-surface);
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
-  border-bottom: 2px solid var(--main-text-color-semidark);
-  border-right: 2px solid var(--main-text-color-semidark);
+  border-bottom: 1px solid var(--color-warning-border);
+  border-right: 1px solid var(--color-warning-border);
 }
 </style>
