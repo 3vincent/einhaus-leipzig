@@ -29,26 +29,65 @@ button {
   display: grid;
   min-width: 48px;
   min-height: 48px;
-  padding: 0.55rem 0 0.55rem 0.75rem;
-  place-items: center end;
+  padding: 0;
+  place-items: center;
   cursor: pointer;
-  background-color: transparent;
-  border: none;
+  background: var(--menu-button-background, rgba(255, 255, 255, 0.78));
+  border: 1px solid var(--menu-button-border-color, rgba(48, 70, 73, 0.18));
+  border-radius: 14px;
+  box-shadow: var(
+    --menu-button-shadow,
+    0 1px 2px rgba(31, 46, 48, 0.08),
+    0 10px 24px -16px rgba(31, 46, 48, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9)
+  );
+  backdrop-filter: var(--menu-button-backdrop-filter, blur(12px));
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+
+  &:hover {
+    background-color: var(
+      --menu-button-hover-background,
+      rgba(255, 255, 255, 0.94)
+    );
+    border-color: var(
+      --menu-button-hover-border-color,
+      rgba(23, 107, 120, 0.34)
+    );
+    box-shadow: var(
+      --menu-button-hover-shadow,
+      0 2px 3px rgba(31, 46, 48, 0.1),
+      0 13px 26px -16px rgba(31, 46, 48, 0.76),
+      inset 0 1px 0 white
+    );
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    background-color: var(
+      --menu-button-active-background,
+      rgba(244, 247, 246, 0.96)
+    );
+    box-shadow: inset 0 1px 2px rgba(31, 46, 48, 0.12);
+    transform: scale(0.96);
+  }
 
   &:focus-visible {
-    outline: 3px solid var(--button-color);
+    outline: 3px solid var(--button-focus-ring);
     outline-offset: 3px;
-    border-radius: 6px;
   }
 }
 
 #main-menu-button span {
   display: block;
   position: absolute;
-  height: 4px;
+  height: 2px;
   width: 100%;
-  background: #000000;
-  outline: 1px solid var(--main-text-color-light);
+  background: var(--main-text-color-dark);
+  border-radius: 99px;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
@@ -61,8 +100,8 @@ button {
 }
 
 #main-menu-button {
-  height: 30px;
-  width: 36px;
+  height: 22px;
+  width: 26px;
   pointer-events: none;
 }
 
@@ -75,7 +114,7 @@ button {
 }
 
 #main-menu-button span:nth-child(2) {
-  top: 11px;
+  top: 10px;
   -webkit-transform-origin: left center;
   -moz-transform-origin: left center;
   -o-transform-origin: left center;
@@ -83,7 +122,7 @@ button {
 }
 
 #main-menu-button span:nth-child(3) {
-  top: 22px;
+  top: 20px;
   -webkit-transform-origin: left center;
   -moz-transform-origin: left center;
   -o-transform-origin: left center;
@@ -95,8 +134,8 @@ button {
   -moz-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
-  top: -1px;
-  left: 8px;
+  top: 1px;
+  left: 4px;
 }
 
 #main-menu-button.open span:nth-child(2) {
@@ -109,7 +148,14 @@ button {
   -moz-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
-  top: 24px;
-  left: 8px;
+  top: 19px;
+  left: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button,
+  #main-menu-button span {
+    transition: none;
+  }
 }
 </style>
