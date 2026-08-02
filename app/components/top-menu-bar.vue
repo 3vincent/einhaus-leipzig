@@ -149,20 +149,33 @@ function makeTopMenuSticky() {
 
 .menu-container {
   position: fixed;
-  right: 14px;
-  top: 18px;
+  right: 12px;
+  top: 6px;
   transition: top 0.4s;
 
   display: flex;
   gap: 1rem;
 
   @media screen and (min-width: $lg) {
-    top: 40px;
+    top: 36px;
     right: 20px;
   }
 }
 
 .top-menu-container.smaller-after-scroll .menu-container {
-  top: 18px;
+  top: 6px;
+}
+
+.smaller-after-scroll.default-sites-menubar .menu-container {
+  --menu-button-background: rgba(255, 255, 255, 0.2);
+  --menu-button-border-color: rgba(48, 70, 73, 0.12);
+  --menu-button-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38);
+  --menu-button-backdrop-filter: none;
+  --menu-button-hover-background: rgba(255, 255, 255, 0.46);
+  --menu-button-hover-border-color: rgba(23, 107, 120, 0.26);
+  --menu-button-hover-shadow:
+    0 4px 12px -10px rgba(31, 46, 48, 0.52),
+    inset 0 1px 0 rgba(255, 255, 255, 0.62);
+  --menu-button-active-background: rgba(255, 255, 255, 0.32);
 }
 </style>
