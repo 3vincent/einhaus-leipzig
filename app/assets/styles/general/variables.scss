@@ -18,12 +18,12 @@ $xxl: 1920px;
   --main-text-color-light: rgba(237, 237, 237, 1);
   --breadcrumb-color: rgba(0, 0, 0, 0.7);
 
-  // --button-color: rgba(6, 147, 227, 1);
-  --button-color: rgba(9, 133, 205, 1);
-
-  // --button-color-hover: rgba(6, 91, 139, 1);
-  --button-color-hover: rgb(3, 120, 184);
-  --button-color-active: rgba(0, 120, 184, 1);
+  --button-color: #176b78;
+  --button-color-hover: #125966;
+  --button-color-active: #0d4651;
+  --button-focus-ring: rgba(23, 107, 120, 0.24);
+  --button-secondary-border: rgba(48, 70, 73, 0.24);
+  --button-secondary-hover: #f4f7f6;
 
   --warning-severe: rgba(255, 72, 0, 0.815);
   --warning: rgba(255, 165, 0, 1);
