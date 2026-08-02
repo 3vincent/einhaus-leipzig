@@ -1,12 +1,12 @@
 @use 'variables';
 
 ::selection {
-  background: #302e3a;
+  background: var(--color-text);
   color: white;
 }
 
 body {
-  color: var(--main-text-color-dark);
+  color: var(--color-text);
 }
 
 .siteContainer {
@@ -73,8 +73,8 @@ body {
     a:link,
     a:visited {
       text-decoration: none;
-      color: var(--main-text-color-dark);
-      border-bottom: 1px solid var(--main-text-color-semidark);
+      color: var(--color-text);
+      border-bottom: 1px solid var(--color-border-strong);
 
       @media screen and (min-width: variables.$md) {
         border-bottom-width: 2px;
@@ -88,7 +88,7 @@ body {
     hr {
       border: none;
       border-top: 1px solid rgba(0, 0, 0, 0.1);
-      color: #333;
+      color: var(--color-text);
       overflow: visible;
       height: 5px;
     }
