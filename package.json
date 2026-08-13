@@ -10,7 +10,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --check .",
-    "format:fix": "prettier --write ."
+    "format:fix": "prettier --write .",
+    "prepare:nuxt": "nuxi prepare",
+    "check": "npm run prepare:nuxt && npm run format && npm run lint && npm test"
   },
   "devDependencies": {
     "@nuxt/devtools": "^3.0.0",
