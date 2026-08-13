@@ -5,6 +5,7 @@ import { useContactForm } from '../composables/useContactForm'
 
 const { isReady, isSubmitting, payload, sendResponse, submit, validation } =
   useContactForm()
+const { showToast } = useToast()
 const envVar = useRuntimeConfig()
 const isTextAreaFocused = ref(false)
 const showTooltipInElement = ref<ContactFormField | null>(null)
@@ -47,6 +48,11 @@ watch(
 async function handleSubmit() {
   if (!validation.value.valid) {
     checkFormValidations()
+
+    showToast({
+      message: 'Bitte Pflichtfelder ausfüllen',
+    })
+
     return
   }
 
