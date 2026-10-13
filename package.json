@@ -1,5 +1,6 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "nuxi build",
     "dev": "nuxi dev",
@@ -36,7 +37,7 @@
   },
   "dependencies": {
     "joi": "^18.0.1",
-    "nodemailer": "^9.0.3",
+    "nodemailer": "^10.1.0",
     "validator": "^13.7.0"
   }
 }
