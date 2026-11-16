@@ -124,7 +124,7 @@ onBeforeUnmount(() => menuHighlightObserver?.disconnect())
 .on-site-menu {
   position: sticky;
   top: 60px;
-  z-index: 1002;
+  z-index: 999;
   width: 100%;
   background: white;
   border-top: 1px solid var(--color-text);
